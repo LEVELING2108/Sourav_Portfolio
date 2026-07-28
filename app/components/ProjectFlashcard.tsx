@@ -11,20 +11,20 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -6, scale: 1.01 }}
-      className="group relative rounded-xl border border-trace bg-ink-raised/90 p-5 backdrop-blur transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-copper/60 hover:shadow-[0_12px_36px_rgba(184,118,62,0.14)]"
+      whileHover={{ y: -4, scale: 1.01 }}
+      className="group relative rounded-xl border border-trace bg-ink-raised p-5 backdrop-blur transition-all duration-300 hover:border-copper/60 hover:shadow-[0_8px_24px_rgba(184,118,62,0.12)]"
     >
-      {/* Subtle top copper/signal gradient ambient glow bar */}
-      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-copper via-copper-bright/40 to-signal opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      {/* Subtle top copper gradient ambient glow bar */}
+      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-copper via-copper-bright/40 to-copper opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* Header Info */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-trace/60 pb-3">
         <div className="flex items-center gap-2 font-mono text-sm">
-          <span className="rounded bg-signal/10 px-2 py-0.5 text-xs font-semibold text-signal border border-signal/20">
+          <span className="rounded bg-copper/10 px-2 py-0.5 text-xs font-semibold text-copper-bright border border-copper/20">
             {project.version}
           </span>
           <h3 className="text-base font-bold text-paper group-hover:text-copper-bright transition-colors duration-300">
@@ -47,9 +47,9 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                 {project.highlights.map((h) => (
                   <span
                     key={h}
-                    className="inline-flex items-center gap-1 rounded-md bg-ink px-2.5 py-1 font-mono text-xs text-copper-bright border border-trace"
+                    className="inline-flex items-center gap-1 rounded bg-ink px-2.5 py-1 font-mono text-[11px] text-paper/90 border border-trace"
                   >
-                    <Sparkles size={11} className="text-copper" />
+                    <Sparkles size={10} className="text-copper" />
                     {h}
                   </span>
                 ))}
@@ -66,7 +66,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
               {project.stack.map((s) => (
                 <span
                   key={s}
-                  className="rounded border border-trace/80 bg-ink px-2 py-0.5 font-mono text-xs text-paper/80 group-hover:border-slate/40 transition-colors duration-300"
+                  className="rounded border border-trace bg-ink px-2 py-0.5 font-mono text-xs text-paper/90 group-hover:border-copper/40 transition-colors duration-300"
                 >
                   {s}
                 </span>
@@ -83,7 +83,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-xs font-medium text-copper-bright hover:text-signal transition-colors duration-300"
+                  className="inline-flex items-center gap-1 font-mono text-xs font-medium text-copper-bright hover:text-paper transition-colors duration-300"
                 >
                   {l.label}
                   <ArrowUpRight size={13} />
@@ -125,10 +125,10 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
                     {project.metrics && (
-                      <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center gap-2 font-mono text-[11px] bg-ink/80 backdrop-blur px-2.5 py-1 rounded border border-trace/60 text-paper">
-                        <span className="text-signal">{project.metrics[0]?.label}: {project.metrics[0]?.value}</span>
+                      <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center gap-2 font-mono text-[11px] bg-ink/85 backdrop-blur px-2.5 py-1 rounded border border-trace/60 text-paper">
+                        <span className="text-copper-bright">{project.metrics[0]?.label}: {project.metrics[0]?.value}</span>
                         {project.metrics[1] && (
-                          <span className="text-copper-bright">{project.metrics[1]?.label}: {project.metrics[1]?.value}</span>
+                          <span className="text-slate">{project.metrics[1]?.label}: {project.metrics[1]?.value}</span>
                         )}
                       </div>
                     )}
@@ -137,7 +137,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                   /* Fallback Code Terminal Flashcard */
                   <div className="p-4 font-mono text-xs space-y-2 h-full flex flex-col justify-between min-h-[190px]">
                     <div className="flex items-center justify-between text-slate text-[11px] border-b border-trace/40 pb-2">
-                      <span className="flex items-center gap-1 text-signal">
+                      <span className="flex items-center gap-1 text-copper-bright font-medium">
                         <Terminal size={12} />
                         {project.title.toLowerCase()}.config.json
                       </span>
@@ -148,7 +148,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                       {project.metrics?.map((m) => (
                         <div key={m.label} className="flex justify-between text-[11px]">
                           <span className="text-slate">{m.label}:</span>
-                          <span className="text-signal">{m.value}</span>
+                          <span className="text-paper">{m.value}</span>
                         </div>
                       ))}
                     </div>
@@ -171,13 +171,13 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
               >
                 <div>
                   <p className="text-[11px] uppercase tracking-wider text-copper-bright font-semibold border-b border-trace/60 pb-1.5 mb-2.5 flex items-center gap-1.5">
-                    <CheckCircle2 size={13} className="text-signal" />
+                    <CheckCircle2 size={13} className="text-copper-bright" />
                     Key Architecture & Features
                   </p>
                   <ul className="space-y-2 text-paper/90 text-[11px]">
                     {project.features?.map((f, idx) => (
                       <li key={idx} className="flex items-start gap-1.5 leading-tight">
-                        <span className="text-signal select-none">›</span>
+                        <span className="text-copper-bright select-none">›</span>
                         <span>{f}</span>
                       </li>
                     ))}
@@ -195,3 +195,4 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
     </motion.div>
   );
 }
+
