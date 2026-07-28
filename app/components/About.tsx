@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { education } from "../data";
 import { SectionHeading } from "./Projects";
+import EducationFlashcard from "./EducationFlashcard";
 
 export default function About() {
   return (
@@ -44,23 +45,17 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-4"
         >
-          <p className="font-mono text-xs uppercase tracking-wide text-signal">
-            education
+          <p className="font-mono text-xs uppercase tracking-wider text-signal font-semibold">
+            // education & academic log
           </p>
-          {education.map((e) => (
-            <div
-              key={e.degree}
-              className="rounded-lg border border-trace bg-ink-raised p-5"
-            >
-              <p className="font-mono text-sm text-paper">{e.degree}</p>
-              <p className="mt-1 text-sm text-slate">{e.school}</p>
-              <p className="mt-2 font-mono text-xs text-copper-bright">
-                {e.detail}
-              </p>
-            </div>
-          ))}
+          <div className="space-y-4">
+            {education.map((e) => (
+              <EducationFlashcard key={e.degree} item={e} />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
+

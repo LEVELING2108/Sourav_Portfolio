@@ -25,18 +25,55 @@ export const profile = {
 };
 
 
-export const education = [
+export type EducationItem = {
+  degree: string;
+  shortDegree: string;
+  school: string;
+  detail: string;
+  location: string;
+  status: string;
+  highlights: string[];
+  courses: string[];
+  icon: string;
+};
+
+export const education: EducationItem[] = [
   {
     degree: "B.Tech, Electronics & Communication Engineering",
+    shortDegree: "B.Tech ECE",
     school: "Bharati Vidyapeeth (Deemed University), Pune",
     detail: "CGPA 9.1",
+    location: "Pune, Maharashtra",
+    status: "Distinction · CGPA 9.1",
+    highlights: ["Hardware-Software Integration", "Embedded Systems", "Signal Processing"],
+    courses: [
+      "Microprocessors & Microcontrollers",
+      "Digital Signal Processing",
+      "Computer Networks",
+      "Embedded C Programming",
+      "Control Systems"
+    ],
+    icon: "Cpu",
   },
   {
     degree: "B.Sc, Data Science & Applications",
+    shortDegree: "B.Sc Data Science",
     school: "Indian Institute of Technology, Madras",
     detail: "CGPA 7.2",
+    location: "IIT Madras Program",
+    status: "Dual Degree · CGPA 7.2",
+    highlights: ["Machine Learning", "Algorithmic Data Science", "DBMS & SQL"],
+    courses: [
+      "Machine Learning Practice",
+      "Database Management Systems (DBMS)",
+      "Python Data Structures & Algorithms",
+      "Statistical Inference",
+      "App Development"
+    ],
+    icon: "GraduationCap",
   },
 ];
+
 
 export const stats = [
   { label: "LeetCode solved", value: "200+" },
