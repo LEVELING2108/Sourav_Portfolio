@@ -14,7 +14,7 @@ export default function About() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 space-y-4 max-w-xl text-slate leading-relaxed"
           >
             <p>
@@ -41,7 +41,7 @@ export default function About() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-4"
         >
           <p className="font-mono text-xs uppercase tracking-wide text-signal">

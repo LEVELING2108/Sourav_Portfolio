@@ -15,7 +15,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-4 max-w-xl text-slate leading-relaxed"
         >
           Open to full-stack and AI/ML roles — {profile.location}. If something
@@ -26,7 +26,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 flex flex-wrap gap-4"
         >
           <a

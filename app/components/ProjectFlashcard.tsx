@@ -14,12 +14,12 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -6, scale: 1.01 }}
-      className="group relative rounded-xl border border-trace bg-ink-raised/90 p-5 backdrop-blur transition-all duration-300 hover:border-copper/60 hover:shadow-[0_8px_30px_rgba(184,118,62,0.15)]"
+      className="group relative rounded-xl border border-trace bg-ink-raised/90 p-5 backdrop-blur transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:border-copper/60 hover:shadow-[0_12px_36px_rgba(184,118,62,0.14)]"
     >
       {/* Subtle top copper/signal gradient ambient glow bar */}
-      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-copper via-copper-bright/40 to-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-copper via-copper-bright/40 to-signal opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       {/* Header Info */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-trace/60 pb-3">
@@ -27,7 +27,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
           <span className="rounded bg-signal/10 px-2 py-0.5 text-xs font-semibold text-signal border border-signal/20">
             {project.version}
           </span>
-          <h3 className="text-base font-bold text-paper group-hover:text-copper-bright transition-colors">
+          <h3 className="text-base font-bold text-paper group-hover:text-copper-bright transition-colors duration-300">
             {project.title}
           </h3>
         </div>
@@ -66,7 +66,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
               {project.stack.map((s) => (
                 <span
                   key={s}
-                  className="rounded border border-trace/80 bg-ink px-2 py-0.5 font-mono text-xs text-paper/80 group-hover:border-slate/40 transition-colors"
+                  className="rounded border border-trace/80 bg-ink px-2 py-0.5 font-mono text-xs text-paper/80 group-hover:border-slate/40 transition-colors duration-300"
                 >
                   {s}
                 </span>
@@ -83,7 +83,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-xs font-medium text-copper-bright hover:text-signal transition-colors"
+                  className="inline-flex items-center gap-1 font-mono text-xs font-medium text-copper-bright hover:text-signal transition-colors duration-300"
                 >
                   {l.label}
                   <ArrowUpRight size={13} />
@@ -93,7 +93,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
 
             <button
               onClick={() => setIsFlipped(!isFlipped)}
-              className="inline-flex items-center gap-1.5 rounded-md border border-copper/30 bg-copper/5 px-2.5 py-1 font-mono text-xs text-copper-bright hover:bg-copper/20 transition-all active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-md border border-copper/30 bg-copper/5 px-2.5 py-1 font-mono text-xs text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95 cursor-pointer"
             >
               <Layers size={13} />
               {isFlipped ? "Show Preview" : "Overview Card"}
@@ -102,16 +102,16 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
         </div>
 
         {/* Right Side: Interactive Preview / Visual Flashcard */}
-        <div className="relative overflow-hidden rounded-lg border border-trace bg-ink min-h-[190px] flex flex-col justify-between group/card">
+        <div className="relative overflow-hidden rounded-lg border border-trace bg-ink min-h-[190px] flex flex-col justify-between group/card [perspective:1000px]">
           <AnimatePresence mode="wait">
             {!isFlipped ? (
               /* Front Card: Image or Code Terminal View */
               <motion.div
                 key="front"
-                initial={{ opacity: 0, rotateY: -10 }}
-                animate={{ opacity: 1, rotateY: 0 }}
-                exit={{ opacity: 0, rotateY: 10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, rotateY: -15, scale: 0.96 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                exit={{ opacity: 0, rotateY: 15, scale: 0.96 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="relative h-full w-full flex flex-col justify-between min-h-[190px]"
               >
                 {project.image ? (
@@ -121,7 +121,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                       alt={`${project.title} Preview`}
                       fill
                       sizes="(max-width: 768px) 100vw, 400px"
-                      className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105 group-hover:brightness-110"
+                      className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 group-hover:brightness-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
                     {project.metrics && (
@@ -154,7 +154,7 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                     </div>
                     <div className="pt-2 text-[10px] text-slate/70 flex items-center justify-between border-t border-trace/40">
                       <span>Hover / Flip for details</span>
-                      <ChevronRight size={12} className="text-copper group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight size={12} className="text-copper group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
                 )}
@@ -163,10 +163,10 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
               /* Back Card: Feature & Architecture Breakdown */
               <motion.div
                 key="back"
-                initial={{ opacity: 0, rotateY: 10 }}
-                animate={{ opacity: 1, rotateY: 0 }}
-                exit={{ opacity: 0, rotateY: -10 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, rotateY: 15, scale: 0.96 }}
+                animate={{ opacity: 1, rotateY: 0, scale: 1 }}
+                exit={{ opacity: 0, rotateY: -15, scale: 0.96 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="p-4 font-mono text-xs h-full flex flex-col justify-between min-h-[190px] bg-ink-raised/95"
               >
                 <div>

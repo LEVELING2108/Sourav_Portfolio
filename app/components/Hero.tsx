@@ -16,18 +16,18 @@ export default function Hero() {
           {/* Left Column: Intro Text & Stats */}
           <div>
             <motion.p
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="mb-4 font-mono text-sm text-signal"
             >
               <span className="text-slate">$</span> whoami
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="font-mono text-4xl sm:text-6xl font-bold tracking-tight text-paper"
             >
               {profile.name}
@@ -35,32 +35,32 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
               className="mt-3 max-w-xl text-lg sm:text-xl text-paper/90"
             >
               {profile.role}
             </motion.p>
 
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
               className="mt-4 max-w-lg text-base text-slate leading-relaxed"
             >
               {profile.tagline}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.7, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
               className="mt-8 flex flex-wrap items-center gap-4"
             >
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-sm font-medium text-ink hover:bg-copper-bright transition-colors"
+                className="inline-flex items-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95"
               >
                 view the log
                 <ArrowDown size={15} />
@@ -69,7 +69,7 @@ export default function Hero() {
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-colors"
+                className="inline-flex items-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
               >
                 <GitBranch size={15} />
                 GitHub
@@ -79,19 +79,19 @@ export default function Hero() {
 
           {/* Right Column: Oval-Squircle Personal Photo Frame */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, rotate: -3 }}
+            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex justify-center lg:justify-end"
           >
             <div className="relative group">
               {/* Outer Glowing Ambient Ring Halo */}
-              <div className="absolute -inset-2 rounded-[52px] sm:rounded-[64px] bg-gradient-to-tr from-copper via-copper-bright/50 to-signal opacity-70 blur-lg transition-all duration-500 group-hover:opacity-100 group-hover:blur-xl" />
+              <div className="absolute -inset-2 rounded-[52px] sm:rounded-[64px] bg-gradient-to-tr from-copper via-copper-bright/50 to-signal opacity-70 blur-lg transition-all duration-700 ease-out group-hover:opacity-100 group-hover:blur-xl" />
 
               {/* Main Oval-Squircle Frame Container */}
               <motion.div
                 whileHover={{ scale: 1.03, rotate: 1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
                 className="relative overflow-hidden rounded-[48px] sm:rounded-[58px] border-2 border-copper/80 bg-ink-raised w-[260px] h-[310px] sm:w-[280px] sm:h-[340px] shadow-[0_10px_40px_rgba(184,118,62,0.3)] backdrop-blur"
               >
                 <Image
@@ -100,7 +100,7 @@ export default function Hero() {
                   fill
                   priority
                   sizes="(max-width: 768px) 260px, 280px"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 group-hover:brightness-110"
+                  className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 group-hover:brightness-110"
                 />
 
                 {/* Subtle bottom gradient vignette */}

@@ -19,9 +19,10 @@ export default function TraceLine({
   });
 
   const scaleY = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 30,
-    restDelta: 0.001,
+    stiffness: 120,
+    damping: 26,
+    mass: 0.15,
+    restDelta: 0.0001,
   });
 
   return (
