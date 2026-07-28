@@ -32,7 +32,6 @@ export type EducationItem = {
   detail: string;
   location: string;
   status: string;
-  highlights: string[];
   icon: string;
 };
 
@@ -44,7 +43,6 @@ export const education: EducationItem[] = [
     detail: "CGPA 9.1",
     location: "Pune, Maharashtra",
     status: "Distinction · CGPA 9.1",
-    highlights: ["Hardware-Software Integration", "Embedded Systems", "Signal Processing"],
     icon: "Cpu",
   },
   {
@@ -54,10 +52,10 @@ export const education: EducationItem[] = [
     detail: "CGPA 7.2",
     location: "IIT Madras Program",
     status: "Dual Degree · CGPA 7.2",
-    highlights: ["Machine Learning", "Algorithmic Foundations", "DBMS & SQL"],
     icon: "GraduationCap",
   },
 ];
+
 
 
 

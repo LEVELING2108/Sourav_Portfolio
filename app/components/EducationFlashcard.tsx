@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { EducationItem } from "../data";
-import { Cpu, GraduationCap, Sparkles, Award, MapPin } from "lucide-react";
+import { Cpu, GraduationCap, Award, MapPin } from "lucide-react";
 
 export default function EducationFlashcard({ item }: { item: EducationItem }) {
   const getIcon = (iconName: string) => {
@@ -38,7 +38,7 @@ export default function EducationFlashcard({ item }: { item: EducationItem }) {
       </div>
 
       {/* Card Content */}
-      <div className="mt-3.5 space-y-3">
+      <div className="mt-3.5 space-y-2.5">
         <div>
           <h3 className="font-mono text-sm font-bold text-paper group-hover:text-copper-bright transition-colors duration-300">
             {item.degree}
@@ -60,21 +60,9 @@ export default function EducationFlashcard({ item }: { item: EducationItem }) {
             {item.status}
           </span>
         </div>
-
-        {/* Focus Highlights */}
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          {item.highlights.map((h) => (
-            <span
-              key={h}
-              className="inline-flex items-center gap-1 rounded bg-ink px-2.5 py-1 font-mono text-[11px] text-paper/90 border border-trace"
-            >
-              <Sparkles size={10} className="text-copper" />
-              {h}
-            </span>
-          ))}
-        </div>
       </div>
     </motion.div>
   );
 }
+
 
