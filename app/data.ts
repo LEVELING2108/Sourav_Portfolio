@@ -21,7 +21,7 @@ export const profile = {
   github: "https://github.com/LEVELING2108",
   email: "sumansourav2108@gmail.com", // TODO: replace with real contact email
   resumeHref: "/resume.pdf", // TODO: drop your resume PDF into /public
-  avatar: "/profile.png",
+  avatar: "/profile.jpg",
 };
 
 
