@@ -41,23 +41,23 @@ export default function Nav() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-trace bg-ink/85 backdrop-blur transition-colors duration-300">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-6 py-3.5 font-mono text-sm">
-        <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-medium">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-6 py-3 font-mono text-xs sm:text-sm">
+        <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-semibold tracking-tight text-xs sm:text-sm shrink-0">
           <span className="text-signal">~/</span>
           {profile.name.toLowerCase()}
         </a>
-        <ul className="flex items-center gap-4 sm:gap-6 text-slate">
+        <ul className="flex items-center gap-2 sm:gap-5 text-slate">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-paper transition-colors">
+              <a href={l.href} className="hover:text-paper transition-colors py-1 px-1">
                 {l.label}
               </a>
             </li>
           ))}
-          <li>
+          <li className="hidden xs:block">
             <a
               href={profile.resumeHref}
-              className="rounded border border-copper/60 px-3 py-1.5 text-copper-bright hover:bg-copper/10 transition-colors"
+              className="rounded border border-copper/60 px-2.5 py-1 text-xs text-copper-bright hover:bg-copper/10 transition-colors"
             >
               resume
             </a>
@@ -68,12 +68,12 @@ export default function Nav() {
                 onClick={toggleTheme}
                 aria-label="Toggle Light/Dark Theme"
                 title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                className="flex items-center justify-center p-2 rounded-lg border border-trace bg-ink-raised text-paper hover:text-copper-bright hover:border-copper/50 transition-all cursor-pointer shadow-sm active:scale-95"
+                className="flex items-center justify-center p-1.5 sm:p-2 rounded-lg border border-trace bg-ink-raised text-paper hover:text-copper-bright hover:border-copper/50 transition-all cursor-pointer shadow-sm active:scale-95"
               >
                 {theme === "dark" ? (
-                  <Sun size={16} className="text-copper-bright animate-pulse" />
+                  <Sun size={15} className="text-copper-bright animate-pulse" />
                 ) : (
-                  <Moon size={16} className="text-signal" />
+                  <Moon size={15} className="text-signal" />
                 )}
               </button>
             )}

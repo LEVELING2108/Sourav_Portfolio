@@ -27,11 +27,11 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 flex flex-wrap gap-4"
+          className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
         >
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-sm font-medium text-ink hover:bg-copper-bright transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-sm font-medium text-ink hover:bg-copper-bright transition-colors active:scale-95"
           >
             <Mail size={15} />
             Email
@@ -40,7 +40,7 @@ export default function Contact() {
             href={profile.github}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-colors active:scale-95"
           >
             <GitBranch size={15} />
             GitHub
@@ -49,7 +49,7 @@ export default function Contact() {
             href="#" /* TODO: add LinkedIn URL */
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-colors active:scale-95"
           >
             <Link2 size={15} />
             LinkedIn
