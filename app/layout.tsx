@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
+      className={`light ${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-ink text-paper antialiased">
         {children}

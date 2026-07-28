@@ -12,18 +12,18 @@ const links = [
 ];
 
 export default function Nav() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
-    if (savedTheme === "light") {
-      setTheme("light");
-      document.documentElement.classList.add("light");
-    } else {
+    if (savedTheme === "dark") {
       setTheme("dark");
       document.documentElement.classList.remove("light");
+    } else {
+      setTheme("light");
+      document.documentElement.classList.add("light");
     }
   }, []);
 
