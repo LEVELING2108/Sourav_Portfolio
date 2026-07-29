@@ -113,8 +113,8 @@ export const projects: Project[] = [
         "Eliminated duplicate dispatching under high-concurrency emergency surges by hunting down and fixing a nasty Redis race condition."
     },
     links: [
-      { label: "Live", href: "#" }, // TODO: add live URL
-      { label: "GitHub", href: "https://github.com/LEVELING2108" },
+      { label: "Live", href: "https://road-so-s-rose.vercel.app" },
+      { label: "GitHub", href: "https://github.com/LEVELING2108/RoadSoS" },
     ],
   },
   {
@@ -146,7 +146,7 @@ export const projects: Project[] = [
       solve:
         "Engineered a high-precision ML inference pipeline operating at <25ms latency with streaming drift monitoring and self-healing error bounds."
     },
-    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108/End-to-End-ML-Platform---Fraud-Detection" }],
   },
   {
     version: "v1.2",
@@ -177,7 +177,7 @@ export const projects: Project[] = [
       solve:
         "Automated end-to-end MLOps lifecycle to eliminate manual model retrain overhead and maintain consistent evaluation metrics."
     },
-    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108/NLP-Text-Classification-MLOps" }],
   },
   {
     version: "v1.3",
@@ -208,7 +208,7 @@ export const projects: Project[] = [
       solve:
         "Built responsive full-stack financial insights dashboard with instant search, real-time analytics aggregation, and zero layout shift."
     },
-    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108/ledgerline" }],
   },
   {
     version: "v1.4",
@@ -239,7 +239,10 @@ export const projects: Project[] = [
       solve:
         "Leveraged structured LLM outputs to parse completely unformatted, messy CSV lead files without relying on static regex or brittle column rules."
     },
-    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+    links: [
+      { label: "Live", href: "https://gro-weasy.vercel.app" },
+      { label: "GitHub", href: "https://github.com/LEVELING2108/GROWeasy" },
+    ],
   },
   {
     version: "v1.5",
@@ -270,7 +273,7 @@ export const projects: Project[] = [
       solve:
         "Engineered production-grade gateway managing JWT rate limiting, zero-downtime model routing, and Prometheus request telemetry."
     },
-    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+    links: [{ label: "GitHub", href: "https://github.com/LEVELING2108/Modelsentry-api" }],
   },
   {
     version: "v1.6",
