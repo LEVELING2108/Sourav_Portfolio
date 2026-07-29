@@ -89,7 +89,7 @@ export default function ProjectCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={toggleFlip}
-      className="relative w-full max-w-4xl min-h-[460px] sm:min-h-[500px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(0,0,0,0.55)] cursor-grab active:cursor-grabbing hover:border-copper/70 hover:shadow-[0_28px_80px_rgba(184,118,62,0.25)] transition-colors duration-300 select-none touch-pan-y"
+      className="relative w-full max-w-6xl min-h-[460px] sm:min-h-[500px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(0,0,0,0.55)] cursor-grab active:cursor-grabbing hover:border-copper/70 hover:shadow-[0_28px_80px_rgba(184,118,62,0.25)] transition-colors duration-300 select-none touch-pan-y"
     >
       {/* Top Ambient Glow Accent Line */}
       <div className="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-copper via-copper-bright/70 to-signal opacity-100" />

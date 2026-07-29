@@ -41,7 +41,7 @@ export default function Nav() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-trace bg-ink/85 backdrop-blur transition-colors duration-300">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-3 sm:px-6 py-3 font-mono text-xs sm:text-sm">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12 py-3 font-mono text-xs sm:text-sm">
         <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-semibold tracking-tight text-xs sm:text-sm shrink-0">
           <span className="text-signal">~/</span>
           {profile.name.toLowerCase()}

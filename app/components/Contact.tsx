@@ -31,7 +31,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative px-4 sm:px-6 py-24 border-t border-trace">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         <SectionHeading eyebrow="$ open contact" title="Let's talk" />
 
         <motion.p

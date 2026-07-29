@@ -8,7 +8,7 @@ import EducationFlashcard from "./EducationFlashcard";
 export default function About() {
   return (
     <section id="about" className="px-4 sm:px-6 py-24 border-t border-trace">
-      <div className="mx-auto max-w-5xl grid gap-12 lg:grid-cols-[1.1fr_1fr]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 grid gap-12 lg:grid-cols-[1.1fr_1fr]">
         <div>
           <SectionHeading eyebrow="$ cat about.md" title="About" />
           <motion.div

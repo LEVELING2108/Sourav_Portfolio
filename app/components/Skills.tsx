@@ -100,7 +100,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="px-4 sm:px-6 py-24 border-t border-trace">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="$ cat stack.json" title="Stack & Architecture" />
           {activeCategory && (

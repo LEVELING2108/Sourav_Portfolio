@@ -11,7 +11,7 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-screen flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-12 sm:pb-16"
     >
-      <div className="mx-auto w-full max-w-5xl pl-2 sm:pl-8 lg:pl-12">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-[1fr_310px] items-center">
           {/* Left Column: Intro Text & Stats */}
           <div>

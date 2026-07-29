@@ -37,7 +37,7 @@ export default function ProjectDeck() {
   const currentProject = projects[currentIndex];
 
   return (
-    <div className="relative mx-auto w-full max-w-4xl flex flex-col items-center py-4">
+    <div className="relative mx-auto w-full max-w-full flex flex-col items-center py-4">
       {/* Header Deck Info Bar */}
       <div className="w-full flex items-center justify-between font-mono text-xs text-slate mb-6 px-1">
         <div className="flex items-center gap-2">
