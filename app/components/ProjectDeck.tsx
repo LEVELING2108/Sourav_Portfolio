@@ -10,15 +10,23 @@ import { Layers } from "lucide-react";
 
 export default function ProjectDeck() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = next/left, -1 = prev/right
   const totalProjects = projects.length;
 
   const handleNext = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % totalProjects);
   }, [totalProjects]);
 
   const handlePrev = useCallback(() => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
   }, [totalProjects]);
+
+  const handleSelectProject = (newIndex: number) => {
+    setDirection(newIndex > currentIndex ? 1 : -1);
+    setCurrentIndex(newIndex);
+  };
 
   // Keyboard Navigation Listener (ArrowLeft / ArrowRight)
   useEffect(() => {
@@ -52,10 +60,11 @@ export default function ProjectDeck() {
 
       {/* Single Active 3D Project Card Container */}
       <div className="relative w-full min-h-[480px] sm:min-h-[520px] flex justify-center items-center">
-        <AnimatePresence mode="wait">
+        <AnimatePresence custom={direction} mode="wait">
           <ProjectCard
             key={currentProject.version}
             project={currentProject}
+            direction={direction}
             onSwipeLeft={handleNext}
             onSwipeRight={handlePrev}
           />
@@ -67,7 +76,7 @@ export default function ProjectDeck() {
         <ProgressIndicator
           currentIndex={currentIndex}
           total={totalProjects}
-          onSelect={setCurrentIndex}
+          onSelect={handleSelectProject}
         />
       </div>
     </div>

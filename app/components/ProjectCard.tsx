@@ -22,12 +22,35 @@ import {
 
 interface ProjectCardProps {
   project: Project;
+  direction?: number;
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
 }
 
+const cardVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 260 : -260,
+    opacity: 0,
+    scale: 0.94,
+    rotate: direction > 0 ? 5 : -5,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -260 : 260,
+    opacity: 0,
+    scale: 0.94,
+    rotate: direction > 0 ? -5 : 5,
+  }),
+};
+
 export default function ProjectCard({
   project,
+  direction = 1,
   onSwipeLeft,
   onSwipeRight,
 }: ProjectCardProps) {
@@ -74,6 +97,11 @@ export default function ProjectCard({
 
   return (
     <motion.div
+      custom={direction}
+      variants={cardVariants}
+      initial="enter"
+      animate="center"
+      exit="exit"
       drag={!isFlipped ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.65}
@@ -82,10 +110,7 @@ export default function ProjectCard({
         rotateX: !isFlipped ? rotateX : 0,
         rotateY: !isFlipped ? rotateY : 0,
       }}
-      initial={{ opacity: 0, x: -140, scale: 0.95, rotate: -3 }}
-      animate={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
-      exit={{ opacity: 0, x: 140, scale: 0.95, rotate: 3 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={toggleFlip}
