@@ -8,32 +8,41 @@ import Image from "next/image";
 
 function TypewriterName({ name }: { name: string }) {
   const [displayedText, setDisplayedText] = useState("");
-  const [isDone, setIsDone] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= name.length) {
-        setDisplayedText(name.slice(0, index));
-        index++;
-      } else {
-        setIsDone(true);
-        clearInterval(timer);
-      }
-    }, 110);
+    let timeout: NodeJS.Timeout;
 
-    return () => clearInterval(timer);
-  }, [name]);
+    if (!isDeleting && displayedText.length < name.length) {
+      // Type forward
+      timeout = setTimeout(() => {
+        setDisplayedText(name.slice(0, displayedText.length + 1));
+      }, 120);
+    } else if (!isDeleting && displayedText.length === name.length) {
+      // Hold full text for 2.5 seconds
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2500);
+    } else if (isDeleting && displayedText.length > 0) {
+      // Delete backward
+      timeout = setTimeout(() => {
+        setDisplayedText(name.slice(0, displayedText.length - 1));
+      }, 75);
+    } else if (isDeleting && displayedText.length === 0) {
+      // Short pause before looping
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+      }, 600);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, name]);
 
   return (
     <span className="inline-flex items-center">
       <span>{displayedText}</span>
       <span className="text-copper">.</span>
-      <span
-        className={`inline-block w-2 sm:w-3.5 h-6 sm:h-12 bg-copper-bright ml-1 sm:ml-2 rounded-sm ${
-          isDone ? "animate-pulse" : "animate-ping"
-        }`}
-      />
+      <span className="inline-block w-2 sm:w-3.5 h-6 sm:h-12 bg-copper-bright ml-1 sm:ml-2 rounded-sm animate-pulse" />
     </span>
   );
 }
