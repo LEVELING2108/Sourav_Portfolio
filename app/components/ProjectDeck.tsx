@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { projects } from "../data";
 import ProjectCard from "./ProjectCard";
 import ProgressIndicator from "./ProgressIndicator";
@@ -34,48 +34,34 @@ export default function ProjectDeck() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleNext, handlePrev]);
 
-  // Visible Stack Subset (Top active card + next 2 depth cards)
-  const visibleCards = [];
-  for (let i = 0; i < Math.min(3, totalProjects); i++) {
-    const projectIdx = (currentIndex + i) % totalProjects;
-    visibleCards.push({
-      project: projects[projectIdx],
-      stackIndex: i,
-    });
-  }
+  const currentProject = projects[currentIndex];
 
   return (
     <div className="relative mx-auto w-full max-w-4xl flex flex-col items-center py-4">
       {/* Header Deck Info Bar */}
-      <div className="w-full max-w-3xl flex items-center justify-between font-mono text-xs text-slate mb-6 px-1">
+      <div className="w-full flex items-center justify-between font-mono text-xs text-slate mb-6 px-1">
         <div className="flex items-center gap-2">
-          <span className="p-1 rounded-lg bg-ink border border-trace text-copper-bright">
-            <Layers size={14} />
+          <span className="p-1.5 rounded-lg bg-ink border border-trace text-copper-bright">
+            <Layers size={15} />
           </span>
-          <span className="text-paper font-semibold">Interactive Card Deck</span>
+          <span className="text-paper font-semibold text-sm">Interactive Project Deck</span>
         </div>
 
         <DeckControls onPrev={handlePrev} onNext={handleNext} />
       </div>
 
-      {/* 3D Stacked Card Container */}
-      <div className="relative w-full max-w-3xl min-h-[520px] sm:min-h-[550px] flex justify-center items-start">
-        <AnimatePresence mode="popLayout">
-          {visibleCards.map(({ project, stackIndex }) => (
-            <ProjectCard
-              key={project.version}
-              project={project}
-              isTop={stackIndex === 0}
-              stackIndex={stackIndex}
-              totalCards={visibleCards.length}
-              onNext={handleNext}
-            />
-          ))}
+      {/* Single Active 3D Project Card Container */}
+      <div className="relative w-full min-h-[480px] sm:min-h-[520px] flex justify-center items-center">
+        <AnimatePresence mode="wait">
+          <ProjectCard
+            key={currentProject.version}
+            project={currentProject}
+          />
         </AnimatePresence>
       </div>
 
       {/* Progress Indicator Dots & Pill */}
-      <div className="mt-8 w-full max-w-3xl pt-4 border-t border-trace/40">
+      <div className="mt-8 w-full pt-4 border-t border-trace/40">
         <ProgressIndicator
           currentIndex={currentIndex}
           total={totalProjects}
