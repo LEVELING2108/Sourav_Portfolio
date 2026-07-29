@@ -17,7 +17,7 @@ export type Project = {
 };
 
 export const profile = {
-  name: "Sourav",
+  name: "Sourav Suman",
   role: "Full-Stack & AI/ML Engineer",
   tagline:
     "Building production-grade software across web, ML pipelines, and applied AI — with an ECE foundation underneath it.",

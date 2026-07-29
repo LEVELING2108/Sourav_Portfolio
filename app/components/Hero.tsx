@@ -1,9 +1,42 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { profile, stats } from "../data";
 import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
+
+function TypewriterName({ name }: { name: string }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= name.length) {
+        setDisplayedText(name.slice(0, index));
+        index++;
+      } else {
+        setIsDone(true);
+        clearInterval(timer);
+      }
+    }, 110);
+
+    return () => clearInterval(timer);
+  }, [name]);
+
+  return (
+    <span className="inline-flex items-center">
+      <span>{displayedText}</span>
+      <span className="text-copper">.</span>
+      <span
+        className={`inline-block w-2 sm:w-3.5 h-6 sm:h-12 bg-copper-bright ml-1 sm:ml-2 rounded-sm ${
+          isDone ? "animate-pulse" : "animate-ping"
+        }`}
+      />
+    </span>
+  );
+}
 
 export default function Hero() {
   return (
@@ -30,8 +63,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="font-mono text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
             >
-              {profile.name}
-              <span className="text-copper">.</span>
+              <TypewriterName name={profile.name} />
             </motion.h1>
 
             <motion.p
