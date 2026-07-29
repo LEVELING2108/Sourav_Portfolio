@@ -7,6 +7,7 @@ import {
   useTransform,
   useSpring,
   useReducedMotion,
+  PanInfo,
 } from "framer-motion";
 import { Project } from "../data";
 import ProjectPreview from "./ProjectPreview";
@@ -21,10 +22,15 @@ import {
 
 interface ProjectCardProps {
   project: Project;
-  direction?: number;
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  onSwipeLeft,
+  onSwipeRight,
+}: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -58,8 +64,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     setIsFlipped((prev) => !prev);
   };
 
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    if (info.offset.x < -70 && onSwipeLeft) {
+      onSwipeLeft();
+    } else if (info.offset.x > 70 && onSwipeRight) {
+      onSwipeRight();
+    }
+  };
+
   return (
     <motion.div
+      drag={!isFlipped ? "x" : false}
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.65}
+      onDragEnd={handleDragEnd}
       style={{
         rotateX: !isFlipped ? rotateX : 0,
         rotateY: !isFlipped ? rotateY : 0,
@@ -71,7 +89,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={toggleFlip}
-      className="relative w-full max-w-4xl min-h-[460px] sm:min-h-[500px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(0,0,0,0.55)] cursor-pointer hover:border-copper/70 hover:shadow-[0_28px_80px_rgba(184,118,62,0.25)] transition-colors duration-300 select-none"
+      className="relative w-full max-w-4xl min-h-[460px] sm:min-h-[500px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 sm:p-8 shadow-[0_24px_70px_rgba(0,0,0,0.55)] cursor-grab active:cursor-grabbing hover:border-copper/70 hover:shadow-[0_28px_80px_rgba(184,118,62,0.25)] transition-colors duration-300 select-none touch-pan-y"
     >
       {/* Top Ambient Glow Accent Line */}
       <div className="absolute inset-x-0 top-0 h-1.5 rounded-t-3xl bg-gradient-to-r from-copper via-copper-bright/70 to-signal opacity-100" />
@@ -83,7 +101,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="w-full h-full [transform-style:preserve-3d] flex flex-col justify-between"
         >
-          {/* CARD FRONT (Spacious Single Deck Layout) */}
+          {/* CARD FRONT */}
           <div
             className={`w-full h-full flex flex-col justify-between space-y-5 [backface-visibility:hidden] ${
               isFlipped ? "pointer-events-none opacity-0" : "opacity-100"
@@ -102,7 +120,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <span className="text-slate text-xs font-mono">{project.tag}</span>
             </div>
 
-            {/* Content Body: Large Preview Image + Complete Right Column */}
+            {/* Content Body: Large Preview Image + Right Column */}
             <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] items-center my-auto">
               {/* Left Column: Spacious High-Res Preview Image */}
               <ProjectPreview
@@ -170,12 +188,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
               <div className="inline-flex items-center gap-1.5 text-signal font-medium animate-pulse text-xs">
                 <RotateCw size={13} />
-                <span>Click to Flip 3D ↻</span>
+                <span>Swipe ↔ or Click to Flip 3D</span>
               </div>
             </div>
           </div>
 
-          {/* CARD BACK (Minimal System Workflow & Action Links) */}
+          {/* CARD BACK */}
           <div
             className={`absolute inset-0 w-full h-full flex flex-col justify-between space-y-4 [transform:rotateY(180deg)] [backface-visibility:hidden] ${
               !isFlipped ? "pointer-events-none opacity-0" : "opacity-100"
@@ -190,7 +208,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <span className="text-copper-bright font-mono">{project.date}</span>
             </div>
 
-            {/* Content Body: Workflow Pipeline & Engineering Solve */}
+            {/* Content Body */}
             <div className="space-y-4 font-mono text-xs my-auto">
               {project.architecture && (
                 <div className="space-y-2">

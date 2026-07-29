@@ -56,6 +56,8 @@ export default function ProjectDeck() {
           <ProjectCard
             key={currentProject.version}
             project={currentProject}
+            onSwipeLeft={handleNext}
+            onSwipeRight={handlePrev}
           />
         </AnimatePresence>
       </div>
