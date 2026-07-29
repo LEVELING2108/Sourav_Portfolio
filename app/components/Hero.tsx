@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { profile, stats } from "../data";
-import { ArrowDown, GitBranch, Sparkles } from "lucide-react";
+import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
 
 export default function Hero() {
@@ -60,10 +60,19 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
               >
                 view the log
                 <ArrowDown size={15} />
+              </a>
+              <a
+                href={profile.resumeHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
+              >
+                <FileText size={15} />
+                Resume PDF
               </a>
               <a
                 href={profile.github}

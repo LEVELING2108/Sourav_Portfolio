@@ -57,9 +57,11 @@ export default function Nav() {
           <li className="hidden xs:block">
             <a
               href={profile.resumeHref}
-              className="rounded border border-copper/60 px-2.5 py-1 text-xs text-copper-bright hover:bg-copper/10 transition-colors"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded border border-copper/60 px-2.5 py-1 text-xs text-copper-bright hover:bg-copper/10 transition-colors inline-flex items-center gap-1 font-mono"
             >
-              resume
+              resume ↗
             </a>
           </li>
           <li>

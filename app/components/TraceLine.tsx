@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
 
 /**
  * The signature element: a vertical line that draws itself as the visitor

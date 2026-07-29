@@ -10,6 +10,10 @@ export type Project = {
   highlights?: string[];
   features?: string[];
   metrics?: { label: string; value: string }[];
+  architecture?: {
+    flow: string[];
+    solve: string;
+  };
 };
 
 export const profile = {
@@ -19,8 +23,9 @@ export const profile = {
     "Building production-grade software across web, ML pipelines, and applied AI — with an ECE foundation underneath it.",
   location: "Pune, Maharashtra · open to remote",
   github: "https://github.com/LEVELING2108",
-  email: "sumansourav2108@gmail.com", // TODO: replace with real contact email
-  resumeHref: "/resume.pdf", // TODO: drop your resume PDF into /public
+  linkedin: "https://www.linkedin.com/in/sourav-suman-325a46353",
+  email: "sumansourav2108@gmail.com",
+  resumeHref: "/resume.pdf",
   avatar: "/sourav.jpeg",
 };
 
@@ -61,8 +66,8 @@ export const education: EducationItem[] = [
 
 export const stats = [
   { label: "LeetCode solved", value: "200+" },
-  { label: "Smart India Hackathon", value: "Cleared" },
-  { label: "Amazon ML Summer School", value: "Stage 3" },
+  { label: "SIH 2025 (Internal)", value: "Round 2 Cleared" },
+  { label: "Projects built", value: "6+ Shipped" },
   { label: "Team led", value: "TEAM NEMESIS" },
 ];
 
@@ -87,7 +92,7 @@ export const projects: Project[] = [
       "A live, Vercel-deployed progressive web app for emergency response coordination — built with TEAM NEMESIS for Smart India Hackathon.",
     stack: ["React", "PWA", "Vercel"],
     image: "/projects/roadsos.jpg",
-    highlights: ["SIH Cleared", "PWA offline ready", "Team Nemesis"],
+    highlights: ["SIH Round 2 Cleared", "PWA offline ready", "Team Nemesis"],
     features: [
       "Real-time geolocation dispatch",
       "Offline-first PWA caching",
@@ -97,6 +102,16 @@ export const projects: Project[] = [
       { label: "Status", value: "Live PWA" },
       { label: "Scope", value: "Hackathon Win" }
     ],
+    architecture: {
+      flow: [
+        "Emergency Trigger",
+        "PWA Offline Cache",
+        "Redis Queue & Mutex Lock",
+        "Live Dispatch Broadcast"
+      ],
+      solve:
+        "Eliminated duplicate dispatching under high-concurrency emergency surges by hunting down and fixing a nasty Redis race condition."
+    },
     links: [
       { label: "Live", href: "#" }, // TODO: add live URL
       { label: "GitHub", href: "https://github.com/LEVELING2108" },
@@ -121,6 +136,16 @@ export const projects: Project[] = [
       { label: "Latency", value: "< 25ms" },
       { label: "Model", value: "Ensemble ML" }
     ],
+    architecture: {
+      flow: [
+        "Transaction Ingestion",
+        "Feature Engineering",
+        "Ensemble ML Scoring",
+        "Real-Time Risk Decision"
+      ],
+      solve:
+        "Engineered a high-precision ML inference pipeline operating at <25ms latency with streaming drift monitoring and self-healing error bounds."
+    },
     links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
   },
   {
@@ -131,6 +156,7 @@ export const projects: Project[] = [
     summary:
       "An end-to-end MLOps pipeline for text classification, covering training, evaluation, and deployment stages.",
     stack: ["Python", "NLP", "MLOps"],
+    image: "/projects/nlppipeline.jpg",
     highlights: ["End-to-End MLOps", "Model Evaluation", "Automated Runs"],
     features: [
       "Automated text data preprocessing & tokenization",
@@ -141,6 +167,16 @@ export const projects: Project[] = [
       { label: "Pipeline", value: "MLOps v1" },
       { label: "Domain", value: "NLP Classifier" }
     ],
+    architecture: {
+      flow: [
+        "Raw Text Corpus",
+        "Tokenization & Preprocessing",
+        "Model Evaluation & Tracking",
+        "Containerized Release"
+      ],
+      solve:
+        "Automated end-to-end MLOps lifecycle to eliminate manual model retrain overhead and maintain consistent evaluation metrics."
+    },
     links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
   },
   {
@@ -162,6 +198,16 @@ export const projects: Project[] = [
       { label: "Status", value: "In Active Dev" },
       { label: "Stack", value: "Next.js + Recharts" }
     ],
+    architecture: {
+      flow: [
+        "Expense Entry",
+        "Validation & Categorization",
+        "Database Persistence",
+        "Recharts Analytics Engine"
+      ],
+      solve:
+        "Built responsive full-stack financial insights dashboard with instant search, real-time analytics aggregation, and zero layout shift."
+    },
     links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
   },
   {
@@ -172,6 +218,7 @@ export const projects: Project[] = [
     summary:
       "A CRM lead-import tool that uses the Anthropic API with structured output to map messy CSV data to clean lead records.",
     stack: ["Next.js", "TypeScript", "Anthropic API"],
+    image: "/projects/crmimporter.jpg",
     highlights: ["LLM Extraction", "Zero CSV Schema Rules", "Type-Safe JSON"],
     features: [
       "AI-driven schema mapping for unformatted CSV rows",
@@ -182,6 +229,16 @@ export const projects: Project[] = [
       { label: "Engine", value: "Anthropic Claude" },
       { label: "Output", value: "Structured JSON" }
     ],
+    architecture: {
+      flow: [
+        "Unformatted CSV Upload",
+        "Chunked Batch Parser",
+        "Anthropic Structured Mode",
+        "Type-Safe Lead JSON"
+      ],
+      solve:
+        "Leveraged structured LLM outputs to parse completely unformatted, messy CSV lead files without relying on static regex or brittle column rules."
+    },
     links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
   },
   {
@@ -203,7 +260,57 @@ export const projects: Project[] = [
       { label: "Metrics", value: "Prometheus" },
       { label: "Auth", value: "JWT Guard" }
     ],
+    architecture: {
+      flow: [
+        "Inference Gateway",
+        "JWT Token Verification",
+        "A/B Model Traffic Splitter",
+        "Prometheus Telemetry"
+      ],
+      solve:
+        "Engineered production-grade gateway managing JWT rate limiting, zero-downtime model routing, and Prometheus request telemetry."
+    },
     links: [{ label: "GitHub", href: "https://github.com/LEVELING2108" }],
+  },
+  {
+    version: "v1.6",
+    title: "RailTrack Pro",
+    tag: "QR-based vendor & track fittings management · Flask + React · SIH",
+    date: "SIH 2025 R2",
+    summary:
+      "A full-stack system for Indian Railways to track rail fittings from manufacturing to installation, with QR-based field verification and AI-powered vendor/item risk scoring.",
+    stack: ["Flask", "React", "PostgreSQL", "Docker", "Redis"],
+    image: "/projects/railtrackpro.jpg",
+    highlights: [
+      "Team Nemesis · SIH 2025 R2",
+      "30+ REST API Endpoints",
+      "~75%+ Test Coverage",
+    ],
+    features: [
+      "QR code generation + camera scanning for field verification of vendors & track items",
+      "Multi-stage inspection workflow (manufacturing, supply, installation, defect) with A–F quality grading",
+      "AI-powered risk scoring (0–100) flagging missing vendor data & high defect patterns",
+    ],
+    metrics: [
+      { label: "Endpoints", value: "30+ REST APIs" },
+      { label: "Coverage", value: "~75%+ Tested" },
+    ],
+    architecture: {
+      flow: [
+        "QR Code Field Scan",
+        "Flask 3.0 REST API",
+        "Multi-Stage Quality Audit",
+        "AI Vendor Risk Engine (0-100)"
+      ],
+      solve:
+        "Architected end-to-end QR field tracking across 4 database models with role-based JWT security, automated quality grading, and vendor anomaly scoring."
+    },
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/LEVELING2108/SIH_Project-Railtrack_PRO-",
+      },
+    ],
   },
 ];
 

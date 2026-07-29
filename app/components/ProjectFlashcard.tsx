@@ -170,22 +170,49 @@ export default function ProjectFlashcard({ project }: { project: Project }) {
                 className="p-4 font-mono text-xs h-full flex flex-col justify-between min-h-[190px] bg-ink-raised/95"
               >
                 <div>
-                  <p className="text-[11px] uppercase tracking-wider text-copper-bright font-semibold border-b border-trace/60 pb-1.5 mb-2.5 flex items-center gap-1.5">
-                    <CheckCircle2 size={13} className="text-copper-bright" />
-                    Key Architecture & Features
+                  <p className="text-[11px] uppercase tracking-wider text-signal font-semibold border-b border-trace/60 pb-1.5 mb-2.5 flex items-center gap-1.5">
+                    <CheckCircle2 size={13} className="text-signal" />
+                    System Architecture Flow
                   </p>
-                  <ul className="space-y-2 text-paper/90 text-[11px]">
-                    {project.features?.map((f, idx) => (
-                      <li key={idx} className="flex items-start gap-1.5 leading-tight">
-                        <span className="text-copper-bright select-none">›</span>
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  
+                  {project.architecture ? (
+                    <div className="space-y-2.5">
+                      {/* Interactive Architecture Flow Steps */}
+                      <div className="flex flex-wrap items-center gap-1 text-[10px]">
+                        {project.architecture.flow.map((step, idx) => (
+                          <div key={idx} className="flex items-center gap-1">
+                            <span className="rounded bg-ink border border-signal/40 px-1.5 py-0.5 text-paper font-medium">
+                              {step}
+                            </span>
+                            {idx < project.architecture!.flow.length - 1 && (
+                              <span className="text-copper font-bold">➔</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Engineering Solve Highlight */}
+                      <div className="p-2 rounded bg-ink/70 border border-trace text-[11px] text-slate font-sans leading-snug">
+                        <span className="text-copper-bright font-mono font-semibold block mb-0.5">
+                          // Key Engineering Solve
+                        </span>
+                        {project.architecture.solve}
+                      </div>
+                    </div>
+                  ) : (
+                    <ul className="space-y-2 text-paper/90 text-[11px]">
+                      {project.features?.map((f, idx) => (
+                        <li key={idx} className="flex items-start gap-1.5 leading-tight">
+                          <span className="text-copper-bright select-none">›</span>
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <div className="pt-3 border-t border-trace/40 text-[10px] text-slate flex justify-between items-center">
+                <div className="pt-2.5 border-t border-trace/40 text-[10px] text-slate flex justify-between items-center">
                   <span>Scope: {project.date}</span>
-                  <span className="text-copper font-medium">Overview mode</span>
+                  <span className="text-signal font-medium font-mono">Architecture active</span>
                 </div>
               </motion.div>
             )}
