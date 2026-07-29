@@ -47,7 +47,7 @@ export default function ProjectDeck() {
   return (
     <div className="relative mx-auto w-full max-w-4xl flex flex-col items-center py-4">
       {/* Header Deck Info Bar */}
-      <div className="w-full max-w-2xl flex items-center justify-between font-mono text-xs text-slate mb-6 px-1">
+      <div className="w-full max-w-3xl flex items-center justify-between font-mono text-xs text-slate mb-6 px-1">
         <div className="flex items-center gap-2">
           <span className="p-1 rounded-lg bg-ink border border-trace text-copper-bright">
             <Layers size={14} />
@@ -59,7 +59,7 @@ export default function ProjectDeck() {
       </div>
 
       {/* 3D Stacked Card Container */}
-      <div className="relative w-full max-w-2xl min-h-[440px] flex justify-center items-start">
+      <div className="relative w-full max-w-3xl min-h-[520px] sm:min-h-[550px] flex justify-center items-start">
         <AnimatePresence mode="popLayout">
           {visibleCards.map(({ project, stackIndex }) => (
             <ProjectCard
@@ -75,7 +75,7 @@ export default function ProjectDeck() {
       </div>
 
       {/* Progress Indicator Dots & Pill */}
-      <div className="mt-8 w-full max-w-2xl pt-4 border-t border-trace/40">
+      <div className="mt-8 w-full max-w-3xl pt-4 border-t border-trace/40">
         <ProgressIndicator
           currentIndex={currentIndex}
           total={totalProjects}

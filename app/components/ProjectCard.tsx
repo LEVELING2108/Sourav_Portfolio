@@ -90,7 +90,7 @@ export default function ProjectCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={isTop ? toggleFlip : undefined}
-      className={`relative w-full max-w-2xl h-[410px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-colors duration-300 ${
+      className={`relative w-full max-w-3xl min-h-[460px] sm:min-h-[490px] h-[480px] sm:h-[500px] rounded-3xl border border-trace/80 bg-ink-raised/95 backdrop-blur-xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-colors duration-300 ${
         isTop
           ? "cursor-pointer hover:border-copper/70 hover:shadow-[0_24px_70px_rgba(184,118,62,0.22)]"
           : "pointer-events-none select-none"
@@ -133,7 +133,7 @@ export default function ProjectCard({
             <div className="grid gap-5 sm:grid-cols-[1.1fr_0.9fr] items-center my-auto">
               {/* Left Column: One-line summary & Tech Badges */}
               <div className="space-y-3 font-sans">
-                <p className="text-xs sm:text-sm text-slate leading-relaxed line-clamp-3">
+                <p className="text-xs sm:text-sm text-slate leading-relaxed">
                   {project.summary}
                 </p>
 

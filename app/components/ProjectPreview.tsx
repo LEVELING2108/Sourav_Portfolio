@@ -15,7 +15,7 @@ export default function ProjectPreview({
   date,
 }: ProjectPreviewProps) {
   return (
-    <div className="relative w-full h-[180px] sm:h-[210px] overflow-hidden rounded-2xl border border-trace/70 bg-ink shadow-inner group">
+    <div className="relative w-full h-[200px] sm:h-[240px] overflow-hidden rounded-2xl border border-trace/70 bg-ink shadow-inner group">
       {image ? (
         <Image
           src={image}
