@@ -34,8 +34,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`light ${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-ink text-paper antialiased">
+      <body
+        className="min-h-full flex flex-col bg-ink text-paper antialiased"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
