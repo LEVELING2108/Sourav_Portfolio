@@ -23,6 +23,14 @@ export const metadata: Metadata = {
   title: "Sourav — Full-Stack & AI/ML Engineer",
   description:
     "Portfolio of Sourav — full-stack and AI/ML engineer building production-grade software across web, ML pipelines, and applied AI.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
