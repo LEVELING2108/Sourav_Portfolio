@@ -25,11 +25,12 @@ export const metadata: Metadata = {
     "Portfolio of Sourav — full-stack and AI/ML engineer building production-grade software across web, ML pipelines, and applied AI.",
   icons: {
     icon: [
+      { url: "/icon.png", type: "image/png" },
       { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico" },
     ],
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
