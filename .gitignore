@@ -42,5 +42,8 @@ next-env.d.ts
 
 # ide
 .idea/
-.vscode/
+# local session history
+CHAT_HISTORY.md
+CHAT_LOG.md
+DEV_SESSION_LOG.md
 
