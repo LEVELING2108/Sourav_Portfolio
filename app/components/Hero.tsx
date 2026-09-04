@@ -6,43 +6,48 @@ import { profile, stats } from "../data";
 import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
 
-function TypewriterName({ name }: { name: string }) {
+const FOCUS_AREAS = [
+  "real-time ML pipelines (<25ms inference)",
+  "high-concurrency distributed systems",
+  "SIH '25 Indian Railways track management",
+  "applied LLM & structured JSON extraction",
+];
+
+function TypewriterFocus({ items }: { items: string[] }) {
+  const [index, setIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
+    const current = items[index];
     let timeout: NodeJS.Timeout;
 
-    if (!isDeleting && displayedText.length < name.length) {
-      // Type forward
+    if (!isDeleting && displayedText.length < current.length) {
       timeout = setTimeout(() => {
-        setDisplayedText(name.slice(0, displayedText.length + 1));
-      }, 120);
-    } else if (!isDeleting && displayedText.length === name.length) {
-      // Hold full text for 2.5 seconds
+        setDisplayedText(current.slice(0, displayedText.length + 1));
+      }, 65);
+    } else if (!isDeleting && displayedText.length === current.length) {
       timeout = setTimeout(() => {
         setIsDeleting(true);
-      }, 2500);
+      }, 2200);
     } else if (isDeleting && displayedText.length > 0) {
-      // Delete backward
       timeout = setTimeout(() => {
-        setDisplayedText(name.slice(0, displayedText.length - 1));
-      }, 75);
+        setDisplayedText(current.slice(0, displayedText.length - 1));
+      }, 35);
     } else if (isDeleting && displayedText.length === 0) {
-      // Short pause before looping
       timeout = setTimeout(() => {
         setIsDeleting(false);
-      }, 600);
+        setIndex((prev) => (prev + 1) % items.length);
+      }, 400);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, name]);
+  }, [displayedText, isDeleting, index, items]);
 
   return (
-    <span className="inline-flex items-center">
+    <span className="inline-flex items-center text-copper-bright font-medium">
       <span>{displayedText}</span>
-      <span className="text-copper">.</span>
-      <span className="inline-block w-2 sm:w-3.5 h-6 sm:h-12 bg-copper-bright ml-1 sm:ml-2 rounded-sm animate-pulse" />
+      <span className="inline-block w-1.5 h-3.5 sm:h-4 bg-copper-bright ml-1 rounded-xs animate-pulse" />
     </span>
   );
 }
@@ -72,7 +77,8 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               className="font-mono text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
             >
-              <TypewriterName name={profile.name} />
+              <span>{profile.name}</span>
+              <span className="text-copper">.</span>
             </motion.h1>
 
             <motion.p
@@ -84,6 +90,17 @@ export default function Hero() {
               {profile.role}
             </motion.p>
 
+            {/* Dynamic Focus Typewriter */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-2 flex items-center gap-2 font-mono text-xs sm:text-sm text-slate min-h-[22px]"
+            >
+              <span className="text-signal">focusing on:</span>
+              <TypewriterFocus items={FOCUS_AREAS} />
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -92,6 +109,20 @@ export default function Hero() {
             >
               {profile.tagline}
             </motion.p>
+
+            {/* Live Status Pulse */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-4 flex flex-wrap items-center gap-2 font-mono text-xs text-slate"
+            >
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-trace bg-ink-raised px-3 py-1 text-slate">
+                <span className="h-2 w-2 rounded-full bg-signal animate-pulse" />
+                <span className="text-paper font-medium">Now:</span>
+                <span>Dual Degree ECE @ BVDU Pune &amp; IIT Madras BS</span>
+              </span>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
