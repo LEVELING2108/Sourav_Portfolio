@@ -57,14 +57,6 @@ export default function HeroPhotoMinimal() {
           className="object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
         />
       </motion.div>
-
-      {/* Clean Status Line Below */}
-      <div className="mt-3 flex items-center gap-2 font-mono text-xs text-slate">
-        <span className="h-2 w-2 rounded-full bg-signal animate-pulse" />
-        <span className="text-paper font-medium">Available for roles</span>
-        <span className="text-trace">•</span>
-        <span>Pune, IN</span>
-      </div>
     </div>
   );
 }
