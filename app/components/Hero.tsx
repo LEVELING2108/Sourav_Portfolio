@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { profile, stats } from "../data";
 import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
-import HeroPhotoBadge from "./HeroPhotoBadge";
+import HeroPhotoFlip from "./HeroPhotoFlip";
 
 const FOCUS_AREAS = [
   "real-time ML pipelines (<25ms inference)",
@@ -159,14 +159,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column: Style 1 - 3D Holographic Specular Glass Engineer Pass */}
+          {/* Right Column: Style 2 - Interactive 3D Spec Sheet Flip */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="mt-4 lg:mt-0"
           >
-            <HeroPhotoBadge />
+            <HeroPhotoFlip />
           </motion.div>
         </div>
 
