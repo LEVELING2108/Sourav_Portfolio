@@ -23,6 +23,8 @@ const categories: SkillCategory[] = [
     label: "Languages",
     icon: "Code2",
     value: 92,
+    badge: "Daily Stack",
+    context: "Core runtime languages used daily across projects",
     items: skills.languages,
   },
   {
@@ -30,6 +32,8 @@ const categories: SkillCategory[] = [
     label: "Frontend",
     icon: "Layers",
     value: 88,
+    badge: "Production UI",
+    context: "Shipped in ROADSoS (PWA), Ledgerline & RailTrack Pro",
     items: skills.frontend,
   },
   {
@@ -37,34 +41,44 @@ const categories: SkillCategory[] = [
     label: "Backend",
     icon: "Server",
     value: 90,
+    badge: "30+ REST APIs",
+    context: "High-throughput APIs in Flask, FastAPI & Express",
     items: skills.backend,
   },
   {
     key: "database",
-    label: "Database",
+    label: "Database & Cache",
     icon: "Database",
-    value: 85,
+    value: 86,
+    badge: "Relational & Redis",
+    context: "PostgreSQL models & Redis concurrency locks",
     items: skills.database,
   },
   {
     key: "systemDesign",
-    label: "System Design",
+    label: "System Architecture",
     icon: "Network",
-    value: 85,
+    value: 88,
+    badge: "Distributed Systems",
+    context: "JWT rate limiting, caching & mutex concurrency",
     items: skills.systemDesign,
   },
   {
     key: "devops",
-    label: "DevOps & Tools",
+    label: "DevOps & Cloud",
     icon: "Cloud",
-    value: 86,
+    value: 85,
+    badge: "CI/CD & Docker",
+    context: "Dockerized containers, AWS/GCP, GitHub Actions",
     items: skills.devops,
   },
   {
     key: "aiml",
-    label: "Applied AI/ML",
+    label: "Applied AI / ML",
     icon: "BrainCircuit",
-    value: 84,
+    value: 87,
+    badge: "<25ms Inference",
+    context: "Real-time fraud scoring, RAG pipelines & MLOps",
     items: skills.aiml,
   },
 ];
@@ -126,7 +140,7 @@ export default function Skills() {
           {/* Quick Filter Pill Buttons */}
           <div className="space-y-4">
             <h4 className="font-mono text-xs uppercase tracking-wider text-slate">
-              // Filter domain
+              {"// Filter domain"}
             </h4>
             <div className="flex flex-wrap gap-2">
               <button
@@ -178,7 +192,7 @@ export default function Skills() {
                 }`}
               >
                 {/* Category Header */}
-                <div className="flex items-center justify-between border-b border-trace pb-3 mb-4">
+                <div className="flex items-center justify-between border-b border-trace pb-2.5 mb-2">
                   <div className="flex items-center gap-2">
                     <span className="p-1 rounded bg-ink border border-trace/60">
                       {getCategoryIcon(cat.key)}
@@ -187,10 +201,17 @@ export default function Skills() {
                       {cat.label}
                     </h3>
                   </div>
-                  <span className="font-mono text-xs text-copper-bright font-medium">
-                    {cat.value}%
+                  <span className="font-mono text-[10px] text-copper-bright font-semibold rounded bg-copper/10 px-2 py-0.5 border border-copper/30">
+                    {cat.badge}
                   </span>
                 </div>
+
+                {/* Context / Production Exposure Subtitle */}
+                {cat.context && (
+                  <p className="text-[11px] text-slate font-sans mb-3 leading-snug">
+                    {cat.context}
+                  </p>
+                )}
 
                 {/* Skill Chips Grid */}
                 <div className="flex flex-wrap gap-2">

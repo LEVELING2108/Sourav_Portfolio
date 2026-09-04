@@ -6,7 +6,9 @@ export type SkillCategory = {
   key: string;
   label: string;
   icon: string;
-  value: number; // 0 to 100
+  value: number; // 0 to 100 for radar geometry
+  badge?: string;
+  context?: string;
   items: string[];
 };
 
@@ -55,7 +57,7 @@ export default function SkillsRadar({
   return (
     <div className="relative flex flex-col items-center justify-center p-4 rounded-xl border border-trace bg-ink-raised">
       <h4 className="font-mono text-xs uppercase tracking-widest text-slate mb-1">
-        // Stack Radar
+        {"// Domain & Systems Mesh"}
       </h4>
 
       <div className="relative w-full max-w-[340px] aspect-square flex items-center justify-center">
