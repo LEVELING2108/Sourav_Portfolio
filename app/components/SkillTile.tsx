@@ -4,27 +4,18 @@ import { motion } from "framer-motion";
 import {
   Code2,
   Terminal,
-  Cpu,
   Layers,
   Palette,
   Server,
-  Zap,
   Database,
   ShieldCheck,
   Network,
-  Activity,
   Box,
-  GitBranch,
   Cloud,
-  Globe,
   BrainCircuit,
   Sparkles,
-  Workflow,
-  Bot,
   FileCode,
-  Flame,
   Binary,
-  Share2,
 } from "lucide-react";
 
 // Minimal unified icon mapping
