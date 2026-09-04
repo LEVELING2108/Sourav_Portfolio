@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { profile, stats } from "../data";
 import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
+import HeroPhotoMinimal from "./HeroPhotoMinimal";
 
 const FOCUS_AREAS = [
   "real-time ML pipelines (<25ms inference)",
@@ -158,45 +159,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column: Oval-Squircle Personal Photo Frame */}
+          {/* Right Column: Style 3 - Minimalist Linear Magnetic Spotlight Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center lg:justify-end mt-4 lg:mt-0"
+            className="mt-4 lg:mt-0"
           >
-            <div className="relative group">
-              {/* Outer Glowing Ambient Ring Halo */}
-              <div className="absolute -inset-2 rounded-[44px] sm:rounded-[52px] lg:rounded-[64px] bg-gradient-to-tr from-copper via-copper-bright/50 to-signal opacity-70 blur-lg transition-all duration-700 ease-out group-hover:opacity-100 group-hover:blur-xl" />
-
-              {/* Main Oval-Squircle Frame Container */}
-              <motion.div
-                whileHover={{ scale: 1.03, rotate: 1 }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                className="relative overflow-hidden rounded-[40px] sm:rounded-[48px] lg:rounded-[58px] border-2 border-copper/80 bg-ink-raised w-[220px] h-[270px] sm:w-[260px] sm:h-[310px] lg:w-[280px] lg:h-[340px] shadow-[0_10px_40px_rgba(184,118,62,0.3)] backdrop-blur"
-              >
-                <Image
-                  src={profile.avatar}
-                  alt={`${profile.name} Personal Photo`}
-                  fill
-                  priority
-                  sizes="(max-width: 640px) 220px, (max-width: 1024px) 260px, 280px"
-                  className="object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 group-hover:brightness-110"
-                />
-
-                {/* Subtle bottom gradient vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-60" />
-
-                {/* Floating Status Pill Overlay */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 flex items-center justify-between font-mono text-[10px] sm:text-[11px] bg-ink/85 backdrop-blur px-2.5 py-1.5 rounded-full border border-copper/50 text-paper">
-                  <span className="flex items-center gap-1.5 text-signal font-semibold">
-                    <span className="h-2 w-2 rounded-full bg-signal animate-ping" />
-                    Available for roles
-                  </span>
-                  <Sparkles size={12} className="text-copper-bright" />
-                </div>
-              </motion.div>
-            </div>
+            <HeroPhotoMinimal />
           </motion.div>
         </div>
 
