@@ -191,7 +191,7 @@ export default function CommandPalette() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full border border-trace bg-ink-raised/90 backdrop-blur-md px-3.5 py-2 font-mono text-xs text-paper shadow-lg hover:border-copper/60 hover:text-copper-bright transition-all cursor-pointer group"
+        className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center gap-1.5 sm:gap-2 rounded-full border border-trace bg-ink-raised/90 backdrop-blur-md px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-xs text-paper shadow-lg hover:border-copper/60 hover:text-copper-bright transition-all cursor-pointer group"
       >
         <span className="p-1 rounded-md bg-ink border border-trace text-signal group-hover:text-copper-bright">
           <Terminal size={13} />
@@ -205,16 +205,16 @@ export default function CommandPalette() {
       {/* Modal Backdrop & Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-ink/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-start justify-center pt-12 sm:pt-24 px-3 sm:px-4 bg-ink/80 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, scale: 0.96, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-trace bg-ink-raised shadow-[0_16px_70px_rgba(0,0,0,0.6)]"
+              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-trace bg-ink-raised shadow-[0_16px_70px_rgba(0,0,0,0.6)] max-h-[85vh] flex flex-col"
             >
               {/* Header Search Bar */}
-              <div className="flex items-center border-b border-trace px-4 py-3 font-mono text-sm">
+              <div className="flex items-center border-b border-trace px-4 py-3 font-mono text-sm shrink-0">
                 <Search size={16} className="text-signal mr-3 shrink-0" />
                 <input
                   ref={inputRef}
@@ -224,7 +224,7 @@ export default function CommandPalette() {
                     setSelectedIndex(0);
                   }}
                   onKeyDown={handleKeyDownInput}
-                  placeholder="Type a command, project, or technology..."
+                  placeholder="Search commands, projects, stack..."
                   className="w-full bg-transparent text-paper placeholder:text-slate focus:outline-none font-mono text-sm"
                 />
                 {query && (

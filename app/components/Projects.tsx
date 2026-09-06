@@ -48,13 +48,13 @@ export default function Projects() {
           </div>
 
           {/* View Mode Toggle & Arrow Controls */}
-          <div className="flex items-center gap-3 font-mono text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 font-mono text-xs w-full sm:w-auto overflow-x-auto scrollbar-none pb-1 sm:pb-0">
             {/* View Mode Toggle */}
-            <div className="flex items-center rounded-lg border border-trace bg-ink p-1">
+            <div className="flex items-center rounded-lg border border-trace bg-ink p-1 shrink-0">
               <button
                 onClick={() => setViewMode("holodeck")}
                 title="3D Tilt Parallax Holo-Deck (Concept 2)"
-                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                   viewMode === "holodeck"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
                     : "text-slate hover:text-paper"
@@ -66,7 +66,7 @@ export default function Projects() {
               <button
                 onClick={() => setViewMode("bento")}
                 title="Bento Command Center (Concept 1)"
-                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                   viewMode === "bento"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
                     : "text-slate hover:text-paper"
@@ -78,7 +78,7 @@ export default function Projects() {
               <button
                 onClick={() => setViewMode("deck")}
                 title="Apple 3D Deck Mode"
-                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                   viewMode === "deck"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
                     : "text-slate hover:text-paper"
@@ -90,7 +90,7 @@ export default function Projects() {
               <button
                 onClick={() => setViewMode("side-scroller")}
                 title="Side Scroller Mode"
-                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                   viewMode === "side-scroller"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
                     : "text-slate hover:text-paper"
@@ -102,7 +102,7 @@ export default function Projects() {
               <button
                 onClick={() => setViewMode("vertical")}
                 title="Vertical Timeline Mode"
-                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                   viewMode === "vertical"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
                     : "text-slate hover:text-paper"

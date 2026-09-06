@@ -710,7 +710,7 @@ export default function ProjectsBento() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-2xl rounded-3xl border border-copper/60 bg-ink-raised p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-10 overflow-hidden"
+              className="relative w-full max-w-2xl rounded-3xl border border-copper/60 bg-ink-raised p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-10 max-h-[90vh] overflow-y-auto"
             >
               {/* Top Accent Line */}
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-copper via-copper-bright to-signal" />

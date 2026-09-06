@@ -53,7 +53,7 @@ export default function LoadingPage() {
           <LoaderGlitchText
             text={text}
             intensity="medium"
-            className="text-4xl sm:text-6xl font-bold tracking-widest text-foreground text-center px-4"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold tracking-wider sm:tracking-widest text-foreground text-center px-4 max-w-full break-words"
           />
         </motion.div>
       )}
