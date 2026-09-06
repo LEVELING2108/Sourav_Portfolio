@@ -3,26 +3,36 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Code2,
-  Terminal,
-  Cpu,
-  Layers,
-  Palette,
-  Server,
-  Database,
-  ShieldCheck,
-  Network,
-  Box,
-  Cloud,
-  BrainCircuit,
   Zap,
   ArrowUpRight,
   Activity,
   Sliders,
-  CheckCircle2,
-  Radio,
-  type LucideIcon,
+  Sparkles,
+  LayoutGrid,
+  CreditCard,
 } from "lucide-react";
+import {
+  NextjsIcon,
+  PythonIcon,
+  TypescriptIcon,
+  ReactIcon,
+  FastapiIcon,
+  FlaskIcon,
+  TailwindIcon,
+  CppIcon,
+  PytorchIcon,
+  HuggingFaceIcon,
+  RagIcon,
+  ScikitLearnIcon,
+  LangChainIcon,
+  MlopsIcon,
+  RedisIcon,
+  DockerIcon,
+  PostgresIcon,
+  GithubActionsIcon,
+  JwtIcon,
+  AwsIcon,
+} from "./BrandIcons";
 
 type MarqueeSkill = {
   id: string;
@@ -31,7 +41,7 @@ type MarqueeSkill = {
   level: string;
   projectProof: string;
   projectUrl: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   highlight: string;
 };
 
@@ -43,7 +53,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "Production Core",
     projectProof: "v1.0 ROADSoS & v1.3 Ledgerline",
     projectUrl: "#projects",
-    icon: Layers,
+    icon: NextjsIcon,
     highlight: "App Router, Turbopack, Server Components & PWA deployment",
   },
   {
@@ -53,7 +63,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "Daily Driver",
     projectProof: "v1.1 FraudShield & v1.6 RailTrack Pro",
     projectUrl: "#projects",
-    icon: Terminal,
+    icon: PythonIcon,
     highlight: "Async APIs, PyTorch pipelines, Flask & FastAPI microservices",
   },
   {
@@ -63,7 +73,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "Strict Mode",
     projectProof: "All frontend & full-stack systems",
     projectUrl: "#projects",
-    icon: Code2,
+    icon: TypescriptIcon,
     highlight: "Type-safe schemas, end-to-end API contract verification",
   },
   {
@@ -73,7 +83,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "Production UI",
     projectProof: "v1.0 ROADSoS & v1.6 RailTrack Pro",
     projectUrl: "#projects",
-    icon: Layers,
+    icon: ReactIcon,
     highlight: "Concurrent rendering, server actions, client hydration",
   },
   {
@@ -83,7 +93,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "High Throughput",
     projectProof: "v1.1 FraudShield REST Scoring",
     projectUrl: "#projects",
-    icon: Zap,
+    icon: FastapiIcon,
     highlight: "Asynchronous REST endpoints with Pydantic schema validation",
   },
   {
@@ -93,7 +103,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "30+ REST APIs",
     projectProof: "v1.6 RailTrack Pro (SIH 2025)",
     projectUrl: "#projects",
-    icon: Server,
+    icon: FlaskIcon,
     highlight: "Modular Blueprints, JWT security & QR field audit pipelines",
   },
   {
@@ -103,7 +113,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "Modern Styling",
     projectProof: "Portfolio & Ledgerline",
     projectUrl: "#projects",
-    icon: Palette,
+    icon: TailwindIcon,
     highlight: "Theme variables, fluid responsive grids, micro-interactions",
   },
   {
@@ -113,7 +123,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     level: "DSA & Core",
     projectProof: "ECE Hardware & Algorithms",
     projectUrl: "#projects",
-    icon: Cpu,
+    icon: CppIcon,
     highlight: "Memory management, algorithmic optimization & systems fundamentals",
   },
 ];
@@ -126,7 +136,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "<25ms Inference",
     projectProof: "v1.1 FraudShield ML Platform",
     projectUrl: "#projects",
-    icon: BrainCircuit,
+    icon: PytorchIcon,
     highlight: "Real-time tensor scoring & streaming anomaly detection",
   },
   {
@@ -136,7 +146,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "Transformer Core",
     projectProof: "v1.2 NLP MLOps Pipeline",
     projectUrl: "#projects",
-    icon: BrainCircuit,
+    icon: HuggingFaceIcon,
     highlight: "Pre-trained tokenizers, BERT fine-tuning & evaluation benchmarks",
   },
   {
@@ -146,7 +156,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "Applied AI",
     projectProof: "GROWeasy AI Importer",
     projectUrl: "#projects",
-    icon: Network,
+    icon: RagIcon,
     highlight: "Vector chunking, context injection & structured schema generation",
   },
   {
@@ -156,7 +166,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "Ensemble Scoring",
     projectProof: "v1.1 FraudShield",
     projectUrl: "#projects",
-    icon: Cpu,
+    icon: ScikitLearnIcon,
     highlight: "Random Forests, XGBoost, feature scaling & precision metrics",
   },
   {
@@ -166,7 +176,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "Agentic Workflows",
     projectProof: "v1.4 CRM CSV Importer",
     projectUrl: "#projects",
-    icon: Activity,
+    icon: LangChainIcon,
     highlight: "Deterministic tool calling & state graph orchestration",
   },
   {
@@ -176,7 +186,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     level: "Production MLOps",
     projectProof: "v1.2 NLP Classification Pipeline",
     projectUrl: "#projects",
-    icon: Box,
+    icon: MlopsIcon,
     highlight: "Data versioning, model registry & automated experiment tracking",
   },
 ];
@@ -189,7 +199,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "Zero Race Conditions",
     projectProof: "v1.0 ROADSoS Emergency Surge",
     projectUrl: "#projects",
-    icon: Database,
+    icon: RedisIcon,
     highlight: "Atomic SETNX locks eliminating duplicate emergency dispatches",
   },
   {
@@ -199,7 +209,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "Multi-stage Builds",
     projectProof: "v1.5 ModelSentry & v1.6 RailTrack Pro",
     projectUrl: "#projects",
-    icon: Box,
+    icon: DockerIcon,
     highlight: "Containerized deployment with minimal layer footprints",
   },
   {
@@ -209,7 +219,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "Relational Schemas",
     projectProof: "v1.6 RailTrack Pro (4-table models)",
     projectUrl: "#projects",
-    icon: Database,
+    icon: PostgresIcon,
     highlight: "Foreign key constraints, indexing, and transactional integrity",
   },
   {
@@ -219,7 +229,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "~75%+ Test Coverage",
     projectProof: "v1.6 RailTrack Pro & v1.2 NLP",
     projectUrl: "#projects",
-    icon: Cloud,
+    icon: GithubActionsIcon,
     highlight: "Automated linting, unit testing, and Docker push workflows",
   },
   {
@@ -229,7 +239,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "Security Gateway",
     projectProof: "v1.5 ModelSentry Gateway",
     projectUrl: "#projects",
-    icon: ShieldCheck,
+    icon: JwtIcon,
     highlight: "Role-based authorization and IP/token bucket throttling",
   },
   {
@@ -239,7 +249,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     level: "Cloud Deployments",
     projectProof: "Cloud storage & server hosting",
     projectUrl: "#projects",
-    icon: Cloud,
+    icon: AwsIcon,
     highlight: "Asset storage, EC2 inference hosting, and security groups",
   },
 ];
@@ -247,6 +257,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
 export default function SkillsMarquee() {
   const [selectedSkill, setSelectedSkill] = useState<MarqueeSkill>(TRACK_1_SKILLS[0]);
   const [isPaused, setIsPaused] = useState(false);
+  const [displayMode, setDisplayMode] = useState<"pills" | "tokens">("pills");
 
   const renderMarqueeRow = (
     skills: MarqueeSkill[],
@@ -258,16 +269,16 @@ export default function SkillsMarquee() {
     const duplicatedSkills = [...skills, ...skills, ...skills];
 
     return (
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <div className="flex items-center gap-2 px-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-copper" />
+          <span className="h-1.5 w-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(184,118,62,0.8)]" />
           <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate/70">
             {trackLabel}
           </span>
         </div>
 
         <div
-          className="relative flex overflow-hidden py-1 select-none"
+          className="relative flex overflow-hidden py-1.5 select-none"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -283,36 +294,62 @@ export default function SkillsMarquee() {
                 ease: "linear",
               },
             }}
-            className="flex gap-2.5 shrink-0"
+            className="flex gap-3 shrink-0 items-center"
           >
             {duplicatedSkills.map((skill, index) => {
               const IconComp = skill.icon;
               const isSelected = selectedSkill.id === skill.id;
 
+              if (displayMode === "tokens") {
+                // Option 2: Compact 3D Dock Token with Prominent Brand Icon
+                return (
+                  <button
+                    key={`${skill.id}-${index}`}
+                    onClick={() => setSelectedSkill(skill)}
+                    className={`group relative flex flex-col items-center justify-center rounded-2xl border transition-all cursor-pointer select-none ${
+                      isSelected
+                        ? "bg-gradient-to-b from-copper/25 via-ink-raised to-ink border-copper-bright shadow-[0_0_24px_rgba(184,118,62,0.45)] scale-110 -translate-y-1 z-10"
+                        : "bg-gradient-to-b from-ink-raised via-ink-raised/90 to-ink border-trace hover:border-copper/70 hover:scale-105 hover:-translate-y-0.5 shadow-md"
+                    }`}
+                    style={{ minWidth: "76px", height: "76px" }}
+                    title={`${skill.name} - ${skill.level}`}
+                  >
+                    {/* Top specular highlight edge */}
+                    <div className="absolute inset-x-2 top-0.5 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
+
+                    <span className="relative z-10 flex items-center justify-center transform group-hover:scale-115 transition-transform duration-200 drop-shadow-[0_3px_5px_rgba(0,0,0,0.5)]">
+                      <IconComp size={30} />
+                    </span>
+
+                    <span className="mt-1.5 text-[9px] font-mono text-slate/90 group-hover:text-paper truncate max-w-[68px] text-center font-medium leading-none">
+                      {skill.name}
+                    </span>
+                  </button>
+                );
+              }
+
+              // Option 1: "Physical Token" Pill (Brand Icon + Full Name + Credibility Badge)
               return (
                 <button
                   key={`${skill.id}-${index}`}
                   onClick={() => setSelectedSkill(skill)}
-                  className={`group flex items-center gap-2 rounded-xl border px-3 py-1.5 font-mono text-xs transition-all cursor-pointer ${
+                  className={`group relative flex items-center gap-2.5 rounded-2xl border px-3.5 py-2 font-mono text-xs transition-all cursor-pointer select-none ${
                     isSelected
-                      ? "bg-copper/25 border-copper-bright text-paper font-semibold shadow-[0_0_16px_rgba(184,118,62,0.35)] scale-105"
-                      : "bg-ink-raised border-trace text-slate hover:text-paper hover:border-copper/60 hover:bg-ink-raised/95"
+                      ? "bg-gradient-to-r from-copper/25 via-ink-raised to-copper/15 border-copper-bright text-paper font-semibold shadow-[0_0_20px_rgba(184,118,62,0.35)] scale-105 z-10"
+                      : "bg-gradient-to-b from-ink-raised to-ink border-trace text-slate hover:text-paper hover:border-copper/60 hover:shadow-lg"
                   }`}
                 >
-                  <span
-                    className={`p-1 rounded-md border transition-colors ${
-                      isSelected
-                        ? "bg-copper text-ink border-copper-bright"
-                        : "bg-ink border-trace text-copper-bright group-hover:text-signal"
-                    }`}
-                  >
-                    <IconComp size={13} />
+                  {/* Top specular highlight edge */}
+                  <div className="absolute inset-x-3 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+
+                  <span className="p-1 rounded-lg bg-ink border border-trace/70 flex items-center justify-center shrink-0 shadow-inner group-hover:scale-110 transition-transform">
+                    <IconComp size={18} />
                   </span>
-                  <span className="whitespace-nowrap">{skill.name}</span>
+                  <span className="whitespace-nowrap font-medium">{skill.name}</span>
                   <span
-                    className={`text-[9px] rounded px-1.5 py-0.5 border ${
+                    className={`text-[9px] rounded-md px-1.5 py-0.5 border font-semibold ${
                       isSelected
-                        ? "bg-copper/30 border-copper text-copper-bright font-bold"
+                        ? "bg-copper/30 border-copper text-copper-bright"
                         : "bg-ink border-trace/60 text-slate/80 group-hover:text-paper"
                     }`}
                   >
@@ -347,9 +384,9 @@ export default function SkillsMarquee() {
           >
             {/* Header: Icon, Name, Badge & Instructions */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-trace/60 pb-4">
-              <div className="flex items-center gap-3">
-                <span className="p-3 rounded-2xl bg-ink border border-copper/50 text-copper-bright shadow-inner">
-                  <SelectedIcon size={24} />
+              <div className="flex items-center gap-3.5">
+                <span className="p-3 rounded-2xl bg-ink border border-copper/50 shadow-inner flex items-center justify-center">
+                  <SelectedIcon size={30} />
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
@@ -366,11 +403,32 @@ export default function SkillsMarquee() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 font-mono text-xs text-slate">
-                <span className="p-1 rounded bg-ink border border-trace text-signal">
-                  <Sliders size={12} />
-                </span>
-                <span>Click any badge below to inspect solve & proof</span>
+              {/* View Switcher: Option 1 (Pills) vs Option 2 (3D Tokens) */}
+              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace font-mono text-xs">
+                <button
+                  onClick={() => setDisplayMode("pills")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    displayMode === "pills"
+                      ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
+                      : "text-slate hover:text-paper"
+                  }`}
+                  title="Option 1: Brand Icon + Full Name + Level"
+                >
+                  <CreditCard size={12} />
+                  <span>Option 1: Pills (Icon+Text)</span>
+                </button>
+                <button
+                  onClick={() => setDisplayMode("tokens")}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    displayMode === "tokens"
+                      ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
+                      : "text-slate hover:text-paper"
+                  }`}
+                  title="Option 2: 3D Brand Dock Tokens"
+                >
+                  <LayoutGrid size={12} />
+                  <span>Option 2: 3D Tokens (Icon Focus)</span>
+                </button>
               </div>
             </div>
 
@@ -435,13 +493,13 @@ export default function SkillsMarquee() {
       </div>
 
       {/* Footer Instructions */}
-      <div className="flex items-center justify-between text-[11px] font-mono text-slate px-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-slate px-2">
         <span className="flex items-center gap-1.5">
           <Activity size={12} className="text-signal animate-pulse" />
-          <span>Bi-directional infinite marquee · hover to slow down</span>
+          <span>Bi-directional continuous loop · hover to slow down · click any badge to inspect</span>
         </span>
-        <span className="hidden sm:inline text-slate/70">
-          20 production-verified engineering tools
+        <span className="text-slate/70">
+          20 authentic brand vector icons
         </span>
       </div>
     </div>
