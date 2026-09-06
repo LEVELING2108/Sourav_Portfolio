@@ -16,8 +16,10 @@ import {
   BrainCircuit,
   Filter,
   Cpu,
+  Boxes,
 } from "lucide-react";
 import SystemBlueprint from "./SystemBlueprint";
+import SkillsBento from "./SkillsBento";
 
 const categories: SkillCategory[] = [
   {
@@ -108,7 +110,7 @@ function getCategoryIcon(key: string) {
 }
 
 export default function Skills() {
-  const [viewMode, setViewMode] = useState<"blueprint" | "mesh">("blueprint");
+  const [viewMode, setViewMode] = useState<"bento" | "blueprint" | "mesh">("bento");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filteredCategories = activeCategory
@@ -121,9 +123,21 @@ export default function Skills() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="$ cat stack.json" title="Stack & Architecture" />
 
-          {/* View Mode Toggle: System Blueprint vs Domain Mesh */}
+          {/* View Mode Toggle: Bento vs Blueprint vs Mesh */}
           <div className="flex items-center gap-2">
             <div className="flex items-center rounded-xl border border-trace bg-ink p-1 font-mono text-xs">
+              <button
+                onClick={() => setViewMode("bento")}
+                title="Modular Bento Ecosystem"
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all cursor-pointer ${
+                  viewMode === "bento"
+                    ? "bg-copper/20 text-copper-bright font-semibold border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Boxes size={13} />
+                <span>Bento Ecosystem</span>
+              </button>
               <button
                 onClick={() => setViewMode("blueprint")}
                 title="Interactive System Architecture Flow"
@@ -163,7 +177,11 @@ export default function Skills() {
         </div>
 
         {/* View Mode Content */}
-        {viewMode === "blueprint" ? (
+        {viewMode === "bento" ? (
+          <div className="mt-10">
+            <SkillsBento />
+          </div>
+        ) : viewMode === "blueprint" ? (
           <div className="mt-10">
             <SystemBlueprint />
           </div>
