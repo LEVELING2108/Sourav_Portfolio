@@ -1,4 +1,4 @@
-import Preloader from "./components/Preloader";
+import PreloaderStudio from "./components/PreloaderStudio";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
@@ -11,7 +11,7 @@ import CommandPalette from "./components/CommandPalette";
 export default function Home() {
   return (
     <>
-      <Preloader />
+      <PreloaderStudio />
       <Nav />
       <main className="flex-1">
         <Hero />
