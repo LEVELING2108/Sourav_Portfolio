@@ -6,19 +6,26 @@ import { LoaderGlitchText } from "@/components/ui/loader-glitch-text";
 
 export default function LoadingPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [text, setText] = useState("LOADING");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    // Show the glitch loader and then smoothly exit
-    const timer = setTimeout(() => {
+    // Switch from LOADING to SOURAV SUMAN in between the glitch effect
+    const nameTimer = setTimeout(() => {
+      setText("SOURAV SUMAN");
+    }, 1400);
+
+    // Smoothly exit after showing the name
+    const exitTimer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = "";
-    }, 2800);
+    }, 3000);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        clearTimeout(timer);
+        clearTimeout(nameTimer);
+        clearTimeout(exitTimer);
         setIsLoading(false);
         document.body.style.overflow = "";
       }
@@ -26,7 +33,8 @@ export default function LoadingPage() {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(nameTimer);
+      clearTimeout(exitTimer);
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
@@ -43,9 +51,9 @@ export default function LoadingPage() {
           className="fixed inset-0 z-[100] flex w-full items-center justify-center bg-background select-none"
         >
           <LoaderGlitchText
-            text="LOADING"
+            text={text}
             intensity="medium"
-            className="text-5xl sm:text-6xl font-bold tracking-widest text-foreground"
+            className="text-4xl sm:text-6xl font-bold tracking-widest text-foreground text-center px-4"
           />
         </motion.div>
       )}
