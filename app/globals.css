@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #0d1117;
-  --ink-raised: #12181f;
-  --paper: #e8e6e1;
-  --slate: #8b8f98;
+  --ink: #000000;
+  --ink-raised: #0a0a0a;
+  --paper: #ededed;
+  --slate: #94969c;
   --copper: #b8763e;
-  --copper-bright: #d99a5f;
+  --copper-bright: #e29d62;
   --signal: #4fd1c5;
-  --trace-line: #232a33;
+  --trace-line: #1c1c21;
 }
 
 html.light {

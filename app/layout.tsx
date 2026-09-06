@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`light ${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
+      className={`${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
       suppressHydrationWarning
     >
       <body
