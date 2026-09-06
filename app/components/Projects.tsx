@@ -4,13 +4,14 @@ import { useRef, useState } from "react";
 import { projects } from "../data";
 import ProjectFlashcard from "./ProjectFlashcard";
 import ProjectDeck from "./ProjectDeck";
+import ProjectsBento from "./ProjectsBento";
 import TraceLine from "./TraceLine";
-import { ChevronLeft, ChevronRight, LayoutGrid, Rows, Layers } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutGrid, Rows, Layers, Sparkles } from "lucide-react";
 
 export default function Projects() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const verticalRef = useRef<HTMLDivElement>(null);
-  const [viewMode, setViewMode] = useState<"deck" | "side-scroller" | "vertical">("deck");
+  const [viewMode, setViewMode] = useState<"bento" | "deck" | "side-scroller" | "vertical">("bento");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScrollLeft = () => {
@@ -49,6 +50,18 @@ export default function Projects() {
           <div className="flex items-center gap-3 font-mono text-xs">
             {/* View Mode Toggle */}
             <div className="flex items-center rounded-lg border border-trace bg-ink p-1">
+              <button
+                onClick={() => setViewMode("bento")}
+                title="Bento Command Center (Linear Style)"
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                  viewMode === "bento"
+                    ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Sparkles size={13} />
+                <span>Bento Center</span>
+              </button>
               <button
                 onClick={() => setViewMode("deck")}
                 title="Apple 3D Deck Mode"
@@ -109,8 +122,12 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Render 3D Deck, Side Scroller, or Timeline depending on viewMode */}
-        {viewMode === "deck" ? (
+        {/* Render Bento, 3D Deck, Side Scroller, or Timeline depending on viewMode */}
+        {viewMode === "bento" ? (
+          <div className="mt-8">
+            <ProjectsBento />
+          </div>
+        ) : viewMode === "deck" ? (
           <div className="mt-8">
             <ProjectDeck />
           </div>
