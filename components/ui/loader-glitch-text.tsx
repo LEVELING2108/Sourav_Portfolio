@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import { cn } from "@/lib/utils";
 
 const GLITCH_CHARS = "!@#$%^&*<>{}[]|/\\~";
@@ -137,14 +138,14 @@ export function LoaderGlitchText({
         }
       >
         <span className="sr-only">{text}</span>
-        <span aria-hidden="true" className="relative text-paper">
+        <span aria-hidden="true" className="relative text-foreground">
           {displayText}
         </span>
         <span
           aria-hidden="true"
-          className="absolute inset-0 text-copper-bright/90"
+          className="absolute inset-0 text-foreground/70"
           style={{
-            color: "oklch(0.72 0.18 55)", // Warm copper/amber chromatic aberration
+            color: "oklch(0.65 0.2 25)",
             animation: `glitch-clip-1 ${intensityConfig.duration} infinite linear alternate-reverse`,
           }}
         >
@@ -152,9 +153,9 @@ export function LoaderGlitchText({
         </span>
         <span
           aria-hidden="true"
-          className="absolute inset-0 text-signal/90"
+          className="absolute inset-0 text-foreground/70"
           style={{
-            color: "oklch(0.75 0.16 195)", // Tech teal/cyan chromatic aberration
+            color: "oklch(0.7 0.15 200)",
             animation: `glitch-clip-2 ${intensityConfig.duration} infinite linear alternate-reverse`,
           }}
         >
@@ -165,7 +166,7 @@ export function LoaderGlitchText({
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.2) 2px, rgba(0, 0, 0, 0.2) 4px)",
+              "repeating-linear-gradient(0deg, transparent, transparent 2px, oklch(0 0 0 / 0.03) 2px, oklch(0 0 0 / 0.03) 4px)",
           }}
         />
       </output>

@@ -23,6 +23,8 @@ html.light {
 }
 
 @theme inline {
+  --color-background: var(--ink);
+  --color-foreground: var(--paper);
   --color-ink: var(--ink);
   --color-ink-raised: var(--ink-raised);
   --color-paper: var(--paper);

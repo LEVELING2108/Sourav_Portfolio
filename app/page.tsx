@@ -1,4 +1,4 @@
-import PreloaderGlitch from "./components/PreloaderGlitch";
+import LoadingPage from "./components/LoadingPage";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
@@ -11,7 +11,7 @@ import CommandPalette from "./components/CommandPalette";
 export default function Home() {
   return (
     <>
-      <PreloaderGlitch />
+      <LoadingPage />
       <Nav />
       <main className="flex-1">
         <Hero />
