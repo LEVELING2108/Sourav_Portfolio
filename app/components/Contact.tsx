@@ -122,7 +122,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-xl border border-signal/60 bg-ink-raised/95 px-4 py-3 font-mono text-xs text-paper shadow-[0_8px_30px_rgba(79,209,197,0.2)] backdrop-blur"
+            className="fixed bottom-6 inset-x-4 sm:inset-x-auto sm:right-6 z-50 flex items-center gap-2.5 rounded-xl border border-signal/60 bg-ink-raised/95 px-4 py-3 font-mono text-xs text-paper shadow-[0_8px_30px_rgba(79,209,197,0.2)] backdrop-blur max-w-sm mx-auto sm:mx-0"
           >
             <span className="p-1 rounded-full bg-signal/20 text-signal">
               <Check size={14} />

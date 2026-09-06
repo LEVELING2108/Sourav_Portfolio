@@ -41,15 +41,15 @@ export default function Nav() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-trace bg-ink/85 backdrop-blur transition-colors duration-300">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12 py-3 font-mono text-xs sm:text-sm">
-        <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-semibold tracking-tight text-xs sm:text-sm shrink-0">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-8 lg:px-12 py-2.5 sm:py-3 font-mono text-xs sm:text-sm">
+        <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-semibold tracking-tight text-[11px] xs:text-xs sm:text-sm shrink-0">
           <span className="text-signal">~/</span>
           {profile.name.toLowerCase()}
         </a>
-        <ul className="flex items-center gap-2 sm:gap-5 text-slate">
+        <ul className="flex items-center gap-1.5 xs:gap-2.5 sm:gap-5 text-slate text-[11px] sm:text-xs">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="hover:text-paper transition-colors py-1 px-1">
+              <a href={l.href} className="hover:text-paper transition-colors py-1 px-1 xs:px-1.5">
                 {l.label}
               </a>
             </li>

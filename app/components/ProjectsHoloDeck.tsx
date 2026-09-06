@@ -114,6 +114,7 @@ function HoloCard({
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
+        onTouchEnd={handleMouseLeave}
         style={{
           rotateX,
           rotateY,
@@ -301,11 +302,11 @@ export default function ProjectsHoloDeck() {
   return (
     <div className="space-y-8">
       {/* Category Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace">
+      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full scrollbar-none w-full sm:w-auto">
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "all"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -315,7 +316,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("flagship")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "flagship"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -325,7 +326,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("aiml")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "aiml"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -335,7 +336,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("systems")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "systems"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -381,7 +382,7 @@ export default function ProjectsHoloDeck() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-2xl rounded-3xl border border-copper/60 bg-ink-raised p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-10 overflow-hidden"
+              className="relative w-full max-w-2xl rounded-3xl border border-copper/60 bg-ink-raised p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-10 max-h-[90vh] overflow-y-auto"
             >
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-copper via-copper-bright to-signal" />
 
