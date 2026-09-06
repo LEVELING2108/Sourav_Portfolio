@@ -246,14 +246,16 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
 
 export default function SkillsMarquee() {
   const [selectedSkill, setSelectedSkill] = useState<MarqueeSkill>(TRACK_1_SKILLS[0]);
+  const [isPaused, setIsPaused] = useState(false);
 
   const renderMarqueeRow = (
     skills: MarqueeSkill[],
-    animationClass: string,
+    direction: "left" | "right",
+    speed: number,
     trackLabel: string
   ) => {
-    // Duplicate skills twice to create a continuous 0% to -50% CSS loop
-    const duplicatedSkills = [...skills, ...skills];
+    // Duplicate skills 3 times to create an unbroken seamless infinite loop
+    const duplicatedSkills = [...skills, ...skills, ...skills];
 
     return (
       <div className="space-y-1.5">
@@ -264,8 +266,25 @@ export default function SkillsMarquee() {
           </span>
         </div>
 
-        <div className="relative flex overflow-hidden py-1 select-none">
-          <div className={`${animationClass} flex gap-2.5 shrink-0`}>
+        <div
+          className="relative flex overflow-hidden py-1 select-none"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <motion.div
+            animate={{
+              x: direction === "left" ? ["0%", "-33.33%"] : ["-33.33%", "0%"],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: isPaused ? speed * 3.5 : speed,
+                ease: "linear",
+              },
+            }}
+            className="flex gap-2.5 shrink-0"
+          >
             {duplicatedSkills.map((skill, index) => {
               const IconComp = skill.icon;
               const isSelected = selectedSkill.id === skill.id;
@@ -302,7 +321,7 @@ export default function SkillsMarquee() {
                 </button>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     );
@@ -388,26 +407,29 @@ export default function SkillsMarquee() {
         </AnimatePresence>
       </div>
 
-      {/* Infinite Scrolling Tickers Container with Hover Freeze & Masked Edges */}
-      <div className="marquee-track-container relative space-y-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      {/* Infinite Scrolling Tickers Container with Masked Edges */}
+      <div className="relative space-y-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
         {/* Track 1: Runtime & Full-Stack */}
         {renderMarqueeRow(
           TRACK_1_SKILLS,
-          "animate-marquee-left",
+          "left",
+          32,
           "Tier 01 · Full-Stack & Runtime"
         )}
 
         {/* Track 2: Applied AI/ML & MLOps */}
         {renderMarqueeRow(
           TRACK_2_SKILLS,
-          "animate-marquee-right",
+          "right",
+          28,
           "Tier 02 · Applied AI/ML & Data Pipelines"
         )}
 
         {/* Track 3: Systems & Cloud Infrastructure */}
         {renderMarqueeRow(
           TRACK_3_SKILLS,
-          "animate-marquee-left-fast",
+          "left",
+          36,
           "Tier 03 · Distributed Systems, DB & Cloud"
         )}
       </div>
@@ -416,7 +438,7 @@ export default function SkillsMarquee() {
       <div className="flex items-center justify-between text-[11px] font-mono text-slate px-2">
         <span className="flex items-center gap-1.5">
           <Activity size={12} className="text-signal animate-pulse" />
-          <span>GPU-accelerated infinite marquee · hover anywhere to pause ticker</span>
+          <span>Bi-directional infinite marquee · hover to slow down</span>
         </span>
         <span className="hidden sm:inline text-slate/70">
           20 production-verified engineering tools
