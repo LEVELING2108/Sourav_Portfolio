@@ -5,13 +5,14 @@ import { projects } from "../data";
 import ProjectFlashcard from "./ProjectFlashcard";
 import ProjectDeck from "./ProjectDeck";
 import ProjectsBento from "./ProjectsBento";
+import ProjectsHoloDeck from "./ProjectsHoloDeck";
 import TraceLine from "./TraceLine";
-import { ChevronLeft, ChevronRight, LayoutGrid, Rows, Layers, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, LayoutGrid, Rows, Layers, Sparkles, Compass } from "lucide-react";
 
 export default function Projects() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const verticalRef = useRef<HTMLDivElement>(null);
-  const [viewMode, setViewMode] = useState<"bento" | "deck" | "side-scroller" | "vertical">("bento");
+  const [viewMode, setViewMode] = useState<"holodeck" | "bento" | "deck" | "side-scroller" | "vertical">("holodeck");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleScrollLeft = () => {
@@ -51,8 +52,20 @@ export default function Projects() {
             {/* View Mode Toggle */}
             <div className="flex items-center rounded-lg border border-trace bg-ink p-1">
               <button
+                onClick={() => setViewMode("holodeck")}
+                title="3D Tilt Parallax Holo-Deck (Concept 2)"
+                className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
+                  viewMode === "holodeck"
+                    ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Compass size={13} />
+                <span>3D Holo-Deck</span>
+              </button>
+              <button
                 onClick={() => setViewMode("bento")}
-                title="Bento Command Center (Linear Style)"
+                title="Bento Command Center (Concept 1)"
                 className={`flex items-center gap-1.5 rounded px-2.5 py-1 transition-all cursor-pointer ${
                   viewMode === "bento"
                     ? "bg-copper/20 text-copper-bright font-medium border border-copper/40"
@@ -122,8 +135,12 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Render Bento, 3D Deck, Side Scroller, or Timeline depending on viewMode */}
-        {viewMode === "bento" ? (
+        {/* Render HoloDeck, Bento, 3D Deck, Side Scroller, or Timeline depending on viewMode */}
+        {viewMode === "holodeck" ? (
+          <div className="mt-8">
+            <ProjectsHoloDeck />
+          </div>
+        ) : viewMode === "bento" ? (
           <div className="mt-8">
             <ProjectsBento />
           </div>
