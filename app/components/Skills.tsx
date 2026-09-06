@@ -17,9 +17,11 @@ import {
   Filter,
   Cpu,
   Boxes,
+  Zap,
 } from "lucide-react";
 import SystemBlueprint from "./SystemBlueprint";
 import SkillsBento from "./SkillsBento";
+import SkillsMarquee from "./SkillsMarquee";
 
 const categories: SkillCategory[] = [
   {
@@ -110,7 +112,7 @@ function getCategoryIcon(key: string) {
 }
 
 export default function Skills() {
-  const [viewMode, setViewMode] = useState<"bento" | "blueprint" | "mesh">("bento");
+  const [viewMode, setViewMode] = useState<"marquee" | "bento" | "blueprint" | "mesh">("marquee");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filteredCategories = activeCategory
@@ -123,9 +125,21 @@ export default function Skills() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="$ cat stack.json" title="Stack & Architecture" />
 
-          {/* View Mode Toggle: Bento vs Blueprint vs Mesh */}
+          {/* View Mode Toggle: Marquee vs Bento vs Blueprint vs Mesh */}
           <div className="flex items-center gap-2">
-            <div className="flex items-center rounded-xl border border-trace bg-ink p-1 font-mono text-xs">
+            <div className="flex flex-wrap items-center rounded-xl border border-trace bg-ink p-1 font-mono text-xs">
+              <button
+                onClick={() => setViewMode("marquee")}
+                title="Infinite Live Marquee + Inspector HUD"
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all cursor-pointer ${
+                  viewMode === "marquee"
+                    ? "bg-copper/20 text-copper-bright font-semibold border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Zap size={13} />
+                <span>Live Marquee HUD</span>
+              </button>
               <button
                 onClick={() => setViewMode("bento")}
                 title="Modular Bento Ecosystem"
@@ -177,7 +191,11 @@ export default function Skills() {
         </div>
 
         {/* View Mode Content */}
-        {viewMode === "bento" ? (
+        {viewMode === "marquee" ? (
+          <div className="mt-10">
+            <SkillsMarquee />
+          </div>
+        ) : viewMode === "bento" ? (
           <div className="mt-10">
             <SkillsBento />
           </div>
