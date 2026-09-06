@@ -23,7 +23,7 @@ export default function Preloader() {
 
     // Progress counter animation from 0 to 100 over ~1.6s
     const startTime = Date.now();
-    const duration = 1600;
+    const duration = 3500; // Extended to 3.5s for comfortable inspection
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -43,7 +43,7 @@ export default function Preloader() {
         setTimeout(() => {
           setIsLoading(false);
           document.body.style.overflow = "";
-        }, 300);
+        }, 600);
       }
     }, 25);
 

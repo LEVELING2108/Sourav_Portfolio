@@ -11,7 +11,7 @@ export default function PreloaderStudio() {
     // Lock scroll during preloader
     document.body.style.overflow = "hidden";
 
-    const duration = 1600; // 1.6s
+    const duration = 3500; // Extended to 3.5s for comfortable inspection
     const startTime = Date.now();
 
     const interval = setInterval(() => {
@@ -27,7 +27,7 @@ export default function PreloaderStudio() {
         setTimeout(() => {
           setIsLoading(false);
           document.body.style.overflow = "";
-        }, 250);
+        }, 600);
       }
     }, 20);
 
