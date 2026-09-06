@@ -15,7 +15,9 @@ import {
   Cloud,
   BrainCircuit,
   Filter,
+  Cpu,
 } from "lucide-react";
+import SystemBlueprint from "./SystemBlueprint";
 
 const categories: SkillCategory[] = [
   {
@@ -106,6 +108,7 @@ function getCategoryIcon(key: string) {
 }
 
 export default function Skills() {
+  const [viewMode, setViewMode] = useState<"blueprint" | "mesh">("blueprint");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filteredCategories = activeCategory
@@ -117,25 +120,62 @@ export default function Skills() {
       <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading eyebrow="$ cat stack.json" title="Stack & Architecture" />
-          {activeCategory && (
-            <button
-              onClick={() => setActiveCategory(null)}
-              className="inline-flex items-center gap-1.5 font-mono text-xs text-copper-bright hover:text-paper transition-colors bg-ink-raised border border-trace px-3 py-1.5 rounded-md cursor-pointer"
-            >
-              <Filter size={13} />
-              Reset Filter ({categories.length})
-            </button>
-          )}
+
+          {/* View Mode Toggle: System Blueprint vs Domain Mesh */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center rounded-xl border border-trace bg-ink p-1 font-mono text-xs">
+              <button
+                onClick={() => setViewMode("blueprint")}
+                title="Interactive System Architecture Flow"
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all cursor-pointer ${
+                  viewMode === "blueprint"
+                    ? "bg-copper/20 text-copper-bright font-semibold border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Cpu size={13} />
+                <span>System Blueprint</span>
+              </button>
+              <button
+                onClick={() => setViewMode("mesh")}
+                title="7-Axis Domain Radar Mesh"
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all cursor-pointer ${
+                  viewMode === "mesh"
+                    ? "bg-copper/20 text-copper-bright font-semibold border border-copper/40"
+                    : "text-slate hover:text-paper"
+                }`}
+              >
+                <Network size={13} />
+                <span>Domain Mesh</span>
+              </button>
+            </div>
+
+            {viewMode === "mesh" && activeCategory && (
+              <button
+                onClick={() => setActiveCategory(null)}
+                className="inline-flex items-center gap-1.5 font-mono text-xs text-copper-bright hover:text-paper transition-colors bg-ink-raised border border-trace px-3 py-1.5 rounded-xl cursor-pointer"
+              >
+                <Filter size={13} />
+                Reset Filter
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Top Grid: Radar Mesh + Category Selector */}
-        <div className="mt-10 grid gap-8 lg:grid-cols-[360px_1fr] items-center">
-          {/* Spider Web Radar Chart */}
-          <SkillsRadar
-            categories={categories}
-            activeCategory={activeCategory}
-            onSelectCategory={setActiveCategory}
-          />
+        {/* View Mode Content */}
+        {viewMode === "blueprint" ? (
+          <div className="mt-10">
+            <SystemBlueprint />
+          </div>
+        ) : (
+          <div className="mt-10">
+            {/* Top Grid: Radar Mesh + Category Selector */}
+            <div className="grid gap-8 lg:grid-cols-[360px_1fr] items-center">
+              <SkillsRadar
+                categories={categories}
+                activeCategory={activeCategory}
+                onSelectCategory={setActiveCategory}
+              />
 
           {/* Quick Filter Pill Buttons */}
           <div className="space-y-4">
@@ -224,8 +264,10 @@ export default function Skills() {
           </AnimatePresence>
         </div>
       </div>
-    </section>
-  );
+    )}
+  </div>
+</section>
+);
 }
 
 
