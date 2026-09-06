@@ -3,13 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Zap,
   ArrowUpRight,
   Activity,
   Sliders,
-  Sparkles,
-  LayoutGrid,
-  CreditCard,
 } from "lucide-react";
 import {
   NextjsIcon,
@@ -257,7 +253,6 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
 export default function SkillsMarquee() {
   const [selectedSkill, setSelectedSkill] = useState<MarqueeSkill>(TRACK_1_SKILLS[0]);
   const [isPaused, setIsPaused] = useState(false);
-  const [displayMode, setDisplayMode] = useState<"pills" | "tokens">("pills");
 
   const renderMarqueeRow = (
     skills: MarqueeSkill[],
@@ -300,35 +295,6 @@ export default function SkillsMarquee() {
               const IconComp = skill.icon;
               const isSelected = selectedSkill.id === skill.id;
 
-              if (displayMode === "tokens") {
-                // Option 2: Compact 3D Dock Token with Prominent Brand Icon
-                return (
-                  <button
-                    key={`${skill.id}-${index}`}
-                    onClick={() => setSelectedSkill(skill)}
-                    className={`group relative flex flex-col items-center justify-center rounded-2xl border transition-all cursor-pointer select-none ${
-                      isSelected
-                        ? "bg-gradient-to-b from-copper/25 via-ink-raised to-ink border-copper-bright shadow-[0_0_24px_rgba(184,118,62,0.45)] scale-110 -translate-y-1 z-10"
-                        : "bg-gradient-to-b from-ink-raised via-ink-raised/90 to-ink border-trace hover:border-copper/70 hover:scale-105 hover:-translate-y-0.5 shadow-md"
-                    }`}
-                    style={{ minWidth: "76px", height: "76px" }}
-                    title={`${skill.name} - ${skill.level}`}
-                  >
-                    {/* Top specular highlight edge */}
-                    <div className="absolute inset-x-2 top-0.5 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
-
-                    <span className="relative z-10 flex items-center justify-center transform group-hover:scale-115 transition-transform duration-200 drop-shadow-[0_3px_5px_rgba(0,0,0,0.5)]">
-                      <IconComp size={30} />
-                    </span>
-
-                    <span className="mt-1.5 text-[9px] font-mono text-slate/90 group-hover:text-paper truncate max-w-[68px] text-center font-medium leading-none">
-                      {skill.name}
-                    </span>
-                  </button>
-                );
-              }
-
-              // Option 1: "Physical Token" Pill (Brand Icon + Full Name + Credibility Badge)
               return (
                 <button
                   key={`${skill.id}-${index}`}
@@ -403,32 +369,11 @@ export default function SkillsMarquee() {
                 </div>
               </div>
 
-              {/* View Switcher: Option 1 (Pills) vs Option 2 (3D Tokens) */}
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace font-mono text-xs">
-                <button
-                  onClick={() => setDisplayMode("pills")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                    displayMode === "pills"
-                      ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                      : "text-slate hover:text-paper"
-                  }`}
-                  title="Option 1: Brand Icon + Full Name + Level"
-                >
-                  <CreditCard size={12} />
-                  <span>Option 1: Pills (Icon+Text)</span>
-                </button>
-                <button
-                  onClick={() => setDisplayMode("tokens")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                    displayMode === "tokens"
-                      ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                      : "text-slate hover:text-paper"
-                  }`}
-                  title="Option 2: 3D Brand Dock Tokens"
-                >
-                  <LayoutGrid size={12} />
-                  <span>Option 2: 3D Tokens (Icon Focus)</span>
-                </button>
+              <div className="flex items-center gap-2 font-mono text-xs text-slate">
+                <span className="p-1 rounded bg-ink border border-trace text-signal">
+                  <Sliders size={12} />
+                </span>
+                <span>Click any badge below to inspect solve & proof</span>
               </div>
             </div>
 
