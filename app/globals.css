@@ -85,3 +85,51 @@ body {
   }
 }
 
+/* GPU-accelerated seamless infinite marquee */
+@keyframes marquee-scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll-left 40s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll-right 36s linear infinite;
+}
+
+.animate-marquee-left-fast {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-scroll-left 34s linear infinite;
+}
+
+/* Pause smoothly when hovering over the marquee container */
+.marquee-track-container:hover .animate-marquee-left,
+.marquee-track-container:hover .animate-marquee-right,
+.marquee-track-container:hover .animate-marquee-left-fast {
+  animation-play-state: paused;
+}
+
+
