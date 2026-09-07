@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { profile } from "../data";
+import { profile } from "@/app/data";
 import { GitBranch, Mail, Copy, Check, FileText } from "lucide-react";
-import { SectionHeading } from "./Projects";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 
 function LinkedinIcon({ size = 15, className = "" }: { size?: number; className?: string }) {
   return (

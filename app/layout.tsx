@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/layout/Nav";
+import Footer from "@/components/layout/Footer";
+import CommandPalette from "@/components/layout/CommandPalette";
 
 // NOTE: next/font/google fetches font files at build time, which requires
 // outbound network access to Google Fonts. Uncomment this block when running
@@ -49,7 +52,10 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-ink text-paper antialiased"
         suppressHydrationWarning
       >
+        <Nav />
         {children}
+        <Footer />
+        <CommandPalette />
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { profile } from "../data";
+import { profile } from "@/app/data";
 import { Sun, Moon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

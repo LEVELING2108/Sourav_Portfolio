@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { profile, projects } from "../data";
+import { profile, projects } from "@/app/data";
 import {
   Search,
   Terminal,

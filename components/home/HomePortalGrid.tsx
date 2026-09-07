@@ -19,7 +19,7 @@ import {
   PytorchIcon,
   DockerIcon,
   RedisIcon,
-} from "./BrandIcons";
+} from "@/components/shared/BrandIcons";
 
 const PORTALS = [
   {

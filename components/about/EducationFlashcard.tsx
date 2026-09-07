@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { EducationItem } from "../data";
+import { EducationItem } from "@/app/data";
 import { Cpu, GraduationCap, Award, MapPin } from "lucide-react";
 
 export default function EducationFlashcard({ item }: { item: EducationItem }) {

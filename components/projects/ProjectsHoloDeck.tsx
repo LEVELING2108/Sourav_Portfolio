@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { projects, Project } from "../data";
+import { projects, Project } from "@/app/data";
 import {
   ArrowUpRight,
   Workflow,
@@ -31,7 +31,7 @@ import {
   GithubActionsIcon,
   JwtIcon,
   MlopsIcon,
-} from "./BrandIcons";
+} from "@/components/shared/BrandIcons";
 
 // Helper to get official brand icon for stack tags
 function getStackIcon(tech: string) {

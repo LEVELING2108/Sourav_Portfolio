@@ -1,7 +1,4 @@
-import Nav from "../components/Nav";
-import SkillsMarquee from "../components/SkillsMarquee";
-import Footer from "../components/Footer";
-import CommandPalette from "../components/CommandPalette";
+import SkillsMarquee from "@/components/stack/SkillsMarquee";
 import Link from "next/link";
 import { ArrowLeft, Cpu } from "lucide-react";
 import type { Metadata } from "next";
@@ -13,9 +10,7 @@ export const metadata: Metadata = {
 
 export default function StackPage() {
   return (
-    <>
-      <Nav />
-      <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
+    <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-8">
           {/* Breadcrumb & Header */}
           <div className="space-y-3">
@@ -53,8 +48,5 @@ export default function StackPage() {
           <SkillsMarquee />
         </div>
       </main>
-      <Footer />
-      <CommandPalette />
-    </>
   );
 }
