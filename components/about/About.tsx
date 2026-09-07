@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { education } from "../data";
-import { SectionHeading } from "./Projects";
+import { education } from "@/app/data";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 import EducationFlashcard from "./EducationFlashcard";
 
 export default function About() {

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { profile, stats } from "../data";
+import { profile, stats } from "@/app/data";
 import { ArrowDown, ArrowUpRight, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

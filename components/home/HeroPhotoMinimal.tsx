@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useSpring, useMotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
-import { profile } from "../data";
+import { profile } from "@/app/data";
 
 export default function HeroPhotoMinimal() {
   const cardRef = useRef<HTMLDivElement>(null);

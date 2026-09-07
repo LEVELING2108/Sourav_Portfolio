@@ -28,7 +28,7 @@ import {
   GithubActionsIcon,
   JwtIcon,
   AwsIcon,
-} from "./BrandIcons";
+} from "@/components/shared/BrandIcons";
 
 type MarqueeSkill = {
   id: string;

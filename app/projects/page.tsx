@@ -1,7 +1,4 @@
-import Nav from "../components/Nav";
-import ProjectsHoloDeck from "../components/ProjectsHoloDeck";
-import Footer from "../components/Footer";
-import CommandPalette from "../components/CommandPalette";
+import ProjectsHoloDeck from "@/components/projects/ProjectsHoloDeck";
 import Link from "next/link";
 import { ArrowLeft, GitBranch, Layers } from "lucide-react";
 import type { Metadata } from "next";
@@ -13,9 +10,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <>
-      <Nav />
-      <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
+    <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-8">
           {/* Breadcrumb & Header */}
           <div className="space-y-3">
@@ -53,8 +48,5 @@ export default function ProjectsPage() {
           <ProjectsHoloDeck />
         </div>
       </main>
-      <Footer />
-      <CommandPalette />
-    </>
   );
 }
