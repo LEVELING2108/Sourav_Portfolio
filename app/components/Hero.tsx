@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { profile, stats } from "../data";
-import { ArrowDown, GitBranch, Sparkles, FileText } from "lucide-react";
+import { ArrowDown, ArrowUpRight, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import HeroPhotoMinimal from "./HeroPhotoMinimal";
 
 const FOCUS_AREAS = [
@@ -131,13 +132,13 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
             >
-              <a
-                href="#projects"
+              <Link
+                href="/projects"
                 className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
               >
-                view the log
-                <ArrowDown size={15} />
-              </a>
+                explore systems
+                <ArrowUpRight size={15} />
+              </Link>
               <a
                 href={profile.resumeHref}
                 target="_blank"

@@ -9,6 +9,12 @@ export default function LoadingPage() {
   const [text, setText] = useState("LOADING");
 
   useEffect(() => {
+    // Check if user already saw the loader in this session
+    if (typeof window !== "undefined" && sessionStorage.getItem("portfolio_loaded")) {
+      setIsLoading(false);
+      return;
+    }
+
     document.body.style.overflow = "hidden";
 
     // Switch from LOADING to SOURAV SUMAN in between the glitch effect
@@ -19,6 +25,7 @@ export default function LoadingPage() {
     // Smoothly exit after showing the name
     const exitTimer = setTimeout(() => {
       setIsLoading(false);
+      sessionStorage.setItem("portfolio_loaded", "true");
       document.body.style.overflow = "";
     }, 3000);
 
@@ -27,6 +34,7 @@ export default function LoadingPage() {
         clearTimeout(nameTimer);
         clearTimeout(exitTimer);
         setIsLoading(false);
+        sessionStorage.setItem("portfolio_loaded", "true");
         document.body.style.overflow = "";
       }
     };

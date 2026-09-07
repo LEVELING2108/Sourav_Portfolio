@@ -3,15 +3,18 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data";
 import { Sun, Moon } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { label: "log", href: "#projects" },
-  { label: "stack", href: "#skills" },
-  { label: "about", href: "#about" },
-  { label: "contact", href: "#contact" },
+  { label: "projects", href: "/projects" },
+  { label: "stack", href: "/stack" },
+  { label: "about", href: "/about" },
+  { label: "contact", href: "/contact" },
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
 
@@ -42,18 +45,33 @@ export default function Nav() {
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-trace bg-ink/85 backdrop-blur transition-colors duration-300">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-8 lg:px-12 py-2.5 sm:py-3 font-mono text-xs sm:text-sm">
-        <a href="#top" className="text-paper hover:text-copper-bright transition-colors font-semibold tracking-tight text-[11px] xs:text-xs sm:text-sm shrink-0">
+        <Link
+          href="/"
+          className={`hover:text-copper-bright transition-colors font-semibold tracking-tight text-[11px] xs:text-xs sm:text-sm shrink-0 ${
+            pathname === "/" ? "text-copper-bright" : "text-paper"
+          }`}
+        >
           <span className="text-signal">~/</span>
           {profile.name.toLowerCase()}
-        </a>
+        </Link>
         <ul className="flex items-center gap-1.5 xs:gap-2.5 sm:gap-5 text-slate text-[11px] sm:text-xs">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="hover:text-paper transition-colors py-1 px-1 xs:px-1.5">
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {links.map((l) => {
+            const isActive = pathname === l.href;
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={`transition-colors py-1 px-1 xs:px-1.5 rounded ${
+                    isActive
+                      ? "text-copper-bright font-semibold bg-copper/10"
+                      : "hover:text-paper text-slate"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
           <li className="hidden xs:block">
             <a
               href={profile.resumeHref}
