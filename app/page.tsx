@@ -1,10 +1,7 @@
 import LoadingPage from "./components/LoadingPage";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import HomePortalGrid from "./components/HomePortalGrid";
 import Footer from "./components/Footer";
 import CommandPalette from "./components/CommandPalette";
 
@@ -15,10 +12,7 @@ export default function Home() {
       <Nav />
       <main className="flex-1">
         <Hero />
-        <Projects />
-        <Skills />
-        <About />
-        <Contact />
+        <HomePortalGrid />
       </main>
       <Footer />
       <CommandPalette />
