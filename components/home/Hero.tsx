@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { profile, stats } from "@/app/data";
+import { profile } from "@/app/data";
 import { ArrowDown, ArrowUpRight, GitBranch, Sparkles, FileText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -73,17 +73,13 @@ export default function Hero() {
         <div className="grid gap-10 lg:grid-cols-[1fr_310px] items-center">
           {/* Left Column: Intro Text & Stats */}
           <div>
-            {/* Top Credibility Badges */}
+            {/* Top Credibility Badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center gap-2 mb-4"
+              className="flex items-center gap-2 mb-4"
             >
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/40 bg-copper/10 px-3 py-1 font-mono text-[11px] text-copper-bright shadow-sm">
-                <Sparkles size={11} className="text-copper-bright" />
-                <span>Full-Stack &amp; Applied AI Engineer</span>
-              </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[11px] text-signal shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
                 <span>Dual-Track: IIT Madras × BVDU Pune</span>
@@ -129,20 +125,11 @@ export default function Hero() {
               <TypewriterFocus items={FOCUS_AREAS} />
             </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 sm:mt-4 max-w-lg text-sm sm:text-base text-slate leading-relaxed font-sans"
-            >
-              {profile.tagline}
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
+              transition={{ duration: 0.7, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
             >
               <Link
                 href="/projects"
@@ -182,22 +169,6 @@ export default function Hero() {
             <HeroPhotoMinimal />
           </motion.div>
         </div>
-
-        {/* Sleek Horizontal Aerospace Telemetry Strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2 border-t border-trace/60 pt-5 font-mono text-xs"
-        >
-          {stats.map((s, idx) => (
-            <div key={s.label} className="flex items-center gap-2">
-              <span className="text-copper-bright font-bold text-sm sm:text-base tracking-tight">{s.value}</span>
-              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate">{s.label}</span>
-              {idx < stats.length - 1 && <span className="text-trace/80 hidden sm:inline ml-4 sm:ml-6">/</span>}
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
