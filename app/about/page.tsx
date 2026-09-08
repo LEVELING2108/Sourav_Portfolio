@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About & Academic Track // Sourav Suman",
-  description: "Dual degree in Electronics & Communication (BVDU Pune) and Data Science (IIT Madras), SIH 2025 Round 2 Cleared.",
+  description: "Dual degree in Electronics & Communication (BVDU Pune) and Data Science (IIT Madras), building AI/ML and distributed systems.",
 };
 
 export default function AboutPage() {

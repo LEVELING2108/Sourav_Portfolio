@@ -33,7 +33,7 @@ const MODULES = [
     description: "Production-ready distributed systems and real-time AI engines.",
     highlights: [
       { text: "ROADSoS (Live PWA)", dot: true },
-      { text: "RailTrack Pro (SIH '25)", spark: true },
+      { text: "RailTrack Pro (QR Audit)", spark: true },
       { text: "FraudShield (<25ms)" },
     ],
   },

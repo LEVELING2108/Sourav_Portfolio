@@ -65,10 +65,10 @@ export const education: EducationItem[] = [
 
 
 export const stats = [
+  { label: "Systems Built", value: "7+ Shipped" },
+  { label: "Core Stack", value: "20+ Techs" },
   { label: "LeetCode solved", value: "200+" },
-  { label: "SIH 2025 (Internal)", value: "Round 2 Cleared" },
-  { label: "Projects built", value: "6+ Shipped" },
-  { label: "Team led", value: "TEAM NEMESIS" },
+  { label: "Dual-Track", value: "IITM × BVDU" },
 ];
 
 export const skills = {
@@ -89,10 +89,10 @@ export const projects: Project[] = [
     tag: "emergency-response · PWA",
     date: "Core project",
     summary:
-      "A live, Vercel-deployed progressive web app for emergency response coordination — built with TEAM NEMESIS for Smart India Hackathon.",
+      "A live, Vercel-deployed progressive web app for emergency response coordination featuring real-time incident dispatching and offline sync.",
     stack: ["React", "PWA", "Vercel"],
     image: "/projects/roadsos.jpg",
-    highlights: ["SIH Round 2 Cleared", "PWA offline ready", "Team Nemesis"],
+    highlights: ["PWA offline ready", "Real-time dispatch", "Zero-downtime cache"],
     features: [
       "Real-time geolocation dispatch",
       "Offline-first PWA caching",
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     ],
     metrics: [
       { label: "Status", value: "Live PWA" },
-      { label: "Scope", value: "Hackathon Win" }
+      { label: "Architecture", value: "Offline First" }
     ],
     architecture: {
       flow: [
@@ -278,14 +278,14 @@ export const projects: Project[] = [
   {
     version: "v1.6",
     title: "RailTrack Pro",
-    tag: "QR-based vendor & track fittings management · Flask + React · SIH",
-    date: "SIH 2025 R2",
+    tag: "QR-based vendor & track fittings management · Flask + React · Enterprise",
+    date: "Production Build",
     summary:
-      "A full-stack system for Indian Railways to track rail fittings from manufacturing to installation, with QR-based field verification and AI-powered vendor/item risk scoring.",
+      "A full-stack system for rail track management to track rail fittings from manufacturing to installation, with QR-based field verification and AI-powered vendor/item risk scoring.",
     stack: ["Flask", "React", "PostgreSQL", "Docker", "Redis"],
     image: "/projects/railtrackpro.jpg",
     highlights: [
-      "Team Nemesis · SIH 2025 R2",
+      "Field QR Verification",
       "30+ REST API Endpoints",
       "~75%+ Test Coverage",
     ],

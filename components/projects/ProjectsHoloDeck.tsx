@@ -172,7 +172,7 @@ function HoloCard({
           ) : project.version === "v1.6" ? (
             <span className="inline-flex items-center gap-1 rounded-full border border-signal/40 bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] text-signal font-bold">
               <Sparkles size={11} />
-              <span>SIH 2025 R2</span>
+              <span>Rail QR Logistics</span>
             </span>
           ) : (
             <span className="font-mono text-[10px] rounded border border-trace bg-ink px-2 py-0.5 text-slate font-medium">
@@ -322,7 +322,7 @@ export default function ProjectsHoloDeck() {
                 : "text-slate hover:text-paper"
             }`}
           >
-            Flagship & SIH (2)
+            Flagship Systems (2)
           </button>
           <button
             onClick={() => setSelectedCategory("aiml")}

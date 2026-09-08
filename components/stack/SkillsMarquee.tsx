@@ -97,7 +97,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     name: "Flask 3.0",
     category: "Full-Stack",
     level: "30+ REST APIs",
-    projectProof: "v1.6 RailTrack Pro (SIH 2025)",
+    projectProof: "v1.6 RailTrack Pro",
     projectUrl: "#projects",
     icon: FlaskIcon,
     highlight: "Modular Blueprints, JWT security & QR field audit pipelines",

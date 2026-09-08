@@ -12,7 +12,7 @@ import NeuralBackground from "./NeuralBackground";
 const FOCUS_AREAS = [
   "real-time ML pipelines (<25ms inference)",
   "high-concurrency distributed systems",
-  "SIH '25 Indian Railways track management",
+  "enterprise QR & track telemetry engines",
   "applied LLM & structured JSON extraction",
 ];
 
@@ -82,7 +82,7 @@ export default function Hero() {
             >
               <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/40 bg-copper/10 px-3 py-1 font-mono text-[11px] text-copper-bright shadow-sm">
                 <Sparkles size={11} className="text-copper-bright" />
-                <span>SIH 2025 R2 National Finalist</span>
+                <span>Full-Stack &amp; Applied AI Engineer</span>
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[11px] text-signal shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
