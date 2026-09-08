@@ -28,7 +28,7 @@ export default function About() {
             </p>
             <p>
               Obsessed with the stuff tutorials skip: self-healing ML pipelines (<span className="text-copper-bright font-medium">FraudShield</span>),
-              hunting down nasty Redis race conditions (<span className="text-copper-bright font-medium">ROADSoS</span>), and SIH 2025 R2 cleared rail tracking systems (<span className="text-copper-bright font-medium">RailTrack Pro</span>).
+              hunting down nasty Redis race conditions (<span className="text-copper-bright font-medium">ROADSoS</span>), and enterprise QR rail track verification systems (<span className="text-copper-bright font-medium">RailTrack Pro</span>).
             </p>
             <p className="font-mono text-xs sm:text-sm text-copper-bright font-medium pt-2 border-t border-trace/60">
               Open to AI/ML &amp; full-stack roles — bring on the interesting problems.

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Projects & Systems // Sourav Suman",
-  description: "Production-grade systems, SIH 2025 Indian Railways tracking, real-time ML pipelines, and distributed architectures.",
+  description: "Production-grade systems, real-time ML pipelines, and distributed architectures.",
 };
 
 export default function ProjectsPage() {
@@ -31,7 +31,7 @@ export default function ProjectsPage() {
                   Systems &amp; Build Log
                 </h1>
                 <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
-                  Deep technical case studies across real-time ML inference, high-concurrency Redis mutexes, QR track verification for Indian Railways (SIH 2025), and deployed PWAs.
+                  Deep technical case studies across real-time ML inference, high-concurrency Redis mutexes, QR track verification pipelines, and deployed PWAs.
                 </p>
               </div>
 
