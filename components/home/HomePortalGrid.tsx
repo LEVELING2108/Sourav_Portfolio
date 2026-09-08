@@ -85,7 +85,7 @@ export default function HomePortalGrid() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="px-4 sm:px-6 py-12 sm:py-16 border-t border-trace">
+    <section id="portals" className="px-4 sm:px-6 py-14 sm:py-18 border-t border-trace">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-6">
         {/* Section Header */}
         <div className="flex items-center justify-between gap-4">
@@ -101,7 +101,7 @@ export default function HomePortalGrid() {
         </div>
 
         {/* Desktop / Tablet: Kinetic Accordion Deck */}
-        <div className="hidden md:flex gap-3 h-[280px] w-full">
+        <div className="hidden md:flex gap-3 h-[270px] w-full">
           {MODULES.map((mod, idx) => {
             const isActive = activeIndex === idx;
             const Icon = mod.icon;
@@ -158,7 +158,7 @@ export default function HomePortalGrid() {
 
                 {/* Expanded State */}
                 {isActive && (
-                  <div className="h-full flex flex-col justify-between p-6">
+                  <div className="h-full flex flex-col justify-between p-4 sm:p-5">
                     <div>
                       {/* Top Header */}
                       <div className="flex items-center justify-between">
@@ -177,25 +177,25 @@ export default function HomePortalGrid() {
                       </div>
 
                       {/* Title & Icon */}
-                      <div className="mt-4 flex items-center gap-3">
+                      <div className="mt-2.5 flex items-center gap-2.5">
                         <span
-                          className={`p-2.5 rounded-xl bg-ink border ${
+                          className={`p-2 rounded-xl bg-ink border ${
                             isCopper
                               ? "border-copper/40 text-copper-bright"
                               : "border-signal/40 text-signal"
                           }`}
                         >
-                          <Icon size={20} />
+                          <Icon size={18} />
                         </span>
                         <div>
-                          <h3 className="font-mono text-2xl font-bold text-paper">
+                          <h3 className="font-mono text-xl sm:text-2xl font-bold text-paper">
                             {mod.title}
                           </h3>
                         </div>
                       </div>
 
                       {/* Content Preview Slot */}
-                      <div className="mt-5">
+                      <div className="mt-3">
                         {/* Systems Highlights */}
                         {mod.highlights && (
                           <div className="flex flex-wrap gap-2 font-mono text-xs">
