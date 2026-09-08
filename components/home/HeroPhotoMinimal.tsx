@@ -72,7 +72,7 @@ export default function HeroPhotoMinimal() {
             <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
             <span className="text-paper font-medium">SOURAV.DEV</span>
           </div>
-          <span className="text-copper-bright/90 font-mono">18.52°N 73.85°E</span>
+          <span className="text-copper-bright/90 font-mono font-medium">ONLINE</span>
         </div>
       </motion.div>
     </div>

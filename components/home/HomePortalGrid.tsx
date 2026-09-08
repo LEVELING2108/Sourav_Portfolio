@@ -30,7 +30,6 @@ const MODULES = [
     href: "/projects",
     cta: "Launch Systems Gallery",
     icon: Layers,
-    description: "Production-ready distributed systems and real-time AI engines.",
     highlights: [
       { text: "ROADSoS (Live PWA)", dot: true },
       { text: "RailTrack Pro (QR Audit)", spark: true },
@@ -47,7 +46,6 @@ const MODULES = [
     href: "/stack",
     cta: "Inspect Architecture HUD",
     icon: Cpu,
-    description: "Battle-tested tools across AI/ML pipelines, backend engines, and cloud.",
     icons: [PytorchIcon, NextjsIcon, PythonIcon, DockerIcon, RedisIcon],
   },
   {
@@ -60,7 +58,6 @@ const MODULES = [
     href: "/about",
     cta: "Read Dual-Track Bio",
     icon: GraduationCap,
-    description: "Hardware foundations fused with rigorous mathematical data science.",
     academic: [
       { school: "BVDU Pune", score: "9.1 CGPA", field: "ECE" },
       { school: "IIT Madras", score: "Active", field: "Data Science & AI" },
@@ -76,7 +73,6 @@ const MODULES = [
     href: "/contact",
     cta: "Open Direct Channel",
     icon: Mail,
-    description: "Currently open to AI/ML and full-stack engineering opportunities.",
     telemetry: [
       { label: "Location", val: "Pune / Remote" },
       { label: "Turnaround", val: "< 24 Hours" },
@@ -94,13 +90,13 @@ export default function HomePortalGrid() {
         {/* Section Header */}
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="font-mono text-xs text-signal">$ inspect ~/runtime_modules</p>
+            <p className="font-mono text-xs text-signal">$ ls ~/portals</p>
             <h2 className="mt-1 font-mono text-xl sm:text-2xl font-bold text-paper">
-              Kinetic Stage
+              Command Portals
             </h2>
           </div>
           <span className="font-mono text-xs text-slate hidden sm:inline">
-            // Hover or tap modules to expand focus
+            // select environment
           </span>
         </div>
 
@@ -195,9 +191,6 @@ export default function HomePortalGrid() {
                           <h3 className="font-mono text-2xl font-bold text-paper">
                             {mod.title}
                           </h3>
-                          <p className="font-sans text-xs text-slate mt-0.5 line-clamp-1">
-                            {mod.description}
-                          </p>
                         </div>
                       </div>
 
@@ -286,9 +279,6 @@ export default function HomePortalGrid() {
                         <span>{mod.cta}</span>
                         <ArrowUpRight size={13} />
                       </Link>
-                      <span className="font-mono text-[10px] text-slate/60">
-                        ESC / TAB to switch
-                      </span>
                     </div>
                   </div>
                 )}
