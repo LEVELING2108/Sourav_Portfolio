@@ -7,6 +7,7 @@ import { ArrowDown, ArrowUpRight, GitBranch, Sparkles, FileText } from "lucide-r
 import Image from "next/image";
 import Link from "next/link";
 import HeroPhotoMinimal from "./HeroPhotoMinimal";
+import NeuralBackground from "./NeuralBackground";
 
 const FOCUS_AREAS = [
   "real-time ML pipelines (<25ms inference)",
@@ -58,17 +59,42 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-12 sm:pb-16"
+      className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-4 sm:pb-6 overflow-hidden"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-12">
+      {/* Background Engineering Blueprint Mesh & Ambient Radiance */}
+      <div className="absolute inset-0 bg-[radial-gradient(#26262d_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,#000_60%,transparent_100%)] pointer-events-none opacity-40" />
+      <div className="absolute top-1/4 left-1/12 w-96 h-96 bg-signal/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/12 w-[420px] h-[420px] bg-copper/10 rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Interactive Neural Particle & Synaptic Constellation */}
+      <NeuralBackground />
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-[1fr_310px] items-center">
           {/* Left Column: Intro Text & Stats */}
           <div>
+            {/* Top Credibility Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-wrap items-center gap-2 mb-4"
+            >
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/40 bg-copper/10 px-3 py-1 font-mono text-[11px] text-copper-bright shadow-sm">
+                <Sparkles size={11} className="text-copper-bright" />
+                <span>SIH 2025 R2 National Finalist</span>
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[11px] text-signal shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
+                <span>Dual-Track: IIT Madras × BVDU Pune</span>
+              </span>
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-3 sm:mb-4 font-mono text-xs sm:text-sm text-signal"
+              transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-2 sm:mb-3 font-mono text-xs sm:text-sm text-signal"
             >
               <span className="text-slate">$</span> whoami
             </motion.p>
@@ -107,29 +133,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 sm:mt-4 max-w-lg text-sm sm:text-base text-slate leading-relaxed"
+              className="mt-3 sm:mt-4 max-w-lg text-sm sm:text-base text-slate leading-relaxed font-sans"
             >
               {profile.tagline}
             </motion.p>
 
-            {/* Live Status Pulse */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-4 flex flex-wrap items-center gap-2 font-mono text-xs text-slate"
-            >
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-trace bg-ink-raised px-3 py-1 text-slate">
-                <span className="h-2 w-2 rounded-full bg-signal animate-pulse" />
-                <span className="text-paper font-medium">Now:</span>
-                <span>Dual Degree ECE @ BVDU Pune &amp; IIT Madras BS</span>
-              </span>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
             >
               <Link
@@ -171,22 +183,21 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Stats Row Below Intro */}
-        <motion.dl
+        {/* Sleek Horizontal Aerospace Telemetry Strip */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="mt-10 sm:mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 border-t border-trace pt-6 max-w-2xl"
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-6 sm:gap-x-8 gap-y-2 border-t border-trace/60 pt-5 font-mono text-xs"
         >
-          {stats.map((s) => (
-            <div key={s.label}>
-              <dt className="font-mono text-[11px] sm:text-xs uppercase tracking-wide text-slate">
-                {s.label}
-              </dt>
-              <dd className="mt-1 font-mono text-base sm:text-lg text-copper-bright">{s.value}</dd>
+          {stats.map((s, idx) => (
+            <div key={s.label} className="flex items-center gap-2">
+              <span className="text-copper-bright font-bold text-sm sm:text-base tracking-tight">{s.value}</span>
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate">{s.label}</span>
+              {idx < stats.length - 1 && <span className="text-trace/80 hidden sm:inline ml-4 sm:ml-6">/</span>}
             </div>
           ))}
-        </motion.dl>
+        </motion.div>
       </div>
     </section>
   );
