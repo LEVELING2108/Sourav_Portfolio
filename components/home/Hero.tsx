@@ -59,7 +59,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[calc(100vh-150px)] flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-4 sm:pb-6 overflow-hidden"
+      className="relative flex min-h-[100dvh] flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-16 overflow-hidden"
     >
       {/* Background Engineering Blueprint Mesh & Ambient Radiance */}
       <div className="absolute inset-0 bg-[radial-gradient(#26262d_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,#000_60%,transparent_100%)] pointer-events-none opacity-40" />
@@ -170,6 +170,31 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Sleek Interactive Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
+        className="absolute bottom-6 inset-x-0 flex flex-col items-center justify-center select-none z-10"
+      >
+        <a
+          href="#portals"
+          className="group flex flex-col items-center justify-center gap-1.5 cursor-pointer p-2"
+          aria-label="Scroll to Command Portals"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-widest text-slate/60 group-hover:text-copper-bright transition-colors">
+            explore portals
+          </span>
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="text-copper-bright/70 group-hover:text-copper-bright transition-colors"
+          >
+            <ArrowDown size={14} />
+          </motion.div>
+        </a>
+      </motion.div>
     </section>
   );
 }
