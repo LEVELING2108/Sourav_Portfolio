@@ -3,10 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { profile } from "@/app/data";
-import { ArrowDown, ArrowUpRight, GitBranch, Sparkles, FileText } from "lucide-react";
-import Image from "next/image";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  GitBranch,
+  Sparkles,
+  FileText,
+} from "lucide-react";
 import Link from "next/link";
-import HeroPhotoMinimal from "./HeroPhotoMinimal";
+import HeroPhotoOrbital from "./HeroPhotoOrbital";
 import NeuralBackground from "./NeuralBackground";
 
 const FOCUS_AREAS = [
@@ -15,6 +20,48 @@ const FOCUS_AREAS = [
   "enterprise QR & track telemetry engines",
   "applied LLM & structured JSON extraction",
 ];
+
+function ScrambleText({ text }: { text: string }) {
+  const [display, setDisplay] = useState(text);
+  const chars = "!<>-_\\/[]{}—=+*^?#________0101";
+
+  const scramble = () => {
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplay(
+        text
+          .split("")
+          .map((char, index) => {
+            if (index < iteration) {
+              return text[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+
+      if (iteration >= text.length) {
+        clearInterval(interval);
+      }
+
+      iteration += 1 / 3;
+    }, 28);
+  };
+
+  useEffect(() => {
+    scramble();
+  }, [text]);
+
+  return (
+    <span
+      onMouseEnter={scramble}
+      className="cursor-pointer select-none transition-colors hover:text-copper-bright"
+      title="Hover to re-scramble"
+    >
+      {display}
+    </span>
+  );
+}
 
 function TypewriterFocus({ items }: { items: string[] }) {
   const [index, setIndex] = useState(0);
@@ -59,81 +106,90 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100dvh] flex-col justify-center px-4 sm:px-6 pt-20 sm:pt-24 pb-16 overflow-hidden"
+      className="relative flex min-h-[100dvh] flex-col justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-16 overflow-hidden"
     >
       {/* Background Engineering Blueprint Mesh & Ambient Radiance */}
       <div className="absolute inset-0 bg-[radial-gradient(#26262d_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,#000_60%,transparent_100%)] pointer-events-none opacity-40" />
-      <div className="absolute top-1/4 left-1/12 w-96 h-96 bg-signal/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/12 w-[420px] h-[420px] bg-copper/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-copper/10 rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-signal/5 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Interactive Neural Particle & Synaptic Constellation */}
       <NeuralBackground />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[1fr_310px] items-center">
-          {/* Left Column: Intro Text & Stats */}
+      {/* Main 50/50 Dual-Pillar Hero Stage */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-12 flex-1 flex flex-col justify-center">
+        <div className="grid gap-12 lg:grid-cols-2 items-center">
+          {/* Left Pillar: Identity, Story & Action CTAs */}
           <div>
-            {/* Top Credibility Badge */}
+            {/* Top Credibility Badges */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-2 mb-4"
+              className="flex flex-wrap items-center gap-2 mb-4"
             >
               <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[11px] text-signal shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
                 <span>Dual-Track: IIT Madras × BVDU Pune</span>
               </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/30 bg-copper/10 px-3 py-1 font-mono text-[11px] text-copper-bright/90">
+                <Sparkles size={11} />
+                <span>7+ Shipped</span>
+              </span>
             </motion.div>
 
+            {/* Monospace Command Prefix */}
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-2 sm:mb-3 font-mono text-xs sm:text-sm text-signal"
+              className="mb-2 font-mono text-xs sm:text-sm text-signal"
             >
-              <span className="text-slate">$</span> whoami
+              <span className="text-slate">$</span> whoami --runtime=production
             </motion.p>
 
+            {/* Headline with Hacker Scramble Effect */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
+              className="font-mono text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
             >
-              <span>{profile.name}</span>
+              <ScrambleText text={profile.name} />
               <span className="text-copper">.</span>
             </motion.h1>
 
+            {/* Subtitle / Role */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-2.5 sm:mt-3 max-w-xl text-base sm:text-lg lg:text-xl text-paper/90 font-medium"
+              className="mt-3 max-w-xl text-base sm:text-lg lg:text-xl text-paper/90 font-medium"
             >
               {profile.role}
             </motion.p>
 
-            {/* Dynamic Focus Typewriter */}
+            {/* Dynamic Focus Capsule */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-2 flex items-center gap-2 font-mono text-xs sm:text-sm text-slate min-h-[22px]"
+              className="mt-3 flex items-center gap-2 font-mono text-xs sm:text-sm text-slate min-h-[24px]"
             >
-              <span className="text-signal">focusing on:</span>
+              <span className="text-signal">$ runtime.focus():</span>
               <TypewriterFocus items={FOCUS_AREAS} />
             </motion.div>
 
+            {/* Action Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
+              className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
               >
                 explore systems
                 <ArrowUpRight size={15} />
@@ -142,7 +198,7 @@ export default function Hero() {
                 href={profile.resumeHref}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
               >
                 <FileText size={15} />
                 Resume PDF
@@ -151,7 +207,7 @@ export default function Hero() {
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
               >
                 <GitBranch size={15} />
                 GitHub
@@ -159,14 +215,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Column: Style 3 - Minimalist Linear Magnetic Spotlight Card */}
+          {/* Right Pillar: 3D Hologram Stage with Locked-in Orbital Rings */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-4 lg:mt-0"
+            className="flex items-center justify-center lg:justify-end"
           >
-            <HeroPhotoMinimal />
+            <HeroPhotoOrbital />
           </motion.div>
         </div>
       </div>
@@ -198,4 +254,3 @@ export default function Hero() {
     </section>
   );
 }
-
