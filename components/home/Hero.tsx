@@ -7,7 +7,6 @@ import {
   ArrowDown,
   ArrowUpRight,
   GitBranch,
-  Sparkles,
   FileText,
 } from "lucide-react";
 import Link from "next/link";
@@ -121,33 +120,6 @@ export default function Hero() {
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           {/* Left Pillar: Identity, Story & Action CTAs */}
           <div>
-            {/* Top Credibility Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center gap-2 mb-4"
-            >
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-3 py-1 font-mono text-[11px] text-signal shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
-                <span>Dual-Track: IIT Madras × BVDU Pune</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/30 bg-copper/10 px-3 py-1 font-mono text-[11px] text-copper-bright/90">
-                <Sparkles size={11} />
-                <span>7+ Shipped</span>
-              </span>
-            </motion.div>
-
-            {/* Monospace Command Prefix */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-2 font-mono text-xs sm:text-sm text-signal"
-            >
-              <span className="text-slate">$</span> whoami --runtime=production
-            </motion.p>
-
             {/* Headline with Hacker Scramble Effect */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
