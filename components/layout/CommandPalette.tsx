@@ -74,6 +74,17 @@ export default function CommandPalette() {
         },
       },
       {
+        id: "nav-oss",
+        category: "Navigation",
+        title: "Go to OSS Engineering ($ git log upstream)",
+        subtitle: "Laya (18k+ ★) LangChain/LangGraph System-1 PRs",
+        icon: GitBranch,
+        action: () => {
+          window.location.href = "/oss";
+          setIsOpen(false);
+        },
+      },
+      {
         id: "nav-skills",
         category: "Navigation",
         title: "Go to Stack & Architecture",
