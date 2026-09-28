@@ -309,7 +309,7 @@ export default function SkillsMarquee() {
                 <button
                   key={`${skill.id}-${index}`}
                   onClick={() => setSelectedSkill(skill)}
-                  className={`group relative flex items-center gap-2.5 rounded-2xl border px-3.5 py-2 font-mono text-xs transition-all cursor-pointer select-none ${
+                  className={`group relative flex items-center gap-2 sm:gap-2.5 rounded-2xl border px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-[11px] sm:text-xs transition-all cursor-pointer select-none ${
                     isSelected
                       ? "bg-gradient-to-r from-copper/25 via-ink-raised to-copper/15 border-copper-bright text-paper font-semibold shadow-[0_0_20px_rgba(184,118,62,0.35)] scale-105 z-10"
                       : "bg-gradient-to-b from-ink-raised to-ink border-trace text-slate hover:text-paper hover:border-copper/60 hover:shadow-lg"
@@ -366,7 +366,7 @@ export default function SkillsMarquee() {
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-mono text-lg sm:text-xl font-bold text-paper">
+                    <h3 className="font-mono text-base sm:text-lg lg:text-xl font-bold text-paper">
                       {selectedSkill.name}
                     </h3>
                     <span className="font-mono text-[10px] rounded bg-copper/15 px-2 py-0.5 text-copper-bright border border-copper/40 font-semibold">
@@ -379,7 +379,7 @@ export default function SkillsMarquee() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 font-mono text-xs text-slate">
+              <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-slate">
                 <span className="p-1 rounded bg-ink border border-trace text-signal">
                   <Sliders size={12} />
                 </span>

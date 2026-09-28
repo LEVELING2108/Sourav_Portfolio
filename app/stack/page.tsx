@@ -27,7 +27,7 @@ export default function StackPage() {
                 <p className="font-mono text-xs sm:text-sm text-signal">
                   $ cat /proc/cpuinfo &amp;&amp; uname -a
                 </p>
-                <h1 className="mt-1 font-mono text-3xl sm:text-4xl font-bold text-paper">
+                <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
                   Stack &amp; Architecture
                 </h1>
                 <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
