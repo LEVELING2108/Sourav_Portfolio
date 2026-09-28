@@ -27,7 +27,7 @@ export default function ProjectsPage() {
               <p className="font-mono text-xs sm:text-sm text-signal">
                 $ git log --all --graph --decorate
               </p>
-              <h1 className="mt-1 font-mono text-3xl sm:text-4xl font-bold text-paper">
+              <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
                 Systems &amp; Build Log
               </h1>
               <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
                 <GitBranch size={13} />
                 <span>$ git checkout upstream/main</span>
               </div>
-              <h3 className="font-mono text-lg font-bold text-paper">
+              <h3 className="font-mono text-base sm:text-lg font-bold text-paper">
                 Open Source Engineering (Laya · 27,000+ ★)
               </h3>
               <p className="text-xs sm:text-sm text-slate font-sans">

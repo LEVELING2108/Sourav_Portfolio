@@ -318,15 +318,15 @@ export default function GitDiffInspector() {
     <div className="w-full space-y-6">
       {/* Section Header */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2 font-mono text-xs text-signal">
-          <Terminal size={14} />
-          <span>$ git log --graph --stat --author=&quot;LEVELING2108&quot; --repo=&quot;NandhaKishorM/laya&quot;</span>
+        <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-signal overflow-hidden">
+          <Terminal size={13} className="shrink-0" />
+          <span className="truncate">$ git log --graph --stat --author=&quot;LEVELING2108&quot; --repo=&quot;NandhaKishorM/laya&quot;</span>
         </div>
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <div className="flex flex-wrap items-end justify-between gap-3 sm:gap-4">
           <div>
-            <h2 className="font-mono text-xl sm:text-2xl font-bold text-paper flex items-center gap-2.5">
+            <h2 className="font-mono text-lg sm:text-xl md:text-2xl font-bold text-paper flex flex-wrap items-center gap-2 sm:gap-2.5">
               <span>Open Source Engineering</span>
-              <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-copper/15 border border-copper/30 text-copper-bright">
+              <span className="text-[10px] sm:text-xs font-mono font-normal px-2 sm:px-2.5 py-0.5 rounded-full bg-copper/15 border border-copper/30 text-copper-bright">
                 Core Contributor
               </span>
             </h2>
@@ -345,10 +345,10 @@ export default function GitDiffInspector() {
           </div>
 
           {/* Mode Switcher: Git Diff vs Architecture */}
-          <div className="flex items-center p-1 rounded-lg bg-ink border border-trace font-mono text-xs">
+          <div className="flex items-center p-1 rounded-xl bg-ink border border-trace font-mono text-xs w-full sm:w-auto">
             <button
               onClick={() => setActiveTab("diff")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
                 activeTab === "diff"
                   ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                   : "text-slate hover:text-paper"
@@ -359,7 +359,7 @@ export default function GitDiffInspector() {
             </button>
             <button
               onClick={() => setActiveTab("architecture")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
                 activeTab === "architecture"
                   ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                   : "text-slate hover:text-paper"
@@ -675,15 +675,15 @@ export default function GitDiffInspector() {
                       </div>
 
                       {/* Unified Diff Viewport */}
-                      <div className="p-3 sm:p-4 overflow-x-auto font-mono text-[11px] sm:text-xs leading-relaxed select-text bg-[#030303] text-paper">
-                        <div className="text-slate/60 pb-1 text-[10px]">{patch.diffHeader}</div>
-                        <div className="text-cyan-400/80 pb-1.5 font-bold text-[11px]">{patch.hunkHeader}</div>
+                      <div className="p-2.5 sm:p-4 overflow-x-auto font-mono text-[10px] sm:text-xs leading-relaxed select-text bg-[#030303] text-paper">
+                        <div className="text-slate/60 pb-1 text-[9px] sm:text-[10px] truncate">{patch.diffHeader}</div>
+                        <div className="text-cyan-400/80 pb-1.5 font-bold text-[10px] sm:text-[11px] truncate">{patch.hunkHeader}</div>
 
                         <div className="space-y-0.5">
                           {patch.diffLines.map((line, lIdx) => (
                             <div
                               key={lIdx}
-                              className={`flex items-start rounded-xs px-1.5 py-0.5 ${
+                              className={`flex items-start rounded-xs px-1 sm:px-1.5 py-0.5 ${
                                 line.type === "add"
                                   ? "bg-emerald-500/15 text-emerald-300 font-medium"
                                   : line.type === "del"
@@ -692,10 +692,10 @@ export default function GitDiffInspector() {
                               }`}
                             >
                               {/* Line numbers */}
-                              <span className="w-8 shrink-0 text-slate/40 text-[10px] select-none text-right pr-2">
+                              <span className="w-6 sm:w-8 shrink-0 text-slate/40 text-[9px] sm:text-[10px] select-none text-right pr-1.5 sm:pr-2">
                                 {line.oldLine || ""}
                               </span>
-                              <span className="w-8 shrink-0 text-slate/40 text-[10px] select-none text-right pr-3">
+                              <span className="w-6 sm:w-8 shrink-0 text-slate/40 text-[9px] sm:text-[10px] select-none text-right pr-2 sm:pr-3">
                                 {line.newLine || ""}
                               </span>
                               {/* Code Text */}

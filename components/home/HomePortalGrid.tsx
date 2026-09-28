@@ -108,7 +108,7 @@ export default function HomePortalGrid() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="font-mono text-xs text-signal">$ ls ~/portals</p>
-            <h2 className="mt-1 font-mono text-xl sm:text-2xl font-bold text-paper">
+            <h2 className="mt-1 font-mono text-lg sm:text-xl md:text-2xl font-bold text-paper">
               Command Portals
             </h2>
           </div>

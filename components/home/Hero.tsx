@@ -126,7 +126,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="font-mono text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
+              className="font-mono text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-paper"
             >
               <ScrambleText text={profile.name} />
               <span className="text-copper">.</span>
@@ -137,7 +137,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 max-w-xl text-base sm:text-lg lg:text-xl text-paper/90 font-medium"
+              className="mt-2.5 sm:mt-3 max-w-xl text-sm sm:text-base lg:text-lg text-paper/90 font-medium"
             >
               {profile.role}
             </motion.p>
@@ -147,9 +147,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 flex items-center gap-2 font-mono text-xs sm:text-sm text-slate min-h-[24px]"
+              className="mt-2.5 sm:mt-3 flex flex-wrap items-baseline gap-1.5 font-mono text-[11px] xs:text-xs sm:text-sm text-slate min-h-[24px]"
             >
-              <span className="text-signal">$ runtime.focus():</span>
+              <span className="text-signal shrink-0">$ runtime.focus():</span>
               <TypewriterFocus items={FOCUS_AREAS} />
             </motion.div>
 
@@ -158,11 +158,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
+              className="mt-6 sm:mt-8 flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-2.5 sm:gap-3.5"
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
               >
                 explore systems
                 <ArrowUpRight size={15} />
@@ -171,7 +171,7 @@ export default function Hero() {
                 href={profile.resumeHref}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
               >
                 <FileText size={15} />
                 Resume PDF
@@ -180,7 +180,7 @@ export default function Hero() {
                 href={profile.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
               >
                 <GitBranch size={15} />
                 GitHub

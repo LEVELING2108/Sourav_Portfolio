@@ -147,10 +147,10 @@ function HoloCard({
           className="flex items-center justify-between border-b border-trace/60 pb-3.5"
         >
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2.5 py-0.5 rounded-md shadow-sm">
+            <span className="font-mono text-[11px] sm:text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2 sm:px-2.5 py-0.5 rounded-md shadow-sm">
               {project.version}
             </span>
-            <span className="font-mono text-xs text-slate truncate max-w-[130px] sm:max-w-none">
+            <span className="font-mono text-[11px] sm:text-xs text-slate truncate max-w-[110px] xs:max-w-[140px] sm:max-w-none">
               {project.tag}
             </span>
           </div>
@@ -196,7 +196,7 @@ function HoloCard({
           style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}
           className="mt-3.5"
         >
-          <h3 className="font-mono text-xl sm:text-2xl font-bold text-paper group-hover:text-copper-bright transition-colors">
+          <h3 className="font-mono text-lg sm:text-xl lg:text-2xl font-bold text-paper group-hover:text-copper-bright transition-colors">
             {project.title}
           </h3>
           <p className="mt-1.5 text-xs text-slate line-clamp-2 leading-relaxed font-sans">
@@ -337,11 +337,11 @@ export default function ProjectsHoloDeck() {
   return (
     <div className="space-y-8">
       {/* Category Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full sm:w-auto">
+      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] sm:text-xs">
+        <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full sm:w-auto">
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "all"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -351,7 +351,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("flagship")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "flagship"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -361,7 +361,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("aiml")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "aiml"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -371,7 +371,7 @@ export default function ProjectsHoloDeck() {
           </button>
           <button
             onClick={() => setSelectedCategory("systems")}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
               selectedCategory === "systems"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -438,7 +438,7 @@ export default function ProjectsHoloDeck() {
                       {inspectedProject.tag}
                     </span>
                   </div>
-                  <h3 className="font-mono text-2xl font-bold text-paper mt-2">
+                  <h3 className="font-mono text-xl sm:text-2xl font-bold text-paper mt-2">
                     {inspectedProject.title}
                   </h3>
                   <p className="text-xs text-slate mt-1">
@@ -451,7 +451,7 @@ export default function ProjectsHoloDeck() {
                     <span className="font-mono text-[10px] uppercase text-slate tracking-wider block font-semibold">
                       // End-to-End Data Pipeline
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px] sm:text-xs">
                       {inspectedProject.architecture.flow.map((stage, i) => (
                         <div
                           key={stage}
