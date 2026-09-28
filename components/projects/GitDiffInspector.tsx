@@ -37,13 +37,14 @@ type PatchItem = {
   prUrl: string;
   repoUrl: string;
   stack: string[];
+  status?: "merged" | "in-review";
 };
 
 const LAYA_METRICS = [
   {
     label: "Decision Latency",
     value: "~33 ms",
-    subtext: "~40x speedup from ~1,500ms autoregressive LLMs",
+    subtext: "~45x speedup from ~1,500ms autoregressive LLMs",
     icon: Zap,
     highlight: "text-amber-400",
   },
@@ -56,15 +57,15 @@ const LAYA_METRICS = [
   },
   {
     label: "Upstream Scale",
-    value: "18,000+ ★",
-    subtext: "Shipped official LangChain & LangGraph integration",
+    value: "27,000+ ★",
+    subtext: "Shipped official LangChain, LangGraph, LlamaIndex & CrewAI",
     icon: Sparkles,
     highlight: "text-copper-bright",
   },
   {
     label: "Code Contribution",
-    value: "+911 / -4 lines",
-    subtext: "2 merged pull requests into v0.3.8+ release",
+    value: "+1,816 / -4 lines",
+    subtext: "4 merged pull requests into v0.3.8 – v0.3.21 releases",
     icon: GitMerge,
     highlight: "text-cyan-400",
   },
@@ -77,6 +78,16 @@ const ARCHITECTURE_HIGHLIGHTS = [
     tag: "LangGraph",
   },
   {
+    title: "LlamaIndex Multi-Index RAG Routing (LayaSingleSelector)",
+    desc: "Architected official LlamaIndex BaseSelector implementations for RouterQueryEngine, routing queries across candidate vector indices and docstores in <35ms with zero token generation cost.",
+    tag: "LlamaIndex",
+  },
+  {
+    title: "CrewAI Hierarchical Task Router (LayaCrewRouter)",
+    desc: "Authored official CrewAI agent routers and task guardrails, replacing slow LLM manager agents in hierarchical multi-agent swarms with sub-35ms task delegation and prompt security.",
+    tag: "CrewAI",
+  },
+  {
     title: "Zero-Latency Prompt Guardrails (LayaGuardrail)",
     desc: "Inline screening pipeline detecting prompt injections, toxic vectors, and jailbreak payloads in real time prior to triggering compute-heavy frontier foundation models.",
     tag: "Security",
@@ -87,13 +98,85 @@ const ARCHITECTURE_HIGHLIGHTS = [
     tag: "Inference",
   },
   {
-    title: "Dual-Mode Execution Architecture",
-    desc: "Engineered seamless execution across both local in-process GPU/CPU inference and lightweight remote HTTP server calls (laya-serve) with zero external client dependencies.",
+    title: "Reverse Proxy Subpath Routing (LAYA_ROOT_PATH)",
+    desc: "Engineered ASGI reverse proxy subpath normalization in laya.serve, Docker Compose, and NixOS packages to standardize API routing behind Nginx, Traefik, and cloud gateways.",
     tag: "Systems",
   },
 ];
 
 const PATCHES: PatchItem[] = [
+  {
+    id: "patch-pr-533",
+    repo: "NandhaKishorM/laya",
+    prNumber: 533,
+    releaseVersion: "v0.3.21",
+    date: "Mar 2025",
+    title: "feat(integrations): add LlamaIndex query routing and selectors",
+    diffStats: { additions: 416, deletions: 0, filesChanged: 3 },
+    targetFile: "laya/integrations/llamaindex.py",
+    diffHeader: "diff --git a/laya/integrations/llamaindex.py b/laya/integrations/llamaindex.py",
+    hunkHeader: "@@ -0,0 +1,95 @@ class LayaSingleSelector(BaseSelector):",
+    solveSummary:
+      "Architected official LlamaIndex selectors (LayaSingleSelector & LayaMultiSelector) for RouterQueryEngine: sub-35ms non-autoregressive RAG index routing with zero token generation costs.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/533",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["Python", "LlamaIndex", "RAG", "PyTorch", "ModernBERT"],
+    status: "merged",
+    diffLines: [
+      { type: "add", text: "+from llama_index.core.selectors import BaseSelector, SelectorResult, ToolSelection", newLine: 1 },
+      { type: "add", text: "+from llama_index.core.schema import QueryBundle", newLine: 2 },
+      { type: "add", text: "+from laya.integrations._errors import LayaLowConfidenceError", newLine: 3 },
+      { type: "add", text: "+", newLine: 4 },
+      { type: "add", text: "+class LayaSingleSelector(BaseSelector):", newLine: 5 },
+      { type: "add", text: "+    \"\"\"Sub-35ms single-choice selector for LlamaIndex RouterQueryEngine.\"\"\"", newLine: 6 },
+      { type: "add", text: "+    def __init__(self, instructions: str = \"Which query engine is best suited?\", confidence_threshold: float = 0.0):", newLine: 7 },
+      { type: "add", text: "+        self.instructions = instructions", newLine: 8 },
+      { type: "add", text: "+        self.confidence_threshold = confidence_threshold", newLine: 9 },
+      { type: "add", text: "+", newLine: 10 },
+      { type: "add", text: "+    def _select(self, choices: Sequence[ToolMetadata], query: QueryBundle) -> SelectorResult:", newLine: 11 },
+      { type: "add", text: "+        query_str = query.query_str", newLine: 12 },
+      { type: "add", text: "+        decision = self._engine.route(query_str, candidate_keys=[c.name for c in choices])", newLine: 13 },
+      { type: "add", text: "+        if decision.confidence < self.confidence_threshold:", newLine: 14 },
+      { type: "add", text: "+            raise LayaLowConfidenceError(f\"Confidence {decision.confidence:.2f} below threshold\")", newLine: 15 },
+      { type: "add", text: "+        selected_idx = [c.name for c in choices].index(decision.selected_route)", newLine: 16 },
+      { type: "add", text: "+        return SelectorResult(selections=[ToolSelection(index=selected_idx, reason=decision.reason)])", newLine: 17 },
+    ],
+  },
+  {
+    id: "patch-pr-535",
+    repo: "NandhaKishorM/laya",
+    prNumber: 535,
+    releaseVersion: "v0.3.21",
+    date: "Mar 2025",
+    title: "feat(integrations): add CrewAI task delegation routing and guardrails",
+    diffStats: { additions: 489, deletions: 0, filesChanged: 3 },
+    targetFile: "laya/integrations/crewai.py",
+    diffHeader: "diff --git a/laya/integrations/crewai.py b/laya/integrations/crewai.py",
+    hunkHeader: "@@ -0,0 +1,104 @@ class LayaCrewRouter:",
+    solveSummary:
+      "Engineered official CrewAI task delegation router and inline task guardrails: replaces slow 2-4s LLM manager agents in hierarchical crews with sub-35ms routing and prompt safety screening.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/535",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["Python", "CrewAI", "Multi-Agent", "PyTorch", "Shannon-Entropy"],
+    status: "merged",
+    diffLines: [
+      { type: "add", text: "+from typing import Any, Dict, List, Optional", newLine: 1 },
+      { type: "add", text: "+from laya.integrations._errors import LayaLowConfidenceError", newLine: 2 },
+      { type: "add", text: "+", newLine: 3 },
+      { type: "add", text: "+class LayaCrewRouter:", newLine: 4 },
+      { type: "add", text: "+    \"\"\"Sub-35ms task delegation router for CrewAI multi-agent crews.\"\"\"", newLine: 5 },
+      { type: "add", text: "+    def __init__(self, instructions: str = \"Which agent in the crew is best qualified?\", confidence_threshold: float = 0.0):", newLine: 6 },
+      { type: "add", text: "+        self.instructions = instructions", newLine: 7 },
+      { type: "add", text: "+        self.confidence_threshold = confidence_threshold", newLine: 8 },
+      { type: "add", text: "+", newLine: 9 },
+      { type: "add", text: "+    def route_task(self, task: Any, agents: List[Any]) -> Any:", newLine: 10 },
+      { type: "add", text: "+        agent_keys = [a.role for a in agents]", newLine: 11 },
+      { type: "add", text: "+        decision = self._engine.route(task.description, candidate_keys=agent_keys)", newLine: 12 },
+      { type: "add", text: "+        if decision.confidence < self.confidence_threshold:", newLine: 13 },
+      { type: "add", text: "+            raise LayaLowConfidenceError(f\"Delegation confidence {decision.confidence:.2f} below threshold\")", newLine: 14 },
+      { type: "add", text: "+        return agents[agent_keys.index(decision.selected_route)]", newLine: 15 },
+    ],
+  },
   {
     id: "patch-pr-229",
     repo: "NandhaKishorM/laya",
@@ -110,6 +193,7 @@ const PATCHES: PatchItem[] = [
     prUrl: "https://github.com/NandhaKishorM/laya/pull/229",
     repoUrl: "https://github.com/NandhaKishorM/laya",
     stack: ["Python", "LangGraph", "LangChain", "ModernBERT", "PyTorch"],
+    status: "merged",
     diffLines: [
       { type: "add", text: "+from typing import Any, Dict, List, Optional, Union", newLine: 1 },
       { type: "add", text: "+import torch", newLine: 2 },
@@ -158,6 +242,7 @@ const PATCHES: PatchItem[] = [
     prUrl: "https://github.com/NandhaKishorM/laya/pull/257",
     repoUrl: "https://github.com/NandhaKishorM/laya",
     stack: ["Python", "Packaging", "REST APIs", "AsyncIO"],
+    status: "merged",
     diffLines: [
       { type: "ctx", text: " [project.optional-dependencies]", oldLine: 42, newLine: 42 },
       { type: "del", text: "-langchain = [\"langchain-core>=0.2.0\"]", oldLine: 43 },
@@ -173,6 +258,40 @@ const PATCHES: PatchItem[] = [
       { type: "add", text: "+            self._client = LayaHttpClient(base_url=self.remote_endpoint)", newLine: 51 },
       { type: "add", text: "+        else:", newLine: 52 },
       { type: "add", text: "+            self._engine = LayaLocalEngine(model=self.model_name)", newLine: 53 },
+    ],
+  },
+  {
+    id: "patch-pr-670",
+    repo: "NandhaKishorM/laya",
+    prNumber: 670,
+    releaseVersion: "v0.3.22 (In Review)",
+    date: "Sep 2026",
+    title: "feat(serve): add LAYA_ROOT_PATH support for reverse proxy subpaths",
+    diffStats: { additions: 132, deletions: 6, filesChanged: 5 },
+    targetFile: "laya/serve.py",
+    diffHeader: "diff --git a/laya/serve.py b/laya/serve.py",
+    hunkHeader: "@@ -28,6 +28,15 @@ def _resolve_root_path() -> str:",
+    solveSummary:
+      "Implemented reverse-proxy subpath handling via LAYA_ROOT_PATH environment variable and --root-path CLI flag, standardizing API routing behind nginx/traefik with 22/22 CI test suites passing.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/670",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["FastAPI", "Starlette", "Uvicorn", "Docker", "NixOS"],
+    status: "in-review",
+    diffLines: [
+      { type: "add", text: "+def _resolve_root_path(explicit: Optional[str] = None) -> str:", newLine: 28 },
+      { type: "add", text: "+    \"\"\"ASGI root_path for reverse proxy subpaths (e.g. /laya). Normalized to /path.\"\"\"", newLine: 29 },
+      { type: "add", text: "+    raw = explicit if explicit is not None else os.environ.get(\"LAYA_ROOT_PATH\", \"\")", newLine: 30 },
+      { type: "add", text: "+    val = (raw or \"\").strip()", newLine: 31 },
+      { type: "add", text: "+    if not val or val == \"/\":", newLine: 32 },
+      { type: "add", text: "+        return \"\"", newLine: 33 },
+      { type: "add", text: "+    if not val.startswith(\"/\"):", newLine: 34 },
+      { type: "add", text: "+        val = \"/\" + val", newLine: 35 },
+      { type: "add", text: "+    return val.rstrip(\"/\")", newLine: 36 },
+      { type: "ctx", text: " ", oldLine: 28, newLine: 37 },
+      { type: "del", text: "-    app = FastAPI(title=\"Laya API\")", oldLine: 29 },
+      { type: "add", text: "+    app = FastAPI(title=\"Laya API\", root_path=_resolve_root_path(root_path))", newLine: 38 },
+      { type: "ctx", text: "     uvicorn.run(", oldLine: 30, newLine: 39 },
+      { type: "add", text: "+        root_path=_resolve_root_path(),", newLine: 40 },
     ],
   },
 ];
@@ -212,14 +331,14 @@ export default function GitDiffInspector() {
               </span>
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-slate max-w-3xl">
-              Official LangChain &amp; LangGraph System-1 integration shipped to{" "}
+              Official framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI) shipped to{" "}
               <a
                 href="https://github.com/NandhaKishorM/laya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-paper hover:text-copper-bright underline underline-offset-4 decoration-copper/40"
               >
-                NandhaKishorM/laya (18,000+ GitHub Stars)
+                NandhaKishorM/laya (27,000+ GitHub Stars)
               </a>
               . Deterministic non-autoregressive decision classification evaluated in ~33ms.
             </p>
@@ -298,24 +417,24 @@ export default function GitDiffInspector() {
                     The Problem
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
-                    Traditional multi-agent systems built on LangGraph/LangChain waste{" "}
-                    <strong className="text-rose-300">1 to 2 seconds</strong> generating tokens just to decide which tool or subagent to branch to, introducing severe latency bottlenecks, non-deterministic branching, and massive LLM API bills.
+                    Traditional multi-agent systems built on LangGraph, LlamaIndex, or CrewAI waste{" "}
+                    <strong className="text-rose-300">1 to 2 seconds</strong> generating tokens just to decide which tool, index, or subagent to branch to, introducing severe latency bottlenecks, non-deterministic branching, and massive LLM API bills.
                   </p>
                 </div>
 
                 <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-2">
                   <span className="text-xs font-mono font-semibold text-emerald-400 uppercase tracking-wider">
-                    The Solution (Laya Integration)
+                    The Solution (Laya Integrations)
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
-                    Contributed the official LangChain &amp; LangGraph integration to{" "}
-                    <strong className="text-emerald-300">Laya</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions (choice, score, noul) in a{" "}
+                    Contributed official integrations across the entire modern agent stack (LangChain, LangGraph, LlamaIndex, and CrewAI) to{" "}
+                    <strong className="text-emerald-300">Laya (27,000+ ★)</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions in a{" "}
                     <strong className="text-emerald-300">single ~33ms forward pass</strong> with mathematical zero hallucination.
                   </p>
                 </div>
               </div>
 
-              {/* 4 Pillars */}
+              {/* Key Contributions */}
               <div className="pt-2">
                 <h4 className="font-mono text-xs uppercase tracking-wider text-slate mb-3">
                   Key Engineering Contributions
@@ -345,26 +464,48 @@ export default function GitDiffInspector() {
               </div>
 
               {/* Action Links */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-trace/70 font-mono text-xs">
+              <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-trace/70 font-mono text-xs">
                 <a
-                  href="https://github.com/NandhaKishorM/laya/pull/229"
+                  href="https://github.com/NandhaKishorM/laya/pull/533"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
                 >
                   <GitPullRequest size={13} />
-                  <span>Merged PR #229 (+866 lines)</span>
+                  <span>Merged PR #533 (LlamaIndex)</span>
                   <ArrowUpRight size={12} />
                 </a>
 
                 <a
-                  href="https://github.com/NandhaKishorM/laya/pull/257"
+                  href="https://github.com/NandhaKishorM/laya/pull/535"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-ink border border-trace text-paper hover:border-copper/40 transition-all"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
                 >
                   <GitPullRequest size={13} />
-                  <span>Merged PR #257 (+45 lines)</span>
+                  <span>Merged PR #535 (CrewAI)</span>
+                  <ArrowUpRight size={12} />
+                </a>
+
+                <a
+                  href="https://github.com/NandhaKishorM/laya/pull/229"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-paper hover:border-copper/40 transition-all"
+                >
+                  <GitPullRequest size={13} />
+                  <span>Merged PR #229 (LangChain)</span>
+                  <ArrowUpRight size={12} />
+                </a>
+
+                <a
+                  href="https://github.com/NandhaKishorM/laya/pull/670"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all"
+                >
+                  <GitPullRequest size={13} />
+                  <span>PR #670 (Root Path · 22/22 Green)</span>
                   <ArrowUpRight size={12} />
                 </a>
 
@@ -372,9 +513,9 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition-all ml-auto"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition-all ml-auto"
                 >
-                  <span>Laya Repository (18,000+ ★)</span>
+                  <span>Laya Repository (27,000+ ★)</span>
                   <ExternalLink size={12} />
                 </a>
               </div>
@@ -397,7 +538,7 @@ export default function GitDiffInspector() {
           </div>
           <div className="flex items-center gap-2 text-copper-bright text-[10px]">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>2 upstream pull requests merged</span>
+            <span>4 upstream pull requests merged · 1 in review</span>
           </div>
         </div>
 
@@ -448,8 +589,14 @@ export default function GitDiffInspector() {
                   <div className="flex items-center gap-2.5 shrink-0 ml-auto font-mono text-xs">
                     <span className="text-slate/70 text-[11px] hidden sm:inline">{patch.releaseVersion}</span>
 
-                    <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold uppercase">
-                      merged
+                    <span
+                      className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${
+                        patch.status === "in-review"
+                          ? "bg-amber-500/10 border border-amber-500/30 text-amber-400"
+                          : "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400"
+                      }`}
+                    >
+                      {patch.status === "in-review" ? "in review" : "merged"}
                     </span>
 
                     <div className="flex items-center gap-1 text-slate group-hover:text-paper text-[11px]">
@@ -576,7 +723,7 @@ export default function GitDiffInspector() {
                           onClick={(e) => e.stopPropagation()}
                           className="text-slate hover:text-copper-bright inline-flex items-center gap-1 text-[11px] transition-colors"
                         >
-                          <span>NandhaKishorM/laya (18k+ ★)</span>
+                          <span>NandhaKishorM/laya (27k+ ★)</span>
                           <ExternalLink size={10} />
                         </a>
                       </div>

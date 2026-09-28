@@ -65,9 +65,9 @@ export const education: EducationItem[] = [
 
 
 export const stats = [
-  { label: "Systems Built", value: "7+ Shipped" },
+  { label: "Upstream OSS", value: "27,000+ ★" },
+  { label: "Systems Built", value: "8+ Shipped" },
   { label: "Core Stack", value: "20+ Techs" },
-  { label: "LeetCode solved", value: "200+" },
   { label: "Dual-Track", value: "IITM × BVDU" },
 ];
 
@@ -78,11 +78,48 @@ export const skills = {
   database: ["PostgreSQL", "MySQL", "MongoDB", "Redis"],
   systemDesign: ["JWT Auth", "WebSockets", "Caching", "Rate Limiting", "Distributed Systems"],
   devops: ["Docker", "GitHub Actions", "CI/CD", "Git", "AWS (S3, EC2)", "GCP", "Vercel", "Render"],
-  aiml: ["PyTorch", "Scikit-learn", "Hugging Face", "RAG Pipelines", "LangChain", "LangGraph"],
+  aiml: ["PyTorch", "LlamaIndex", "CrewAI", "LangChain", "LangGraph", "ModernBERT", "System-1 Routing", "RAG Pipelines", "Hugging Face", "Scikit-learn"],
 };
 
 
 export const projects: Project[] = [
+  {
+    version: "v0.3.21",
+    title: "Laya System-1 Integrations",
+    tag: "upstream AI · 27k+ ★ · sub-35ms routing",
+    date: "Production Shipped",
+    summary:
+      "Authored official third-party framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI) for Laya, enabling sub-35ms non-autoregressive agent decision routing and zero-latency prompt guardrails.",
+    stack: ["Python", "PyTorch", "LangGraph", "LlamaIndex", "CrewAI", "ModernBERT"],
+    highlights: [
+      "27,000+ Upstream Stars",
+      "4 Merged PRs (#229, #257, #533, #535)",
+      "~33ms Routing (98% Faster)",
+    ],
+    features: [
+      "Sub-35ms conditional edge routing for LangGraph with Shannon-entropy confidence gating",
+      "Official LlamaIndex LayaSingleSelector and LayaMultiSelector for zero-token multi-index RAG routing",
+      "Official CrewAI LayaCrewRouter and LayaTaskGuard for instant hierarchical swarm task delegation",
+    ],
+    metrics: [
+      { label: "Latency", value: "~33ms" },
+      { label: "Ecosystem", value: "27,000+ ★" },
+    ],
+    architecture: {
+      flow: [
+        "Agent State / Input",
+        "ModernBERT 1-Pass Inference",
+        "Shannon-Entropy Confidence Gating",
+        "Sub-35ms Route Dispatch"
+      ],
+      solve:
+        "Eliminated token-by-token autoregressive LLM branching overhead (reducing decision latency from ~1,500ms to ~33ms) across 4 major agent frameworks."
+    },
+    links: [
+      { label: "Inspect Diffs", href: "/oss" },
+      { label: "GitHub Upstream", href: "https://github.com/NandhaKishorM/laya" },
+    ],
+  },
   {
     version: "v1.0",
     title: "ROADSoS",

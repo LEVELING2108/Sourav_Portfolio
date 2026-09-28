@@ -14,6 +14,7 @@ import HeroPhotoOrbital from "./HeroPhotoOrbital";
 import NeuralBackground from "./NeuralBackground";
 
 const FOCUS_AREAS = [
+  "upstream System-1 agent routing (Laya · 27k+ ★)",
   "real-time ML pipelines (<25ms inference)",
   "high-concurrency distributed systems",
   "enterprise QR & track telemetry engines",
