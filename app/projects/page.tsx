@@ -56,10 +56,10 @@ export default function ProjectsPage() {
                 <span>$ git checkout upstream/main</span>
               </div>
               <h3 className="font-mono text-lg font-bold text-paper">
-                Open Source Engineering (Laya · 18,000+ ★)
+                Open Source Engineering (Laya · 27,000+ ★)
               </h3>
               <p className="text-xs sm:text-sm text-slate font-sans">
-                Explore merged pull requests (#229, #257), ~33ms System-1 ModernBERT edge routing, and interactive git diffs in the dedicated OSS portal.
+                Explore 4 merged pull requests (#229, #257, #533, #535), ~33ms System-1 ModernBERT edge routing across LangChain, LlamaIndex &amp; CrewAI, and interactive git diffs in the dedicated OSS portal.
               </p>
             </div>
             <Link
