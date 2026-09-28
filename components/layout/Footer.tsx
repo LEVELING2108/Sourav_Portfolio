@@ -7,7 +7,9 @@ export default function Footer() {
         <p>
           © {new Date().getFullYear()} {profile.name}. Built with Next.js.
         </p>
-        <p className="text-trace-line">// end of log</p>
+        <p className="text-slate/60 hover:text-copper-bright transition-colors select-none">
+          // end of log
+        </p>
       </div>
     </footer>
   );

@@ -50,16 +50,16 @@ export default function HeroPhotoOrbital() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 75, repeat: Infinity, ease: "linear" }}
-          className="w-[340px] h-[340px] sm:w-[410px] sm:h-[410px] rounded-full border border-dashed border-copper/25 dark:border-copper/20"
+          className="w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[380px] sm:h-[380px] lg:w-[410px] lg:h-[410px] rounded-full border border-dashed border-copper/25 dark:border-copper/20"
         />
         {/* Outer Elliptical Orbit */}
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 95, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[420px] h-[420px] sm:w-[500px] sm:h-[500px] rounded-full border border-dotted border-signal/25 dark:border-signal/15"
+          className="absolute w-[330px] h-[330px] xs:w-[370px] xs:h-[370px] sm:w-[450px] sm:h-[450px] lg:w-[500px] lg:h-[500px] rounded-full border border-dotted border-signal/25 dark:border-signal/15"
         />
         {/* Radial Core Glow */}
-        <div className="absolute w-[360px] h-[360px] bg-gradient-to-tr from-copper/20 via-signal/10 to-transparent rounded-full blur-3xl opacity-60" />
+        <div className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] bg-gradient-to-tr from-copper/20 via-signal/10 to-transparent rounded-full blur-3xl opacity-60" />
       </div>
 
       {/* SATELLITE 1: Top-Left (PyTorch ML) */}
@@ -68,7 +68,7 @@ export default function HeroPhotoOrbital() {
         animate={{ y: [-4, 4, -4] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
         whileHover={{ scale: 1.08 }}
-        className="absolute -top-3 -left-3 sm:-left-10 z-30 flex items-center gap-2 rounded-full border border-copper/50 bg-ink-raised/95 backdrop-blur-xl px-3.5 py-1.5 font-mono text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper-bright hover:shadow-copper/20 hover:shadow-xl"
+        className="absolute -top-2 -left-1 sm:-left-8 sm:-top-3 z-30 flex items-center gap-1.5 sm:gap-2 rounded-full border border-copper/50 bg-ink-raised/95 backdrop-blur-xl px-2.5 sm:px-3.5 py-1 sm:py-1.5 font-mono text-[10px] sm:text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper-bright hover:shadow-copper/20 hover:shadow-xl"
       >
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75" />
@@ -85,7 +85,7 @@ export default function HeroPhotoOrbital() {
         animate={{ y: [4, -4, 4] }}
         transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
         whileHover={{ scale: 1.08 }}
-        className="absolute top-5 -right-3 sm:-right-8 z-30 flex items-center gap-2 rounded-full border border-signal/50 bg-ink-raised/95 backdrop-blur-xl px-3.5 py-1.5 font-mono text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-signal hover:shadow-signal/20 hover:shadow-xl"
+        className="absolute top-4 -right-1 sm:-right-8 sm:top-5 z-30 flex items-center gap-1.5 sm:gap-2 rounded-full border border-signal/50 bg-ink-raised/95 backdrop-blur-xl px-2.5 sm:px-3.5 py-1 sm:py-1.5 font-mono text-[10px] sm:text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-signal hover:shadow-signal/20 hover:shadow-xl"
       >
         <GraduationCap size={14} className="text-signal" />
         <span className="text-signal font-semibold">9.1 CGPA</span>
@@ -98,7 +98,7 @@ export default function HeroPhotoOrbital() {
         animate={{ y: [3, -3, 3] }}
         transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
         whileHover={{ scale: 1.08 }}
-        className="absolute bottom-16 -left-3 sm:-left-8 z-30 flex items-center gap-2 rounded-full border border-trace bg-ink-raised/95 backdrop-blur-xl px-3.5 py-1.5 font-mono text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper/70 hover:shadow-xl"
+        className="absolute bottom-12 -left-1 sm:-left-8 sm:bottom-16 z-30 flex items-center gap-1.5 sm:gap-2 rounded-full border border-trace bg-ink-raised/95 backdrop-blur-xl px-2.5 sm:px-3.5 py-1 sm:py-1.5 font-mono text-[10px] sm:text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper/70 hover:shadow-xl"
       >
         <NextjsIcon size={14} />
         <span className="font-medium">Next.js 16</span>
@@ -111,10 +111,10 @@ export default function HeroPhotoOrbital() {
         animate={{ y: [-3, 3, -3] }}
         transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
         whileHover={{ scale: 1.08 }}
-        className="absolute -bottom-2 -right-3 sm:-right-8 z-30 flex items-center gap-2 rounded-full border border-copper/50 bg-ink-raised/95 backdrop-blur-xl px-3.5 py-1.5 font-mono text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper-bright hover:shadow-copper/20 hover:shadow-xl"
+        className="absolute -bottom-2 -right-1 sm:-right-8 z-30 flex items-center gap-1.5 sm:gap-2 rounded-full border border-copper/50 bg-ink-raised/95 backdrop-blur-xl px-2.5 sm:px-3.5 py-1 sm:py-1.5 font-mono text-[10px] sm:text-[11px] text-paper shadow-lg cursor-pointer transition-all hover:border-copper-bright hover:shadow-copper/20 hover:shadow-xl"
       >
         <Sparkles size={13} className="text-copper-bright" />
-        <span className="text-copper-bright font-semibold">7+ Shipped</span>
+        <span className="text-copper-bright font-semibold">8+ Shipped</span>
         <span className="text-slate text-[10px] hidden sm:inline">Production</span>
       </motion.div>
 
@@ -127,14 +127,14 @@ export default function HeroPhotoOrbital() {
         }}
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="relative w-[230px] h-[300px] sm:w-[260px] sm:h-[340px] lg:w-[275px] lg:h-[355px] shrink-0 rounded-3xl border border-trace bg-ink-raised overflow-hidden shadow-2xl transition-colors duration-300 hover:border-copper/80 cursor-pointer select-none"
+        className="relative w-[210px] h-[275px] xs:w-[230px] xs:h-[300px] sm:w-[260px] sm:h-[340px] lg:w-[275px] lg:h-[355px] shrink-0 rounded-3xl border border-trace bg-ink-raised overflow-hidden shadow-2xl transition-colors duration-300 hover:border-copper/80 cursor-pointer select-none"
       >
         <Image
           src={profile.avatar}
           alt={`${profile.name} Portrait`}
           fill
           priority
-          sizes="(max-width: 640px) 230px, (max-width: 1024px) 260px, 275px"
+          sizes="(max-width: 640px) 210px, (max-width: 1024px) 260px, 275px"
           className="object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
         />
       </motion.div>

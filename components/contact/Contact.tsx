@@ -30,89 +30,85 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative px-4 sm:px-6 py-24 border-t border-trace">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
-        <SectionHeading eyebrow="$ open contact" title="Let's talk" />
+    <div className="space-y-6 pt-2">
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-xl text-slate leading-relaxed text-sm sm:text-base"
+      >
+        Open to full-stack and AI/ML roles — {profile.location}. If something
+        in the build log or open-source integrations aligns with what you&apos;re building, reach out directly or copy my email below.
+      </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 max-w-xl text-slate leading-relaxed"
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-wrap items-center gap-2.5 sm:gap-4"
+      >
+        {/* Send Email Mailto */}
+        <a
+          href={`mailto:${profile.email}`}
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all active:scale-95 shadow-md"
         >
-          Open to full-stack and AI/ML roles — {profile.location}. If something
-          in the log above is relevant to what you&apos;re building, reach out directly or copy my email below.
-        </motion.p>
+          <Mail size={15} />
+          Email Me
+        </a>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4"
+        {/* Copy Email Button */}
+        <button
+          onClick={handleCopyEmail}
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95 cursor-pointer"
         >
-          {/* Send Email Mailto */}
-          <a
-            href={`mailto:${profile.email}`}
-            className="inline-flex items-center justify-center gap-2 rounded bg-copper px-5 py-2.5 font-mono text-sm font-medium text-ink hover:bg-copper-bright transition-all active:scale-95 shadow-md"
-          >
-            <Mail size={15} />
-            Email Me
-          </a>
+          {copied ? (
+            <>
+              <Check size={15} className="text-signal" />
+              <span>Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy size={15} />
+              <span>Copy Email</span>
+            </>
+          )}
+        </button>
 
-          {/* Copy Email Button */}
-          <button
-            onClick={handleCopyEmail}
-            className="inline-flex items-center justify-center gap-2 rounded border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95 cursor-pointer"
-          >
-            {copied ? (
-              <>
-                <Check size={15} className="text-signal" />
-                <span>Copied!</span>
-              </>
-            ) : (
-              <>
-                <Copy size={15} />
-                <span>Copy Email</span>
-              </>
-            )}
-          </button>
+        {/* GitHub Link */}
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
+        >
+          <GitBranch size={15} />
+          GitHub
+        </a>
 
-          {/* GitHub Link */}
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
-          >
-            <GitBranch size={15} />
-            GitHub
-          </a>
+        {/* LinkedIn Link */}
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
+        >
+          <LinkedinIcon size={15} className="text-signal" />
+          LinkedIn
+        </a>
 
-          {/* LinkedIn Link */}
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded border border-trace px-5 py-2.5 font-mono text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
-          >
-            <LinkedinIcon size={15} className="text-signal" />
-            LinkedIn
-          </a>
-
-          {/* Resume PDF Link */}
-          <a
-            href={profile.resumeHref}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded border border-copper/60 bg-copper/10 px-5 py-2.5 font-mono text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95"
-          >
-            <FileText size={15} />
-            Resume PDF
-          </a>
-        </motion.div>
-      </div>
+        {/* Resume PDF Link */}
+        <a
+          href={profile.resumeHref}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95"
+        >
+          <FileText size={15} />
+          Resume PDF
+        </a>
+      </motion.div>
 
       {/* Floating Toast Notification */}
       <AnimatePresence>
@@ -134,7 +130,7 @@ export default function Contact() {
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </div>
   );
 }
 

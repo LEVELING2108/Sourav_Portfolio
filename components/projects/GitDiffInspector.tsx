@@ -373,20 +373,20 @@ export default function GitDiffInspector() {
       </div>
 
       {/* 4 Telemetry Metrics Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 font-mono">
         {LAYA_METRICS.map((metric, i) => {
           const Icon = metric.icon;
           return (
             <div
               key={i}
-              className="p-3.5 rounded-xl border border-trace bg-ink-raised/60 backdrop-blur-xs flex flex-col justify-between"
+              className="p-2.5 sm:p-3.5 rounded-xl border border-trace bg-ink-raised/60 backdrop-blur-xs flex flex-col justify-between"
             >
               <div className="flex items-center justify-between text-slate/70 mb-2">
-                <span className="text-[11px] uppercase tracking-wider">{metric.label}</span>
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider">{metric.label}</span>
                 <Icon size={14} className={metric.highlight} />
               </div>
               <div>
-                <div className={`text-base sm:text-lg font-bold ${metric.highlight}`}>
+                <div className={`text-sm xs:text-base sm:text-lg font-bold ${metric.highlight}`}>
                   {metric.value}
                 </div>
                 <div className="text-[10px] text-slate/80 leading-tight mt-1">
