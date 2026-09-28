@@ -118,7 +118,7 @@ export default function HomePortalGrid() {
         </div>
 
         {/* Desktop / Tablet: Kinetic Accordion Deck */}
-        <div className="hidden md:flex gap-3 h-[270px] w-full">
+        <div className="hidden md:flex gap-3 min-h-[295px] md:h-[295px] lg:h-[285px] w-full">
           {MODULES.map((mod, idx) => {
             const isActive = activeIndex === idx;
             const Icon = mod.icon;
@@ -314,12 +314,12 @@ export default function HomePortalGrid() {
               <Link
                 key={mod.id}
                 href={mod.href}
-                className="block rounded-xl border border-trace bg-ink-raised/70 p-4 transition-colors hover:border-copper/50"
+                className="block rounded-xl border border-trace bg-ink-raised/70 p-3.5 sm:p-4 transition-colors hover:border-copper/50"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <span
-                      className={`p-2 rounded-lg bg-ink border ${
+                      className={`p-2 rounded-lg bg-ink border shrink-0 ${
                         isCopper
                           ? "border-copper/30 text-copper-bright"
                           : "border-signal/30 text-signal"
@@ -327,18 +327,34 @@ export default function HomePortalGrid() {
                     >
                       <Icon size={16} />
                     </span>
-                    <div>
-                      <span className="font-mono text-[10px] text-slate uppercase tracking-wider block">
-                        {mod.sysId}
-                      </span>
-                      <h3 className="font-mono text-base font-bold text-paper">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] text-slate uppercase tracking-wider block">
+                          {mod.sysId}
+                        </span>
+                        <span
+                          className={`rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold border ${
+                            isCopper
+                              ? "bg-copper/10 border-copper/30 text-copper-bright"
+                              : "bg-signal/10 border-signal/30 text-signal"
+                          }`}
+                        >
+                          {mod.badge}
+                        </span>
+                      </div>
+                      <h3 className="font-mono text-sm sm:text-base font-bold text-paper truncate">
                         {mod.title}
                       </h3>
+                      {mod.highlights?.[0] && (
+                        <p className="font-mono text-[11px] text-slate/80 truncate mt-0.5">
+                          {mod.highlights[0].text}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <span
-                    className={`p-1.5 rounded-md border border-trace bg-ink ${
+                    className={`p-1.5 rounded-md border border-trace bg-ink shrink-0 ${
                       isCopper ? "text-copper-bright" : "text-signal"
                     }`}
                   >

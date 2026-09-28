@@ -102,7 +102,7 @@ function HoloCard({
     y.set(0);
   };
 
-  const isFlagship = project.version === "v1.0" || project.version === "v1.1" || project.version === "v1.6";
+  const isFlagship = project.version === "v0.3.21" || project.version === "v1.0" || project.version === "v1.1" || project.version === "v1.6";
 
   return (
     <div
@@ -120,7 +120,7 @@ function HoloCard({
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className={`group relative w-full rounded-3xl border bg-gradient-to-b from-ink-raised via-ink to-ink p-6 sm:p-7 transition-shadow duration-300 ${
+        className={`group relative w-full rounded-3xl border bg-gradient-to-b from-ink-raised via-ink to-ink p-5 sm:p-7 transition-shadow duration-300 ${
           isFlagship
             ? "border-copper/60 shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:border-copper-bright hover:shadow-[0_20px_50px_rgba(184,118,62,0.25)]"
             : "border-trace shadow-lg hover:border-copper/70 hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)]"
@@ -144,19 +144,27 @@ function HoloCard({
         {/* ================================================================= */}
         <div
           style={{ transform: "translateZ(25px)", transformStyle: "preserve-3d" }}
-          className="flex items-center justify-between border-b border-trace/60 pb-4"
+          className="flex items-center justify-between border-b border-trace/60 pb-3.5"
         >
           <div className="flex items-center gap-2">
             <span className="font-mono text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2.5 py-0.5 rounded-md shadow-sm">
               {project.version}
             </span>
-            <span className="font-mono text-xs text-slate truncate max-w-[140px] sm:max-w-none">
+            <span className="font-mono text-xs text-slate truncate max-w-[130px] sm:max-w-none">
               {project.tag}
             </span>
           </div>
 
           {/* Live Status Pill with custom animations */}
-          {project.version === "v1.0" ? (
+          {project.version === "v0.3.21" ? (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/50 bg-copper/15 px-2.5 py-0.5 font-mono text-[11px] text-copper-bright font-bold">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper-bright opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-copper-bright" />
+              </span>
+              <span>27k+ ★ OSS</span>
+            </span>
+          ) : project.version === "v1.0" ? (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] text-signal font-semibold">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75" />
@@ -186,7 +194,7 @@ function HoloCard({
         {/* ================================================================= */}
         <div
           style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}
-          className="mt-4"
+          className="mt-3.5"
         >
           <h3 className="font-mono text-xl sm:text-2xl font-bold text-paper group-hover:text-copper-bright transition-colors">
             {project.title}
@@ -203,15 +211,28 @@ function HoloCard({
           style={{ transform: "translateZ(55px)", transformStyle: "preserve-3d" }}
           className="mt-4 relative h-44 sm:h-52 w-full rounded-2xl overflow-hidden border border-trace/90 bg-ink shadow-inner"
         >
-          {project.image && (
+          {project.image ? (
             <Image
               src={project.image}
               alt={project.title}
               fill
               className="object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
             />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-ink-raised via-[#0b0c10] to-ink p-4 flex flex-col justify-between font-mono text-[11px] select-text">
+              <div className="flex items-center justify-between text-slate/70 border-b border-trace/60 pb-2">
+                <span className="text-copper-bright font-semibold">laya · v0.3.21</span>
+                <span className="text-emerald-400 font-semibold">22/22 CI green</span>
+              </div>
+              <div className="space-y-1 text-slate/90 text-[10px] sm:text-[11px] font-mono">
+                <div className="text-signal">$ router.route(query) ➔ ~33ms</div>
+                <div className="text-emerald-300">+ LayaSingleSelector (LlamaIndex)</div>
+                <div className="text-copper-bright">+ LayaCrewRouter (CrewAI)</div>
+              </div>
+              <div className="text-[10px] text-slate/60">Shannon-Entropy Gated Engine</div>
+            </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85 pointer-events-none" />
 
           {/* Floating Telemetry Pill on Screenshot */}
           {project.architecture?.solve && (
@@ -291,11 +312,25 @@ export default function ProjectsHoloDeck() {
   const [selectedCategory, setSelectedCategory] = useState<"all" | "flagship" | "aiml" | "systems">("all");
   const [inspectedProject, setInspectedProject] = useState<Project | null>(null);
 
+  const allCount = projects.length;
+  const flagshipCount = projects.filter(
+    (p) => p.version === "v0.3.21" || p.version === "v1.0" || p.version === "v1.1" || p.version === "v1.6"
+  ).length;
+  const aimlCount = projects.filter(
+    (p) => p.tag.includes("AI") || p.tag.includes("routing") || p.tag.includes("machine learning") || p.tag.includes("MLOps") || p.tag.includes("LLM")
+  ).length;
+  const systemsCount = projects.filter(
+    (p) => p.tag.includes("routing") || p.tag.includes("gateway") || p.tag.includes("emergency") || p.tag.includes("Railways") || p.tag.includes("fittings")
+  ).length;
+
   const filteredProjects = projects.filter((p) => {
     if (selectedCategory === "all") return true;
-    if (selectedCategory === "flagship") return p.version === "v1.0" || p.version === "v1.6";
-    if (selectedCategory === "aiml") return p.tag.includes("machine learning") || p.tag.includes("MLOps") || p.tag.includes("LLM");
-    if (selectedCategory === "systems") return p.tag.includes("gateway") || p.tag.includes("emergency") || p.tag.includes("Indian Railways");
+    if (selectedCategory === "flagship")
+      return p.version === "v0.3.21" || p.version === "v1.0" || p.version === "v1.1" || p.version === "v1.6";
+    if (selectedCategory === "aiml")
+      return p.tag.includes("AI") || p.tag.includes("routing") || p.tag.includes("machine learning") || p.tag.includes("MLOps") || p.tag.includes("LLM");
+    if (selectedCategory === "systems")
+      return p.tag.includes("routing") || p.tag.includes("gateway") || p.tag.includes("emergency") || p.tag.includes("Railways") || p.tag.includes("fittings");
     return true;
   });
 
@@ -303,7 +338,7 @@ export default function ProjectsHoloDeck() {
     <div className="space-y-8">
       {/* Category Filter Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full scrollbar-none w-full sm:w-auto">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full sm:w-auto">
           <button
             onClick={() => setSelectedCategory("all")}
             className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
@@ -312,7 +347,7 @@ export default function ProjectsHoloDeck() {
                 : "text-slate hover:text-paper"
             }`}
           >
-            All Systems (7)
+            All Systems ({allCount})
           </button>
           <button
             onClick={() => setSelectedCategory("flagship")}
@@ -322,7 +357,7 @@ export default function ProjectsHoloDeck() {
                 : "text-slate hover:text-paper"
             }`}
           >
-            Flagship Systems (2)
+            Flagship Systems ({flagshipCount})
           </button>
           <button
             onClick={() => setSelectedCategory("aiml")}
@@ -332,7 +367,7 @@ export default function ProjectsHoloDeck() {
                 : "text-slate hover:text-paper"
             }`}
           >
-            Applied AI / ML (3)
+            Applied AI / ML ({aimlCount})
           </button>
           <button
             onClick={() => setSelectedCategory("systems")}
@@ -342,7 +377,7 @@ export default function ProjectsHoloDeck() {
                 : "text-slate hover:text-paper"
             }`}
           >
-            Distributed & Cloud (4)
+            Distributed & Cloud ({systemsCount})
           </button>
         </div>
 

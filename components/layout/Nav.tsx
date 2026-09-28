@@ -71,14 +71,14 @@ export default function Nav() {
         </Link>
 
         {/* Center: Navigation Links with Kinetic Sliding Pill */}
-        <ul className="flex items-center gap-0.5 sm:gap-1.5 font-mono text-[11px] sm:text-xs">
+        <ul className="flex items-center gap-0.5 sm:gap-1.5 font-mono text-[10px] xs:text-[11px] sm:text-xs overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {links.map((l) => {
             const isActive = pathname === l.href;
             return (
-              <li key={l.href} className="relative">
+              <li key={l.href} className="relative shrink-0">
                 <Link
                   href={l.href}
-                  className={`relative z-10 block px-2 sm:px-3 py-1 sm:py-1.5 transition-colors ${
+                  className={`relative z-10 block px-1.5 xs:px-2.5 sm:px-3 py-1 sm:py-1.5 transition-colors whitespace-nowrap ${
                     isActive
                       ? "text-copper-bright font-semibold"
                       : "text-slate hover:text-paper"
