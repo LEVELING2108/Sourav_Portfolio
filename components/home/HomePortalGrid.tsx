@@ -42,15 +42,15 @@ const MODULES = [
     sysId: "SYS.02",
     label: "UPSTREAM AI / OSS",
     title: "Open Source Engine",
-    badge: "27,000+ ★",
+    badge: "30,000+ ★",
     accent: "signal",
     href: "/oss",
     cta: "Inspect Git Diffs & PRs",
     icon: GitBranch,
     highlights: [
-      { text: "Laya (4 Merged PRs)", dot: true },
+      { text: "Laya (5 Merged PRs)", dot: true },
       { text: "LangChain / LlamaIndex", spark: true },
-      { text: "CrewAI (~33ms Router)" },
+      { text: "CrewAI & Windows CI" },
     ],
   },
   {

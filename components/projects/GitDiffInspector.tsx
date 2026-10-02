@@ -37,7 +37,7 @@ type PatchItem = {
   prUrl: string;
   repoUrl: string;
   stack: string[];
-  status?: "merged" | "in-review";
+  status?: "merged" | "in-review" | "closed";
 };
 
 const LAYA_METRICS = [
@@ -57,15 +57,15 @@ const LAYA_METRICS = [
   },
   {
     label: "Upstream Scale",
-    value: "27,000+ ★",
+    value: "30,000+ ★",
     subtext: "Shipped official LangChain, LangGraph, LlamaIndex & CrewAI",
     icon: Sparkles,
     highlight: "text-copper-bright",
   },
   {
     label: "Code Contribution",
-    value: "+1,816 / -4 lines",
-    subtext: "4 merged pull requests into v0.3.8 – v0.3.21 releases",
+    value: "+1,819 / -7 lines",
+    subtext: "5 merged pull requests into v0.3.8 – v0.3.23 releases",
     icon: GitMerge,
     highlight: "text-cyan-400",
   },
@@ -102,9 +102,46 @@ const ARCHITECTURE_HIGHLIGHTS = [
     desc: "Engineered ASGI reverse proxy subpath normalization in laya.serve, Docker Compose, and NixOS packages to standardize API routing behind Nginx, Traefik, and cloud gateways.",
     tag: "Systems",
   },
+  {
+    title: "Cross-Platform Path Normalization (test_env_docs)",
+    desc: "Resolved Windows CI test gate breakage by normalizing relative paths from os.path.relpath with .replace(os.sep, '/') against hardcoded POSIX doc anchors, merged upstream into official v0.3.23 release.",
+    tag: "CI / Core",
+  },
 ];
 
 const PATCHES: PatchItem[] = [
+  {
+    id: "patch-pr-737",
+    repo: "NandhaKishorM/laya",
+    prNumber: 737,
+    releaseVersion: "v0.3.23",
+    date: "Oct 2026",
+    title: "fix(tests): normalize relpath separators in test_env_docs for Windows compatibility",
+    diffStats: { additions: 3, deletions: 3, filesChanged: 1 },
+    targetFile: "tests/test_env_docs.py",
+    diffHeader: "diff --git a/tests/test_env_docs.py b/tests/test_env_docs.py",
+    hunkHeader: "@@ -94,7 +94,7 @@ def package_names() -> Dict[str, Set[str]]:",
+    solveSummary:
+      "Fixed Windows test suite breakage by normalizing relative paths from os.path.relpath with .replace(os.sep, '/') against POSIX doc anchors, unblocking Windows CI in official release v0.3.23.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/737",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["Python", "pytest", "Windows CI", "AST", "Pathlib"],
+    status: "merged",
+    diffLines: [
+      { type: "ctx", text: "                 for name in NAME.findall(node.value):", oldLine: 96, newLine: 96 },
+      { type: "del", text: "-                    found.setdefault(name, set()).add(os.path.relpath(path, ROOT))", oldLine: 97 },
+      { type: "add", text: "+                    found.setdefault(name, set()).add(os.path.relpath(path, ROOT).replace(os.sep, \"/\"))", newLine: 97 },
+      { type: "ctx", text: "     return found", oldLine: 98, newLine: 98 },
+      { type: "ctx", text: " ", oldLine: 129, newLine: 129 },
+      { type: "del", text: "-            found.setdefault(name, set()).add(os.path.relpath(path, ROOT))", oldLine: 130 },
+      { type: "add", text: "+            found.setdefault(name, set()).add(os.path.relpath(path, ROOT).replace(os.sep, \"/\"))", newLine: 130 },
+      { type: "ctx", text: "     return found", oldLine: 131, newLine: 131 },
+      { type: "ctx", text: " ", oldLine: 151, newLine: 151 },
+      { type: "del", text: "-                found.setdefault(name, set()).add(os.path.relpath(path, ROOT))", oldLine: 152 },
+      { type: "add", text: "+                found.setdefault(name, set()).add(os.path.relpath(path, ROOT).replace(os.sep, \"/\"))", newLine: 152 },
+      { type: "ctx", text: "     return found", oldLine: 153, newLine: 153 },
+    ],
+  },
   {
     id: "patch-pr-533",
     repo: "NandhaKishorM/laya",
@@ -264,7 +301,7 @@ const PATCHES: PatchItem[] = [
     id: "patch-pr-670",
     repo: "NandhaKishorM/laya",
     prNumber: 670,
-    releaseVersion: "v0.3.22 (In Review)",
+    releaseVersion: "Architectural RFC",
     date: "Sep 2026",
     title: "feat(serve): add LAYA_ROOT_PATH support for reverse proxy subpaths",
     diffStats: { additions: 132, deletions: 6, filesChanged: 5 },
@@ -272,11 +309,11 @@ const PATCHES: PatchItem[] = [
     diffHeader: "diff --git a/laya/serve.py b/laya/serve.py",
     hunkHeader: "@@ -28,6 +28,15 @@ def _resolve_root_path() -> str:",
     solveSummary:
-      "Implemented reverse-proxy subpath handling via LAYA_ROOT_PATH environment variable and --root-path CLI flag, standardizing API routing behind nginx/traefik with 22/22 CI test suites passing.",
+      "Architected reverse-proxy subpath handling via LAYA_ROOT_PATH environment variable; maintainer review prompted unblocking Windows test suite in PR #737.",
     prUrl: "https://github.com/NandhaKishorM/laya/pull/670",
     repoUrl: "https://github.com/NandhaKishorM/laya",
     stack: ["FastAPI", "Starlette", "Uvicorn", "Docker", "NixOS"],
-    status: "in-review",
+    status: "closed",
     diffLines: [
       { type: "add", text: "+def _resolve_root_path(explicit: Optional[str] = None) -> str:", newLine: 28 },
       { type: "add", text: "+    \"\"\"ASGI root_path for reverse proxy subpaths (e.g. /laya). Normalized to /path.\"\"\"", newLine: 29 },
@@ -298,7 +335,7 @@ const PATCHES: PatchItem[] = [
 
 export default function GitDiffInspector() {
   const [activeTab, setActiveTab] = useState<"diff" | "architecture">("diff");
-  const [expandedId, setExpandedId] = useState<string | null>("patch-pr-229");
+  const [expandedId, setExpandedId] = useState<string | null>("patch-pr-737");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
@@ -338,7 +375,7 @@ export default function GitDiffInspector() {
                 rel="noopener noreferrer"
                 className="text-paper hover:text-copper-bright underline underline-offset-4 decoration-copper/40"
               >
-                NandhaKishorM/laya (27,000+ GitHub Stars)
+                NandhaKishorM/laya (30,000+ GitHub Stars)
               </a>
               . Deterministic non-autoregressive decision classification evaluated in ~33ms.
             </p>
@@ -428,7 +465,7 @@ export default function GitDiffInspector() {
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
                     Contributed official integrations across the entire modern agent stack (LangChain, LangGraph, LlamaIndex, and CrewAI) to{" "}
-                    <strong className="text-emerald-300">Laya (27,000+ ★)</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions in a{" "}
+                    <strong className="text-emerald-300">Laya (30,000+ ★)</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions in a{" "}
                     <strong className="text-emerald-300">single ~33ms forward pass</strong> with mathematical zero hallucination.
                   </p>
                 </div>
@@ -465,6 +502,17 @@ export default function GitDiffInspector() {
 
               {/* Action Links */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-trace/70 font-mono text-xs">
+                <a
+                  href="https://github.com/NandhaKishorM/laya/pull/737"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition-all font-semibold"
+                >
+                  <GitPullRequest size={13} />
+                  <span>Merged PR #737 (Windows CI · v0.3.23)</span>
+                  <ArrowUpRight size={12} />
+                </a>
+
                 <a
                   href="https://github.com/NandhaKishorM/laya/pull/533"
                   target="_blank"
@@ -505,7 +553,7 @@ export default function GitDiffInspector() {
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all"
                 >
                   <GitPullRequest size={13} />
-                  <span>PR #670 (Root Path · 22/22 Green)</span>
+                  <span>PR #670 (Root Path RFC)</span>
                   <ArrowUpRight size={12} />
                 </a>
 
@@ -515,7 +563,7 @@ export default function GitDiffInspector() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition-all ml-auto"
                 >
-                  <span>Laya Repository (27,000+ ★)</span>
+                  <span>Laya Repository (30,000+ ★)</span>
                   <ExternalLink size={12} />
                 </a>
               </div>
@@ -538,7 +586,7 @@ export default function GitDiffInspector() {
           </div>
           <div className="flex items-center gap-2 text-copper-bright text-[10px]">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>4 upstream pull requests merged · 1 in review</span>
+            <span>5 upstream pull requests merged · release v0.3.23</span>
           </div>
         </div>
 
@@ -593,10 +641,16 @@ export default function GitDiffInspector() {
                       className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${
                         patch.status === "in-review"
                           ? "bg-amber-500/10 border border-amber-500/30 text-amber-400"
+                          : patch.status === "closed"
+                          ? "bg-slate/15 border border-trace text-slate"
                           : "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400"
                       }`}
                     >
-                      {patch.status === "in-review" ? "in review" : "merged"}
+                      {patch.status === "in-review"
+                        ? "in review"
+                        : patch.status === "closed"
+                        ? "closed (RFC)"
+                        : "merged"}
                     </span>
 
                     <div className="flex items-center gap-1 text-slate group-hover:text-paper text-[11px]">
@@ -723,7 +777,7 @@ export default function GitDiffInspector() {
                           onClick={(e) => e.stopPropagation()}
                           className="text-slate hover:text-copper-bright inline-flex items-center gap-1 text-[11px] transition-colors"
                         >
-                          <span>NandhaKishorM/laya (27k+ ★)</span>
+                          <span>NandhaKishorM/laya (30k+ ★)</span>
                           <ExternalLink size={10} />
                         </a>
                       </div>

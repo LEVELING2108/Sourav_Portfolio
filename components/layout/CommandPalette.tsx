@@ -77,7 +77,7 @@ export default function CommandPalette() {
         id: "nav-oss",
         category: "Navigation",
         title: "Go to OSS Engineering ($ git log upstream)",
-        subtitle: "Laya (27k+ ★) LangChain, LlamaIndex & CrewAI PRs",
+        subtitle: "Laya (30k+ ★) LangChain, LlamaIndex & CrewAI PRs",
         icon: GitBranch,
         action: () => {
           window.location.href = "/oss";
