@@ -27,7 +27,7 @@ export default function About() {
             I build software that doesn&apos;t just work — it survives contact with real users, bad inputs, and 3am traffic spikes.
           </p>
           <p>
-            Obsessed with the stuff tutorials skip: core upstream System-1 decision routing (<span className="text-copper-bright font-medium">Laya · 27k+ ★</span>), self-healing ML pipelines (<span className="text-copper-bright font-medium">FraudShield</span>),
+            Obsessed with the stuff tutorials skip: core upstream System-1 decision routing (<span className="text-copper-bright font-medium">Laya · 30k+ ★</span>), self-healing ML pipelines (<span className="text-copper-bright font-medium">FraudShield</span>),
             hunting down nasty Redis race conditions (<span className="text-copper-bright font-medium">ROADSoS</span>), and enterprise QR rail track verification systems (<span className="text-copper-bright font-medium">RailTrack Pro</span>).
           </p>
           <p className="font-mono text-xs sm:text-sm text-copper-bright font-medium pt-3 border-t border-trace/60">

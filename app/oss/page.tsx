@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Open Source Engineering // Sourav Suman",
   description:
-    "Core open source contributions to Laya (27,000+ stars), architecting official LangChain, LangGraph, LlamaIndex, and CrewAI System-1 non-autoregressive decision routing.",
+    "Core open source contributions to Laya (30,000+ stars), architecting official LangChain, LangGraph, LlamaIndex, and CrewAI System-1 non-autoregressive decision routing.",
 };
 
 export default function OssPage() {
@@ -40,7 +40,7 @@ export default function OssPage() {
               <span className="p-1 rounded bg-ink border border-trace text-copper-bright">
                 <GitBranch size={13} />
               </span>
-              <span>27,000+ Stars Ecosystem</span>
+              <span>30,000+ Stars Ecosystem</span>
             </div>
           </div>
         </div>

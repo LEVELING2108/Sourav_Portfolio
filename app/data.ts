@@ -65,7 +65,7 @@ export const education: EducationItem[] = [
 
 
 export const stats = [
-  { label: "Upstream OSS", value: "27,000+ ★" },
+  { label: "Upstream OSS", value: "30,000+ ★" },
   { label: "Systems Built", value: "8+ Shipped" },
   { label: "Core Stack", value: "20+ Techs" },
   { label: "Dual-Track", value: "IITM × BVDU" },
@@ -84,26 +84,27 @@ export const skills = {
 
 export const projects: Project[] = [
   {
-    version: "v0.3.21",
+    version: "v0.3.23",
     title: "Laya System-1 Integrations",
-    tag: "upstream AI · 27k+ ★ · sub-35ms routing",
+    tag: "upstream AI · 30k+ ★ · sub-35ms routing",
     date: "Production Shipped",
     summary:
       "Authored official third-party framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI) for Laya, enabling sub-35ms non-autoregressive agent decision routing and zero-latency prompt guardrails.",
     stack: ["Python", "PyTorch", "LangGraph", "LlamaIndex", "CrewAI", "ModernBERT"],
     highlights: [
-      "27,000+ Upstream Stars",
-      "4 Merged PRs (#229, #257, #533, #535)",
+      "30,000+ Upstream Stars",
+      "5 Merged PRs (#229, #257, #533, #535, #737)",
       "~33ms Routing (98% Faster)",
     ],
     features: [
       "Sub-35ms conditional edge routing for LangGraph with Shannon-entropy confidence gating",
       "Official LlamaIndex LayaSingleSelector and LayaMultiSelector for zero-token multi-index RAG routing",
       "Official CrewAI LayaCrewRouter and LayaTaskGuard for instant hierarchical swarm task delegation",
+      "Cross-platform Windows path normalization in test_env_docs unblocking Windows CI in release v0.3.23",
     ],
     metrics: [
       { label: "Latency", value: "~33ms" },
-      { label: "Ecosystem", value: "27,000+ ★" },
+      { label: "Ecosystem", value: "30,000+ ★" },
     ],
     architecture: {
       flow: [

@@ -156,13 +156,13 @@ function HoloCard({
           </div>
 
           {/* Live Status Pill with custom animations */}
-          {project.version === "v0.3.21" ? (
+          {project.version === "v0.3.23" || project.version === "v0.3.21" ? (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/50 bg-copper/15 px-2.5 py-0.5 font-mono text-[11px] text-copper-bright font-bold">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper-bright opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-copper-bright" />
               </span>
-              <span>27k+ ★ OSS</span>
+              <span>30k+ ★ OSS</span>
             </span>
           ) : project.version === "v1.0" ? (
             <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] text-signal font-semibold">
@@ -221,13 +221,14 @@ function HoloCard({
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-ink-raised via-[#0b0c10] to-ink p-4 flex flex-col justify-between font-mono text-[11px] select-text">
               <div className="flex items-center justify-between text-slate/70 border-b border-trace/60 pb-2">
-                <span className="text-copper-bright font-semibold">laya · v0.3.21</span>
+                <span className="text-copper-bright font-semibold">laya · v0.3.23</span>
                 <span className="text-emerald-400 font-semibold">22/22 CI green</span>
               </div>
               <div className="space-y-1 text-slate/90 text-[10px] sm:text-[11px] font-mono">
                 <div className="text-signal">$ router.route(query) ➔ ~33ms</div>
                 <div className="text-emerald-300">+ LayaSingleSelector (LlamaIndex)</div>
                 <div className="text-copper-bright">+ LayaCrewRouter (CrewAI)</div>
+                <div className="text-cyan-300">+ Windows CI Normalization (#737)</div>
               </div>
               <div className="text-[10px] text-slate/60">Shannon-Entropy Gated Engine</div>
             </div>
