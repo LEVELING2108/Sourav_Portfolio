@@ -103,6 +103,152 @@ function TypewriterFocus({ items }: { items: string[] }) {
   );
 }
 
+function HeroActionDock() {
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  const items = [
+    {
+      id: "systems",
+      label: "explore systems",
+      href: "/projects",
+      isInternal: true,
+      icon: (
+        <ArrowUpRight
+          size={14}
+          className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+        />
+      ),
+    },
+    {
+      id: "resume",
+      label: "resume",
+      href: profile.resumeHref,
+      isInternal: false,
+      icon: <FileText size={14} className="text-copper-bright transition-colors" />,
+    },
+    {
+      id: "github",
+      label: "github",
+      href: profile.github,
+      isInternal: false,
+      icon: <GitBranch size={14} className="text-signal transition-colors" />,
+    },
+  ];
+
+  return (
+    <div
+      onMouseLeave={() => setHovered(null)}
+      className="relative mt-5 sm:mt-6 inline-flex items-center gap-1 p-1 sm:p-1.5 rounded-full border border-trace/90 bg-ink-raised/90 backdrop-blur-xl shadow-xl shadow-black/30 shrink-0 select-none"
+    >
+      {/* Specular ambient rim reflection on outer dock */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
+
+      {items.map((item, index) => {
+        const isHovered = hovered === item.id;
+        const isSystems = item.id === "systems";
+
+        const content = (
+          <span className="relative z-10 flex items-center gap-1.5 font-mono text-xs sm:text-[13px] tracking-tight">
+            <span
+              className={`transition-colors duration-200 ${
+                isSystems && !hovered
+                  ? "text-copper-bright font-semibold"
+                  : isHovered
+                  ? "text-paper font-semibold"
+                  : "text-slate group-hover:text-paper"
+              }`}
+            >
+              {item.label}
+            </span>
+            {item.icon}
+          </span>
+        );
+
+        const className =
+          "group relative flex items-center justify-center rounded-full px-3.5 sm:px-4 py-1.5 sm:py-2 transition-colors duration-200";
+
+        return (
+          <div key={item.id} className="relative flex items-center">
+            {index > 0 && (
+              <div className="h-4 w-px bg-trace/70 mx-0.5 transition-opacity duration-200 group-hover:opacity-20" />
+            )}
+
+            {item.isInternal ? (
+              <Link
+                href={item.href}
+                onMouseEnter={() => setHovered(item.id)}
+                className={className}
+              >
+                {/* Resting liquid glass state on primary when dock is idle */}
+                {isSystems && !hovered && (
+                  <motion.div
+                    layoutId="liquid-glass-pill"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-copper/25 via-copper/15 to-copper/5 border border-copper/50 shadow-[0_2px_12px_rgba(235,140,80,0.25),inset_0_1px_1.5px_rgba(255,255,255,0.25)] backdrop-blur-md"
+                    transition={{
+                      type: "spring",
+                      stiffness: 450,
+                      damping: 32,
+                      mass: 0.7,
+                    }}
+                  />
+                )}
+
+                {/* Sliding Liquid Glass Morphing Pill while hovering */}
+                {isHovered && (
+                  <motion.div
+                    layoutId="liquid-glass-pill"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.45),0_0_16px_rgba(235,140,80,0.2)] backdrop-blur-xl"
+                    transition={{
+                      type: "spring",
+                      stiffness: 450,
+                      damping: 30,
+                      mass: 0.65,
+                    }}
+                  >
+                    {/* Liquid glass light sheen refraction */}
+                    <div className="absolute inset-x-2.5 top-0.5 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent rounded-full" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-copper/20 to-transparent pointer-events-none" />
+                  </motion.div>
+                )}
+
+                {content}
+              </Link>
+            ) : (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                onMouseEnter={() => setHovered(item.id)}
+                className={className}
+              >
+                {/* Sliding Liquid Glass Morphing Pill while hovering */}
+                {isHovered && (
+                  <motion.div
+                    layoutId="liquid-glass-pill"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.45),0_0_16px_rgba(235,140,80,0.2)] backdrop-blur-xl"
+                    transition={{
+                      type: "spring",
+                      stiffness: 450,
+                      damping: 30,
+                      mass: 0.65,
+                    }}
+                  >
+                    {/* Liquid glass light sheen refraction */}
+                    <div className="absolute inset-x-2.5 top-0.5 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent rounded-full" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-copper/20 to-transparent pointer-events-none" />
+                  </motion.div>
+                )}
+
+                {content}
+              </a>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section
@@ -176,38 +322,13 @@ export default function Hero() {
               <TypewriterFocus items={FOCUS_AREAS} />
             </motion.div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons: Liquid Glass Floating Command Dock */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-6 sm:mt-8 flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center gap-2.5 sm:gap-3.5"
             >
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all duration-300 active:scale-95 shadow-md"
-              >
-                explore systems
-                <ArrowUpRight size={15} />
-              </Link>
-              <a
-                href={profile.resumeHref}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all duration-300 active:scale-95"
-              >
-                <FileText size={15} />
-                Resume PDF
-              </a>
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all duration-300 active:scale-95"
-              >
-                <GitBranch size={15} />
-                GitHub
-              </a>
+              <HeroActionDock />
             </motion.div>
           </div>
 
