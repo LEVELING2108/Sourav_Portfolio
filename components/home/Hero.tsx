@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import HeroPhotoOrbital from "./HeroPhotoOrbital";
 import NeuralBackground from "./NeuralBackground";
+import { Mascot } from "@/components/shared/Mascot";
 
 const FOCUS_AREAS = [
   "upstream System-1 agent routing (Laya · 30k+ ★)",
@@ -121,6 +122,28 @@ export default function Hero() {
         <div className="grid gap-12 lg:grid-cols-2 items-center">
           {/* Left Pillar: Identity, Story & Action CTAs */}
           <div>
+            {/* Interactive Mascot Companion */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-3 inline-flex items-center gap-3"
+            >
+              <Mascot
+                directions="/mascots/sourav-directions.webp"
+                reactions="/mascots/sourav-reactions.webp"
+                size={110}
+                label="Sourav"
+              />
+              <div className="hidden xs:flex flex-col text-left">
+                <span className="font-mono text-xs text-copper-bright font-medium tracking-wide flex items-center gap-1.5">
+                  <span className="inline-block w-2 h-2 rounded-full bg-signal animate-pulse" />
+                  cursor tracker online
+                </span>
+                <span className="font-mono text-[11px] text-slate">click to boop</span>
+              </div>
+            </motion.div>
+
             {/* Headline with Hacker Scramble Effect */}
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
