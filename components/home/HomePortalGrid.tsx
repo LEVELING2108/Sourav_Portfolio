@@ -96,48 +96,16 @@ export default function HomePortalGrid() {
     <section id="portals" className="px-4 sm:px-6 py-14 sm:py-18 border-t border-trace">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-6">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <div>
             <p className="font-mono text-xs text-signal">$ ls ~/portals</p>
             <h2 className="mt-1 font-mono text-lg sm:text-xl md:text-2xl font-bold text-paper">
               Command Portals
             </h2>
           </div>
-
-          {/* Quick-switch targeted plate pills */}
-          <div className="flex flex-wrap items-center gap-1 p-1 rounded-xl bg-ink-raised/60 border border-trace/70 w-fit">
-            {MODULES.map((mod, idx) => {
-              const isCur = activeIndex === idx;
-              const isCopper = mod.accent === "copper";
-
-              return (
-                <button
-                  key={mod.id}
-                  type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  className={`relative px-3 py-1 rounded-lg font-mono text-xs transition-colors cursor-pointer select-none ${
-                    isCur
-                      ? isCopper
-                        ? "text-copper-bright font-semibold"
-                        : "text-signal font-semibold"
-                      : "text-slate/70 hover:text-slate"
-                  }`}
-                  aria-label={`Select ${mod.name}`}
-                >
-                  {isCur && (
-                    <motion.div
-                      layoutId="portal-tab-pill"
-                      className={`absolute inset-0 rounded-lg bg-ink border shadow-sm -z-10 ${
-                        isCopper ? "border-copper/40" : "border-signal/40"
-                      }`}
-                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                    />
-                  )}
-                  <span>{mod.name}</span>
-                </button>
-              );
-            })}
-          </div>
+          <span className="font-mono text-xs text-slate hidden sm:inline">
+            // select environment
+          </span>
         </div>
 
         {/* Desktop / Tablet: Kinetic Accordion Deck */}
