@@ -197,22 +197,6 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Fixed Trigger Pill at bottom-left */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center gap-1.5 sm:gap-2 rounded-full border border-trace bg-ink-raised/90 backdrop-blur-md px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-xs text-paper shadow-lg hover:border-copper/60 hover:text-copper-bright transition-all cursor-pointer group"
-      >
-        <span className="p-1 rounded-md bg-ink border border-trace text-signal group-hover:text-copper-bright">
-          <Terminal size={13} />
-        </span>
-        <span className="hidden sm:inline">Command Palette</span>
-        <kbd className="rounded border border-trace bg-ink px-1.5 py-0.5 text-[10px] text-slate">
-          ⌘K
-        </kbd>
-      </motion.button>
-
       {/* Modal Backdrop & Drawer */}
       <AnimatePresence>
         {isOpen && (
