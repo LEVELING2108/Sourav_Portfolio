@@ -45,5 +45,7 @@ next-env.d.ts
 # local session history
 CHAT_HISTORY.md
 CHAT_LOG.md
+CHAT_LOG_OSS_UPDATE.md
+CHAT_LOG_*.md
 DEV_SESSION_LOG.md
 
