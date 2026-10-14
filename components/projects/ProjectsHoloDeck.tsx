@@ -10,10 +10,7 @@ import {
   X,
   Zap,
   Sparkles,
-  ShieldCheck,
-  Radio,
   Lock,
-  Layers,
   Cpu,
 } from "lucide-react";
 import {
@@ -450,7 +447,7 @@ export default function ProjectsHoloDeck() {
                 {inspectedProject.architecture && (
                   <div className="p-4 rounded-2xl border border-trace bg-ink space-y-3">
                     <span className="font-mono text-[10px] uppercase text-slate tracking-wider block font-semibold">
-                      // End-to-End Data Pipeline
+                      {"// End-to-End Data Pipeline"}
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px] sm:text-xs">
                       {inspectedProject.architecture.flow.map((stage, i) => (
@@ -473,7 +470,7 @@ export default function ProjectsHoloDeck() {
                 {inspectedProject.architecture?.solve && (
                   <div className="p-4 rounded-2xl border border-copper/40 bg-copper/5 space-y-1.5 font-mono text-xs">
                     <span className="text-[10px] uppercase text-copper-bright tracking-wider block font-semibold">
-                      // Core Engineering Solve
+                      {"// Core Engineering Solve"}
                     </span>
                     <p className="text-paper text-xs leading-relaxed font-sans">
                       {inspectedProject.architecture.solve}

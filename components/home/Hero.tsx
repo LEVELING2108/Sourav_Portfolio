@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { profile } from "@/app/data";
 import {
@@ -26,7 +26,7 @@ function ScrambleText({ text }: { text: string }) {
   const [display, setDisplay] = useState(text);
   const chars = "!<>-_\\/[]{}—=+*^?#________0101";
 
-  const scramble = () => {
+  const scramble = useCallback(() => {
     let iteration = 0;
     const interval = setInterval(() => {
       setDisplay(
@@ -47,11 +47,14 @@ function ScrambleText({ text }: { text: string }) {
 
       iteration += 1 / 3;
     }, 28);
-  };
+
+    return () => clearInterval(interval);
+  }, [text]);
 
   useEffect(() => {
-    scramble();
-  }, [text]);
+    const cleanup = scramble();
+    return cleanup;
+  }, [scramble]);
 
   return (
     <span

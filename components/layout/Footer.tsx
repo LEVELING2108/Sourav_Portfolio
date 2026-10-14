@@ -8,7 +8,7 @@ export default function Footer() {
           © {new Date().getFullYear()} {profile.name}. Built with Next.js.
         </p>
         <p className="text-slate/60 hover:text-copper-bright transition-colors select-none">
-          // end of log
+          {"// end of log"}
         </p>
       </div>
     </footer>

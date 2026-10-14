@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { profile } from "@/app/data";
 import { Sun, Moon, Search, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+
+const emptySubscribe = () => () => {};
 
 const links = [
   { label: "projects", href: "/projects" },
@@ -18,16 +20,19 @@ const links = [
 export default function Nav() {
   const pathname = usePathname();
   const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
     if (savedTheme === "light") {
-      setTheme("light");
+      const timer = setTimeout(() => setTheme("light"), 0);
       document.documentElement.classList.add("light");
+      return () => clearTimeout(timer);
     } else {
-      setTheme("dark");
       document.documentElement.classList.remove("light");
     }
   }, []);

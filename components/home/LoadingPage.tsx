@@ -11,8 +11,8 @@ export default function LoadingPage() {
   useEffect(() => {
     // Check if user already saw the loader in this session
     if (typeof window !== "undefined" && sessionStorage.getItem("portfolio_loaded")) {
-      setIsLoading(false);
-      return;
+      const skipTimer = setTimeout(() => setIsLoading(false), 0);
+      return () => clearTimeout(skipTimer);
     }
 
     document.body.style.overflow = "hidden";

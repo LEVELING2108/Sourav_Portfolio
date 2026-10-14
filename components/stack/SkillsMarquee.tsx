@@ -391,7 +391,7 @@ export default function SkillsMarquee() {
             <div className="grid gap-4 sm:grid-cols-2 font-mono text-xs">
               <div className="p-3.5 rounded-xl bg-ink border border-trace space-y-1.5">
                 <span className="text-[10px] uppercase text-slate tracking-wider block font-semibold">
-                  // Production Engineering Solve
+                  {"// Production Engineering Solve"}
                 </span>
                 <p className="text-paper text-xs leading-relaxed font-sans">
                   {selectedSkill.highlight}
@@ -400,7 +400,7 @@ export default function SkillsMarquee() {
 
               <div className="p-3.5 rounded-xl bg-ink border border-trace space-y-1.5 flex flex-col justify-between">
                 <span className="text-[10px] uppercase text-slate tracking-wider block font-semibold">
-                  // Shipped In Portfolio Project
+                  {"// Shipped In Portfolio Project"}
                 </span>
                 <div className="flex items-center justify-between pt-1">
                   <span className="text-copper-bright font-semibold">

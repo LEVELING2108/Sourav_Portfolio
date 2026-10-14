@@ -9,7 +9,7 @@ export default function About() {
     <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.1fr_1fr] pt-2">
       <div>
         <p className="font-mono text-xs uppercase tracking-wider text-copper-bright font-semibold">
-          // engineering philosophy
+          {"// engineering philosophy"}
         </p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -44,7 +44,7 @@ export default function About() {
         className="space-y-4"
       >
         <p className="font-mono text-xs uppercase tracking-wider text-signal font-semibold">
-          // education &amp; academic log
+          {"// education & academic log"}
         </p>
         <div className="space-y-4">
           {education.map((e) => (
