@@ -25,7 +25,6 @@ export function LoaderGlitchText({
   const lastScrambleRef = useRef<number>(0);
   const scrambleTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  textRef.current = text;
 
   const intensityConfig = {
     subtle: {
@@ -75,7 +74,11 @@ export function LoaderGlitchText({
   }, [intensityConfig.scrambleChars]);
 
   useEffect(() => {
-    setDisplayText(text);
+    textRef.current = text;
+    const timer = setTimeout(() => {
+      setDisplayText(text);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [text]);
 
   useEffect(() => {

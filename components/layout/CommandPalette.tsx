@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile, projects } from "@/app/data";
 import {
@@ -19,11 +20,12 @@ type CommandItem = {
   category: "Navigation" | "Action" | "Projects" | "Stack";
   title: string;
   subtitle?: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   action: () => void;
 };
 
 export default function CommandPalette() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,17 +50,20 @@ export default function CommandPalette() {
   // Focus input when opened
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
-      setQuery("");
-      setSelectedIndex(0);
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+        setQuery("");
+        setSelectedIndex(0);
+      }, 50);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = useCallback(() => {
     navigator.clipboard.writeText(profile.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
-  };
+  }, []);
 
   const commandItems = useMemo<CommandItem[]>(() => {
     const items: CommandItem[] = [
@@ -69,7 +74,7 @@ export default function CommandPalette() {
         subtitle: "View versioned projects v1.0 - v1.6",
         icon: Terminal,
         action: () => {
-          window.location.hash = "#projects";
+          router.push("/#projects");
           setIsOpen(false);
         },
       },
@@ -80,7 +85,7 @@ export default function CommandPalette() {
         subtitle: "Laya (30k+ ★) LangChain, LlamaIndex & CrewAI PRs",
         icon: GitBranch,
         action: () => {
-          window.location.href = "/oss";
+          router.push("/oss");
           setIsOpen(false);
         },
       },
@@ -91,7 +96,7 @@ export default function CommandPalette() {
         subtitle: "Explore skills & 7-axis radar mesh",
         icon: Code2,
         action: () => {
-          window.location.hash = "#skills";
+          router.push("/#skills");
           setIsOpen(false);
         },
       },
@@ -102,7 +107,7 @@ export default function CommandPalette() {
         subtitle: "Read dual-degree & engineering bio",
         icon: Terminal,
         action: () => {
-          window.location.hash = "#about";
+          router.push("/#about");
           setIsOpen(false);
         },
       },
@@ -113,7 +118,7 @@ export default function CommandPalette() {
         subtitle: "Reach out for AI/ML & Full-Stack roles",
         icon: Terminal,
         action: () => {
-          window.location.hash = "#contact";
+          router.push("/#contact");
           setIsOpen(false);
         },
       },
@@ -160,14 +165,14 @@ export default function CommandPalette() {
         subtitle: `${proj.tag} — ${proj.stack.join(", ")}`,
         icon: Terminal,
         action: () => {
-          window.location.hash = "#projects";
+          router.push("/#projects");
           setIsOpen(false);
         },
       });
     });
 
     return items;
-  }, []);
+  }, [handleCopyEmail, router]);
 
   const filteredItems = useMemo(() => {
     if (!query.trim()) return commandItems;

@@ -104,7 +104,7 @@ export default function HomePortalGrid() {
             </h2>
           </div>
           <span className="font-mono text-xs text-slate hidden sm:inline">
-            // select environment
+            {"// select environment"}
           </span>
         </div>
 

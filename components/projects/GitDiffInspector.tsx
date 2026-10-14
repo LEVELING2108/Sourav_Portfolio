@@ -15,8 +15,6 @@ import {
   ExternalLink,
   Zap,
   ShieldCheck,
-  Cpu,
-  Layers,
   Sparkles,
   Network,
 } from "lucide-react";

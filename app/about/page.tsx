@@ -1,6 +1,6 @@
 import About from "@/components/about/About";
 import Link from "next/link";
-import { ArrowLeft, GraduationCap, Award } from "lucide-react";
+import { ArrowLeft, GraduationCap } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
