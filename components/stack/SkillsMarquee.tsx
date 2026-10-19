@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -48,7 +49,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "Production Core",
     projectProof: "v1.0 ROADSoS & v1.3 Ledgerline",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: NextjsIcon,
     highlight: "App Router, Turbopack, Server Components & PWA deployment",
   },
@@ -58,7 +59,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "Daily Driver",
     projectProof: "v1.1 FraudShield & v1.6 RailTrack Pro",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: PythonIcon,
     highlight: "Async APIs, PyTorch pipelines, Flask & FastAPI microservices",
   },
@@ -68,7 +69,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "Strict Mode",
     projectProof: "All frontend & full-stack systems",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: TypescriptIcon,
     highlight: "Type-safe schemas, end-to-end API contract verification",
   },
@@ -78,7 +79,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "Production UI",
     projectProof: "v1.0 ROADSoS & v1.6 RailTrack Pro",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: ReactIcon,
     highlight: "Concurrent rendering, server actions, client hydration",
   },
@@ -88,7 +89,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "High Throughput",
     projectProof: "v1.1 FraudShield REST Scoring",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: FastapiIcon,
     highlight: "Asynchronous REST endpoints with Pydantic schema validation",
   },
@@ -98,7 +99,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "30+ REST APIs",
     projectProof: "v1.6 RailTrack Pro",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: FlaskIcon,
     highlight: "Modular Blueprints, JWT security & QR field audit pipelines",
   },
@@ -108,7 +109,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "Modern Styling",
     projectProof: "Portfolio & Ledgerline",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: TailwindIcon,
     highlight: "Theme variables, fluid responsive grids, micro-interactions",
   },
@@ -118,7 +119,7 @@ const TRACK_1_SKILLS: MarqueeSkill[] = [
     category: "Full-Stack",
     level: "DSA & Core",
     projectProof: "ECE Hardware & Algorithms",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: CppIcon,
     highlight: "Memory management, algorithmic optimization & systems fundamentals",
   },
@@ -131,7 +132,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     category: "AI/ML & Data",
     level: "<25ms Inference",
     projectProof: "v1.1 FraudShield ML Platform",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: PytorchIcon,
     highlight: "Real-time tensor scoring & streaming anomaly detection",
   },
@@ -141,7 +142,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     category: "AI/ML & Data",
     level: "Transformer Core",
     projectProof: "v1.2 NLP MLOps Pipeline",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: HuggingFaceIcon,
     highlight: "Pre-trained tokenizers, BERT fine-tuning & evaluation benchmarks",
   },
@@ -151,7 +152,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     category: "AI/ML & Data",
     level: "Applied AI",
     projectProof: "GROWeasy AI Importer",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: RagIcon,
     highlight: "Vector chunking, context injection & structured schema generation",
   },
@@ -161,7 +162,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     category: "AI/ML & Data",
     level: "Ensemble Scoring",
     projectProof: "v1.1 FraudShield",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: ScikitLearnIcon,
     highlight: "Random Forests, XGBoost, feature scaling & precision metrics",
   },
@@ -191,7 +192,7 @@ const TRACK_2_SKILLS: MarqueeSkill[] = [
     category: "AI/ML & Data",
     level: "Production MLOps",
     projectProof: "v1.2 NLP Classification Pipeline",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: MlopsIcon,
     highlight: "Data versioning, model registry & automated experiment tracking",
   },
@@ -204,7 +205,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "Zero Race Conditions",
     projectProof: "v1.0 ROADSoS Emergency Surge",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: RedisIcon,
     highlight: "Atomic SETNX locks eliminating duplicate emergency dispatches",
   },
@@ -214,7 +215,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "Multi-stage Builds",
     projectProof: "v1.5 ModelSentry & v1.6 RailTrack Pro",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: DockerIcon,
     highlight: "Containerized deployment with minimal layer footprints",
   },
@@ -224,7 +225,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "Relational Schemas",
     projectProof: "v1.6 RailTrack Pro (4-table models)",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: PostgresIcon,
     highlight: "Foreign key constraints, indexing, and transactional integrity",
   },
@@ -234,7 +235,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "~75%+ Test Coverage",
     projectProof: "v1.6 RailTrack Pro & v1.2 NLP",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: GithubActionsIcon,
     highlight: "Automated linting, unit testing, and Docker push workflows",
   },
@@ -244,7 +245,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "Security Gateway",
     projectProof: "v1.5 ModelSentry Gateway",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: JwtIcon,
     highlight: "Role-based authorization and IP/token bucket throttling",
   },
@@ -254,7 +255,7 @@ const TRACK_3_SKILLS: MarqueeSkill[] = [
     category: "Systems & Cloud",
     level: "Cloud Deployments",
     projectProof: "Cloud storage & server hosting",
-    projectUrl: "#projects",
+    projectUrl: "/projects",
     icon: AwsIcon,
     highlight: "Asset storage, EC2 inference hosting, and security groups",
   },
@@ -406,13 +407,13 @@ export default function SkillsMarquee() {
                   <span className="text-copper-bright font-semibold">
                     {selectedSkill.projectProof}
                   </span>
-                  <a
+                  <Link
                     href={selectedSkill.projectUrl}
                     className="inline-flex items-center gap-1 text-[11px] text-signal hover:underline font-semibold"
                   >
                     <span>Inspect Project</span>
                     <ArrowUpRight size={12} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
