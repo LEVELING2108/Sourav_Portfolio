@@ -82,7 +82,7 @@ export default function CommandPalette() {
         id: "nav-oss",
         category: "Navigation",
         title: "Go to OSS Engineering ($ git log upstream)",
-        subtitle: "Laya (30k+ ★) LangChain, LlamaIndex & CrewAI PRs",
+        subtitle: "Laya (33k+ ★) LayaToolSelector, LangChain, LlamaIndex, CrewAI & .NET PRs",
         icon: GitBranch,
         action: () => {
           router.push("/oss");

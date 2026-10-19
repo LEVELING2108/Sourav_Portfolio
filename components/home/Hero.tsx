@@ -15,7 +15,7 @@ import NeuralBackground from "./NeuralBackground";
 import { Mascot } from "@/components/shared/Mascot";
 
 const FOCUS_AREAS = [
-  "upstream System-1 agent routing (Laya · 30k+ ★)",
+  "upstream System-1 agent routing (Laya · 33k+ ★)",
   "real-time ML pipelines (<25ms inference)",
   "high-concurrency distributed systems",
   "enterprise QR & track telemetry engines",

@@ -55,21 +55,26 @@ const LAYA_METRICS = [
   },
   {
     label: "Upstream Scale",
-    value: "30,000+ ★",
-    subtext: "Shipped official LangChain, LangGraph, LlamaIndex & CrewAI",
+    value: "33,000+ ★",
+    subtext: "Official Tool Calling, LangChain, LangGraph, LlamaIndex & CrewAI",
     icon: Sparkles,
     highlight: "text-copper-bright",
   },
   {
     label: "Code Contribution",
-    value: "+1,819 / -7 lines",
-    subtext: "5 merged pull requests into v0.3.8 – v0.3.23 releases",
+    value: "+3,114 / -33 lines",
+    subtext: "7 merged pull requests into v0.3.8 – v0.4.11 releases",
     icon: GitMerge,
     highlight: "text-cyan-400",
   },
 ];
 
 const ARCHITECTURE_HIGHLIGHTS = [
+  {
+    title: "Sub-35ms Tool & Function Routing (LayaToolSelector)",
+    desc: "Evaluates candidate Python functions, LangChain/CrewAI/LlamaIndex tools, and JSON Schemas in a single ~32.8ms GPU forward pass (ToolRouteDecision) with calibrated confidence gating and zero token generation cost.",
+    tag: "Tool Calling",
+  },
   {
     title: "Sub-35ms Conditional Edge Routing (LayaRouter)",
     desc: "Replaces token-by-token LLM branching in LangGraph state graphs with a single ~33ms classification pass. Implements statistical Shannon-entropy confidence gating with automated fallback routing when decisions are ambiguous.",
@@ -86,19 +91,19 @@ const ARCHITECTURE_HIGHLIGHTS = [
     tag: "CrewAI",
   },
   {
+    title: ".NET Tokenizer Cache Synchronization (HfTokenizer)",
+    desc: "Engineered double-checked lock synchronization (s_cacheLock) and GUID-scoped atomic .part writes in EnsureStrippedTokenizer, eliminating parallel race conditions in the C#/.NET runtime.",
+    tag: "C# / .NET",
+  },
+  {
     title: "Zero-Latency Prompt Guardrails (LayaGuardrail)",
     desc: "Inline screening pipeline detecting prompt injections, toxic vectors, and jailbreak payloads in real time prior to triggering compute-heavy frontier foundation models.",
     tag: "Security",
   },
   {
-    title: "Multi-Label Ticket Triage Node (LayaTriage)",
-    desc: "Extracts intent, urgency level, user frustration score, and churn risk simultaneously within a single forward pass, replacing multi-prompt LLM cascades.",
-    tag: "Inference",
-  },
-  {
-    title: "Reverse Proxy Subpath Routing (LAYA_ROOT_PATH)",
-    desc: "Engineered ASGI reverse proxy subpath normalization in laya.serve, Docker Compose, and NixOS packages to standardize API routing behind Nginx, Traefik, and cloud gateways.",
-    tag: "Systems",
+    title: "Early Stopping & Disjoint Calibration Split (TrainConfig)",
+    desc: "3-way disjoint validation/calibration partition with patience-based early stopping and budget-independent learning rate schedules (constant / warmup_constant) to prevent calibration temperature leakage.",
+    tag: "Training / ML",
   },
   {
     title: "Cross-Platform Path Normalization (test_env_docs)",
@@ -108,6 +113,113 @@ const ARCHITECTURE_HIGHLIGHTS = [
 ];
 
 const PATCHES: PatchItem[] = [
+  {
+    id: "patch-pr-977",
+    repo: "NandhaKishorM/laya",
+    prNumber: 977,
+    releaseVersion: "v0.4.11",
+    date: "Oct 2026",
+    title: "feat(integrations): add LayaToolSelector for tool and function routing",
+    diffStats: { additions: 1246, deletions: 0, filesChanged: 7 },
+    targetFile: "laya/integrations/tools.py",
+    diffHeader: "diff --git a/laya/integrations/tools.py b/laya/integrations/tools.py",
+    hunkHeader: "@@ -0,0 +1,533 @@ class LayaToolSelector:",
+    solveSummary:
+      "Architected LayaToolSelector & ToolRouteDecision for non-autoregressive tool and function calling across Python callables, LangChain/CrewAI/LlamaIndex tools, and JSON Schemas (~32.8ms on T4 GPU) with local and remote laya-serve support.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/977",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["Python", "Tool Calling", "JSON Schema", "PyTorch", "ModernBERT"],
+    status: "merged",
+    diffLines: [
+      { type: "add", text: "+@dataclass", newLine: 36 },
+      { type: "add", text: "+class ToolRouteDecision:", newLine: 37 },
+      { type: "add", text: "+    \"\"\"Result of a Laya tool routing decision.\"\"\"", newLine: 38 },
+      { type: "add", text: "+    tool: Any", newLine: 39 },
+      { type: "add", text: "+    tool_name: str", newLine: 40 },
+      { type: "add", text: "+    tool_index: int", newLine: 41 },
+      { type: "add", text: "+    confidence: float", newLine: 42 },
+      { type: "add", text: "+    probabilities: Dict[str, float]", newLine: 43 },
+      { type: "add", text: "+    is_direct_answer: bool", newLine: 45 },
+      { type: "add", text: "+", newLine: 230 },
+      { type: "add", text: "+class LayaToolSelector:", newLine: 231 },
+      { type: "add", text: "+    \"\"\"Non-autoregressive tool and function router for AI agent workflows (32.8ms on T4 GPU).\"\"\"", newLine: 232 },
+      { type: "add", text: "+    def select(self, state: Any, tools: Optional[Sequence[Any]] = None) -> ToolRouteDecision:", newLine: 306 },
+      { type: "add", text: "+        criteria, lookup = _format_tools_criteria(tools or self.tools, self.allow_direct_answer)", newLine: 315 },
+      { type: "add", text: "+        questions = {\"tool_select\": {\"type\": \"choice\", \"instructions\": self.instructions, \"criteria\": criteria}}", newLine: 325 },
+      { type: "add", text: "+        result = _execute_decision(state, questions, agent=self.agent, base_url=self.base_url)", newLine: 328 },
+      { type: "add", text: "+        conf = _gated_confidence(result[\"answers\"][\"tool_select\"])", newLine: 362 },
+      { type: "add", text: "+        if self.confidence_threshold is not None and conf < self.confidence_threshold:", newLine: 365 },
+      { type: "add", text: "+            raise LayaLowConfidenceError(f\"Tool selection confidence {conf:.3f} below threshold\")", newLine: 368 },
+      { type: "add", text: "+        idx, selected_tool, name = lookup[result[\"answers\"][\"tool_select\"][\"answer\"]]", newLine: 372 },
+      { type: "add", text: "+        return ToolRouteDecision(tool=selected_tool, tool_name=name, tool_index=idx, confidence=conf, ...)", newLine: 375 },
+    ],
+  },
+  {
+    id: "patch-pr-1020",
+    repo: "NandhaKishorM/laya",
+    prNumber: 1020,
+    releaseVersion: "v0.4.x",
+    date: "Oct 2026",
+    title: "fix(dotnet): synchronize EnsureStrippedTokenizer to prevent race condition",
+    diffStats: { additions: 49, deletions: 26, filesChanged: 1 },
+    targetFile: "laya-dotnet/src/Laya/Tokenization/HfTokenizer.cs",
+    diffHeader: "diff --git a/laya-dotnet/src/Laya/Tokenization/HfTokenizer.cs b/laya-dotnet/src/Laya/Tokenization/HfTokenizer.cs",
+    hunkHeader: "@@ -106,6 +106,39 @@ private static string EnsureStrippedTokenizer(string sourcePath)",
+    solveSummary:
+      "Eliminated parallel test race conditions in the .NET tokenizer cache by introducing double-checked locking (s_cacheLock), non-empty file verification, and GUID-scoped atomic .part temporary writes.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/1020",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["C#", ".NET", "Concurrency", "Tokenizer", "Thread Safety"],
+    status: "merged",
+    diffLines: [
+      { type: "add", text: "+    private static readonly object s_cacheLock = new();", newLine: 109 },
+      { type: "ctx", text: "     private static string EnsureStrippedTokenizer(string sourcePath)", oldLine: 121, newLine: 123 },
+      { type: "ctx", text: "     {", oldLine: 122, newLine: 124 },
+      { type: "ctx", text: "         if (IsCacheValid(primaryPath, fingerprint)) return primaryPath;", oldLine: 126, newLine: 128 },
+      { type: "del", text: "-        if (TryWriteStripped(sourcePath, primaryPath, fingerprint))", oldLine: 129 },
+      { type: "del", text: "-            return primaryPath;", oldLine: 130 },
+      { type: "add", text: "+        lock (s_cacheLock)", newLine: 131 },
+      { type: "add", text: "+        {", newLine: 132 },
+      { type: "add", text: "+            if (IsCacheValid(primaryPath, fingerprint)) return primaryPath;", newLine: 133 },
+      { type: "add", text: "+            if (TryWriteStripped(sourcePath, primaryPath, fingerprint)) return primaryPath;", newLine: 136 },
+      { type: "add", text: "+        }", newLine: 156 },
+      { type: "ctx", text: "     }", oldLine: 150, newLine: 157 },
+      { type: "del", text: "-        var partPath = destPath + \".part\";", oldLine: 190 },
+      { type: "add", text: "+        var partPath = $\"{destPath}.{Guid.NewGuid():N}.part\";", newLine: 202 },
+      { type: "add", text: "+        File.Move(partPath, destPath, overwrite: true);", newLine: 213 },
+    ],
+  },
+  {
+    id: "patch-pr-982",
+    repo: "NandhaKishorM/laya",
+    prNumber: 982,
+    releaseVersion: "In Review",
+    date: "Oct 2026",
+    title: "feat(train): add early stopping, disjoint validation split, and budget-independent schedules (#963)",
+    diffStats: { additions: 377, deletions: 23, filesChanged: 3 },
+    targetFile: "laya/train.py",
+    diffHeader: "diff --git a/laya/train.py b/laya/train.py",
+    hunkHeader: "@@ -122,6 +123,13 @@ class TrainConfig:",
+    solveSummary:
+      "Implemented 3-way disjoint train/validation/calibration partitioning (split_validation_calibration), patience-based early stopping, and budget-independent constant/warmup_constant LR schedules.",
+    prUrl: "https://github.com/NandhaKishorM/laya/pull/982",
+    repoUrl: "https://github.com/NandhaKishorM/laya",
+    stack: ["Python", "PyTorch", "Training", "Calibration", "LR Schedules"],
+    status: "in-review",
+    diffLines: [
+      { type: "ctx", text: " LOSSES = (\"soft-ce\", \"rlcd\")", oldLine: 63, newLine: 63 },
+      { type: "add", text: "+LR_SCHEDULES = (\"cosine\", \"constant\", \"warmup_constant\")", newLine: 64 },
+      { type: "ctx", text: " class TrainConfig:", oldLine: 122, newLine: 123 },
+      { type: "ctx", text: "     target_error: float = 0.10", oldLine: 124, newLine: 125 },
+      { type: "add", text: "+    early_stopping: bool = False", newLine: 126 },
+      { type: "add", text: "+    patience: Optional[int] = None", newLine: 127 },
+      { type: "add", text: "+    val_frac: Optional[float] = None", newLine: 128 },
+      { type: "add", text: "+    val_max: int = 400", newLine: 129 },
+      { type: "add", text: "+    lr_schedule: Optional[str] = None", newLine: 130 },
+      { type: "add", text: "+    warmup_steps: int = 0", newLine: 131 },
+      { type: "add", text: "+    sigma_anneal_epochs: Optional[int] = None", newLine: 132 },
+    ],
+  },
   {
     id: "patch-pr-737",
     repo: "NandhaKishorM/laya",
@@ -333,7 +445,7 @@ const PATCHES: PatchItem[] = [
 
 export default function GitDiffInspector() {
   const [activeTab, setActiveTab] = useState<"diff" | "architecture">("diff");
-  const [expandedId, setExpandedId] = useState<string | null>("patch-pr-737");
+  const [expandedId, setExpandedId] = useState<string | null>("patch-pr-977");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
@@ -366,14 +478,14 @@ export default function GitDiffInspector() {
               </span>
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-slate max-w-3xl">
-              Official framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI) shipped to{" "}
+              Official tool selection (`LayaToolSelector`), framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI), and .NET concurrency patches shipped to{" "}
               <a
                 href="https://github.com/NandhaKishorM/laya"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-paper hover:text-copper-bright underline underline-offset-4 decoration-copper/40"
               >
-                NandhaKishorM/laya (30,000+ GitHub Stars)
+                NandhaKishorM/laya (33,000+ GitHub Stars)
               </a>
               . Deterministic non-autoregressive decision classification evaluated in ~33ms.
             </p>
@@ -462,8 +574,8 @@ export default function GitDiffInspector() {
                     The Solution (Laya Integrations)
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
-                    Contributed official integrations across the entire modern agent stack (LangChain, LangGraph, LlamaIndex, and CrewAI) to{" "}
-                    <strong className="text-emerald-300">Laya (30,000+ ★)</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions in a{" "}
+                    Contributed official tool routing (`LayaToolSelector`) and framework integrations across the modern agent stack (LangChain, LangGraph, LlamaIndex, and CrewAI) to{" "}
+                    <strong className="text-emerald-300">Laya (33,000+ ★)</strong>, an open-source non-autoregressive System-1 decision engine. Evaluates typed decisions in a{" "}
                     <strong className="text-emerald-300">single ~33ms forward pass</strong> with mathematical zero hallucination.
                   </p>
                 </div>
@@ -501,13 +613,35 @@ export default function GitDiffInspector() {
               {/* Action Links */}
               <div className="flex flex-wrap items-center gap-2.5 pt-2 border-t border-trace/70 font-mono text-xs">
                 <a
-                  href="https://github.com/NandhaKishorM/laya/pull/737"
+                  href="https://github.com/NandhaKishorM/laya/pull/977"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition-all font-semibold"
                 >
                   <GitPullRequest size={13} />
-                  <span>Merged PR #737 (Windows CI · v0.3.23)</span>
+                  <span>Merged PR #977 (LayaToolSelector · v0.4.11)</span>
+                  <ArrowUpRight size={12} />
+                </a>
+
+                <a
+                  href="https://github.com/NandhaKishorM/laya/pull/1020"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition-all font-semibold"
+                >
+                  <GitPullRequest size={13} />
+                  <span>Merged PR #1020 (.NET Concurrency)</span>
+                  <ArrowUpRight size={12} />
+                </a>
+
+                <a
+                  href="https://github.com/NandhaKishorM/laya/pull/737"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
+                >
+                  <GitPullRequest size={13} />
+                  <span>Merged PR #737 (Windows CI)</span>
                   <ArrowUpRight size={12} />
                 </a>
 
@@ -545,13 +679,13 @@ export default function GitDiffInspector() {
                 </a>
 
                 <a
-                  href="https://github.com/NandhaKishorM/laya/pull/670"
+                  href="https://github.com/NandhaKishorM/laya/pull/982"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-all"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition-all"
                 >
                   <GitPullRequest size={13} />
-                  <span>PR #670 (Root Path RFC)</span>
+                  <span>PR #982 (Early Stopping · In Review)</span>
                   <ArrowUpRight size={12} />
                 </a>
 
@@ -561,7 +695,7 @@ export default function GitDiffInspector() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition-all ml-auto"
                 >
-                  <span>Laya Repository (30,000+ ★)</span>
+                  <span>Laya Repository (33,000+ ★)</span>
                   <ExternalLink size={12} />
                 </a>
               </div>
@@ -584,7 +718,7 @@ export default function GitDiffInspector() {
           </div>
           <div className="flex items-center gap-2 text-copper-bright text-[10px]">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span>5 upstream pull requests merged · release v0.3.23</span>
+            <span>7 upstream pull requests merged · release v0.4.11</span>
           </div>
         </div>
 
@@ -605,8 +739,24 @@ export default function GitDiffInspector() {
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                     {/* Git Graph Node Indicator */}
                     <span className="relative flex h-2.5 w-2.5 shrink-0">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                      <span
+                        className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-60 ${
+                          patch.status === "in-review"
+                            ? "bg-amber-400"
+                            : patch.status === "closed"
+                            ? "bg-slate"
+                            : "bg-emerald-400"
+                        }`}
+                      />
+                      <span
+                        className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+                          patch.status === "in-review"
+                            ? "bg-amber-400"
+                            : patch.status === "closed"
+                            ? "bg-slate"
+                            : "bg-emerald-400"
+                        }`}
+                      />
                     </span>
 
                     {/* Repository Name */}
@@ -775,7 +925,7 @@ export default function GitDiffInspector() {
                           onClick={(e) => e.stopPropagation()}
                           className="text-slate hover:text-copper-bright inline-flex items-center gap-1 text-[11px] transition-colors"
                         >
-                          <span>NandhaKishorM/laya (30k+ ★)</span>
+                          <span>NandhaKishorM/laya (33k+ ★)</span>
                           <ExternalLink size={10} />
                         </a>
                       </div>

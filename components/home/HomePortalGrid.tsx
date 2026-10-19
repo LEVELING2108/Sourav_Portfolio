@@ -35,13 +35,13 @@ const MODULES = [
   {
     id: "oss",
     name: "Open Source",
-    badge: "30k+ ★",
+    badge: "33k+ ★",
     accent: "signal" as const,
     href: "/oss",
     cta: "Inspect Upstream PRs",
     icon: GitBranch,
     summary: "Upstream PRs and core tooling for leading AI frameworks.",
-    chips: ["Laya (5 Merged PRs)", "LangChain", "CrewAI CI"],
+    chips: ["Laya (7 Merged PRs)", "LayaToolSelector", "LangChain & .NET"],
   },
   {
     id: "stack",

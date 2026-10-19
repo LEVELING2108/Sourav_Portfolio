@@ -65,7 +65,7 @@ export const education: EducationItem[] = [
 
 
 export const stats = [
-  { label: "Upstream OSS", value: "30,000+ ★" },
+  { label: "Upstream OSS", value: "33,000+ ★" },
   { label: "Systems Built", value: "8+ Shipped" },
   { label: "Core Stack", value: "20+ Techs" },
   { label: "Dual-Track", value: "IITM × BVDU" },
@@ -84,37 +84,37 @@ export const skills = {
 
 export const projects: Project[] = [
   {
-    version: "v0.3.23",
+    version: "v0.4.11",
     title: "Laya System-1 Integrations",
-    tag: "upstream AI · 30k+ ★ · sub-35ms routing",
+    tag: "upstream AI · 33k+ ★ · sub-35ms routing",
     date: "Production Shipped",
     summary:
-      "Authored official third-party framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI) for Laya, enabling sub-35ms non-autoregressive agent decision routing and zero-latency prompt guardrails.",
+      "Authored official tool & function calling (LayaToolSelector), framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI), and .NET concurrency fixes for Laya, enabling sub-35ms non-autoregressive agent decision routing.",
     stack: ["Python", "PyTorch", "LangGraph", "LlamaIndex", "CrewAI", "ModernBERT"],
     highlights: [
-      "30,000+ Upstream Stars",
-      "5 Merged PRs (#229, #257, #533, #535, #737)",
+      "33,000+ Upstream Stars",
+      "7 Merged PRs (#229, #257, #533, #535, #737, #977, #1020)",
       "~33ms Routing (98% Faster)",
     ],
     features: [
+      "Official LayaToolSelector & ToolRouteDecision for ~32.8ms GPU tool and function calling across Python, LangChain, CrewAI, LlamaIndex & JSON Schemas",
       "Sub-35ms conditional edge routing for LangGraph with Shannon-entropy confidence gating",
-      "Official LlamaIndex LayaSingleSelector and LayaMultiSelector for zero-token multi-index RAG routing",
-      "Official CrewAI LayaCrewRouter and LayaTaskGuard for instant hierarchical swarm task delegation",
-      "Cross-platform Windows path normalization in test_env_docs unblocking Windows CI in release v0.3.23",
+      "Official LlamaIndex LayaSingleSelector and CrewAI LayaCrewRouter for zero-token RAG & swarm delegation",
+      "Thread-safe .NET tokenizer cache synchronization (#1020) and cross-platform Windows CI path normalization (#737)",
     ],
     metrics: [
       { label: "Latency", value: "~33ms" },
-      { label: "Ecosystem", value: "30,000+ ★" },
+      { label: "Ecosystem", value: "33,000+ ★" },
     ],
     architecture: {
       flow: [
-        "Agent State / Input",
+        "Agent State / Tool Schemas",
         "ModernBERT 1-Pass Inference",
-        "Shannon-Entropy Confidence Gating",
-        "Sub-35ms Route Dispatch"
+        "Calibrated Confidence Gating",
+        "Sub-35ms Route / Tool Dispatch"
       ],
       solve:
-        "Eliminated token-by-token autoregressive LLM branching overhead (reducing decision latency from ~1,500ms to ~33ms) across 4 major agent frameworks."
+        "Eliminated token-by-token autoregressive LLM branching and tool-calling overhead (reducing decision latency from ~1,500ms to ~33ms) across major agent frameworks."
     },
     links: [
       { label: "Inspect Diffs", href: "/oss" },
