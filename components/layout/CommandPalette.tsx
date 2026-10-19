@@ -70,18 +70,18 @@ export default function CommandPalette() {
       {
         id: "nav-projects",
         category: "Navigation",
-        title: "Go to Build Log ($ git log)",
-        subtitle: "View versioned projects v1.0 - v1.6",
+        title: "Go to Projects",
+        subtitle: "View shipped systems v0.4.11 – v1.6",
         icon: Terminal,
         action: () => {
-          router.push("/#projects");
+          router.push("/projects");
           setIsOpen(false);
         },
       },
       {
         id: "nav-oss",
         category: "Navigation",
-        title: "Go to OSS Engineering ($ git log upstream)",
+        title: "Go to Open Source",
         subtitle: "Laya (33k+ ★) LayaToolSelector, LangChain, LlamaIndex, CrewAI & .NET PRs",
         icon: GitBranch,
         action: () => {
@@ -92,22 +92,22 @@ export default function CommandPalette() {
       {
         id: "nav-skills",
         category: "Navigation",
-        title: "Go to Stack & Architecture",
-        subtitle: "Explore skills & 7-axis radar mesh",
+        title: "Go to Tech Stack",
+        subtitle: "Explore 20+ production tools & architecture solves",
         icon: Code2,
         action: () => {
-          router.push("/#skills");
+          router.push("/stack");
           setIsOpen(false);
         },
       },
       {
         id: "nav-about",
         category: "Navigation",
-        title: "Go to About Me",
-        subtitle: "Read dual-degree & engineering bio",
+        title: "Go to Education & About",
+        subtitle: "Read dual-degree (BVDU Pune × IIT Madras) & engineering bio",
         icon: Terminal,
         action: () => {
-          router.push("/#about");
+          router.push("/about");
           setIsOpen(false);
         },
       },
@@ -118,7 +118,7 @@ export default function CommandPalette() {
         subtitle: "Reach out for AI/ML & Full-Stack roles",
         icon: Terminal,
         action: () => {
-          router.push("/#contact");
+          router.push("/contact");
           setIsOpen(false);
         },
       },
@@ -165,7 +165,7 @@ export default function CommandPalette() {
         subtitle: `${proj.tag} — ${proj.stack.join(", ")}`,
         icon: Terminal,
         action: () => {
-          router.push("/#projects");
+          router.push(proj.version.startsWith("v0.") ? "/oss" : "/projects");
           setIsOpen(false);
         },
       });
