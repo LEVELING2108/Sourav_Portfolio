@@ -22,16 +22,13 @@ export default function StackPage() {
               <span>cd ~/portfolio</span>
             </Link>
 
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-6">
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
               <div>
-                <p className="font-mono text-xs sm:text-sm text-signal">
-                  $ cat /proc/cpuinfo &amp;&amp; uname -a
-                </p>
-                <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
-                  Stack &amp; Architecture
+                <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
+                  Tech Stack
                 </h1>
-                <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
-                  The runtime layers, distributed frameworks, and AI toolchains used to build scalable production systems. Click any badge to inspect production solves and project proofs.
+                <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
+                  Deep learning engines, full-stack runtimes &amp; cloud infrastructure. Click any badge to inspect project proofs.
                 </p>
               </div>
 
@@ -39,7 +36,7 @@ export default function StackPage() {
                 <span className="p-1 rounded bg-ink border border-trace text-signal">
                   <Cpu size={13} />
                 </span>
-                <span>20 Production Technologies</span>
+                <span>20+ Core Technologies</span>
               </div>
             </div>
           </div>

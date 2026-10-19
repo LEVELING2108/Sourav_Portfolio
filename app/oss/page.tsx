@@ -23,16 +23,13 @@ export default function OssPage() {
             <span>cd ~/portfolio</span>
           </Link>
 
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-6">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
             <div>
-              <p className="font-mono text-xs sm:text-sm text-signal">
-                $ git log --upstream --graph --decorate
-              </p>
-              <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
-                Open Source Engineering
+              <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
+                Open Source
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
-                Core contributions to upstream AI frameworks, agentic decision engines, and high-performance inference pipelines. Official tool selection (`LayaToolSelector`), LangChain, LangGraph, LlamaIndex, CrewAI integrations, and .NET runtime patches in NandhaKishorM/laya.
+              <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
+                Core contributions to <span className="text-paper font-medium">NandhaKishorM/laya</span> (33,000+ ★) — sub-35ms System-1 tool calling, agent routing &amp; runtime patches.
               </p>
             </div>
 
