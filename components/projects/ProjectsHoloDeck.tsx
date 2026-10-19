@@ -1,18 +1,11 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects, Project } from "@/app/data";
-import {
-  ArrowUpRight,
-  Workflow,
-  X,
-  Zap,
-  Sparkles,
-  Lock,
-  Cpu,
-} from "lucide-react";
+import { ArrowUpRight, Zap, Sparkles, Cpu, Terminal } from "lucide-react";
 import {
   NextjsIcon,
   PythonIcon,
@@ -30,7 +23,6 @@ import {
   MlopsIcon,
 } from "@/components/shared/BrandIcons";
 
-// Helper to get official brand icon for stack tags
 function getStackIcon(tech: string) {
   const normalized = tech.toLowerCase();
   if (normalized.includes("react") || normalized.includes("pwa")) return ReactIcon;
@@ -50,457 +42,316 @@ function getStackIcon(tech: string) {
   return Cpu;
 }
 
-// 3D Tilt HoloCard with Multi-Plane Depth
-function HoloCard({
-  project,
-  onInspect,
-}: {
-  project: Project;
-  onInspect: (p: Project) => void;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Mouse coordinate motion values (-0.5 to 0.5)
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Spring physics for buttery-smooth responsiveness
-  const mouseXSpring = useSpring(x, { stiffness: 260, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 260, damping: 20 });
-
-  // 3D Rotation transforms
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
-
-  // Dynamic glass glare sheen tracking
-  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
-  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
-  const isFlagship = project.version.startsWith("v0.") || project.version === "v1.0" || project.version === "v1.1" || project.version === "v1.6";
-
+function StatusBadge({ project }: { project: Project }) {
+  if (project.version.startsWith("v0.")) {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-md border border-copper/40 bg-copper/10 px-2 py-0.5 font-mono text-[10px] text-copper-bright font-semibold shrink-0">
+        <span className="h-1.5 w-1.5 rounded-full bg-copper-bright animate-pulse" />
+        <span>33k+ ★ OSS</span>
+      </span>
+    );
+  }
+  if (project.version === "v1.0") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-md border border-signal/40 bg-signal/10 px-2 py-0.5 font-mono text-[10px] text-signal font-semibold shrink-0">
+        <span className="h-1.5 w-1.5 rounded-full bg-signal animate-pulse" />
+        <span>Live PWA</span>
+      </span>
+    );
+  }
+  if (project.version === "v1.1") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-md border border-copper/40 bg-copper/10 px-2 py-0.5 font-mono text-[10px] text-copper-bright font-semibold shrink-0">
+        <Zap size={10} className="text-signal" />
+        <span>&lt;25ms ML</span>
+      </span>
+    );
+  }
+  if (project.version === "v1.6") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-md border border-signal/40 bg-signal/10 px-2 py-0.5 font-mono text-[10px] text-signal font-semibold shrink-0">
+        <Sparkles size={10} />
+        <span>QR Audit</span>
+      </span>
+    );
+  }
   return (
-    <div
-      style={{ perspective: "1200px" }}
-      className="w-full flex justify-center py-2 select-none"
-    >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
-        onTouchEnd={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className={`group relative w-full rounded-3xl border bg-gradient-to-b from-ink-raised via-ink to-ink p-5 sm:p-7 transition-shadow duration-300 ${
-          isFlagship
-            ? "border-copper/60 shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:border-copper-bright hover:shadow-[0_20px_50px_rgba(184,118,62,0.25)]"
-            : "border-trace shadow-lg hover:border-copper/70 hover:shadow-[0_16px_40px_rgba(0,0,0,0.6)]"
-        }`}
-      >
-        {/* Top 3D Specular Highlight Line */}
-        <div className="absolute inset-x-4 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
-
-        {/* Dynamic Holographic Glare Sheen */}
-        <motion.div
-          className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-30"
-          style={{
-            background: isHovered
-              ? `radial-gradient(400px circle at ${glareX} ${glareY}, rgba(255, 255, 255, 0.08), transparent 70%)`
-              : "none",
-          }}
-        />
-
-        {/* ================================================================= */}
-        {/* PLANE 1 (Depth: 25px): Header - Version & Live Status Pill */}
-        {/* ================================================================= */}
-        <div
-          style={{ transform: "translateZ(25px)", transformStyle: "preserve-3d" }}
-          className="flex items-center justify-between border-b border-trace/60 pb-3.5"
-        >
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-[11px] sm:text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2 sm:px-2.5 py-0.5 rounded-md shadow-sm">
-              {project.version}
-            </span>
-            <span className="font-mono text-[11px] sm:text-xs text-slate truncate max-w-[110px] xs:max-w-[140px] sm:max-w-none">
-              {project.tag}
-            </span>
-          </div>
-
-          {/* Live Status Pill with custom animations */}
-          {project.version.startsWith("v0.") ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-copper/50 bg-copper/15 px-2.5 py-0.5 font-mono text-[11px] text-copper-bright font-bold">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-copper-bright opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-copper-bright" />
-              </span>
-              <span>33k+ ★ OSS</span>
-            </span>
-          ) : project.version === "v1.0" ? (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-signal/40 bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] text-signal font-semibold">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-signal opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-signal" />
-              </span>
-              <span>LIVE PWA</span>
-            </span>
-          ) : project.version === "v1.1" ? (
-            <span className="inline-flex items-center gap-1 rounded-full border border-copper-bright/40 bg-copper/15 px-2.5 py-0.5 font-mono text-[11px] text-copper-bright font-bold">
-              <Zap size={11} className="text-signal" />
-              <span>&lt;25ms ML</span>
-            </span>
-          ) : project.version === "v1.6" ? (
-            <span className="inline-flex items-center gap-1 rounded-full border border-signal/40 bg-signal/10 px-2.5 py-0.5 font-mono text-[11px] text-signal font-bold">
-              <Sparkles size={11} />
-              <span>Rail QR Logistics</span>
-            </span>
-          ) : (
-            <span className="font-mono text-[10px] rounded border border-trace bg-ink px-2 py-0.5 text-slate font-medium">
-              {project.metrics?.[0]?.value || "Production"}
-            </span>
-          )}
-        </div>
-
-        {/* ================================================================= */}
-        {/* PLANE 2 (Depth: 40px): Title & Minimal 1-line summary */}
-        {/* ================================================================= */}
-        <div
-          style={{ transform: "translateZ(40px)", transformStyle: "preserve-3d" }}
-          className="mt-3.5"
-        >
-          <h3 className="font-mono text-lg sm:text-xl lg:text-2xl font-bold text-paper group-hover:text-copper-bright transition-colors">
-            {project.title}
-          </h3>
-          <p className="mt-1.5 text-xs text-slate line-clamp-2 leading-relaxed font-sans">
-            {project.summary}
-          </p>
-        </div>
-
-        {/* ================================================================= */}
-        {/* PLANE 3 (Depth: 55px): High-Definition Mockup with Bezel */}
-        {/* ================================================================= */}
-        <div
-          style={{ transform: "translateZ(55px)", transformStyle: "preserve-3d" }}
-          className="mt-4 relative h-44 sm:h-52 w-full rounded-2xl overflow-hidden border border-trace/90 bg-ink shadow-inner"
-        >
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-ink-raised via-[#0b0c10] to-ink p-4 flex flex-col justify-between font-mono text-[11px] select-text">
-              <div className="flex items-center justify-between text-slate/70 border-b border-trace/60 pb-2">
-                <span className="text-copper-bright font-semibold">laya · v0.4.11</span>
-                <span className="text-emerald-400 font-semibold">7 PRs merged</span>
-              </div>
-              <div className="space-y-1 text-slate/90 text-[10px] sm:text-[11px] font-mono">
-                <div className="text-signal">$ selector.select(query) ➔ ~32.8ms</div>
-                <div className="text-emerald-300">+ LayaToolSelector (Tool Calling #977)</div>
-                <div className="text-copper-bright">+ LangChain, LlamaIndex &amp; CrewAI</div>
-                <div className="text-cyan-300">+ .NET Lock (#1020) &amp; Win CI (#737)</div>
-              </div>
-              <div className="text-[10px] text-slate/60">Shannon-Entropy Gated Engine</div>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-85 pointer-events-none" />
-
-          {/* Floating Telemetry Pill on Screenshot */}
-          {project.architecture?.solve && (
-            <div className="absolute bottom-2.5 inset-x-2.5 p-2 rounded-xl bg-ink-raised/95 border border-trace backdrop-blur-md flex items-center justify-between font-mono text-[11px] text-slate shadow-md">
-              <div className="flex items-center gap-1.5 truncate">
-                <span className="p-0.5 rounded bg-copper/20 text-copper-bright">
-                  <Lock size={11} />
-                </span>
-                <span className="text-paper truncate font-medium">
-                  {project.highlights?.[0] || "Architecture"}
-                </span>
-              </div>
-              <span className="text-copper-bright font-semibold shrink-0 ml-2">
-                {project.metrics?.[0]?.value || "Verified"}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* ================================================================= */}
-        {/* PLANE 4 (Depth: 65px): Tech Stack Brand Icons & Direct Actions */}
-        {/* ================================================================= */}
-        <div
-          style={{ transform: "translateZ(65px)", transformStyle: "preserve-3d" }}
-          className="mt-5 pt-4 border-t border-trace/60 flex flex-wrap items-center justify-between gap-3"
-        >
-          {/* Brand Vector SVGs */}
-          <div className="flex items-center gap-1.5">
-            {project.stack.slice(0, 4).map((tech) => {
-              const IconComp = getStackIcon(tech);
-              return (
-                <span
-                  key={tech}
-                  title={tech}
-                  className="p-1.5 rounded-lg border border-trace bg-ink hover:border-copper/60 transition-colors flex items-center justify-center shadow-inner"
-                >
-                  <IconComp size={15} />
-                </span>
-              );
-            })}
-          </div>
-
-          {/* Quick Action CTAs */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => onInspect(project)}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-ink border border-trace text-slate hover:text-paper hover:border-copper/60 font-mono text-xs transition-all cursor-pointer"
-            >
-              <Workflow size={12} className="text-copper-bright" />
-              <span>Flow</span>
-            </button>
-
-            {project.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-xl font-mono text-xs font-semibold transition-all ${
-                  link.label === "Live"
-                    ? "bg-copper text-ink hover:bg-copper-bright shadow-md"
-                    : "bg-ink border border-trace text-paper hover:border-copper/60"
-                }`}
-              >
-                <span>{link.label}</span>
-                <ArrowUpRight size={12} />
-              </a>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </div>
+    <span className="font-mono text-[10px] rounded-md border border-trace bg-ink px-2 py-0.5 text-slate shrink-0">
+      {project.metrics?.[0]?.value || project.date}
+    </span>
   );
 }
 
 export default function ProjectsHoloDeck() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "flagship" | "aiml" | "systems">("all");
-  const [inspectedProject, setInspectedProject] = useState<Project | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const allCount = projects.length;
-  const flagshipCount = projects.filter(
-    (p) => p.version.startsWith("v0.") || p.version === "v1.0" || p.version === "v1.1" || p.version === "v1.6"
-  ).length;
-  const aimlCount = projects.filter(
-    (p) => p.tag.includes("AI") || p.tag.includes("routing") || p.tag.includes("machine learning") || p.tag.includes("MLOps") || p.tag.includes("LLM")
-  ).length;
-  const systemsCount = projects.filter(
-    (p) => p.tag.includes("routing") || p.tag.includes("gateway") || p.tag.includes("emergency") || p.tag.includes("Railways") || p.tag.includes("fittings")
-  ).length;
-
-  const filteredProjects = projects.filter((p) => {
-    if (selectedCategory === "all") return true;
-    if (selectedCategory === "flagship")
-      return p.version.startsWith("v0.") || p.version === "v1.0" || p.version === "v1.1" || p.version === "v1.6";
-    if (selectedCategory === "aiml")
-      return p.tag.includes("AI") || p.tag.includes("routing") || p.tag.includes("machine learning") || p.tag.includes("MLOps") || p.tag.includes("LLM");
-    if (selectedCategory === "systems")
-      return p.tag.includes("routing") || p.tag.includes("gateway") || p.tag.includes("emergency") || p.tag.includes("Railways") || p.tag.includes("fittings");
-    return true;
-  });
+  const activeProject = projects[activeIndex] || projects[0];
+  const isFlagship =
+    activeProject.version.startsWith("v0.") ||
+    activeProject.version === "v1.0" ||
+    activeProject.version === "v1.1" ||
+    activeProject.version === "v1.6";
 
   return (
-    <div className="space-y-8">
-      {/* Category Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] sm:text-xs">
-        <div className="flex items-center gap-1 sm:gap-1.5 p-1 rounded-xl bg-ink border border-trace overflow-x-auto max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full sm:w-auto">
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-              selectedCategory === "all"
-                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                : "text-slate hover:text-paper"
-            }`}
-          >
-            All Systems ({allCount})
-          </button>
-          <button
-            onClick={() => setSelectedCategory("flagship")}
-            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-              selectedCategory === "flagship"
-                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                : "text-slate hover:text-paper"
-            }`}
-          >
-            Flagship Systems ({flagshipCount})
-          </button>
-          <button
-            onClick={() => setSelectedCategory("aiml")}
-            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-              selectedCategory === "aiml"
-                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                : "text-slate hover:text-paper"
-            }`}
-          >
-            Applied AI / ML ({aimlCount})
-          </button>
-          <button
-            onClick={() => setSelectedCategory("systems")}
-            className={`px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg transition-all cursor-pointer shrink-0 whitespace-nowrap ${
-              selectedCategory === "systems"
-                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                : "text-slate hover:text-paper"
-            }`}
-          >
-            Distributed & Cloud ({systemsCount})
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2 text-slate/80 text-[11px]">
-          <span className="flex h-2 w-2 rounded-full bg-signal animate-pulse" />
-          <span>3D Parallax Tilt Holo-Decks · Hover to tilt in 3D perspective</span>
-        </div>
-      </div>
-
-      {/* 3D Holo-Deck Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {filteredProjects.map((project) => (
-          <HoloCard
-            key={project.version}
-            project={project}
-            onInspect={setInspectedProject}
-          />
-        ))}
-      </div>
-
-      {/* ========================================================================= */}
-      {/* Interactive System Flow Modal */}
-      {/* ========================================================================= */}
-      <AnimatePresence>
-        {inspectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setInspectedProject(null)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-md"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 16 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-2xl rounded-3xl border border-copper/60 bg-ink-raised p-5 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-10 max-h-[90vh] overflow-y-auto"
+    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] lg:h-[430px] gap-4 items-stretch">
+      {/* Left Rail: Compact Project Selector */}
+      <div className="rounded-2xl border border-trace bg-ink-raised/60 p-2 flex flex-col justify-between gap-1 h-full">
+        {projects.map((proj, idx) => {
+          const isSelected = activeIndex === idx;
+          const PrimaryIcon = getStackIcon(proj.stack[0] || "Python");
+          return (
+            <button
+              key={proj.version}
+              onMouseEnter={() => setActiveIndex(idx)}
+              onClick={() => setActiveIndex(idx)}
+              className="relative w-full flex-1 text-left px-3 py-2 rounded-xl transition-colors flex items-center justify-between gap-2.5 cursor-pointer select-none"
             >
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-copper via-copper-bright to-signal" />
+              {isSelected && (
+                <motion.div
+                  layoutId="split-selector-pill"
+                  className="absolute inset-0 rounded-xl bg-ink border border-copper/40 shadow-[0_4px_20px_rgba(184,118,62,0.12)]"
+                  transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                />
+              )}
 
-              <button
-                onClick={() => setInspectedProject(null)}
-                className="absolute top-5 right-5 p-2 rounded-xl border border-trace bg-ink text-slate hover:text-paper hover:border-copper/60 transition-colors cursor-pointer"
+              <div className="relative z-10 flex items-center gap-2.5 min-w-0">
+                <span
+                  className={`p-1.5 rounded-lg border transition-colors shrink-0 ${
+                    isSelected
+                      ? "border-copper/40 bg-copper/10 text-copper-bright"
+                      : "border-trace bg-ink text-slate"
+                  }`}
+                >
+                  <PrimaryIcon size={13} />
+                </span>
+                <div className="min-w-0">
+                  <div
+                    className={`font-mono text-xs font-bold truncate transition-colors ${
+                      isSelected ? "text-paper" : "text-slate"
+                    }`}
+                  >
+                    {proj.title}
+                  </div>
+                  <div className="font-mono text-[10px] text-slate/60 truncate">
+                    {proj.tag.split("·")[0].trim()}
+                  </div>
+                </div>
+              </div>
+
+              <span
+                className={`relative z-10 font-mono text-[10px] px-1.5 py-0.5 rounded shrink-0 ${
+                  isSelected
+                    ? "text-copper-bright bg-copper/15 font-semibold"
+                    : "text-slate/60"
+                }`}
               >
-                <X size={16} />
-              </button>
+                {proj.version}
+              </span>
+            </button>
+          );
+        })}
+      </div>
 
-              <div className="space-y-5">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2 py-0.5 rounded">
-                      {inspectedProject.version}
+      {/* Right Stage: Two-Side Split Deck — Locked Exact Height */}
+      <div
+        className={`relative h-full rounded-2xl border bg-gradient-to-br from-ink-raised/95 to-ink p-5 sm:p-6 overflow-hidden ${
+          isFlagship ? "border-copper/50" : "border-signal/40"
+        }`}
+      >
+        {/* Top Specular Beam */}
+        <div
+          className={`absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent ${
+            isFlagship ? "via-copper-bright" : "via-signal"
+          } to-transparent`}
+        />
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeProject.version}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="h-full grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-6 items-stretch"
+          >
+            {/* SIDE 1: Minimal Essential Info (Uniform Fixed Slots) */}
+            <div className="flex flex-col justify-between h-full min-w-0">
+              <div className="space-y-3.5">
+                {/* Version & Status */}
+                <div className="flex items-center justify-between gap-2 border-b border-trace/60 pb-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="font-mono text-xs font-bold text-copper-bright bg-copper/15 border border-copper/40 px-2.5 py-0.5 rounded-md shrink-0">
+                      {activeProject.version}
                     </span>
-                    <span className="font-mono text-xs text-slate">
-                      {inspectedProject.tag}
+                    <span className="font-mono text-xs text-slate truncate">
+                      {activeProject.tag.split("·")[0].trim()}
                     </span>
                   </div>
-                  <h3 className="font-mono text-xl sm:text-2xl font-bold text-paper mt-2">
-                    {inspectedProject.title}
-                  </h3>
-                  <p className="text-xs text-slate mt-1">
-                    System Architecture &amp; Production Flow Diagram
+                  <StatusBadge project={activeProject} />
+                </div>
+
+                {/* Title & Summary (Locked 1-line title + 2-line summary) */}
+                <div>
+                  <h2 className="font-mono text-xl sm:text-2xl font-bold text-paper truncate">
+                    {activeProject.title}
+                  </h2>
+                  <p className="mt-1.5 text-xs sm:text-sm text-slate leading-relaxed font-sans line-clamp-2 h-[38px] sm:h-[42px]">
+                    {activeProject.summary}
                   </p>
                 </div>
 
-                {inspectedProject.architecture && (
-                  <div className="p-4 rounded-2xl border border-trace bg-ink space-y-3">
-                    <span className="font-mono text-[10px] uppercase text-slate tracking-wider block font-semibold">
-                      {"// End-to-End Data Pipeline"}
+                {/* Key Highlight Chips (Single Non-Wrapping Row) */}
+                {activeProject.highlights && (
+                  <div className="flex items-center gap-1.5 font-mono overflow-hidden whitespace-nowrap">
+                    {activeProject.highlights.slice(0, 3).map((chip) => (
+                      <span
+                        key={chip}
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-trace bg-ink/90 px-2.5 py-1 text-[11px] text-paper/90 shrink-0"
+                      >
+                        <span
+                          className={`h-1.5 w-1.5 rounded-full shrink-0 ${
+                            isFlagship ? "bg-copper-bright" : "bg-signal"
+                          }`}
+                        />
+                        <span className="truncate max-w-[170px]">{chip}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Concise Engineering Solve (Locked 2-line Box) */}
+                {activeProject.architecture?.solve && (
+                  <div className="h-[64px] p-3 rounded-xl border border-trace bg-ink/70 flex items-start gap-2.5 text-xs overflow-hidden">
+                    <Terminal
+                      size={13}
+                      className="text-copper-bright shrink-0 mt-0.5"
+                    />
+                    <span className="text-slate leading-relaxed font-sans text-xs line-clamp-2">
+                      <strong className="text-paper font-mono">Solve: </strong>
+                      {activeProject.architecture.solve}
                     </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-2 font-mono text-[11px] sm:text-xs">
-                      {inspectedProject.architecture.flow.map((stage, i) => (
-                        <div
-                          key={stage}
-                          className="p-2.5 rounded-xl border border-trace/70 bg-ink-raised/80 flex flex-col justify-between"
-                        >
-                          <span className="text-[10px] text-copper-bright font-bold">
-                            0{i + 1}
-                          </span>
-                          <span className="text-paper text-xs mt-2 font-medium leading-snug">
-                            {stage}
-                          </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Footer: Stack Icons + Direct Action Links (Single Row) */}
+              <div className="pt-3.5 border-t border-trace/50 flex items-center justify-between gap-3 shrink-0">
+                <div className="flex items-center gap-1.5 overflow-hidden">
+                  {activeProject.stack.slice(0, 4).map((tech) => {
+                    const IconComp = getStackIcon(tech);
+                    return (
+                      <span
+                        key={tech}
+                        title={tech}
+                        className="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg border border-trace bg-ink font-mono text-[11px] text-slate shrink-0"
+                      >
+                        <IconComp size={12} />
+                        <span className="hidden sm:inline">{tech}</span>
+                      </span>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  {activeProject.links.map((link) => {
+                    const isInternal = link.href.startsWith("/");
+                    const isPrimary =
+                      link.label === "Live" || link.label === "Inspect Diffs";
+                    const cls = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs font-semibold transition-all whitespace-nowrap ${
+                      isPrimary
+                        ? "bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30"
+                        : "bg-ink border border-trace text-paper hover:border-copper/40"
+                    }`;
+
+                    return isInternal ? (
+                      <Link key={link.label} href={link.href} className={cls}>
+                        <span>{link.label}</span>
+                        <ArrowUpRight size={13} />
+                      </Link>
+                    ) : (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={cls}
+                      >
+                        <span>{link.label}</span>
+                        <ArrowUpRight size={13} />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* SIDE 2: Dedicated Project Photo / Visual Viewport (Locked Height) */}
+            <div className="relative rounded-xl border border-trace/90 bg-ink overflow-hidden flex flex-col h-[240px] sm:h-[280px] xl:h-full shadow-inner group">
+              {/* Top Window Frame Bar */}
+              <div className="flex items-center justify-between px-3.5 py-2 border-b border-trace/70 bg-ink-raised/80 font-mono text-[10px] text-slate shrink-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-rose-500/70" />
+                  <span className="h-2 w-2 rounded-full bg-amber-500/70" />
+                  <span className="h-2 w-2 rounded-full bg-emerald-500/70" />
+                  <span className="ml-1.5 text-slate/80 truncate">
+                    {activeProject.title.toLowerCase().replace(/\s+/g, "-")}
+                  </span>
+                </div>
+                <span className="text-copper-bright font-semibold">
+                  {activeProject.version}
+                </span>
+              </div>
+
+              {/* Project Image or System-1 Terminal Preview */}
+              <div className="relative flex-1 w-full overflow-hidden bg-[#07080a]">
+                {activeProject.image ? (
+                  <>
+                    <Image
+                      src={activeProject.image}
+                      alt={activeProject.title}
+                      fill
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent pointer-events-none" />
+                  </>
+                ) : (
+                  <div className="h-full w-full p-4 sm:p-5 flex flex-col justify-between font-mono text-xs bg-gradient-to-br from-ink-raised via-[#08090c] to-ink">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-[11px] text-slate/70 border-b border-trace/50 pb-2">
+                        <span className="text-signal">laya.integrations.tools</span>
+                        <span className="text-emerald-400">7 Merged PRs · v0.4.11</span>
+                      </div>
+                      <div className="space-y-1.5 pt-1 text-[11px] leading-relaxed">
+                        <div className="text-slate/70"># Non-autoregressive System-1 routing (~32.8ms)</div>
+                        <div className="text-paper">
+                          selector = <span className="text-copper-bright">LayaToolSelector</span>(tools=candidates)
                         </div>
-                      ))}
+                        <div className="text-paper">
+                          decision = selector.<span className="text-signal">select</span>(agent_state)
+                        </div>
+                        <div className="text-emerald-300 pt-1">
+                          ➔ ToolRouteDecision(tool=&quot;issue_refund&quot;, conf=0.998)
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-3 border-t border-trace/50 text-[10px]">
+                      <div className="p-2 rounded-lg bg-ink border border-trace">
+                        <span className="text-slate/60 block">LATENCY</span>
+                        <span className="text-amber-400 font-bold text-xs">~32.8 ms (45x)</span>
+                      </div>
+                      <div className="p-2 rounded-lg bg-ink border border-trace">
+                        <span className="text-slate/60 block">ECOSYSTEM</span>
+                        <span className="text-copper-bright font-bold text-xs">33,000+ ★</span>
+                      </div>
                     </div>
                   </div>
                 )}
-
-                {inspectedProject.architecture?.solve && (
-                  <div className="p-4 rounded-2xl border border-copper/40 bg-copper/5 space-y-1.5 font-mono text-xs">
-                    <span className="text-[10px] uppercase text-copper-bright tracking-wider block font-semibold">
-                      {"// Core Engineering Solve"}
-                    </span>
-                    <p className="text-paper text-xs leading-relaxed font-sans">
-                      {inspectedProject.architecture.solve}
-                    </p>
-                  </div>
-                )}
-
-                <div className="pt-2 flex items-center justify-end gap-3 font-mono text-xs">
-                  {inspectedProject.links.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold transition-all ${
-                        link.label === "Live"
-                          ? "bg-copper text-ink hover:bg-copper-bright"
-                          : "bg-ink border border-trace text-paper hover:border-copper/60"
-                      }`}
-                    >
-                      <span>{link.label}</span>
-                      <ArrowUpRight size={13} />
-                    </a>
-                  ))}
-                </div>
               </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
