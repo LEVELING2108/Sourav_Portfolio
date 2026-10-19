@@ -463,59 +463,46 @@ export default function GitDiffInspector() {
 
   return (
     <div className="w-full space-y-6">
-      {/* Section Header */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs text-signal overflow-hidden">
-          <Terminal size={13} className="shrink-0" />
-          <span className="truncate">$ git log --graph --stat --author=&quot;LEVELING2108&quot; --repo=&quot;NandhaKishorM/laya&quot;</span>
+      {/* Compact Inspector Toolbar: Upstream Repo Link + Mode Switcher */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 font-mono text-xs">
+          <span className="px-2.5 py-1 rounded-full bg-copper/15 border border-copper/30 text-copper-bright font-semibold">
+            Core Contributor
+          </span>
+          <a
+            href="https://github.com/NandhaKishorM/laya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate hover:text-paper underline underline-offset-4 decoration-trace hover:decoration-copper/50 transition-colors"
+          >
+            NandhaKishorM/laya
+          </a>
         </div>
-        <div className="flex flex-wrap items-end justify-between gap-3 sm:gap-4">
-          <div>
-            <h2 className="font-mono text-lg sm:text-xl md:text-2xl font-bold text-paper flex flex-wrap items-center gap-2 sm:gap-2.5">
-              <span>Open Source Engineering</span>
-              <span className="text-[10px] sm:text-xs font-mono font-normal px-2 sm:px-2.5 py-0.5 rounded-full bg-copper/15 border border-copper/30 text-copper-bright">
-                Core Contributor
-              </span>
-            </h2>
-            <p className="mt-1 text-xs sm:text-sm text-slate max-w-3xl">
-              Official tool selection (`LayaToolSelector`), framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI), and .NET concurrency patches shipped to{" "}
-              <a
-                href="https://github.com/NandhaKishorM/laya"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-paper hover:text-copper-bright underline underline-offset-4 decoration-copper/40"
-              >
-                NandhaKishorM/laya (33,000+ GitHub Stars)
-              </a>
-              . Deterministic non-autoregressive decision classification evaluated in ~33ms.
-            </p>
-          </div>
 
-          {/* Mode Switcher: Git Diff vs Architecture */}
-          <div className="flex items-center p-1 rounded-xl bg-ink border border-trace font-mono text-xs w-full sm:w-auto">
-            <button
-              onClick={() => setActiveTab("diff")}
-              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
-                activeTab === "diff"
-                  ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                  : "text-slate hover:text-paper"
-              }`}
-            >
-              <Code2 size={13} />
-              <span>Git Diff Inspector</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("architecture")}
-              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
-                activeTab === "architecture"
-                  ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
-                  : "text-slate hover:text-paper"
-              }`}
-            >
-              <Network size={13} />
-              <span>System-1 Specs</span>
-            </button>
-          </div>
+        {/* Mode Switcher: Git Diff vs Architecture */}
+        <div className="flex items-center p-1 rounded-xl bg-ink border border-trace font-mono text-xs w-full sm:w-auto">
+          <button
+            onClick={() => setActiveTab("diff")}
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
+              activeTab === "diff"
+                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
+                : "text-slate hover:text-paper"
+            }`}
+          >
+            <Code2 size={13} />
+            <span>Git Diff Inspector</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("architecture")}
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
+              activeTab === "architecture"
+                ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
+                : "text-slate hover:text-paper"
+            }`}
+          >
+            <Network size={13} />
+            <span>System-1 Specs</span>
+          </button>
         </div>
       </div>
 

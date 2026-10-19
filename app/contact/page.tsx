@@ -22,16 +22,13 @@ export default function ContactPage() {
               <span>cd ~/portfolio</span>
             </Link>
 
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-6">
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
               <div>
-                <p className="font-mono text-xs sm:text-sm text-signal">
-                  $ ssh -i ~/.ssh/id_rsa sourav@pune
-                </p>
-                <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
-                  Initialize Channel
+                <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
+                  Contact
                 </h1>
-                <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
-                  Available for full-time full-stack and AI/ML engineering roles, high-concurrency systems development, and production challenges.
+                <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
+                  Direct line for full-stack and AI/ML engineering roles, technical advisory &amp; collaborations.
                 </p>
               </div>
 

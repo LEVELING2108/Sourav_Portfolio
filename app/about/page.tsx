@@ -22,16 +22,13 @@ export default function AboutPage() {
               <span>cd ~/portfolio</span>
             </Link>
 
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-6">
+            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
               <div>
-                <p className="font-mono text-xs sm:text-sm text-signal">
-                  $ cat about.md &amp;&amp; cat education.log
-                </p>
-                <h1 className="mt-1 font-mono text-2xl sm:text-3xl lg:text-4xl font-bold text-paper">
-                  Background &amp; Dual-Track
+                <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
+                  Education &amp; Background
                 </h1>
-                <p className="mt-2 text-xs sm:text-sm text-slate max-w-2xl font-sans">
-                  The intersection of hardware systems (ECE) and computational intelligence (IIT Madras Data Science) — engineering software that withstands production stress.
+                <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
+                  Dual-degree track across ECE (BVDU Pune · 9.1 CGPA) and Data Science (IIT Madras).
                 </p>
               </div>
 
