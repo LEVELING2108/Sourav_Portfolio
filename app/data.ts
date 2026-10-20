@@ -91,6 +91,7 @@ export const projects: Project[] = [
     summary:
       "Authored official tool & function calling (LayaToolSelector), framework integrations (LangChain, LangGraph, LlamaIndex, CrewAI), and .NET concurrency fixes for Laya, enabling sub-35ms non-autoregressive agent decision routing.",
     stack: ["Python", "PyTorch", "LangGraph", "LlamaIndex", "CrewAI", "ModernBERT"],
+    image: "/projects/laya.jpg",
     highlights: [
       "33,000+ Upstream Stars",
       "7 Merged PRs (#229, #257, #533, #535, #737, #977, #1020)",
