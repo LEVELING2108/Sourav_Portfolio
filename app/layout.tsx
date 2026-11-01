@@ -1,25 +1,23 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Inter } from "next/font/google";
+import { Shantell_Sans, Caveat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/layout/Nav";
-import Footer from "@/components/layout/Footer";
-import CommandPalette from "@/components/layout/CommandPalette";
+import { ThemeProvider, themeBootScript } from "@/components/sketch/ThemeProvider";
+import { SoundProvider } from "@/components/sketch/SoundProvider";
+import LayoutChrome from "@/components/layout/LayoutChrome";
 
-// NOTE: next/font/google fetches font files at build time, which requires
-// outbound network access to Google Fonts. Uncomment this block when running
-// locally (it just works there) — it self-hosts the fonts for you, no <link>
-// tags needed. Then swap the className below to use the variables.
-//
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono-loaded",
+const shantell = Shantell_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-shantell",
 });
 
-const inter = Inter({
-  variable: "--font-sans-loaded",
+const caveat = Caveat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-caveat",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
 });
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://souravsuman.dev";
@@ -89,6 +87,7 @@ const jsonLd = {
   url: baseUrl,
   sameAs: [
     "https://github.com/LEVELING2108",
+    "https://www.linkedin.com/in/sourav-suman-dev",
   ],
   jobTitle: "Full-Stack & AI/ML Engineer",
   alumniOf: [
@@ -111,21 +110,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} ${inter.variable} h-full scroll-smooth`}
+      data-theme="paper"
+      className={`${shantell.variable} ${caveat.variable} ${jetbrains.variable} h-full scroll-smooth`}
       suppressHydrationWarning
     >
-      <body
-        className="min-h-full flex flex-col bg-ink text-paper antialiased"
-        suppressHydrationWarning
-      >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
+      <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Nav />
-        {children}
-        <Footer />
-        <CommandPalette />
+        <ThemeProvider>
+          <SoundProvider>
+            <LayoutChrome>{children}</LayoutChrome>
+          </SoundProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

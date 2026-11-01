@@ -1,49 +1,11 @@
-import ProjectsHoloDeck from "@/components/projects/ProjectsHoloDeck";
-import Link from "next/link";
-import { ArrowLeft, Layers } from "lucide-react";
 import type { Metadata } from "next";
+import SketchProjects from "@/components/projects/SketchProjects";
 
 export const metadata: Metadata = {
-  title: "Projects // Sourav Suman",
-  description: "Production AI systems, real-time ML pipelines, and full-stack applications.",
+  title: "Projects",
+  description: "Eight shipped systems across applied AI, real-time ML pipelines, and full-stack web applications.",
 };
 
 export default function ProjectsPage() {
-  return (
-    <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-8">
-        {/* Breadcrumb & Minimal Header */}
-        <div className="space-y-3">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 font-mono text-xs text-slate hover:text-copper-bright transition-colors"
-          >
-            <ArrowLeft size={13} />
-            <span>cd ~/portfolio</span>
-          </Link>
-
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
-            <div>
-              <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
-                Projects
-              </h1>
-              <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
-                Production AI systems, real-time ML pipelines &amp; full-stack applications.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-xs text-slate">
-              <span className="p-1 rounded bg-ink border border-trace text-copper-bright">
-                <Layers size={13} />
-              </span>
-              <span>8 Shipped Systems</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Minimal Projects Showcase */}
-        <ProjectsHoloDeck />
-      </div>
-    </main>
-  );
+  return <SketchProjects />;
 }

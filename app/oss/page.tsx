@@ -1,50 +1,12 @@
-import GitDiffInspector from "@/components/projects/GitDiffInspector";
-import Link from "next/link";
-import { ArrowLeft, GitBranch } from "lucide-react";
 import type { Metadata } from "next";
+import SketchOSS from "@/components/projects/SketchOSS";
 
 export const metadata: Metadata = {
-  title: "Open Source Engineering // Sourav Suman",
+  title: "Open Source",
   description:
-    "Core open source contributions to Laya (33,000+ stars), architecting official LayaToolSelector tool calling, LangChain, LangGraph, LlamaIndex, CrewAI routing, and .NET runtime concurrency patches.",
+    "Core contributions to NandhaKishorM/laya (33k+ stars) — sub-35ms tool calling, agent routing, and runtime patches.",
 };
 
 export default function OssPage() {
-  return (
-    <main className="flex-1 px-4 sm:px-6 pt-24 sm:pt-28 pb-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12 space-y-8">
-        {/* Breadcrumb & Header */}
-        <div className="space-y-3">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 font-mono text-xs text-slate hover:text-copper-bright transition-colors"
-          >
-            <ArrowLeft size={13} />
-            <span>cd ~/portfolio</span>
-          </Link>
-
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-trace pb-5">
-            <div>
-              <h1 className="font-mono text-2xl sm:text-3xl font-bold text-paper">
-                Open Source
-              </h1>
-              <p className="mt-1 text-xs sm:text-sm text-slate max-w-xl font-sans">
-                Core contributions to <span className="text-paper font-medium">NandhaKishorM/laya</span> (33,000+ ★) — sub-35ms System-1 tool calling, agent routing &amp; runtime patches.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-xs text-slate">
-              <span className="p-1 rounded bg-ink border border-trace text-copper-bright">
-                <GitBranch size={13} />
-              </span>
-              <span>33,000+ Stars Ecosystem</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Dedicated Git Diff Inspector Component */}
-        <GitDiffInspector />
-      </div>
-    </main>
-  );
+  return <SketchOSS />;
 }

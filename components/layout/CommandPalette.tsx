@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile, projects } from "@/app/data";
+import { useTheme } from "@/components/sketch/ThemeProvider";
+import { useSound } from "@/components/sketch/SoundProvider";
 import {
   Search,
   Terminal,
@@ -13,11 +15,13 @@ import {
   GitBranch,
   Code2,
   X,
+  Sun,
+  Moon,
 } from "lucide-react";
 
 type CommandItem = {
   id: string;
-  category: "Navigation" | "Action" | "Projects" | "Stack";
+  category: "Navigation" | "Theme" | "Action" | "Projects";
   title: string;
   subtitle?: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
@@ -26,6 +30,8 @@ type CommandItem = {
 
 export default function CommandPalette() {
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
+  const { play } = useSound();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,7 +41,7 @@ export default function CommandPalette() {
   // Toggle on Cmd+K / Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       } else if (e.key === "Escape") {
@@ -68,10 +74,21 @@ export default function CommandPalette() {
   const commandItems = useMemo<CommandItem[]>(() => {
     const items: CommandItem[] = [
       {
+        id: "nav-home",
+        category: "Navigation",
+        title: "Go to Home",
+        subtitle: "Back to the sketchbook cover",
+        icon: Terminal,
+        action: () => {
+          router.push("/");
+          setIsOpen(false);
+        },
+      },
+      {
         id: "nav-projects",
         category: "Navigation",
-        title: "Go to Projects",
-        subtitle: "View shipped systems v0.4.11 – v1.6",
+        title: "Go to Selected Work",
+        subtitle: "View all 8 shipped systems & case studies",
         icon: Terminal,
         action: () => {
           router.push("/projects");
@@ -82,7 +99,7 @@ export default function CommandPalette() {
         id: "nav-oss",
         category: "Navigation",
         title: "Go to Open Source",
-        subtitle: "Laya (33k+ ★) LayaToolSelector, LangChain, LlamaIndex, CrewAI & .NET PRs",
+        subtitle: "Laya (33k+ ★) — 9 PRs across LangChain, LlamaIndex, CrewAI & .NET",
         icon: GitBranch,
         action: () => {
           router.push("/oss");
@@ -93,7 +110,7 @@ export default function CommandPalette() {
         id: "nav-skills",
         category: "Navigation",
         title: "Go to Tech Stack",
-        subtitle: "Explore 20+ production tools & architecture solves",
+        subtitle: "Explore 20+ production tools & system architecture flow",
         icon: Code2,
         action: () => {
           router.push("/stack");
@@ -104,7 +121,7 @@ export default function CommandPalette() {
         id: "nav-about",
         category: "Navigation",
         title: "Go to Education & About",
-        subtitle: "Read dual-degree (BVDU Pune × IIT Madras) & engineering bio",
+        subtitle: "Dual-degree (BVDU Pune · 9.04 CGPA × IIT Madras) & timeline",
         icon: Terminal,
         action: () => {
           router.push("/about");
@@ -115,10 +132,53 @@ export default function CommandPalette() {
         id: "nav-contact",
         category: "Navigation",
         title: "Go to Contact",
-        subtitle: "Reach out for AI/ML & Full-Stack roles",
+        subtitle: "Fold a paper-plane note or reach out directly",
         icon: Terminal,
         action: () => {
           router.push("/contact");
+          setIsOpen(false);
+        },
+      },
+      {
+        id: "theme-classic",
+        category: "Theme",
+        title:
+          theme === "classic"
+            ? "Switch to Sketchbook Theme ✎"
+            : "Switch to Classic White Theme ✦",
+        subtitle:
+          theme === "classic"
+            ? "Return to the hand-drawn notebook portfolio"
+            : "Original portfolio design in crisp White / Light mode",
+        icon: theme === "classic" ? Moon : Sun,
+        action: () => {
+          setTheme(theme === "classic" ? "paper" : "classic");
+          setIsOpen(false);
+        },
+      },
+      {
+        id: "theme-toggle",
+        category: "Theme",
+        title:
+          theme === "blueprint"
+            ? "Switch to Paper Mode ☀"
+            : "Switch to Blueprint Mode ☾",
+        subtitle: "Flip the tracing-paper sheet between warm paper and blueprint",
+        icon: theme === "blueprint" ? Sun : Moon,
+        action: () => {
+          setTheme(theme === "blueprint" ? "paper" : "blueprint");
+          setIsOpen(false);
+        },
+      },
+      {
+        id: "theme-sudo",
+        category: "Theme",
+        title:
+          theme === "root" ? "exit — Leave Root Mode" : "sudo — Secret Root Mode",
+        subtitle: "Phosphor-green terminal override",
+        icon: Terminal,
+        action: () => {
+          setTheme(theme === "root" ? "paper" : "root");
           setIsOpen(false);
         },
       },
@@ -156,23 +216,23 @@ export default function CommandPalette() {
       },
     ];
 
-    // Append Projects to command list
+    // Append Projects to command list with direct Case Study navigation
     projects.forEach((proj) => {
       items.push({
-        id: `proj-${proj.version}`,
+        id: `proj-${proj.slug}`,
         category: "Projects",
         title: `${proj.title} (${proj.version})`,
-        subtitle: `${proj.tag} — ${proj.stack.join(", ")}`,
+        subtitle: `Case Study — ${proj.tag} · ${proj.stack.slice(0, 4).join(", ")}`,
         icon: Terminal,
         action: () => {
-          router.push(proj.version.startsWith("v0.") ? "/oss" : "/projects");
+          router.push(`/projects/${proj.slug}`);
           setIsOpen(false);
         },
       });
     });
 
     return items;
-  }, [handleCopyEmail, router]);
+  }, [handleCopyEmail, router, setTheme, theme]);
 
   const filteredItems = useMemo(() => {
     if (!query.trim()) return commandItems;
@@ -196,141 +256,141 @@ export default function CommandPalette() {
       );
     } else if (e.key === "Enter" && filteredItems[selectedIndex]) {
       e.preventDefault();
+      play("thock");
       filteredItems[selectedIndex].action();
     }
   };
 
   return (
-    <>
-      {/* Modal Backdrop & Drawer */}
-      <AnimatePresence>
-        {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-start justify-center pt-12 sm:pt-24 px-3 sm:px-4 bg-ink/80 backdrop-blur-sm">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: -10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-trace bg-ink-raised shadow-[0_16px_70px_rgba(0,0,0,0.6)] max-h-[85vh] flex flex-col"
-            >
-              {/* Header Search Bar */}
-              <div className="flex items-center border-b border-trace px-4 py-3 font-mono text-sm shrink-0">
-                <Search size={16} className="text-signal mr-3 shrink-0" />
-                <input
-                  ref={inputRef}
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                    setSelectedIndex(0);
-                  }}
-                  onKeyDown={handleKeyDownInput}
-                  placeholder="Search commands, projects, stack..."
-                  className="w-full bg-transparent text-paper placeholder:text-slate focus:outline-none font-mono text-sm"
-                />
-                {query && (
-                  <button
-                    onClick={() => setQuery("")}
-                    className="p-1 text-slate hover:text-paper mr-1"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
+    <AnimatePresence>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center pt-12 sm:pt-24 px-3 sm:px-4 bg-black/45 backdrop-blur-[2px]"
+          onClick={() => setIsOpen(false)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: -10 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+            className="sk-box hatch relative w-full max-w-2xl overflow-hidden bg-card text-ink max-h-[85vh] flex flex-col"
+          >
+            {/* Header Search Bar */}
+            <div className="flex items-center border-b-2 border-dashed border-muted px-4 py-3.5 font-mono text-sm shrink-0">
+              <Search size={16} className="text-accent mr-3 shrink-0" />
+              <input
+                ref={inputRef}
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
+                onKeyDown={handleKeyDownInput}
+                placeholder="Search pages, case studies, commands (try sudo)..."
+                className="w-full bg-transparent text-ink placeholder:text-muted focus:outline-none font-mono text-sm"
+              />
+              {query && (
                 <button
-                  onClick={() => setIsOpen(false)}
-                  className="rounded border border-trace px-2 py-1 text-[11px] text-slate hover:text-paper"
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="p-1 text-muted hover:text-ink mr-1 cursor-pointer"
                 >
-                  ESC
+                  <X size={14} />
                 </button>
-              </div>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="kbd cursor-pointer"
+              >
+                ESC
+              </button>
+            </div>
 
-              {/* Toast message if email copied */}
-              {copied && (
-                <div className="bg-signal/15 border-b border-signal/40 px-4 py-2 font-mono text-xs text-signal flex items-center gap-2">
-                  <Check size={14} />
-                  <span>Email copied to clipboard ({profile.email})</span>
+            {/* Toast message if email copied */}
+            {copied && (
+              <div className="bg-[var(--accent-soft)] border-b-2 border-dashed border-ink px-4 py-2 font-mono text-xs text-ink flex items-center gap-2">
+                <Check size={14} />
+                <span>Email copied to clipboard ({profile.email})</span>
+              </div>
+            )}
+
+            {/* Items List */}
+            <div className="max-h-[380px] overflow-y-auto p-3 font-mono text-xs">
+              {filteredItems.length === 0 ? (
+                <div className="py-12 text-center text-muted">
+                  <p className="font-hand text-2xl text-note m-0">
+                    nothing in the notebook matches &ldquo;{query}&rdquo;
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  {filteredItems.map((item, idx) => {
+                    const IconComp = item.icon;
+                    const isSelected = idx === selectedIndex;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => {
+                          play("thock");
+                          item.action();
+                        }}
+                        onMouseEnter={() => setSelectedIndex(idx)}
+                        className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all text-left cursor-pointer border-2 ${
+                          isSelected
+                            ? "bg-[var(--accent-soft)] border-ink text-ink"
+                            : "text-body hover:bg-paper border-transparent"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span
+                            className={`p-1.5 rounded-lg border-[1.5px] border-ink ${
+                              isSelected
+                                ? "bg-accent text-[var(--on-accent)]"
+                                : "bg-paper text-ink"
+                            }`}
+                          >
+                            <IconComp size={14} />
+                          </span>
+                          <div className="truncate">
+                            <p className="font-bold text-ink truncate m-0 text-[13px]">
+                              {item.title}
+                            </p>
+                            {item.subtitle && (
+                              <p className="text-[11px] text-muted truncate font-sans mt-0.5 mb-0">
+                                {item.subtitle}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <span className="chip shrink-0 ml-2">
+                          {item.category}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
+            </div>
 
-              {/* Items List */}
-              <div className="max-h-[380px] overflow-y-auto p-2 font-mono text-xs">
-                {filteredItems.length === 0 ? (
-                  <div className="py-12 text-center text-slate">
-                    <p>No matching commands found for &quot;{query}&quot;</p>
-                  </div>
-                ) : (
-                  <div className="space-y-1">
-                    {filteredItems.map((item, idx) => {
-                      const IconComp = item.icon;
-                      const isSelected = idx === selectedIndex;
-                      return (
-                        <button
-                          key={item.id}
-                          onClick={item.action}
-                          onMouseEnter={() => setSelectedIndex(idx)}
-                          className={`w-full flex items-center justify-between p-2.5 rounded-lg transition-all text-left cursor-pointer ${
-                            isSelected
-                              ? "bg-copper/15 border border-copper/40 text-paper"
-                              : "text-slate hover:bg-ink hover:text-paper border border-transparent"
-                          }`}
-                        >
-                          <div className="flex items-center gap-3 min-w-0">
-                            <span
-                              className={`p-1.5 rounded-md border ${
-                                isSelected
-                                  ? "bg-copper text-ink border-copper-bright"
-                                  : "bg-ink border-trace text-signal"
-                              }`}
-                            >
-                              <IconComp size={14} />
-                            </span>
-                            <div className="truncate">
-                              <p
-                                className={`font-medium truncate ${
-                                  isSelected ? "text-paper" : "text-paper/90"
-                                }`}
-                              >
-                                {item.title}
-                              </p>
-                              {item.subtitle && (
-                                <p className="text-[11px] text-slate truncate font-sans mt-0.5">
-                                  {item.subtitle}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <span className="text-[10px] rounded border border-trace/60 px-2 py-0.5 text-slate uppercase shrink-0">
-                            {item.category}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-              {/* Footer Hint */}
-              <div className="flex items-center justify-between border-t border-trace px-4 py-2.5 font-mono text-[11px] text-slate bg-ink/50">
-                <span className="flex items-center gap-2">
-                  <span>Use</span>
-                  <kbd className="rounded border border-trace bg-ink px-1 py-0.5 text-[10px]">
-                    ↑
-                  </kbd>
-                  <kbd className="rounded border border-trace bg-ink px-1 py-0.5 text-[10px]">
-                    ↓
-                  </kbd>
-                  <span>to navigate</span>
-                </span>
-                <span className="flex items-center gap-2">
-                  <kbd className="rounded border border-trace bg-ink px-1 py-0.5 text-[10px]">
-                    ↵
-                  </kbd>
-                  <span>to select</span>
-                </span>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-    </>
+            {/* Footer Hint */}
+            <div className="flex items-center justify-between border-t-2 border-dashed border-muted px-4 py-2.5 font-mono text-[11px] text-muted bg-paper">
+              <span className="flex items-center gap-2">
+                <span>Use</span>
+                <kbd className="kbd">↑</kbd>
+                <kbd className="kbd">↓</kbd>
+                <span>to navigate</span>
+              </span>
+              <span className="flex items-center gap-2">
+                <kbd className="kbd">↵</kbd>
+                <span>to open</span>
+              </span>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
 import { profile } from "@/app/data";
-import { Sun, Moon, Search, ArrowUpRight } from "lucide-react";
+import { Search, ArrowUpRight, Pencil } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-
-const emptySubscribe = () => () => {};
+import { useTheme } from "@/components/sketch/ThemeProvider";
 
 const links = [
   { label: "projects", href: "/projects" },
@@ -19,35 +17,7 @@ const links = [
 
 export default function Nav() {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const mounted = useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
-    if (savedTheme === "light") {
-      const timer = setTimeout(() => setTheme("light"), 0);
-      document.documentElement.classList.add("light");
-      return () => clearTimeout(timer);
-    } else {
-      document.documentElement.classList.remove("light");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
-      document.documentElement.classList.add("light");
-      localStorage.setItem("theme", "light");
-    } else {
-      setTheme("dark");
-      document.documentElement.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    }
-  };
+  const { setTheme } = useTheme();
 
   const openSearch = () => {
     window.dispatchEvent(
@@ -57,7 +27,7 @@ export default function Nav() {
 
   return (
     <header className="fixed top-3 sm:top-5 inset-x-0 z-50 flex justify-center px-3 sm:px-6 lg:px-8 pointer-events-none">
-      <nav className="pointer-events-auto mx-auto w-full max-w-5xl lg:max-w-6xl flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-trace/90 bg-ink-raised/90 backdrop-blur-xl px-3 sm:px-6 py-2 sm:py-2.5 shadow-[0_12px_36px_rgba(0,0,0,0.5)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)] transition-all">
+      <nav className="pointer-events-auto mx-auto w-full max-w-5xl lg:max-w-6xl flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-trace/90 bg-ink-raised/90 backdrop-blur-xl px-3 sm:px-6 py-2 sm:py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.08)] transition-all">
         {/* Left: Brand Identity with Live Pulsing LED */}
         <Link
           href="/"
@@ -69,7 +39,6 @@ export default function Nav() {
           </span>
           <span className="font-mono text-xs sm:text-sm md:text-base font-semibold tracking-tight text-paper group-hover:text-copper-bright transition-colors">
             <span className="text-signal">~/</span>
-            {/* Short name on tiny screens, first name on mobile, full name on md+ */}
             <span className="hidden md:inline">{profile.name.toLowerCase()}</span>
             <span className="hidden xs:inline md:hidden">{profile.name.split(" ")[0].toLowerCase()}</span>
             <span className="xs:hidden">ss</span>
@@ -108,7 +77,7 @@ export default function Nav() {
           })}
         </ul>
 
-        {/* Right: Quick Search, Resume & Theme Toggle */}
+        {/* Right: Quick Search, Resume & Switch Back to Sketchbook */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pr-0.5">
           {/* Cmd+K Search Trigger Button */}
           <button
@@ -121,7 +90,7 @@ export default function Nav() {
             <span className="hidden md:inline text-[11px] text-slate/75">⌘K</span>
           </button>
 
-          {/* Resume PDF Badge (Visible on medium+ screens) */}
+          {/* Resume PDF Badge */}
           <a
             href={profile.resumeHref}
             target="_blank"
@@ -132,23 +101,17 @@ export default function Nav() {
             <ArrowUpRight size={12} />
           </a>
 
-          {/* Theme Toggle Button */}
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle Light/Dark Theme"
-              title={
-                theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"
-              }
-              className="flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-full border border-trace bg-ink-raised text-paper hover:text-copper-bright hover:border-copper/60 transition-all cursor-pointer shadow-sm active:scale-95"
-            >
-              {theme === "dark" ? (
-                <Sun size={15} className="text-copper-bright" />
-              ) : (
-                <Moon size={15} className="text-signal" />
-              )}
-            </button>
-          )}
+          {/* Switch Back to Sketchbook Theme */}
+          <button
+            type="button"
+            onClick={() => setTheme("paper")}
+            aria-label="Switch to Sketchbook Theme"
+            title="Switch to Sketchbook Theme"
+            className="inline-flex items-center justify-center gap-1.5 h-8 sm:h-9 px-3 rounded-full border border-copper/60 bg-ink-raised font-mono text-xs font-medium text-paper hover:text-copper-bright hover:border-copper transition-all cursor-pointer shadow-sm active:scale-95"
+          >
+            <Pencil size={13} className="text-copper-bright" />
+            <span>sketch</span>
+          </button>
         </div>
       </nav>
     </header>

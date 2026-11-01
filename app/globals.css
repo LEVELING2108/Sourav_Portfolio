@@ -1,17 +1,40 @@
 @import "tailwindcss";
 
-:root {
-  --ink: #000000;
-  --ink-raised: #0a0a0a;
-  --paper: #ededed;
-  --slate: #94969c;
-  --copper: #b8763e;
-  --copper-bright: #e29d62;
-  --signal: #4fd1c5;
-  --trace-line: #1c1c21;
+/* ============================================================
+   SKETCH PORTFOLIO — design tokens
+   Three themes, switched with <html data-theme="…">:
+   paper (default) · blueprint (the dark theme) · root (secret, via `sudo`)
+   ============================================================ */
+:root,
+[data-theme="paper"] {
+  --paper: #F5F2EA;        /* notebook paper (page background) */
+  --card: #FFFDF8;         /* cards, inputs, bubbles */
+  --ink: #1F1D1A;          /* graphite: text, borders */
+  --muted: #4A463F;        /* small mono labels */
+  --body: #3A3732;         /* paragraph text */
+  --note: #A84E1E;         /* handwritten margin notes */
+  --red: #B8322A;          /* red-pen corrections */
+  --accent: #C4612A;       /* copper marker */
+  --on-accent: #FFFDF8;
+  --accent-soft: rgba(196, 97, 42, 0.28);  /* highlighter */
+  --dot: rgba(31, 29, 26, 0.06);           /* dot grid */
+  --hatch: rgba(31, 29, 26, 0.22);         /* pencil-hatch shadow */
+  --tape: rgba(214, 196, 150, 0.8);
+  --mascot-filter: none;
 }
-
-html.light {
+[data-theme="blueprint"] {
+  --paper: #1C3D6E; --card: #21477F; --ink: #F1F6FF; --muted: #C4D4EE; --body: #DCE6F8;
+  --note: #FFD27A; --red: #FFB0A0; --accent: #FFB86B; --on-accent: #14130F;
+  --accent-soft: rgba(255, 184, 107, 0.35); --dot: transparent; --hatch: rgba(241, 246, 255, 0.25);
+  --tape: rgba(255, 255, 255, 0.22); --mascot-filter: invert(1) brightness(1.6);
+}
+[data-theme="root"] {
+  --paper: #0E100D; --card: #151913; --ink: #D3F5C4; --muted: #98BE8A; --body: #BDE3AE;
+  --note: #7CE38B; --red: #FF8F7A; --accent: #7CE38B; --on-accent: #0E100D;
+  --accent-soft: rgba(124, 227, 139, 0.35); --dot: rgba(124, 227, 139, 0.10); --hatch: rgba(124, 227, 139, 0.25);
+  --tape: rgba(124, 227, 139, 0.2); --mascot-filter: invert(1) sepia(1) hue-rotate(60deg) saturate(3) brightness(1.1);
+}
+[data-theme="classic"] {
   --ink: #f8fafc;
   --ink-raised: #ffffff;
   --paper: #0f172a;
@@ -20,76 +43,123 @@ html.light {
   --copper-bright: #c2410c;
   --signal: #0d9488;
   --trace-line: #cbd5e1;
+  --card: #ffffff;
+  --muted: #475569;
+  --body: #334155;
+  --note: #c2410c;
+  --red: #dc2626;
+  --accent: #d97706;
+  --on-accent: #ffffff;
+  --accent-soft: rgba(217, 119, 6, 0.18);
+  --dot: transparent;
+  --hatch: rgba(15, 23, 42, 0.12);
+  --tape: rgba(203, 213, 225, 0.65);
+  --mascot-filter: none;
 }
 
 @theme inline {
-  --color-background: var(--ink);
-  --color-foreground: var(--paper);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
   --color-ink: var(--ink);
   --color-ink-raised: var(--ink-raised);
-  --color-paper: var(--paper);
   --color-slate: var(--slate);
   --color-copper: var(--copper);
   --color-copper-bright: var(--copper-bright);
   --color-signal: var(--signal);
   --color-trace: var(--trace-line);
-  --font-sans: var(--font-sans-loaded), "Inter", ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-mono-loaded), "JetBrains Mono", ui-monospace,
-    "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  --color-muted: var(--muted);
+  --color-body: var(--body);
+  --color-note: var(--note);
+  --color-red-pen: var(--red);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-shantell), ui-rounded, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  background: var(--ink);
-  color: var(--paper);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-
+html { background: var(--paper); }
 body {
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  background-color: var(--ink);
-  color: var(--paper);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
-  max-width: 100vw;
-  width: 100%;
-}
-
-::selection {
-  background: var(--copper);
+  margin: 0;
+  font-family: var(--font-sans);
   color: var(--ink);
+  background-color: var(--paper);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  transition: background-color .5s ease, color .5s ease;
+  overflow-x: clip;
 }
+[data-theme="blueprint"] body {
+  background-image:
+    linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 110px 110px, 110px 110px, 22px 22px, 22px 22px;
+}
+[data-theme="root"] body { font-family: var(--font-mono); }
+[data-theme="root"] .font-hand { font-family: var(--font-mono); letter-spacing: -0.03em; }
+[data-theme="root"] .hero-sketch-note { font-size: 15px; }
+[data-theme="classic"] { background: var(--ink); }
+[data-theme="classic"] body {
+  background-color: var(--ink);
+  background-image: none;
+  color: var(--paper);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+::selection { background: var(--accent); color: var(--on-accent); }
+a:hover { color: var(--note); }
 
-/* thin custom scrollbar to match the terminal feel */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: var(--ink);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--trace-line);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--copper);
-}
+@layer components {
+  /* hand-drawn outlines: uneven elliptical radii read as a wobbly pen line */
+  .sk-box   { border: 2px solid var(--ink); border-radius: 255px 14px 225px 14px / 14px 225px 14px 255px; }
+  .sk-box-b { border: 2px solid var(--ink); border-radius: 14px 225px 14px 255px / 255px 14px 225px 14px; }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  /* pencil-hatch shadow (diagonal lines offset behind the element) */
+  .hatch { position: relative; z-index: 0; }
+  .hatch::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    transform: translate(9px, 9px);
+    background: repeating-linear-gradient(-45deg, var(--hatch) 0 1.5px, transparent 1.5px 6px);
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1);
   }
+  .hatch:hover::after { transform: translate(12px, 12px); }
+
+  /* highlighter pen behind a phrase */
+  .marker { background: linear-gradient(transparent 55%, var(--accent-soft) 55%, var(--accent-soft) 88%, transparent 88%); padding: 0 4px; }
+
+  .chip { font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; border: 1.5px dashed var(--muted); border-radius: 999px; color: var(--body); }
+  .navlink { text-decoration: underline wavy transparent; text-underline-offset: 7px; transition: text-decoration-color .25s; padding: 10px 4px; }
+  .navlink:hover, .navlink[aria-current="page"] { text-decoration-color: var(--accent); color: var(--ink); }
+  .kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 6px; border: 1.5px solid var(--ink); border-radius: 6px 4px 7px 5px; box-shadow: 2px 2px 0 var(--ink); background: var(--card); font-family: var(--font-mono); font-size: 13px; color: var(--ink); }
+  .tape { position: absolute; height: 30px; background: var(--tape); border: 1px solid var(--hatch); }
+  .mascot-img { filter: var(--mascot-filter); }
 }
 
+/* ambient loops — the only things that loop */
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -6px; rotate: 2deg; } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes ping { from { opacity: .9; scale: .5; } to { opacity: 0; scale: 1.6; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes photoDrop { 0% { opacity: 0; translate: 0 -110px; rotate: -16deg; } 65% { opacity: 1; translate: 0 8px; rotate: 2deg; } 100% { opacity: 1; translate: 0 0; rotate: -3deg; } }
+@keyframes tapeOn { from { opacity: 0; scale: 0 1; } to { opacity: 1; scale: 1 1; } }
+@keyframes foldAway { 0% { transform: none; opacity: 1; } 30% { transform: perspective(900px) rotateX(55deg) scale(.55) rotate(-6deg); opacity: 1; } 55% { transform: perspective(900px) rotateX(70deg) scale(.25) rotate(-14deg); opacity: .9; } 100% { transform: translate(520px, -420px) scale(.08) rotate(28deg); opacity: 0; } }
+@keyframes formPlane { 0% { opacity: 0; translate: 0 0; scale: .5; rotate: 0deg; } 35% { opacity: 1; scale: 1.2; } 100% { opacity: 0; translate: 480px -460px; scale: .7; rotate: 18deg; } }
+@keyframes sentIn { 0% { opacity: 0; scale: .7; rotate: -8deg; } 70% { opacity: 1; scale: 1.05; rotate: 2deg; } 100% { opacity: 1; scale: 1; rotate: -2deg; } }
+.animate-bob { animation: bob 4s ease-in-out infinite; }
+.animate-photo-drop { animation: photoDrop 1s cubic-bezier(.22,1,.36,1) .4s both; }
+.animate-tape-on { animation: tapeOn .3s ease-out 1.2s both; }
+.folding { animation: foldAway 1s cubic-bezier(.55,0,.75,.4) both; transform-origin: 30% 60%; pointer-events: none; }
+.form-plane { position: absolute; left: 40%; top: 40%; z-index: 4; animation: formPlane 1s cubic-bezier(.55,0,.75,.4) .35s both; pointer-events: none; }
+.sent-card { animation: sentIn .6s cubic-bezier(.34,1.56,.64,1) both; }
+.caret { display: inline-block; width: 3px; height: 1em; background: var(--accent); vertical-align: -0.15em; margin-left: 4px; animation: blink 1s steps(1) infinite; }
+.live-dot { position: relative; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2F7A5B; border: 1.5px solid var(--ink); }
+.live-dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid #2F7A5B; animation: ping 2s ease-out infinite; }
 
+/* reduced motion: everything static and fully drawn */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
