@@ -185,7 +185,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
                   initial={false}
                   animate={{ opacity: flowOn ? 1 : 0.3, y: flowOn ? 0 : 6 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20, delay: flowOn ? i * 0.25 : 0 }}
-                  className={`sk-box-b flex min-h-[130px] flex-1 flex-col gap-2 bg-card px-[18px] py-5 ${
+                  className={`flex min-h-[130px] flex-1 flex-col gap-2 rounded-[16px_8px_18px_8px/8px_18px_8px_16px] border-2 border-ink bg-card px-5 py-5 ${
                     flowOn ? "border-solid" : "border-dashed"
                   }`}
                 >

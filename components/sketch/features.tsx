@@ -53,7 +53,7 @@ export function SketchFlow({ steps, latch = false, compact = true, hint = "archi
     <div className="relative pt-8" tabIndex={0}
       onMouseEnter={() => { setHover(true); play("graphite"); if (latch) setTimeout(() => setBuilt(true), 1400); }}
       onMouseLeave={() => setHover(false)} onFocus={() => setHover(true)} onBlur={() => setHover(false)}>
-      <motion.span aria-hidden animate={{ opacity: on ? 0 : 1 }} className="absolute left-0 top-0 font-hand text-[21px] text-note">{hint}</motion.span>
+      <motion.span aria-hidden animate={{ opacity: on ? 0 : 1 }} className="pointer-events-none absolute left-0 top-0 font-hand text-[21px] text-note">{hint}</motion.span>
       <ol className="m-0 flex list-none items-stretch gap-1 p-0" aria-label="Architecture">
         {steps.map((s, i) => (
           <li key={s} className="flex min-w-0 flex-1 items-center gap-1">
@@ -61,12 +61,14 @@ export function SketchFlow({ steps, latch = false, compact = true, hint = "archi
               initial={false}
               animate={{ opacity: on ? 1 : 0.3, y: on ? 0 : 6 }}
               transition={{ type: "spring", stiffness: 400, damping: 20, delay: on ? i * 0.22 : 0 }}
-              className={`sk-box-b min-w-0 flex-1 bg-paper p-2 text-center font-mono leading-snug ${compact ? "text-[11.5px]" : "text-sm"} ${on ? "border-solid" : "border-dashed"}`}
+              className={`flex min-w-0 flex-1 items-center justify-center rounded-[10px_4px_12px_4px/4px_12px_4px_10px] border-2 border-ink bg-paper px-1.5 py-2 text-center font-mono leading-[1.25] tracking-[-0.02em] break-words ${
+                compact ? "text-[10.5px]" : "text-sm"
+              } ${on ? "border-solid" : "border-dashed"}`}
             >
               {s}
             </motion.span>
             {i < steps.length - 1 && (
-              <svg width="20" height="16" viewBox="0 0 20 16" aria-hidden className="flex-none">
+              <svg width="15" height="14" viewBox="0 0 20 16" aria-hidden className="flex-none">
                 <motion.path d="M1 9 C 6 5, 11 11, 17 8 M13 4 L18 8 L13 12" fill="none" stroke="var(--ink)" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"
                   initial={false} animate={{ pathLength: on ? 1 : 0 }} transition={{ duration: 0.3, delay: on ? i * 0.22 + 0.12 : 0 }} />
               </svg>

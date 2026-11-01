@@ -87,7 +87,7 @@ export function Ticker({ items }: { items: string[] }) {
   const loop = [...items, ...items];
   return (
     <div className="group -mx-5 -rotate-[1.2deg] overflow-hidden border-y-2 border-ink bg-ink text-paper">
-      <div className="flex w-max py-4 [animation:marquee_38s_linear_infinite] group-hover:[animation-play-state:paused]">
+      <div className="animate-marquee flex w-max py-4">
         {loop.map((t, i) => (
           <span key={i} className="inline-flex items-center gap-5 whitespace-nowrap px-5 text-[22px]">{t}<span aria-hidden className="text-accent">✳</span></span>
         ))}

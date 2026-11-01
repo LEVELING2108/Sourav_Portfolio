@@ -34,15 +34,15 @@ export const RED_PEN = {
 
 /** Architecture flows drawn on project cards (from app/data.ts architecture.flow, shortened). */
 export const PROJECT_FLOWS: Record<string, string[]> = {
-  "Laya System-1 Integrations": ["agent state / tool schemas", "ModernBERT, 1 pass", "confidence gating", "sub-35ms dispatch"],
-  ROADSoS: ["emergency trigger", "PWA offline cache", "Redis queue + mutex", "live dispatch"],
-  "RailTrack Pro": ["QR field scan", "Flask 3.0 REST API", "multi-stage audit", "vendor risk 0–100"],
-  FraudShield: ["transaction ingestion", "feature engineering", "ensemble scoring", "real-time decision"],
-  "CRM CSV Importer": ["messy CSV upload", "chunked batch parser", "structured LLM output", "type-safe lead JSON"],
-  "ModelSentry API": ["inference gateway", "JWT verification", "A/B traffic splitter", "Prometheus telemetry"],
-  "NLP Text Classification": ["raw text corpus", "tokenise + preprocess", "evaluate + track", "containerised release"],
-  "NLP Text Classification Pipeline": ["raw text corpus", "tokenise + preprocess", "evaluate + track", "containerised release"],
-  Ledgerline: ["expense entry", "validate + categorise", "database", "Recharts analytics"],
+  "Laya System-1 Integrations": ["agent state", "ModernBERT", "confidence gate", "sub-35ms route"],
+  ROADSoS: ["SOS trigger", "PWA cache", "Redis mutex", "live dispatch"],
+  "RailTrack Pro": ["QR field scan", "Flask 3 API", "4-stage audit", "vendor score"],
+  FraudShield: ["tx ingestion", "feature pipe", "ensemble ML", "live decision"],
+  "CRM CSV Importer": ["CSV upload", "chunk parser", "LLM extract", "typed JSON"],
+  "ModelSentry API": ["API gateway", "JWT auth", "A/B splitter", "telemetry"],
+  "NLP Text Classification": ["raw corpus", "tokenise", "eval + track", "Docker build"],
+  "NLP Text Classification Pipeline": ["raw corpus", "tokenise", "eval + track", "Docker build"],
+  Ledgerline: ["expense form", "auto-tag", "database", "Recharts UI"],
 };
 
 /** Tech stack page: where each tool shipped (mirrors SkillsMarquee projectProof). */

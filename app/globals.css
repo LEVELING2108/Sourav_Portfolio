@@ -150,6 +150,8 @@ a:hover { color: var(--note); }
 @keyframes formPlane { 0% { opacity: 0; translate: 0 0; scale: .5; rotate: 0deg; } 35% { opacity: 1; scale: 1.2; } 100% { opacity: 0; translate: 480px -460px; scale: .7; rotate: 18deg; } }
 @keyframes sentIn { 0% { opacity: 0; scale: .7; rotate: -8deg; } 70% { opacity: 1; scale: 1.05; rotate: 2deg; } 100% { opacity: 1; scale: 1; rotate: -2deg; } }
 .animate-bob { animation: bob 4s ease-in-out infinite; }
+.animate-marquee { animation: marquee 28s linear infinite; }
+.group:hover .animate-marquee { animation-play-state: paused; }
 .animate-photo-drop { animation: photoDrop 1s cubic-bezier(.22,1,.36,1) .4s both; }
 .animate-tape-on { animation: tapeOn .3s ease-out 1.2s both; }
 .folding { animation: foldAway 1s cubic-bezier(.55,0,.75,.4) both; transform-origin: 30% 60%; pointer-events: none; }
@@ -161,5 +163,5 @@ a:hover { color: var(--note); }
 
 /* reduced motion: everything static and fully drawn */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+/* ambient animations stay active even if Windows OS reduced-motion is toggled */
 }

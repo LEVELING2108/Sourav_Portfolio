@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { PORTRAIT_PATHS, PORTRAIT_VIEWBOX } from "@/lib/portrait-paths";
 import { INTRO, photoDrop, riseIn } from "@/lib/motion";
 import { useTheme } from "./ThemeProvider";
@@ -14,7 +14,7 @@ import { useTheme } from "./ThemeProvider";
  *  4. hover: the sketch comes back over a faded photo
  */
 export function SelfDrawingPortrait({ src = "/photos/portrait-crop.jpg", caption = "me, mid-commit" }: { src?: string; caption?: string }) {
-  const reduce = useReducedMotion();
+  const reduce = false;
   const { theme } = useTheme();
   const [developed, setDeveloped] = useState(!!reduce);
   const [hover, setHover] = useState(false);
