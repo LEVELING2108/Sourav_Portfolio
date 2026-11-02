@@ -30,7 +30,8 @@ function HeroCtas() {
       <motion.span variants={popIn} initial="hidden" animate="show" custom={INTRO.ctas[2]} {...gh}>
         <SketchButton href={profile.github} external>github</SketchButton>
       </motion.span>
-      <div className="ml-2.5"><Mascot delay={INTRO.mascot} /></div>
+      {/* on phones the mascot takes its own row, so its bubble sits in the gap above it, not over the buttons */}
+      <div className="ml-2.5 max-sm:mt-12 max-sm:flex max-sm:basis-full max-sm:justify-end"><Mascot delay={INTRO.mascot} /></div>
     </div>
   );
 }

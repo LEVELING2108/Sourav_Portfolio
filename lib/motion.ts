@@ -16,24 +16,24 @@ export const spring = {
 
 /** Home intro choreography (seconds after first paint). Plays once per session. */
 export const INTRO = {
-  nav: 0.15,
-  kicker: 0.45,
-  name: 0.6,          // name writes in left→right (1.1s)
-  photo: 0.5,         // polaroid drops and swings
-  portraitLines: 1.0, // self-drawing portrait strokes start
-  underline: 1.55,
-  tagline: 1.75,
-  meta: 1.9,
-  tape: 1.2,
-  ctas: [2.1, 2.2, 2.3],
-  mascot: 2.6,
-  stats: 2.5,
-  ticker: 2.9,
-  photoDevelops: 4.3, // line-art fades into the real photo
+  nav: 0.1,
+  kicker: 0.25,
+  name: 0.35,         // name writes in left→right (1.1s)
+  photo: 0.3,         // polaroid drops and swings
+  portraitLines: 0.6, // self-drawing portrait strokes start (~3.15s of strokes)
+  underline: 0.9,
+  tagline: 1.0,
+  meta: 1.1,
+  tape: 0.7,
+  ctas: [1.2, 1.28, 1.36],
+  mascot: 1.5,
+  stats: 1.4,
+  ticker: 1.6,
+  photoDevelops: 3.8, // line-art fades into the real photo, once the strokes finish
 };
 
-/** Sub-page intro (after the page turn). */
-export const PAGE_INTRO = { nav: 0.45, kicker: 0.65, title: 0.75, underline: 1.55, lead: 1.6, mascot: 1.9 };
+/** Sub-page intro (after the page turn; the sheet clears ~0.5s in). */
+export const PAGE_INTRO = { nav: 0.35, kicker: 0.5, title: 0.55, underline: 1.1, lead: 1.0, mascot: 1.3 };
 
 export const writeIn: Variants = {
   hidden: { clipPath: "inset(0 100% 0 0)" },
