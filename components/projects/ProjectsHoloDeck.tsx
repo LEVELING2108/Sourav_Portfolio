@@ -109,7 +109,7 @@ export default function ProjectsHoloDeck() {
               {isSelected && (
                 <motion.div
                   layoutId="split-selector-pill"
-                  className="absolute inset-0 rounded-xl bg-ink border border-copper/40 shadow-[0_4px_20px_rgba(184,118,62,0.12)]"
+                  className="absolute inset-0 rounded-xl bg-ink border border-copper/40 shadow-md"
                   transition={{ type: "spring", stiffness: 400, damping: 32 }}
                 />
               )}
@@ -161,7 +161,7 @@ export default function ProjectsHoloDeck() {
         {/* Top Specular Beam */}
         <div
           className={`absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent ${
-            isFlagship ? "via-copper-bright" : "via-signal"
+            isFlagship ? "via-copper-bright" : "via-copper"
           } to-transparent`}
         />
 
@@ -257,7 +257,7 @@ export default function ProjectsHoloDeck() {
                     const isInternal = link.href.startsWith("/");
                     const isPrimary =
                       link.label === "Live" || link.label === "Inspect Diffs";
-                    const cls = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs font-semibold transition-all whitespace-nowrap ${
+                    const cls = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs font-semibold transition whitespace-nowrap ${
                       isPrimary
                         ? "bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30"
                         : "bg-ink border border-trace text-paper hover:border-copper/40"
@@ -303,7 +303,7 @@ export default function ProjectsHoloDeck() {
               </div>
 
               {/* Project Image or System-1 Terminal Preview */}
-              <div className="relative flex-1 w-full overflow-hidden bg-[#07080a]">
+              <div className="relative flex-1 w-full overflow-hidden bg-paper">
                 {activeProject.image ? (
                   <>
                     <Image
@@ -315,7 +315,7 @@ export default function ProjectsHoloDeck() {
                     <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent pointer-events-none" />
                   </>
                 ) : (
-                  <div className="h-full w-full p-4 sm:p-5 flex flex-col justify-between font-mono text-xs bg-gradient-to-br from-ink-raised via-[#08090c] to-ink">
+                  <div className="h-full w-full p-4 sm:p-5 flex flex-col justify-between font-mono text-xs bg-gradient-to-br from-ink-raised via-ink to-ink">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-[11px] text-slate/70 border-b border-trace/50 pb-2">
                         <span className="text-signal">laya.integrations.tools</span>
@@ -337,11 +337,11 @@ export default function ProjectsHoloDeck() {
 
                     <div className="grid grid-cols-2 gap-2 pt-3 border-t border-trace/50 text-[10px]">
                       <div className="p-2 rounded-lg bg-ink border border-trace">
-                        <span className="text-slate/60 block">LATENCY</span>
+                        <span className="text-slate/60 block">Latency</span>
                         <span className="text-amber-400 font-bold text-xs">~32.8 ms (45x)</span>
                       </div>
                       <div className="p-2 rounded-lg bg-ink border border-trace">
-                        <span className="text-slate/60 block">ECOSYSTEM</span>
+                        <span className="text-slate/60 block">Ecosystem</span>
                         <span className="text-copper-bright font-bold text-xs">33,000+ ★</span>
                       </div>
                     </div>

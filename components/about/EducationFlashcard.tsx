@@ -17,10 +17,10 @@ export default function EducationFlashcard({ item }: { item: EducationItem }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4, scale: 1.01 }}
-      className="group relative rounded-xl border border-trace bg-ink-raised p-5 backdrop-blur transition-all duration-300 hover:border-copper/60 hover:shadow-[0_8px_24px_rgba(184,118,62,0.12)]"
+      className="group relative rounded-xl border border-trace bg-ink-raised p-5 backdrop-blur transition duration-300 hover:border-copper/60 hover:shadow-md"
     >
       {/* Subtle top copper/signal gradient ambient glow bar */}
-      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-gradient-to-r from-copper via-copper-bright/40 to-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="absolute inset-x-0 top-0 h-1 rounded-t-xl bg-copper opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* Header Info */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-trace/60 pb-3">

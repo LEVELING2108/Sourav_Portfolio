@@ -483,7 +483,7 @@ export default function GitDiffInspector() {
         <div className="flex items-center p-1 rounded-xl bg-ink border border-trace font-mono text-xs w-full sm:w-auto">
           <button
             onClick={() => setActiveTab("diff")}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
               activeTab === "diff"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -494,7 +494,7 @@ export default function GitDiffInspector() {
           </button>
           <button
             onClick={() => setActiveTab("architecture")}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition-all cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg transition cursor-pointer text-[11px] sm:text-xs whitespace-nowrap ${
               activeTab === "architecture"
                 ? "bg-copper/20 text-copper-bright border border-copper/40 font-semibold"
                 : "text-slate hover:text-paper"
@@ -516,7 +516,7 @@ export default function GitDiffInspector() {
               className="p-2.5 sm:p-3.5 rounded-xl border border-trace bg-ink-raised/60 backdrop-blur-xs flex flex-col justify-between"
             >
               <div className="flex items-center justify-between text-slate/70 mb-2">
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider">{metric.label}</span>
+                <span className="text-[10px] sm:text-[11px]">{metric.label}</span>
                 <Icon size={14} className={metric.highlight} />
               </div>
               <div>
@@ -547,7 +547,7 @@ export default function GitDiffInspector() {
             <div className="rounded-2xl border border-trace bg-ink-raised/90 p-5 sm:p-6 backdrop-blur-md space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl border border-rose-500/20 bg-rose-500/5 space-y-2">
-                  <span className="text-xs font-mono font-semibold text-rose-400 uppercase tracking-wider">
+                  <span className="text-xs font-mono font-semibold text-rose-400">
                     The Problem
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
@@ -557,7 +557,7 @@ export default function GitDiffInspector() {
                 </div>
 
                 <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 space-y-2">
-                  <span className="text-xs font-mono font-semibold text-emerald-400 uppercase tracking-wider">
+                  <span className="text-xs font-mono font-semibold text-emerald-400">
                     The Solution (Laya Integrations)
                   </span>
                   <p className="text-xs sm:text-sm text-paper/90 leading-relaxed font-sans">
@@ -570,7 +570,7 @@ export default function GitDiffInspector() {
 
               {/* Key Contributions */}
               <div className="pt-2">
-                <h4 className="font-mono text-xs uppercase tracking-wider text-slate mb-3">
+                <h4 className="font-mono text-xs text-slate mb-3">
                   Key Engineering Contributions
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -603,7 +603,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/977"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition font-semibold"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #977 (LayaToolSelector · v0.4.11)</span>
@@ -614,7 +614,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/1020"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/25 transition font-semibold"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #1020 (.NET Concurrency)</span>
@@ -625,7 +625,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/737"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition font-semibold"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #737 (Windows CI)</span>
@@ -636,7 +636,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/533"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition font-semibold"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #533 (LlamaIndex)</span>
@@ -647,7 +647,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/535"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all font-semibold"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition font-semibold"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #535 (CrewAI)</span>
@@ -658,7 +658,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/229"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-paper hover:border-copper/40 transition-all"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-paper hover:border-copper/40 transition"
                 >
                   <GitPullRequest size={13} />
                   <span>Merged PR #229 (LangChain)</span>
@@ -669,7 +669,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya/pull/982"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition-all"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:bg-amber-500/20 transition"
                 >
                   <GitPullRequest size={13} />
                   <span>PR #982 (Early Stopping · In Review)</span>
@@ -680,7 +680,7 @@ export default function GitDiffInspector() {
                   href="https://github.com/NandhaKishorM/laya"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition-all ml-auto"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-ink border border-trace text-slate hover:text-paper transition ml-auto"
                 >
                   <span>Laya Repository (33,000+ ★)</span>
                   <ExternalLink size={12} />
@@ -720,7 +720,7 @@ export default function GitDiffInspector() {
                 {/* Monoline Commit Bar */}
                 <div
                   onClick={() => toggleExpand(patch.id)}
-                  className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-4 p-3.5 sm:p-4 cursor-pointer select-none font-mono text-xs transition-all"
+                  className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-4 p-3.5 sm:p-4 cursor-pointer select-none font-mono text-xs transition"
                 >
                   {/* Left: Graph node & repo */}
                   <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
@@ -773,7 +773,7 @@ export default function GitDiffInspector() {
                     <span className="text-slate/70 text-[11px] hidden sm:inline">{patch.releaseVersion}</span>
 
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-semibold uppercase ${
+                      className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                         patch.status === "in-review"
                           ? "bg-amber-500/10 border border-amber-500/30 text-amber-400"
                           : patch.status === "closed"
@@ -827,7 +827,7 @@ export default function GitDiffInspector() {
                               e.stopPropagation();
                               handleCopyDiff(patch);
                             }}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-trace bg-ink text-slate hover:text-paper hover:border-copper/50 transition-all cursor-pointer text-[10px]"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-trace bg-ink text-slate hover:text-paper hover:border-copper/50 transition cursor-pointer text-[10px]"
                             title="Copy raw unified diff patch"
                           >
                             {isCopied ? (
@@ -849,7 +849,7 @@ export default function GitDiffInspector() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition-all text-[10px] font-semibold"
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded bg-copper/20 border border-copper/40 text-copper-bright hover:bg-copper/30 transition text-[10px] font-semibold"
                           >
                             <span>GitHub PR #{patch.prNumber}</span>
                             <ArrowUpRight size={10} />
@@ -864,7 +864,7 @@ export default function GitDiffInspector() {
                       </div>
 
                       {/* Unified Diff Viewport */}
-                      <div className="p-2.5 sm:p-4 overflow-x-auto font-mono text-[10px] sm:text-xs leading-relaxed select-text bg-[#030303] text-paper">
+                      <div className="p-2.5 sm:p-4 overflow-x-auto font-mono text-[10px] sm:text-xs leading-relaxed select-text bg-paper text-paper">
                         <div className="text-slate/60 pb-1 text-[9px] sm:text-[10px] truncate">{patch.diffHeader}</div>
                         <div className="text-cyan-400/80 pb-1.5 font-bold text-[10px] sm:text-[11px] truncate">{patch.hunkHeader}</div>
 
@@ -897,7 +897,7 @@ export default function GitDiffInspector() {
                       {/* Diff Footer: Stack Tags */}
                       <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 border-t border-trace/60 bg-ink-raised/50 font-mono text-[11px]">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-slate/60 text-[10px] uppercase">Tech Stack:</span>
+                          <span className="text-slate/60 text-[10px] ">Tech Stack:</span>
                           {patch.stack.map((t) => (
                             <span key={t} className="px-2 py-0.5 rounded bg-ink border border-trace text-slate text-[10px]">
                               {t}

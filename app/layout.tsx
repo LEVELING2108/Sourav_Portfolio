@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Shantell_Sans, Caveat, JetBrains_Mono } from "next/font/google";
+import { Shantell_Sans, Caveat, JetBrains_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider, themeBootScript } from "@/components/sketch/ThemeProvider";
 import { SoundProvider } from "@/components/sketch/SoundProvider";
@@ -13,6 +13,11 @@ const shantell = Shantell_Sans({
 const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-caveat",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
 });
 
 const jetbrains = JetBrains_Mono({
@@ -111,7 +116,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="paper"
-      className={`${shantell.variable} ${caveat.variable} ${jetbrains.variable} h-full scroll-smooth`}
+      className={`${shantell.variable} ${caveat.variable} ${jetbrains.variable} ${geist.variable} h-full scroll-smooth`}
       suppressHydrationWarning
     >
       <head>

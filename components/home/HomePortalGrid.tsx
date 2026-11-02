@@ -132,11 +132,11 @@ export default function HomePortalGrid() {
                     setActiveIndex(idx);
                   }
                 }}
-                className={`relative rounded-2xl border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between overflow-hidden cursor-pointer select-none ${
+                className={`relative rounded-2xl border transition duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-between overflow-hidden cursor-pointer select-none ${
                   isActive
                     ? isCopper
-                      ? "flex-[3.2] border-copper/60 bg-gradient-to-br from-ink-raised/95 to-ink shadow-[0_12px_36px_rgba(184,118,62,0.18)]"
-                      : "flex-[3.2] border-signal/60 bg-gradient-to-br from-ink-raised/95 to-ink shadow-[0_12px_36px_rgba(79,209,197,0.16)]"
+                      ? "flex-[3.2] border-copper/60 bg-gradient-to-br from-ink-raised/95 to-ink shadow-md"
+                      : "flex-[3.2] border-signal/60 bg-gradient-to-br from-ink-raised/95 to-ink shadow-md"
                     : "flex-1 border-trace/60 bg-ink-raised/40 hover:bg-ink-raised/70 hover:border-trace"
                 }`}
                 title={isActive ? `Click to launch ${mod.name}` : `Click to inspect ${mod.name}`}
@@ -147,8 +147,8 @@ export default function HomePortalGrid() {
                     layoutId="portal-top-beam"
                     className={`absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent ${
                       isCopper
-                        ? "via-copper-bright shadow-[0_0_14px_rgba(184,118,62,0.6)]"
-                        : "via-signal shadow-[0_0_14px_rgba(79,209,197,0.6)]"
+                        ? "via-copper-bright "
+                        : "via-signal "
                     } to-transparent pointer-events-none z-20`}
                     transition={{ type: "spring", stiffness: 360, damping: 32 }}
                   />
@@ -188,7 +188,7 @@ export default function HomePortalGrid() {
                         <Icon size={16} />
                       </span>
 
-                      <div className="[writing-mode:vertical-lr] rotate-180 font-mono text-xs text-slate uppercase tracking-widest font-medium whitespace-nowrap">
+                      <div className="[writing-mode:vertical-lr] rotate-180 font-mono text-xs text-slate font-medium whitespace-nowrap">
                         {mod.name}
                       </div>
 
@@ -214,8 +214,8 @@ export default function HomePortalGrid() {
                           transition={{ duration: 0.24, delay: 0.05 }}
                           className="flex items-center justify-between"
                         >
-                          <span className="font-mono text-[11px] text-slate/70 tracking-wider">
-                            PORTAL // 0{idx + 1}
+                          <span className="font-mono text-[11px] text-slate/70">
+                            portal 0{idx + 1}
                           </span>
                           <span
                             className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-semibold ${
@@ -345,7 +345,7 @@ export default function HomePortalGrid() {
               >
                 <Link
                   href={mod.href}
-                  className="block rounded-xl border border-trace bg-ink-raised/70 p-3.5 sm:p-4 transition-all hover:border-copper/50 hover:bg-ink-raised"
+                  className="block rounded-xl border border-trace bg-ink-raised/70 p-3.5 sm:p-4 transition hover:border-copper/50 hover:bg-ink-raised"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">

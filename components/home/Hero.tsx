@@ -186,7 +186,7 @@ function HeroActionDock() {
                 {isSystems && !hovered && (
                   <motion.div
                     layoutId="liquid-glass-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-b from-copper/25 via-copper/15 to-copper/5 border border-copper/50 shadow-[0_2px_12px_rgba(235,140,80,0.25),inset_0_1px_1.5px_rgba(255,255,255,0.25)] backdrop-blur-md"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-copper/25 via-copper/15 to-copper/5 border border-copper/50 shadow-sm backdrop-blur-md"
                     transition={{
                       type: "spring",
                       stiffness: 450,
@@ -200,7 +200,7 @@ function HeroActionDock() {
                 {isHovered && (
                   <motion.div
                     layoutId="liquid-glass-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.45),0_0_16px_rgba(235,140,80,0.2)] backdrop-blur-xl"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-sm backdrop-blur-xl"
                     transition={{
                       type: "spring",
                       stiffness: 450,
@@ -228,7 +228,7 @@ function HeroActionDock() {
                 {isHovered && (
                   <motion.div
                     layoutId="liquid-glass-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.45),0_0_16px_rgba(235,140,80,0.2)] backdrop-blur-xl"
+                    className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 via-white/[0.08] to-white/[0.02] border border-white/35 shadow-sm backdrop-blur-xl"
                     transition={{
                       type: "spring",
                       stiffness: 450,
@@ -259,7 +259,7 @@ export default function Hero() {
       className="relative flex min-h-[100dvh] flex-col justify-center px-4 sm:px-6 pt-16 sm:pt-20 pb-16 overflow-hidden"
     >
       {/* Background Engineering Blueprint Mesh & Ambient Radiance */}
-      <div className="absolute inset-0 bg-[radial-gradient(#26262d_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,#000_60%,transparent_100%)] pointer-events-none opacity-40" />
+      <div className="absolute inset-0 bg-[radial-gradient(var(--trace-line)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,#000_60%,transparent_100%)] pointer-events-none opacity-40" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-copper/10 rounded-full blur-[170px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-signal/5 rounded-full blur-[150px] pointer-events-none" />
 
@@ -285,7 +285,7 @@ export default function Hero() {
                 label="Sourav"
               />
               <div className="hidden xs:flex flex-col text-left">
-                <span className="font-mono text-xs text-copper-bright font-medium tracking-wide flex items-center gap-1.5">
+                <span className="font-mono text-xs text-copper-bright font-medium flex items-center gap-1.5">
                   <span className="inline-block w-2 h-2 rounded-full bg-signal animate-pulse" />
                   cursor tracker online
                 </span>
@@ -359,7 +359,7 @@ export default function Hero() {
           className="group flex flex-col items-center justify-center gap-1.5 cursor-pointer p-2"
           aria-label="Scroll to Command Portals"
         >
-          <span className="font-mono text-[10px] uppercase tracking-widest text-slate/60 group-hover:text-copper-bright transition-colors">
+          <span className="font-mono text-[10px] text-slate/60 group-hover:text-copper-bright transition-colors">
             explore portals
           </span>
           <motion.div

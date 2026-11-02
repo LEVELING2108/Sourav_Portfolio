@@ -277,8 +277,8 @@ export default function SkillsMarquee() {
     return (
       <div className="space-y-2">
         <div className="flex items-center gap-2 px-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-copper shadow-[0_0_8px_rgba(184,118,62,0.8)]" />
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-slate/70">
+          <span className="h-1.5 w-1.5 rounded-full bg-copper " />
+          <span className="font-mono text-[10px] font-semibold text-slate/70">
             {trackLabel}
           </span>
         </div>
@@ -310,9 +310,9 @@ export default function SkillsMarquee() {
                 <button
                   key={`${skill.id}-${index}`}
                   onClick={() => setSelectedSkill(skill)}
-                  className={`group relative flex items-center gap-2 sm:gap-2.5 rounded-2xl border px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-[11px] sm:text-xs transition-all cursor-pointer select-none ${
+                  className={`group relative flex items-center gap-2 sm:gap-2.5 rounded-2xl border px-2.5 py-1.5 sm:px-3.5 sm:py-2 font-mono text-[11px] sm:text-xs transition cursor-pointer select-none ${
                     isSelected
-                      ? "bg-gradient-to-r from-copper/25 via-ink-raised to-copper/15 border-copper-bright text-paper font-semibold shadow-[0_0_20px_rgba(184,118,62,0.35)] scale-105 z-10"
+                      ? "bg-gradient-to-r from-copper/25 via-ink-raised to-copper/15 border-copper-bright text-paper font-semibold shadow-sm scale-105 z-10"
                       : "bg-gradient-to-b from-ink-raised to-ink border-trace text-slate hover:text-paper hover:border-copper/60 hover:shadow-lg"
                   }`}
                 >
@@ -346,9 +346,9 @@ export default function SkillsMarquee() {
   return (
     <div className="space-y-6">
       {/* Live HUD Terminal Inspector Drawer */}
-      <div className="rounded-3xl border border-copper/50 bg-ink-raised/95 backdrop-blur-xl p-5 sm:p-6 shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative overflow-hidden">
+      <div className="rounded-3xl border border-copper/50 bg-ink-raised/95 backdrop-blur-xl p-5 sm:p-6 shadow-lg relative overflow-hidden">
         {/* Top ambient accent highlight line */}
-        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-copper via-copper-bright to-signal opacity-100" />
+        <div className="absolute top-0 inset-x-0 h-1 bg-copper opacity-100" />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -391,7 +391,7 @@ export default function SkillsMarquee() {
             {/* Detailed Specs Grid */}
             <div className="grid gap-4 sm:grid-cols-2 font-mono text-xs">
               <div className="p-3.5 rounded-xl bg-ink border border-trace space-y-1.5">
-                <span className="text-[10px] uppercase text-slate tracking-wider block font-semibold">
+                <span className="text-[10px] text-slate block font-semibold">
                   {"// Production Engineering Solve"}
                 </span>
                 <p className="text-paper text-xs leading-relaxed font-sans">
@@ -400,7 +400,7 @@ export default function SkillsMarquee() {
               </div>
 
               <div className="p-3.5 rounded-xl bg-ink border border-trace space-y-1.5 flex flex-col justify-between">
-                <span className="text-[10px] uppercase text-slate tracking-wider block font-semibold">
+                <span className="text-[10px] text-slate block font-semibold">
                   {"// Shipped In Portfolio Project"}
                 </span>
                 <div className="flex items-center justify-between pt-1">

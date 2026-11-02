@@ -338,7 +338,7 @@ export default function CommandPalette() {
                           item.action();
                         }}
                         onMouseEnter={() => setSelectedIndex(idx)}
-                        className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all text-left cursor-pointer border-2 ${
+                        className={`w-full flex items-center justify-between p-2.5 rounded-xl transition text-left cursor-pointer border-2 ${
                           isSelected
                             ? "bg-[var(--accent-soft)] border-ink text-ink"
                             : "text-body hover:bg-paper border-transparent"

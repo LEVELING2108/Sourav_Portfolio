@@ -27,7 +27,7 @@ export default function Nav() {
 
   return (
     <header className="fixed top-3 sm:top-5 inset-x-0 z-50 flex justify-center px-3 sm:px-6 lg:px-8 pointer-events-none">
-      <nav className="pointer-events-auto mx-auto w-full max-w-5xl lg:max-w-6xl flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-trace/90 bg-ink-raised/90 backdrop-blur-xl px-3 sm:px-6 py-2 sm:py-2.5 shadow-[0_12px_36px_rgba(15,23,42,0.08)] transition-all">
+      <nav className="pointer-events-auto mx-auto w-full max-w-5xl lg:max-w-6xl flex items-center justify-between gap-2 sm:gap-4 rounded-full border border-trace/90 bg-ink-raised/90 backdrop-blur-xl px-3 sm:px-6 py-2 sm:py-2.5 shadow-sm transition">
         {/* Left: Brand Identity with Live Pulsing LED */}
         <Link
           href="/"
@@ -84,7 +84,7 @@ export default function Nav() {
             onClick={openSearch}
             aria-label="Search site (Cmd + K)"
             title="Search (Cmd + K)"
-            className="flex items-center justify-center gap-1.5 h-8 sm:h-9 px-2.5 sm:px-3 rounded-full border border-trace bg-ink/70 font-mono text-xs text-slate hover:text-paper hover:border-copper/50 transition-all cursor-pointer shadow-sm active:scale-95"
+            className="flex items-center justify-center gap-1.5 h-8 sm:h-9 px-2.5 sm:px-3 rounded-full border border-trace bg-ink/70 font-mono text-xs text-slate hover:text-paper hover:border-copper/50 transition cursor-pointer shadow-sm active:scale-95"
           >
             <Search size={14} className="text-copper-bright" />
             <span className="hidden md:inline text-[11px] text-slate/75">⌘K</span>
@@ -95,7 +95,7 @@ export default function Nav() {
             href={profile.resumeHref}
             target="_blank"
             rel="noreferrer"
-            className="hidden lg:inline-flex items-center gap-1.5 h-8 sm:h-9 px-3.5 rounded-full border border-copper/60 bg-copper/10 font-mono text-xs text-copper-bright hover:bg-copper/20 transition-all active:scale-95"
+            className="hidden lg:inline-flex items-center gap-1.5 h-8 sm:h-9 px-3.5 rounded-full border border-copper/60 bg-copper/10 font-mono text-xs text-copper-bright hover:bg-copper/20 transition active:scale-95"
           >
             <span>resume</span>
             <ArrowUpRight size={12} />
@@ -107,7 +107,7 @@ export default function Nav() {
             onClick={() => setTheme("paper")}
             aria-label="Switch to Sketchbook Theme"
             title="Switch to Sketchbook Theme"
-            className="inline-flex items-center justify-center gap-1.5 h-8 sm:h-9 px-3 rounded-full border border-copper/60 bg-ink-raised font-mono text-xs font-medium text-paper hover:text-copper-bright hover:border-copper transition-all cursor-pointer shadow-sm active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 h-8 sm:h-9 px-3 rounded-full border border-copper/60 bg-ink-raised font-mono text-xs font-medium text-paper hover:text-copper-bright hover:border-copper transition cursor-pointer shadow-sm active:scale-95"
           >
             <Pencil size={13} className="text-copper-bright" />
             <span>sketch</span>

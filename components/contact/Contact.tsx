@@ -7,7 +7,7 @@ import { GitBranch, Mail, Copy, Check, FileText } from "lucide-react";
 
 function LinkedinIcon({ size = 15, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ export default function Contact() {
         {/* Send Email Mailto */}
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition-all active:scale-95 shadow-md"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-copper px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm font-medium text-ink hover:bg-copper-bright transition active:scale-95 shadow-md"
         >
           <Mail size={15} />
           Email Me
@@ -60,7 +60,7 @@ export default function Contact() {
         {/* Copy Email Button */}
         <button
           onClick={handleCopyEmail}
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition active:scale-95 cursor-pointer"
         >
           {copied ? (
             <>
@@ -80,7 +80,7 @@ export default function Contact() {
           href={profile.github}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition active:scale-95"
         >
           <GitBranch size={15} />
           GitHub
@@ -91,7 +91,7 @@ export default function Contact() {
           href={profile.linkedin}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition-all active:scale-95"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-trace px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-paper hover:border-copper/60 transition active:scale-95"
         >
           <LinkedinIcon size={15} className="text-signal" />
           LinkedIn
@@ -102,7 +102,7 @@ export default function Contact() {
           href={profile.resumeHref}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition-all active:scale-95"
+          className="inline-flex items-center justify-center gap-2 rounded-lg border border-copper/60 bg-copper/10 px-4 sm:px-5 py-2.5 font-mono text-xs sm:text-sm text-copper-bright hover:bg-copper/20 transition active:scale-95"
         >
           <FileText size={15} />
           Resume PDF
@@ -117,7 +117,7 @@ export default function Contact() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-6 inset-x-4 sm:inset-x-auto sm:right-6 z-50 flex items-center gap-2.5 rounded-xl border border-signal/60 bg-ink-raised/95 px-4 py-3 font-mono text-xs text-paper shadow-[0_8px_30px_rgba(79,209,197,0.2)] backdrop-blur max-w-sm mx-auto sm:mx-0"
+            className="fixed bottom-6 inset-x-4 sm:inset-x-auto sm:right-6 z-50 flex items-center gap-2.5 rounded-xl border border-signal/60 bg-ink-raised/95 px-4 py-3 font-mono text-xs text-paper shadow-md backdrop-blur max-w-sm mx-auto sm:mx-0"
           >
             <span className="p-1 rounded-full bg-signal/20 text-signal">
               <Check size={14} />
