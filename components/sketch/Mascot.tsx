@@ -57,7 +57,7 @@ export function Mascot({ size = 150, bubbleSide = "left", delay = 2.6 }: { size?
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.2 }}
-          className={`absolute bottom-[calc(100%-8px)] ${bubbleSide === "left" ? "right-[70%] rounded-[18px_22px_4px_18px]" : "left-[55%] rounded-[22px_18px_18px_4px]"} whitespace-nowrap border-2 border-ink bg-card px-3.5 py-1.5 font-hand text-[23px] font-bold text-ink`}
+          className={`absolute bottom-[calc(100%-8px)] ${bubbleSide === "left" ? "right-[70%] rounded-[18px_22px_4px_18px]" : "left-[55%] rounded-[22px_18px_18px_4px] max-sm:left-auto max-sm:right-0"} w-max max-w-[min(260px,60vw)] border-2 border-ink bg-card px-3.5 py-1.5 font-hand text-[23px] font-bold text-ink`}
         >
           {state.line}
         </motion.span>

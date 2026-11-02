@@ -100,11 +100,11 @@ function SketchContactInner() {
               onMouseEnter={() => play("graphite")}
               className="inline-block font-mono text-[14px] text-muted no-underline py-2 hover:text-ink"
             >
-              ← back home
+              back home
             </Link>
 
             <p className="font-hand text-[30px] text-note mt-[18px] mb-0">
-              a role, a project, a weird bug — say hi
+              a role, a project, a weird bug? say hi
             </p>
           </motion.div>
 
@@ -186,12 +186,6 @@ function SketchContactInner() {
                     {l.kind}
                   </span>
                   <span className="text-[20px] font-bold">{l.label}</span>
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="text-[22px] inline-block transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                >
-                  ↗
                 </span>
               </a>
             ))}
@@ -315,7 +309,7 @@ function SketchContactInner() {
                   onMouseEnter={() => play("thock")}
                   className="sk-box hatch self-start inline-flex items-center justify-center gap-2.5 min-h-[54px] px-7 font-bold text-[18px] bg-accent text-[var(--on-accent)] cursor-pointer transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-x-[3px] hover:-translate-y-[3px] hover:-rotate-1 active:translate-x-[5px] active:translate-y-[5px]"
                 >
-                  fold it &amp; send ✈
+                  fold it &amp; send
                 </button>
               </form>
 
@@ -341,18 +335,18 @@ function SketchContactInner() {
             <div className="min-h-[420px] lg:pt-20">
               <div
                 role="status"
-                className="sent-card sk-box-b hatch bg-[#FFF4C7] text-[#1F1D1A] p-[40px_36px] flex flex-col gap-3.5"
+                className="sent-card sk-box-b hatch bg-sticky-paper text-sticky-ink p-[40px_36px] flex flex-col gap-3.5"
               >
-                <span className="font-hand text-[36px] text-[#A84E1E]">
+                <span className="font-hand text-[36px] text-sticky-note">
                   it flew!
                 </span>
                 <span className="text-[30px] font-extrabold leading-[1.2]">
-                  Thanks — I&apos;ll get back to you within a day.
+                  Thanks! I&apos;ll get back to you within a day.
                 </span>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="sk-box self-start mt-2.5 inline-flex items-center justify-center min-h-[48px] px-[22px] font-bold text-[17px] bg-[#FFFDF8] text-[#1F1D1A] cursor-pointer transition-transform duration-300 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:-rotate-1"
+                  className="sk-box self-start mt-2.5 inline-flex items-center justify-center min-h-[48px] px-[22px] font-bold text-[17px] bg-sticky-card text-sticky-ink cursor-pointer transition-transform duration-300 hover:-translate-x-[3px] hover:-translate-y-[3px] hover:-rotate-1"
                 >
                   write another
                 </button>
@@ -364,7 +358,7 @@ function SketchContactInner() {
 
       {/* Bottom Back Home Button */}
       <div className="max-w-[1240px] mx-auto px-6 pb-8 flex justify-end">
-        <SketchButton href="/">back to the start ↺</SketchButton>
+        <SketchButton href="/">back to the start</SketchButton>
       </div>
     </main>
   );

@@ -29,10 +29,10 @@ export function SelfDrawingPortrait({ src = "/photos/portrait-crop.jpg", caption
   const displayCaption = theme === "root" ? "root@sourav:~$" : caption;
 
   return (
-    <div className="relative flex flex-col items-center pb-14">
-      <motion.div className="relative w-[300px]" variants={photoDrop} initial="hidden" animate="show" custom={INTRO.photo}>
+    <div className="relative flex w-full flex-col items-center pb-14">
+      <motion.div className="relative w-full max-w-[300px]" variants={photoDrop} initial="hidden" animate="show" custom={INTRO.photo}>
         <div className="sk-box hatch bg-card px-3.5 pb-14 pt-3.5" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-          <div className="relative h-[340px] w-full overflow-hidden bg-card">
+          <div className="relative h-[340px] w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={src} alt="Portrait of Sourav Suman" className="absolute inset-0 h-full w-full object-cover grayscale contrast-[1.15] brightness-105 transition-opacity duration-[1200ms]"
               style={{ opacity: developed ? (hover ? 0.1 : 1) : 0 }} />

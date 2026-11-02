@@ -116,6 +116,10 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+        {/* without JS, intro motion never runs: show everything it would have revealed */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}[style*="clip-path"]{clip-path:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col antialiased" suppressHydrationWarning>
         <script

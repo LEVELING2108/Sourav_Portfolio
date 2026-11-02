@@ -44,16 +44,16 @@ function ProjectsContent() {
         <div className="min-w-0 flex-[999_1_560px]">
           <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.kicker}>
             <Link href="/" className="inline-block py-2 font-mono text-sm text-muted no-underline">
-              ← back home
+              back home
             </Link>
-            <p className="m-0 mt-4 font-hand text-[30px] text-note">everything I&apos;ve shipped —</p>
+            <p className="m-0 mt-4 font-hand text-[30px] text-note">everything I&apos;ve shipped</p>
           </motion.div>
           <WriteIn delay={PAGE_INTRO.title} className="m-0 text-[clamp(60px,8vw,112px)] font-extrabold leading-none tracking-[-0.03em]">
             Projects
           </WriteIn>
           <Scribble width={300} height={24} delay={PAGE_INTRO.underline} className="mt-1.5 block max-w-full" />
           <motion.p variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.lead} className="mt-6 max-w-[720px] text-[22px] leading-relaxed">
-            <span className="marker">Eight shipped systems</span> — hover a card to see it in colour and watch its architecture sketch itself.
+            <span className="marker">Eight shipped systems</span>. Hover a card to see it in colour and watch its architecture sketch itself.
           </motion.p>
           <motion.div
             variants={riseIn}
@@ -113,13 +113,13 @@ function ProjectsContent() {
                     <img
                       src={p.image}
                       alt={`Screenshot of ${p.title}`}
-                      className="block h-full w-full object-cover object-top grayscale contrast-[1.15] transition-all duration-500 group-hover:grayscale-0 group-hover:contrast-100"
+                      className="block h-full w-full object-cover object-top grayscale contrast-[1.15] transition-[filter] duration-500 group-hover:grayscale-0 group-hover:contrast-100"
                     />
                   </div>
                 )}
 
                 <span
-                  className="sk-box absolute right-1 top-1 rotate-[8deg] px-3 py-1.5 font-mono text-xs text-[#1F1D1A] transition-transform duration-300 group-hover:scale-[1.08] group-hover:-rotate-[4deg]"
+                  className="sk-box absolute right-1 top-1 rotate-[8deg] px-3 py-1.5 font-mono text-xs text-sticky-ink transition-transform duration-300 group-hover:scale-[1.08] group-hover:-rotate-[4deg]"
                   style={{ background: p.stickerBg }}
                 >
                   {p.status}
@@ -147,7 +147,7 @@ function ProjectsContent() {
 
                 <div className="mt-1.5 flex flex-wrap gap-3.5">
                   <SketchButton href={`/projects/${p.slug}`} shape="b" className="min-h-11 px-4 text-[15px]">
-                    read the case →
+                    read the case
                   </SketchButton>
                   {p.links.map((l) => (
                     <SketchButton
@@ -156,7 +156,7 @@ function ProjectsContent() {
                       external={l.href.startsWith("http")}
                       className="min-h-11 bg-transparent px-4 text-[15px]"
                     >
-                      {l.label} ↗
+                      {l.label}
                     </SketchButton>
                   ))}
                 </div>
@@ -166,7 +166,7 @@ function ProjectsContent() {
         </div>
 
         <div className="mt-16 flex justify-end">
-          <SketchButton href="/oss">next: open source →</SketchButton>
+          <SketchButton href="/oss">next: open source</SketchButton>
         </div>
       </section>
     </main>
