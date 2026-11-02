@@ -52,8 +52,11 @@ export default function NeuralBackground() {
       parent.addEventListener("mouseleave", handleMouseLeave);
     }
 
-    // Bright vibrant copper and cyan colors with glow
-    const colors = ["rgba(230, 154, 89, 0.95)", "rgba(79, 209, 197, 0.9)", "rgba(255, 184, 108, 0.95)"];
+    // Colours come from the theme tokens (--constellation-*) so the canvas follows the palette
+    const css = getComputedStyle(document.documentElement);
+    const token = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
+    const colors = [token("--constellation-node", "rgba(178, 90, 38, 0.55)"), token("--constellation-node-soft", "rgba(107, 94, 82, 0.45)")];
+    const line = token("--constellation-line", "178, 90, 38");
 
     // Initialize particles with higher density
     const particleCount = Math.min(65, Math.floor((width * height) / 12000));
@@ -86,9 +89,7 @@ export default function NeuralBackground() {
         if (p.x < 0 || p.x > width) p.vx *= -1;
         if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        // Draw particle dot with soft neon bloom
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 6;
+        // Draw particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
@@ -106,8 +107,8 @@ export default function NeuralBackground() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            const alpha = (1 - dist / 135) * 0.45;
-            ctx.strokeStyle = `rgba(230, 154, 89, ${alpha})`;
+            const alpha = (1 - dist / 135) * 0.22;
+            ctx.strokeStyle = `rgba(${line}, ${alpha})`;
             ctx.lineWidth = 0.95;
             ctx.stroke();
           }
@@ -122,13 +123,10 @@ export default function NeuralBackground() {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
-          const malpha = (1 - mdist / mouse.maxDist) * 0.85;
-          ctx.strokeStyle = `rgba(79, 209, 197, ${malpha})`;
-          ctx.lineWidth = 1.3;
-          ctx.shadowColor = "#4fd1c5";
-          ctx.shadowBlur = 6;
+          const malpha = (1 - mdist / mouse.maxDist) * 0.45;
+          ctx.strokeStyle = `rgba(${line}, ${malpha})`;
+          ctx.lineWidth = 1.1;
           ctx.stroke();
-          ctx.shadowBlur = 0;
         }
       }
 
@@ -150,7 +148,8 @@ export default function NeuralBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0 opacity-80 select-none"
+      aria-hidden="true"
+      className="absolute inset-0 pointer-events-none z-0 opacity-70 select-none"
     />
   );
 }

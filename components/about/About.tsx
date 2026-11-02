@@ -8,7 +8,7 @@ export default function About() {
   return (
     <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.1fr_1fr] pt-2">
       <div>
-        <p className="font-mono text-xs uppercase tracking-wider text-copper-bright font-semibold">
+        <p className="font-mono text-xs text-copper-bright font-semibold">
           {"// engineering philosophy"}
         </p>
         <motion.div
@@ -43,7 +43,7 @@ export default function About() {
         transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="space-y-4"
       >
-        <p className="font-mono text-xs uppercase tracking-wider text-signal font-semibold">
+        <p className="font-mono text-xs text-signal font-semibold">
           {"// education & academic log"}
         </p>
         <div className="space-y-4">

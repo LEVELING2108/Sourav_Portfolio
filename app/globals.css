@@ -53,26 +53,37 @@
   --tape: rgba(124, 227, 139, 0.2); --mascot-filter: invert(1) sepia(1) hue-rotate(60deg) saturate(3) brightness(1.1);
 }
 [data-theme="classic"] {
-  --ink: #f8fafc;
-  --ink-raised: #ffffff;
-  --paper: #0f172a;
-  --slate: #475569;
-  --copper: #d97706;
-  --copper-bright: #c2410c;
-  --signal: #0d9488;
-  --trace-line: #cbd5e1;
-  --card: #ffffff;
-  --muted: #475569;
-  --body: #334155;
-  --note: #c2410c;
-  --red: #dc2626;
-  --accent: #d97706;
-  --on-accent: #ffffff;
-  --accent-soft: rgba(217, 119, 6, 0.18);
+  /* classic: a warm white page with one copper accent, shared with the sketch themes
+     (names are inverted here: --ink is the page, --paper is the text) */
+  --ink: #FAF8F4;          /* page */
+  --ink-raised: #FFFDFA;   /* cards */
+  --paper: #1F1D1A;        /* text */
+  --slate: #5C5750;        /* secondary text */
+  --copper: #B25A26;       /* the one accent */
+  --copper-bright: #96471B;/* accent, pressed and hover */
+  --signal: #6B5E52;       /* the old teal, now a quiet warm grey */
+  --trace-line: #E6E0D6;   /* borders, rules */
+  --card: #FFFDFA;
+  --muted: #5C5750;
+  --body: #3A3732;
+  --note: #96471B;
+  --red: #B8322A;
+  --accent: #B25A26;
+  --on-accent: #FFFDF8;
+  --accent-soft: rgba(178, 90, 38, 0.14);
   --dot: transparent;
-  --hatch: rgba(15, 23, 42, 0.12);
-  --tape: rgba(203, 213, 225, 0.65);
+  --hatch: rgba(31, 29, 26, 0.10);
+  --tape: rgba(214, 196, 150, 0.6);
   --mascot-filter: none;
+  --constellation-node: rgba(178, 90, 38, 0.55);
+  --constellation-node-soft: rgba(107, 94, 82, 0.45);
+  --constellation-line: 178, 90, 38;      /* rgb triplet, alpha set per line */
+  --font-classic: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* small-phone breakpoint used by the classic components (xs:, 480px) */
+@theme {
+  --breakpoint-xs: 30rem;
 }
 
 @theme inline {
@@ -135,8 +146,9 @@ body {
   background-color: var(--ink);
   background-image: none;
   color: var(--paper);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--font-classic);
 }
+[data-theme="classic"] .font-sans { font-family: var(--font-classic); }
 ::selection { background: var(--accent); color: var(--on-accent); }
 a:hover { color: var(--note); }
 :is(button, input, textarea, select):disabled,
