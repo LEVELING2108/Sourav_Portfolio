@@ -97,7 +97,7 @@ export default function SketchStack() {
   const usedIn = USED_IN[selected] ?? [];
   const usedLabel = usedIn.length
     ? `shipped in ${usedIn.length} ${usedIn.length === 1 ? "place:" : "places:"}`
-    : "in my toolkit — not in a featured project yet";
+    : "in my toolkit, not in a featured project yet";
   const mascotPose = usedIn.length ? mascotSrc("stars") : mascotSrc("bashful");
   const flowOn = built || hoverBuild;
 
@@ -107,9 +107,9 @@ export default function SketchStack() {
       <section data-tick className="mx-auto max-w-[1240px] px-6 pb-6 pt-16">
         <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.kicker}>
           <Link href="/" className="inline-block py-2 font-mono text-sm text-muted no-underline">
-            ← back home
+            back home
           </Link>
-          <p className="m-0 mt-4 font-hand text-[30px] text-note">what I reach for —</p>
+          <p className="m-0 mt-4 font-hand text-[30px] text-note">what I reach for</p>
         </motion.div>
         <WriteIn delay={PAGE_INTRO.title} className="m-0 text-[clamp(60px,8vw,112px)] font-extrabold leading-none tracking-[-0.03em]">
           Tech stack
@@ -151,7 +151,7 @@ export default function SketchStack() {
                         play("graphite");
                         setSelected(t);
                       }}
-                      className={`min-h-10 cursor-pointer rounded-full px-3.5 font-mono text-sm transition-all duration-200 hover:-translate-y-0.5 hover:-rotate-2 hover:border-solid hover:border-ink ${
+                      className={`min-h-11 cursor-pointer rounded-full px-3.5 font-mono text-sm transition-[transform,background-color,border-color,color] duration-200 hover:-translate-y-0.5 hover:-rotate-2 hover:border-solid hover:border-ink ${
                         isSel
                           ? "border-[1.5px] border-solid border-ink bg-accent text-[var(--on-accent)]"
                           : isUsed
@@ -173,7 +173,7 @@ export default function SketchStack() {
             initial={{ opacity: 0, scale: 0.9, rotate: -6 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 400, damping: 18, delay: 1.0 }}
-            className="sk-box-b hatch relative flex flex-col gap-3 bg-[#FFF4C7] px-6 py-[26px] text-[#1F1D1A]"
+            className="sk-box-b hatch relative flex flex-col gap-3 bg-sticky-paper px-6 py-[26px] text-sticky-ink"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -184,16 +184,16 @@ export default function SketchStack() {
               height={120}
               className="animate-bob absolute -right-4 -top-[86px] block"
             />
-            <span className="font-mono text-[13px] text-[#4A463F]">selected</span>
+            <span className="font-mono text-[13px] text-sticky-muted">selected</span>
             <span className="text-4xl font-extrabold leading-[1.1]">{selected}</span>
-            <span className="font-hand text-[26px] text-[#A84E1E]">{usedLabel}</span>
+            <span className="font-hand text-[26px] text-sticky-note">{usedLabel}</span>
             {usedIn.length > 0 && (
               <ul className="m-0 flex list-none flex-col gap-2 p-0">
                 {usedIn.map((u) => (
                   <li key={u}>
                     <Link
                       href="/projects"
-                      className="text-lg font-bold text-[#1F1D1A] underline decoration-[#C4612A] decoration-wavy underline-offset-[6px]"
+                      className="text-lg font-bold text-sticky-ink underline decoration-sticky-accent decoration-wavy underline-offset-[6px]"
                     >
                       {u}
                     </Link>
@@ -201,7 +201,7 @@ export default function SketchStack() {
                 ))}
               </ul>
             )}
-            <span className="font-mono text-xs leading-relaxed text-[#4A463F]">
+            <span className="font-mono text-xs leading-relaxed text-sticky-muted">
               solid outline = used in a project · dashed = in my toolkit
             </span>
           </motion.div>
@@ -211,7 +211,7 @@ export default function SketchStack() {
       {/* The shape of a typical build */}
       <section data-tick className="mx-auto max-w-[1240px] px-6 pb-16 pt-20">
         <motion.div variants={riseIn} initial="hidden" whileInView="show" viewport={{ once: true }} className="mb-7">
-          <p className="m-0 font-hand text-[28px] text-note">how it usually fits together — hover to sketch it</p>
+          <p className="m-0 font-hand text-[28px] text-note">how it usually fits together: hover to sketch it</p>
           <h2 className="mt-1 text-5xl font-extrabold tracking-[-0.02em]">The shape of a typical build</h2>
         </motion.div>
 
@@ -265,12 +265,12 @@ export default function SketchStack() {
 
           <div className="sk-box mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-dashed px-5 py-3.5">
             <span className="font-hand text-2xl">wrapped in</span>
-            <span className="font-mono text-sm">Docker · GitHub Actions CI/CD · Vercel / Render / AWS / GCP</span>
+            <span className="font-mono text-sm">Docker, GitHub Actions CI/CD, Vercel, Render, AWS, GCP</span>
           </div>
         </div>
 
         <div className="mt-16 flex justify-end">
-          <SketchButton href="/about">next: education &amp; background →</SketchButton>
+          <SketchButton href="/about">next: education &amp; background</SketchButton>
         </div>
       </section>
     </main>

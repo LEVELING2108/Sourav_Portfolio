@@ -16,9 +16,9 @@ export default function SketchFooter() {
         <CommandLine />
       </div>
       <div className="flex flex-wrap items-center gap-x-[22px] gap-y-1">
-        <a className="navlink" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a className="navlink" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-        <a className="navlink" href={profile.resumeHref} target="_blank" rel="noopener noreferrer">Resume ↗</a>
+        <a className="navlink" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a className="navlink" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a className="navlink" href={profile.resumeHref} target="_blank" rel="noopener noreferrer">Resume</a>
         <a className="navlink" href={`mailto:${profile.email}`}>Email</a>
         <Link className="navlink font-mono text-[13px]" href="/erased-page">(a broken link)</Link>
         <span className="flex-1" />

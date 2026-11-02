@@ -52,7 +52,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
           <motion.div
             key={sheet}
             aria-hidden
-            className="pointer-events-none fixed inset-0 z-[65] border-y-2 border-[#1F1D1A] bg-[rgba(240,236,226,.6)]"
+            className="pointer-events-none fixed inset-0 z-[65] border-y-2 border-sticky-ink bg-sticky-veil"
             initial={{ y: "-102%" }}
             animate={{ y: ["-102%", "0%", "0%", "102%"] }}
             transition={{ duration: 0.82, times: [0, 0.45, 0.55, 1], ease: [0.65, 0, 0.35, 1] }}
@@ -70,7 +70,7 @@ export function useTheme() {
   return c;
 }
 
-/** Nav button: "☾ blueprint" ↔ "☀ paper". */
+/** Nav button: "☾ blueprint" / "☀ paper". */
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
   const bp = theme === "blueprint";

@@ -33,7 +33,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
         <div className="min-w-0 flex-[999_1_640px]">
           <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.kicker}>
             <Link href="/projects" className="inline-block py-2 font-mono text-sm text-muted no-underline">
-              ← all projects
+              all projects
             </Link>
             <p className="m-0 mt-4 font-mono text-sm text-muted">{cs.subtitle}</p>
           </motion.div>
@@ -49,7 +49,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
           <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.lead + 0.1} className="mt-7 flex flex-wrap items-center gap-4">
             {primaryLink && (
               <SketchButton href={primaryLink.href} external={primaryLink.href.startsWith("http")} accent>
-                view the code ↗
+                view the code
               </SketchButton>
             )}
             <span className="font-mono text-sm text-muted">role: {cs.role}</span>
@@ -148,7 +148,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
       {/* 01 — The problem */}
       <section className="mx-auto flex max-w-[1240px] flex-wrap gap-12 px-6 pb-5 pt-24">
         <motion.div variants={riseIn} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex-[1_1_280px]">
-          <p className="m-0 font-hand text-[28px] text-note">01 —</p>
+          <p className="m-0 font-hand text-[28px] text-note">01</p>
           <h2 className="mt-1 text-5xl font-extrabold tracking-[-0.02em]">The problem</h2>
         </motion.div>
         <motion.div variants={riseIn} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex-[2_1_520px] text-xl leading-[1.65] text-body">
@@ -160,7 +160,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
       {/* 02 — How it works */}
       <section data-tick className="mx-auto max-w-[1240px] px-6 pb-5 pt-24">
         <motion.div variants={riseIn} initial="hidden" whileInView="show" viewport={{ once: true }} className="mb-7">
-          <p className="m-0 font-hand text-[28px] text-note">02 — hover the diagram to sketch it</p>
+          <p className="m-0 font-hand text-[28px] text-note">02: hover the diagram to sketch it</p>
           <h2 className="mt-1 text-5xl font-extrabold tracking-[-0.02em]">How it works</h2>
         </motion.div>
         <div
@@ -217,7 +217,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
       {/* 03 — What I built */}
       <section className="mx-auto max-w-[1240px] px-6 pb-5 pt-24">
         <motion.div variants={riseIn} initial="hidden" whileInView="show" viewport={{ once: true }} className="mb-10">
-          <p className="m-0 font-hand text-[28px] text-note">03 —</p>
+          <p className="m-0 font-hand text-[28px] text-note">03</p>
           <h2 className="mt-1 text-5xl font-extrabold tracking-[-0.02em]">What I built</h2>
         </motion.div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-9">
@@ -267,7 +267,7 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
           className="sk-box-b flex flex-wrap gap-x-12 gap-y-6 bg-ink px-9 py-10 text-paper"
         >
           <div className="flex-[1_1_240px]">
-            <p className="m-0 font-hand text-[30px] text-accent">04 — looking back</p>
+            <p className="m-0 font-hand text-[30px] text-accent">04: looking back</p>
           </div>
           <div className="flex-[2_1_480px] text-[19px] leading-relaxed">
             <p className="m-0">{cs.reflection}</p>
@@ -278,10 +278,10 @@ function CaseBody({ project, nextProject }: { project: Project; nextProject: Pro
       {/* Pager */}
       <nav aria-label="More projects" className="mx-auto flex max-w-[1240px] flex-wrap justify-between gap-4 px-6 pb-14 pt-5">
         <SketchButton href="/projects" shape="b">
-          ← all projects
+          all projects
         </SketchButton>
         <SketchButton href={`/projects/${nextProject.slug}`} accent>
-          next: {nextProject.title} →
+          next: {nextProject.title}
         </SketchButton>
       </nav>
     </main>

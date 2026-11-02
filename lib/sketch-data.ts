@@ -16,7 +16,7 @@ export const mascotSrc = (m: Mood) => `/mascot/mascot-${MASCOT_IMG[m]}.png`;
 
 /** What the mascot says on each page/state. */
 export const MASCOT_LINES = {
-  home: { idle: "psst — start here", stars: "ooh, good pick!", happy: "hehe, hi!", sparkle: "all the code lives here", surprised: "~45× faster?!", delighted: "root mode, nice" },
+  home: { idle: "psst, start here", stars: "ooh, good pick!", happy: "hehe, hi!", sparkle: "all the code lives here", surprised: "~45× faster?!", delighted: "root mode, nice" },
   projects: { all: "eight of them!", ai: "the brainy ones", web: "the full-stack ones", oss: "upstream!!" },
   case: { idle: "SIH 2025 build!", bashful: "this bit is still blank…" },
   oss: { idle: "click a PR!", merged: "merged!!", "in review": "fingers crossed…", closed: "a dupe of #656, oops" },
@@ -27,8 +27,8 @@ export const MASCOT_LINES = {
 
 /** Red-pen notes shown on hover over numbers. */
 export const RED_PEN = {
-  home: { stars: "the repo's stars — 7 of its PRs are mine", shipped: "2 are live, 2 still cooking", latency: "down from ~1,500ms!! ~45× faster" },
-  oss: { merged: "+1 still in review (#982)", lines: "biggest: #977 at +1,246", stars: "the repo’s, not mine — still climbing", frameworks: "LangChain · LangGraph · LlamaIndex · CrewAI" },
+  home: { stars: "the repo's stars; 7 of its PRs are mine", shipped: "2 are live, 2 still cooking", latency: "down from ~1,500ms!! ~45× faster" },
+  oss: { merged: "+1 still in review (#982)", lines: "biggest: #977 at +1,246", stars: "the repo’s, not mine, still climbing", frameworks: "LangChain, LangGraph, LlamaIndex, CrewAI" },
   railtrack: { endpoints: "all JWT-secured, role-based", coverage: "tracked in GitHub Actions CI", stages: "make → supply → install → defect", grade: "graded at every stage" },
 } as const;
 
@@ -108,7 +108,7 @@ export const OSS_PRS: OssPr[] = [
     adds: 1246,
     dels: 0,
     filesChanged: 7,
-    plain: "LayaToolSelector — pick the right tool in ~33ms",
+    plain: "LayaToolSelector: pick the right tool in ~33ms",
     title: "feat(integrations): add LayaToolSelector for tool and function routing",
     detail:
       "Chooses between candidate Python functions, LangChain / CrewAI / LlamaIndex tools and JSON Schemas in one ~32.8ms forward pass, with calibrated confidence gating and zero tokens generated.",
@@ -180,9 +180,9 @@ export const OSS_PRS: OssPr[] = [
     adds: 866,
     dels: 1,
     filesChanged: 3,
-    plain: "LangChain + LangGraph integration — where it started",
+    plain: "LangChain + LangGraph integration, where it started",
     title: "feat(integrations): add LangChain and LangGraph routing and guardrails",
     detail:
-      "LayaRouter, LayaGuardrail, LayaTriage and LayaEvaluator — working with local models or a remote laya-serve endpoint, with tests and a quickstart.",
+      "LayaRouter, LayaGuardrail, LayaTriage and LayaEvaluator, working with local models or a remote laya-serve endpoint, with tests and a quickstart.",
   },
 ];

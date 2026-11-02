@@ -56,7 +56,7 @@ const TIMELINE_STEPS = [
     year: "2023",
     dot: "#F5F2EA",
     title: "Started B.Tech ECE at Bharati Vidyapeeth",
-    body: "Circuits, signals and embedded systems — the foundation underneath everything else.",
+    body: "Circuits, signals and embedded systems: the foundation underneath everything else.",
   },
   {
     year: "2024",
@@ -79,7 +79,7 @@ const TIMELINE_STEPS = [
   {
     year: "2027",
     dot: "var(--accent)",
-    title: "Graduating — and looking for my first full-time role",
+    title: "Graduating, and looking for my first full-time role",
     body: "AI/ML or full-stack, in Pune or remote.",
   },
 ];
@@ -107,11 +107,11 @@ function SketchAboutInner() {
               onMouseEnter={() => play("graphite")}
               className="inline-block font-mono text-[14px] text-muted no-underline py-2 hover:text-ink"
             >
-              ← back home
+              back home
             </Link>
 
             <p className="font-hand text-[30px] text-note mt-[18px] mb-0">
-              about me —
+              about me
             </p>
           </motion.div>
 
@@ -157,7 +157,7 @@ function SketchAboutInner() {
                 <b className="text-ink">Bharati Vidyapeeth, Pune</b> while
                 running a parallel questline in Data Science at{" "}
                 <b className="text-ink">IIT Madras</b>. I build software that
-                doesn&apos;t just work — it survives real users, bad inputs and
+                doesn&apos;t just work: it survives real users, bad inputs and
                 3am traffic spikes.
               </p>
               <p className="mt-[18px] mb-0">
@@ -172,11 +172,11 @@ function SketchAboutInner() {
             <div className="flex flex-wrap gap-4 mt-7 items-center">
               <PaperPlaneResume
                 href="/resume.pdf"
-                label="download resume ↓"
+                label="download resume"
                 className="!bg-accent !text-[var(--on-accent)] !min-h-12 !px-5 !text-[17px]"
               />
               <SketchButton href="/contact" shape="b">
-                say hi →
+                say hi
               </SketchButton>
             </div>
           </motion.div>
@@ -184,7 +184,7 @@ function SketchAboutInner() {
 
         {/* Polaroid photo on the right */}
         <div className="flex-[1_1_300px] flex justify-center pt-10">
-          <div className="relative w-[300px] animate-photo-drop">
+          <div className="relative w-full max-w-[300px] animate-photo-drop">
             <div className="sk-box hatch bg-card pt-[14px] px-[14px] pb-[56px] transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] hover:rotate-[4deg] hover:scale-[1.02]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -211,7 +211,7 @@ function SketchAboutInner() {
       >
         <div className="mb-10">
           <p className="font-hand m-0 text-[28px] text-note">
-            the dual track —
+            the dual track
           </p>
           <h2 className="mt-1 mb-0 text-[48px] font-extrabold tracking-[-0.02em]">
             Education
@@ -231,7 +231,7 @@ function SketchAboutInner() {
                 </span>
                 <RedPenNote note={e.note} peek={e.peek}>
                   <span
-                    className="sk-box-b font-mono inline-block text-[13px] px-3 py-[5px] text-[#1F1D1A]"
+                    className="sk-box-b font-mono inline-block text-[13px] px-3 py-[5px] text-sticky-ink"
                     style={{ background: e.tagBg }}
                   >
                     {e.grade}
@@ -259,7 +259,7 @@ function SketchAboutInner() {
         <div className="flex-[999_1_640px] min-w-0">
           <div className="mb-11">
             <p className="font-hand m-0 text-[28px] text-note">
-              so far — hover a year
+              so far: hover a year
             </p>
             <h2 className="mt-1 mb-0 text-[48px] font-extrabold tracking-[-0.02em]">
               The short version
@@ -314,7 +314,7 @@ function SketchAboutInner() {
 
       {/* Bottom Next Button */}
       <div className="max-w-[1240px] mx-auto px-6 pb-8 flex justify-end">
-        <SketchButton href="/contact">next: contact →</SketchButton>
+        <SketchButton href="/contact">next: contact</SketchButton>
       </div>
     </main>
   );

@@ -26,7 +26,7 @@ export function RedPenNote({ note, peek = false, circle = false, children, class
         initial={false}
         animate={{ opacity: show ? 1 : 0, y: show ? 0 : 8 }}
         transition={{ type: "spring", stiffness: 400, damping: 20 }}
-        className="pointer-events-none absolute -top-12 left-[45%] z-10 flex -rotate-3 items-end gap-0.5 whitespace-nowrap font-hand text-[25px] font-bold text-red-pen"
+        className="pointer-events-none absolute -top-12 left-[45%] z-10 flex max-w-[55%] -rotate-3 items-end gap-0.5 font-hand sm:max-w-none sm:whitespace-nowrap text-[25px] font-bold text-red-pen"
       >
         <svg width="30" height="34" viewBox="0 0 30 34" aria-hidden>
           <motion.path d="M26 4 C 14 6, 6 16, 6 30 M2 24 L6 31 L11 25" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"
@@ -44,7 +44,7 @@ export function RedPenNote({ note, peek = false, circle = false, children, class
    Faint + dashed at rest; on hover each box inks in, then the arrow to
    the next one draws. `latch` keeps it drawn after the first hover.
    ===================================================================== */
-export function SketchFlow({ steps, latch = false, compact = true, hint = "architecture — hover to sketch it ↓" }: { steps: string[]; latch?: boolean; compact?: boolean; hint?: string }) {
+export function SketchFlow({ steps, latch = false, compact = true, hint = "architecture: hover to sketch it" }: { steps: string[]; latch?: boolean; compact?: boolean; hint?: string }) {
   const [hover, setHover] = useState(false);
   const [built, setBuilt] = useState(false);
   const { play } = useSound();
@@ -61,8 +61,8 @@ export function SketchFlow({ steps, latch = false, compact = true, hint = "archi
               initial={false}
               animate={{ opacity: on ? 1 : 0.3, y: on ? 0 : 6 }}
               transition={{ type: "spring", stiffness: 400, damping: 20, delay: on ? i * 0.22 : 0 }}
-              className={`flex min-w-0 flex-1 items-center justify-center rounded-[10px_4px_12px_4px/4px_12px_4px_10px] border-2 border-ink bg-paper px-1.5 py-2 text-center font-mono leading-[1.25] tracking-[-0.02em] break-words ${
-                compact ? "text-[10.5px]" : "text-sm"
+              className={`flex min-w-0 flex-1 items-center justify-center rounded-[10px_4px_12px_4px/4px_12px_4px_10px] border-2 border-ink bg-paper px-2 py-2 text-center font-mono leading-[1.25] tracking-[-0.02em] break-words ${
+                compact ? "text-[11.5px]" : "text-sm"
               } ${on ? "border-solid" : "border-dashed"}`}
             >
               {s}
@@ -111,8 +111,8 @@ export function PencilRail() {
       <div className="absolute bottom-0 left-3 top-0 border-l-[1.5px] border-dashed border-[var(--hatch)]" />
       <motion.div className="absolute left-[11px] top-0 w-[3px] rounded-sm bg-ink opacity-80" style={{ height }} />
       {ticks.map((f, i) => (
-        <span key={i} className="absolute left-[3px] h-[2.5px] rounded-sm transition-all duration-300"
-          style={{ top: `${f * 100}%`, width: progress + 0.001 >= f ? 22 : 14, background: progress + 0.001 >= f ? "var(--accent)" : "var(--hatch)" }} />
+        <span key={i} className="absolute left-[3px] h-[2.5px] w-[22px] origin-left rounded-sm transition-[transform,background-color] duration-300"
+          style={{ top: `${f * 100}%`, transform: progress + 0.001 >= f ? "scaleX(1)" : "scaleX(0.636)", background: progress + 0.001 >= f ? "var(--accent)" : "var(--hatch)" }} />
       ))}
       <motion.div className="absolute -left-px -mt-[62px] h-16 w-7" style={{ top: height }}>
         <svg width="28" height="64" viewBox="0 0 28 64">
@@ -131,7 +131,7 @@ export function PencilRail() {
    PaperPlaneResume — the button folds, a paper plane loops off-screen,
    a toast confirms, then the PDF downloads.
    ===================================================================== */
-export function PaperPlaneResume({ href = "/resume.pdf", label = "resume ↓", className = "" }: { href?: string; label?: string; className?: string }) {
+export function PaperPlaneResume({ href = "/resume.pdf", label = "resume", className = "" }: { href?: string; label?: string; className?: string }) {
   const [flying, setFlying] = useState(0);
   const { play } = useSound();
   const go = (e: React.MouseEvent) => {
@@ -160,7 +160,7 @@ export function PaperPlaneResume({ href = "/resume.pdf", label = "resume ↓", c
             </motion.svg>
             <motion.div key={`t${flying}`} role="status" className="sk-box fixed bottom-7 left-1/2 z-[70] -translate-x-1/2 bg-card px-5 py-3 font-hand text-[26px] font-bold text-ink"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}>
-              resume.pdf is on its way ✈
+              resume.pdf is on its way
             </motion.div>
           </>
         )}
@@ -194,7 +194,7 @@ export function CommandLine() {
       <label className="sk-box-b inline-flex min-h-11 items-center gap-2 bg-card px-3.5">
         <span aria-hidden className="font-mono text-accent">&gt;</span>
         <input ref={ref} type="text" aria-label="Type a command" placeholder="type a command (try help)"
-          className="min-h-10 w-[230px] border-0 bg-transparent font-mono text-sm text-ink outline-none placeholder:text-muted"
+          className="min-h-11 w-[230px] border-0 bg-transparent font-mono text-sm text-ink outline-none placeholder:text-muted"
           onKeyDown={(e) => { play("thock"); if (e.key === "Enter") { run(e.currentTarget.value); e.currentTarget.value = ""; } }} />
       </label>
       {out && <p role="status" className="m-0 font-mono text-sm text-note">{out}</p>}

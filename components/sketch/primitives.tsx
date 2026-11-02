@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Asterisk } from "lucide-react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { ease, pressable, settleIn, spring } from "@/lib/motion";
 import { useSound } from "./SoundProvider";
@@ -71,13 +72,13 @@ export function StickyNote({ href, bg, tilt = 0, badge, title, blurb }: { href: 
       onMouseEnter={() => play("graphite")}
       variants={settleIn(tilt)} initial="hidden" whileInView="show" viewport={{ once: true }}
       whileHover={{ rotate: [tilt, tilt + 1.6, tilt], y: [0, -4, 0], transition: { duration: 0.6 } }}
-      className="hatch flex min-h-[210px] flex-col gap-2.5 rounded-[4px_4px_22px_4px] border-2 border-[#1F1D1A] p-6 text-[#1F1D1A] no-underline hover:text-[#1F1D1A]"
+      className="hatch flex min-h-[210px] flex-col gap-2.5 rounded-[4px_4px_22px_4px] border-2 border-sticky-ink p-6 text-sticky-ink no-underline hover:text-sticky-ink"
       style={{ background: bg }}
     >
-      <span className="font-mono text-[13px] text-[#3A3732]">{badge}</span>
+      <span className="font-mono text-[13px] text-sticky-body">{badge}</span>
       <span className="text-[28px] font-extrabold leading-tight">{title}</span>
-      <span className="flex-1 text-[15px] leading-relaxed text-[#3A3732]">{blurb}</span>
-      <span className="font-hand text-2xl font-bold">open →</span>
+      <span className="flex-1 text-[15px] leading-relaxed text-sticky-body">{blurb}</span>
+      <span className="font-hand text-2xl font-bold">open</span>
     </MotionLink>
   );
 }
@@ -89,7 +90,7 @@ export function Ticker({ items }: { items: string[] }) {
     <div className="group -mx-5 -rotate-[1.2deg] overflow-hidden border-y-2 border-ink bg-ink text-paper">
       <div className="animate-marquee flex w-max py-4">
         {loop.map((t, i) => (
-          <span key={i} className="inline-flex items-center gap-5 whitespace-nowrap px-5 text-[22px]">{t}<span aria-hidden className="text-accent">✳</span></span>
+          <span key={i} className="inline-flex items-center gap-5 whitespace-nowrap px-5 text-[22px]">{t}<Asterisk aria-hidden className="size-5 text-accent" strokeWidth={2.5} /></span>
         ))}
       </div>
     </div>

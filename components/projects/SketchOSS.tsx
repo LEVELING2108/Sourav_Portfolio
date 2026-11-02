@@ -68,20 +68,20 @@ function OssContent() {
         <div className="min-w-0 flex-[999_1_600px]">
           <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.kicker}>
             <Link href="/" className="inline-block py-2 font-mono text-sm text-muted no-underline">
-              ← back home
+              back home
             </Link>
-            <p className="m-0 mt-4 font-hand text-[30px] text-note">upstream, in public —</p>
+            <p className="m-0 mt-4 font-hand text-[30px] text-note">upstream, in public</p>
           </motion.div>
           <WriteIn delay={PAGE_INTRO.title} className="m-0 text-[clamp(60px,8vw,112px)] font-extrabold leading-none tracking-[-0.03em]">
             Open source
           </WriteIn>
           <Scribble width={420} height={24} delay={PAGE_INTRO.underline} className="mt-1.5 block max-w-full" />
           <motion.p variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.lead} className="mt-6 max-w-[760px] text-[22px] leading-relaxed">
-            Core contributions to <b>NandhaKishorM/laya</b> (33k+ ★) — <span className="marker">sub-35ms tool calling</span>, agent routing &amp; runtime patches.
+            Core contributions to <b>NandhaKishorM/laya</b> (33k+ ★): <span className="marker">sub-35ms tool calling</span>, agent routing &amp; runtime patches.
           </motion.p>
           <motion.div variants={riseIn} initial="hidden" animate="show" custom={PAGE_INTRO.lead + 0.1} className="mt-6">
             <SketchButton href="https://github.com/NandhaKishorM/laya" external accent>
-              Laya on GitHub ↗
+              Laya on GitHub
             </SketchButton>
           </motion.div>
         </div>
@@ -122,7 +122,7 @@ function OssContent() {
       <section data-tick className="mx-auto max-w-[1240px] px-6 pb-16 pt-20">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <p className="m-0 font-hand text-[28px] text-note">git log --mine — click one</p>
+            <p className="m-0 font-hand text-[28px] text-note">git log --mine: click one</p>
             <h2 className="mt-1 text-5xl font-extrabold tracking-[-0.02em]">Every pull request</h2>
           </div>
           <div role="group" aria-label="Filter pull requests" className="flex flex-wrap gap-3">
@@ -193,7 +193,7 @@ function OssContent() {
                     <span className="flex w-full flex-wrap items-center gap-3.5">
                       <span className="font-mono text-[15px] font-medium">#{p.num}</span>
                       <span
-                        className="-rotate-4 inline-block rounded-md border-2 border-current px-2.5 py-1 font-mono text-xs font-medium uppercase tracking-wider"
+                        className="-rotate-4 inline-block rounded-md border-2 border-current px-2.5 py-1 font-mono text-xs font-medium"
                         style={{ color: stampColor(p.status) }}
                       >
                         {p.status}
@@ -238,7 +238,7 @@ function OssContent() {
                           external
                           className="min-h-11 px-4 text-[15px]"
                         >
-                          view on GitHub ↗
+                          view on GitHub
                         </SketchButton>
                       </motion.div>
                     )}
@@ -272,7 +272,7 @@ function OssContent() {
         </motion.div>
 
         <div className="mt-16 flex justify-end">
-          <SketchButton href="/stack">next: tech stack →</SketchButton>
+          <SketchButton href="/stack">next: tech stack</SketchButton>
         </div>
       </section>
     </main>

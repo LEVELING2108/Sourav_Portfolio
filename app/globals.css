@@ -1,3 +1,7 @@
+/* Hallmark · v2.0.0 · built: the project · redesign: polish · genre: playful · theme: brand (the sketchbook system, kept) · job: hire */
+/* Hallmark · pre-emit critique: P4 H3 E4 S5 R3 V4 · weakest: R, the home hero stacks kicker, name, tagline, meta, mascot and three actions; polish keeps the layout, so a full run would settle it */
+/* Hallmark · waive 12 · the springy pin easing on stickers, notes and the send button · the sketchbook places paper by hand and the bounce is how a pinned note lands */
+
 @import "tailwindcss";
 
 /* ============================================================
@@ -14,19 +18,33 @@
   --body: #3A3732;         /* paragraph text */
   --note: #A84E1E;         /* handwritten margin notes */
   --red: #B8322A;          /* red-pen corrections */
-  --accent: #C4612A;       /* copper marker */
+  --accent: #B25A26;       /* copper marker (4.7:1 under --on-accent) */
   --on-accent: #FFFDF8;
   --accent-soft: rgba(196, 97, 42, 0.28);  /* highlighter */
   --dot: rgba(31, 29, 26, 0.06);           /* dot grid */
   --hatch: rgba(31, 29, 26, 0.22);         /* pencil-hatch shadow */
   --tape: rgba(214, 196, 150, 0.8);
   --mascot-filter: none;
+  --grid-line: transparent;                /* blueprint grid, major */
+  --grid-line-soft: transparent;           /* blueprint grid, minor */
+  --live: #2F7A5B;                         /* "available" dot */
+  /* sticky notes stay light paper with graphite ink in every theme */
+  --sticky-paper: #FFF4C7;
+  --sticky-card: #FFFDF8;
+  --sticky-ink: #1F1D1A;
+  --sticky-body: #3A3732;
+  --sticky-muted: #4A463F;
+  --sticky-note: #A84E1E;
+  --sticky-accent: #C4612A;
+  --sticky-veil: rgba(240, 236, 226, 0.6);
+  --page-shade: rgba(0, 0, 0, 0.18);       /* the turning page's spine shadow */
 }
 [data-theme="blueprint"] {
   --paper: #1C3D6E; --card: #21477F; --ink: #F1F6FF; --muted: #C4D4EE; --body: #DCE6F8;
   --note: #FFD27A; --red: #FFB0A0; --accent: #FFB86B; --on-accent: #14130F;
   --accent-soft: rgba(255, 184, 107, 0.35); --dot: transparent; --hatch: rgba(241, 246, 255, 0.25);
   --tape: rgba(255, 255, 255, 0.22); --mascot-filter: invert(1) brightness(1.6);
+  --grid-line: rgba(255, 255, 255, 0.09); --grid-line-soft: rgba(255, 255, 255, 0.04);
 }
 [data-theme="root"] {
   --paper: #0E100D; --card: #151913; --ink: #D3F5C4; --muted: #98BE8A; --body: #BDE3AE;
@@ -72,6 +90,15 @@
   --color-note: var(--note);
   --color-red-pen: var(--red);
   --color-accent: var(--accent);
+  --color-live: var(--live);
+  --color-sticky-paper: var(--sticky-paper);
+  --color-sticky-card: var(--sticky-card);
+  --color-sticky-ink: var(--sticky-ink);
+  --color-sticky-body: var(--sticky-body);
+  --color-sticky-muted: var(--sticky-muted);
+  --color-sticky-note: var(--sticky-note);
+  --color-sticky-accent: var(--sticky-accent);
+  --color-sticky-veil: var(--sticky-veil);
   --font-sans: var(--font-shantell), ui-rounded, system-ui, sans-serif;
   --font-hand: var(--font-caveat), cursive;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
@@ -81,7 +108,7 @@
   box-sizing: border-box;
 }
 
-html { background: var(--paper); }
+html { background: var(--paper); overflow-x: clip; scrollbar-color: var(--muted) var(--paper); }
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -94,10 +121,10 @@ body {
 }
 [data-theme="blueprint"] body {
   background-image:
-    linear-gradient(rgba(255,255,255,.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(var(--grid-line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-soft) 1px, transparent 1px);
   background-size: 110px 110px, 110px 110px, 22px 22px, 22px 22px;
 }
 [data-theme="root"] body { font-family: var(--font-mono); }
@@ -112,6 +139,8 @@ body {
 }
 ::selection { background: var(--accent); color: var(--on-accent); }
 a:hover { color: var(--note); }
+:is(button, input, textarea, select):disabled,
+[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
 
 @layer components {
   /* hand-drawn outlines: uneven elliptical radii read as a wobbly pen line */
@@ -149,6 +178,14 @@ a:hover { color: var(--note); }
 @keyframes foldAway { 0% { transform: none; opacity: 1; } 30% { transform: perspective(900px) rotateX(55deg) scale(.55) rotate(-6deg); opacity: 1; } 55% { transform: perspective(900px) rotateX(70deg) scale(.25) rotate(-14deg); opacity: .9; } 100% { transform: translate(520px, -420px) scale(.08) rotate(28deg); opacity: 0; } }
 @keyframes formPlane { 0% { opacity: 0; translate: 0 0; scale: .5; rotate: 0deg; } 35% { opacity: 1; scale: 1.2; } 100% { opacity: 0; translate: 480px -460px; scale: .7; rotate: 18deg; } }
 @keyframes sentIn { 0% { opacity: 0; scale: .7; rotate: -8deg; } 70% { opacity: 1; scale: 1.05; rotate: 2deg; } 100% { opacity: 1; scale: 1; rotate: -2deg; } }
+@keyframes pageTurn { from { transform: perspective(1800px) rotateY(0deg); opacity: 1; } to { transform: perspective(1800px) rotateY(-96deg); opacity: .2; visibility: hidden; } }
+/* page-turn on every route: pure CSS, so it renders the same on server and client and still clears without JS */
+.page-turn {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none;
+  border-right: 2px solid var(--ink); transform-origin: left center;
+  background: linear-gradient(90deg, var(--paper) 0%, var(--paper) 92%, var(--page-shade) 100%);
+  animation: pageTurn .85s cubic-bezier(.65,0,.35,1) both;
+}
 .animate-bob { animation: bob 4s ease-in-out infinite; }
 .animate-marquee { animation: marquee 28s linear infinite; }
 .group:hover .animate-marquee { animation-play-state: paused; }
@@ -158,10 +195,11 @@ a:hover { color: var(--note); }
 .form-plane { position: absolute; left: 40%; top: 40%; z-index: 4; animation: formPlane 1s cubic-bezier(.55,0,.75,.4) .35s both; pointer-events: none; }
 .sent-card { animation: sentIn .6s cubic-bezier(.34,1.56,.64,1) both; }
 .caret { display: inline-block; width: 3px; height: 1em; background: var(--accent); vertical-align: -0.15em; margin-left: 4px; animation: blink 1s steps(1) infinite; }
-.live-dot { position: relative; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2F7A5B; border: 1.5px solid var(--ink); }
-.live-dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid #2F7A5B; animation: ping 2s ease-out infinite; }
+.live-dot { position: relative; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--live); border: 1.5px solid var(--ink); }
+.live-dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--live); animation: ping 2s ease-out infinite; }
 
 /* reduced motion: everything static and fully drawn */
 @media (prefers-reduced-motion: reduce) {
+  .page-turn { display: none; }
 /* ambient animations stay active even if Windows OS reduced-motion is toggled */
 }

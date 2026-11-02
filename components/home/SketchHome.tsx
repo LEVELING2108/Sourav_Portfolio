@@ -20,15 +20,15 @@ function HeroCtas() {
   const resume = useMascotHover("happy", L.happy);
   const gh = useMascotHover("sparkle", L.sparkle);
   return (
-    <div className="mt-9 flex flex-wrap items-end gap-[18px]">
+    <div className="mt-7 flex flex-wrap items-end gap-[18px]">
       <motion.span variants={popIn} initial="hidden" animate="show" custom={INTRO.ctas[0]} {...work}>
-        <SketchButton href="/projects" accent>see my work →</SketchButton>
+        <SketchButton href="/projects" accent>see my work</SketchButton>
       </motion.span>
       <motion.span variants={popIn} initial="hidden" animate="show" custom={INTRO.ctas[1]} {...resume}>
         <PaperPlaneResume label="resume" className="min-h-12 px-5 text-[17px]" />
       </motion.span>
       <motion.span variants={popIn} initial="hidden" animate="show" custom={INTRO.ctas[2]} {...gh}>
-        <SketchButton href={profile.github} external>github ↗</SketchButton>
+        <SketchButton href={profile.github} external>github</SketchButton>
       </motion.span>
       <div className="ml-2.5"><Mascot delay={INTRO.mascot} /></div>
     </div>
@@ -48,7 +48,7 @@ function Stats() {
       <div {...happy}>
         <RedPenNote note={RED_PEN.home.shipped} className="px-2 py-[18px]">
           <p className="m-0 text-[46px] font-extrabold">8</p>
-          <p className="mt-1.5 font-mono text-sm text-muted">systems shipped — PWAs, ML APIs, enterprise tools</p>
+          <p className="mt-1.5 font-mono text-sm text-muted">systems shipped: PWAs, ML APIs, enterprise tools</p>
         </RedPenNote>
       </div>
       <div {...surprised}>
@@ -77,10 +77,10 @@ function HomeContactCta() {
             </SketchButton>
           </span>
           <SketchButton href={profile.linkedin} external shape="b" className="min-h-14">
-            linkedin ↗
+            linkedin
           </SketchButton>
           <SketchButton href={profile.github} external className="min-h-14">
-            github ↗
+            github
           </SketchButton>
         </div>
       </motion.div>
@@ -104,16 +104,16 @@ export default function SketchHome() {
   return (
     <MascotProvider idle={{ mood: "idle", line: L.idle }}>
       <main>
-        <section data-tick className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-14 px-6 pb-10 pt-[72px]">
+        <section data-tick className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-14 px-6 pb-10 pt-12">
           <div className="min-w-0 flex-[999_1_560px]">
-            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.kicker} className="mb-[18px] font-mono text-sm tracking-wide text-muted">hello, world —</motion.p>
+            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.kicker} className="mb-[18px] font-mono text-sm text-muted">hello, world</motion.p>
             <WriteIn delay={INTRO.name} className="m-0 text-[clamp(64px,9vw,128px)] font-extrabold leading-[.95] tracking-[-0.03em]">Sourav<br />Suman</WriteIn>
             <Scribble width={360} height={26} delay={INTRO.underline} className="mt-1.5 block max-w-full" />
-            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.tagline} className="mt-6 max-w-[620px] text-[clamp(20px,2vw,26px)] leading-snug">
-              I build full-stack products, real-time ML pipelines and <span className="marker">fast agent tooling</span> — and I care about how it feels to use.<span className="caret" aria-hidden="true" />
+            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.tagline} className="mt-5 max-w-[620px] text-[clamp(20px,2vw,26px)] leading-snug">
+              I build full-stack products, real-time ML pipelines and <span className="marker">fast agent tooling</span>, and I care about how it feels to use.<span className="caret" aria-hidden="true" />
             </motion.p>
-            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.meta} className="mt-[18px] font-mono text-sm leading-relaxed text-muted">
-              pune, india · open to remote<br />B.Tech ECE @ BVDU · B.Sc Data Science @ IIT Madras
+            <motion.p variants={riseIn} initial="hidden" animate="show" custom={INTRO.meta} className="mt-4 text-[15px] leading-relaxed text-muted">
+              Pune, India. Open to remote.<br />B.Tech ECE at BVDU, B.Sc Data Science at IIT Madras.
             </motion.p>
             <HeroCtas />
           </div>
@@ -128,10 +128,10 @@ export default function SketchHome() {
         <section id="work" data-tick className="mx-auto max-w-[1240px] px-6 pb-10 pt-28">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="m-0 font-hand text-[28px] text-note">things I&apos;ve built —</p>
+              <p className="m-0 font-hand text-[28px] text-note">things I&apos;ve built</p>
               <h2 className="mt-1 text-[clamp(40px,5vw,64px)] font-extrabold tracking-tight">Selected work</h2>
             </div>
-            <Link href="/projects" className="navlink font-mono text-[15px]">all 8 projects →</Link>
+            <Link href="/projects" className="navlink font-mono text-[15px]">all 8 projects</Link>
           </div>
           <div className="mt-12 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-11">
             {featured.map((p, i) => (
@@ -147,7 +147,7 @@ export default function SketchHome() {
                 <div className="flex flex-wrap gap-2">{p.stack.map((s) => <span key={s} className="chip">{s}</span>)}</div>
                 <div className="mt-1.5">
                   <SketchButton href={`/projects/${p.slug}`} shape="b" className="min-h-11 px-4 text-[15px]">
-                    read the case →
+                    read the case
                   </SketchButton>
                 </div>
               </SketchCard>
@@ -156,7 +156,7 @@ export default function SketchHome() {
         </section>
 
         <section id="explore" data-tick className="mx-auto max-w-[1240px] px-6 pb-10 pt-24">
-          <p className="m-0 font-hand text-[28px] text-note">pick a page —</p>
+          <p className="m-0 font-hand text-[28px] text-note">pick a page</p>
           <h2 className="mt-1 text-[clamp(40px,5vw,64px)] font-extrabold tracking-tight">Keep exploring</h2>
           <div className="mt-11 grid grid-cols-[repeat(auto-fit,minmax(210px,1fr))] gap-7">
             <StickyNote href="/projects" bg={STICKY.yellow} tilt={-2} badge="8 shipped" title="Projects" blurb="Every system, with the architecture sketched out." />
