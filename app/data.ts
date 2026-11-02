@@ -41,7 +41,7 @@ export const profile = {
   name: "Sourav Suman",
   role: "Full-Stack & AI/ML Engineer",
   tagline:
-    "Building production-grade software across web, ML pipelines, and applied AI — with an ECE foundation underneath it.",
+    "Building production-grade software across web, ML pipelines, and applied AI, with an ECE foundation underneath it.",
   location: "Pune, Maharashtra · open to remote",
   github: "https://github.com/LEVELING2108",
   linkedin: "https://www.linkedin.com/in/sourav-suman-dev",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     cats: ["ai", "oss"],
     win: "~1,500ms → ~33ms per decision",
     summary:
-      "Tool selection plus LangChain, LangGraph, LlamaIndex and CrewAI routers for Laya — agent decisions in one forward pass instead of token-by-token.",
+      "Tool selection plus LangChain, LangGraph, LlamaIndex and CrewAI routers for Laya: agent decisions in one forward pass instead of token-by-token.",
     stack: ["Python", "PyTorch", "LangGraph", "LlamaIndex", "CrewAI", "ModernBERT"],
     image: "/projects/laya.jpg",
     highlights: [
@@ -173,7 +173,7 @@ export const projects: Project[] = [
       ],
       problem: [
         "Multi-agent workflows spend most of their wall-clock time not generating final answers, but deciding which node, index, or tool to call next. Using an autoregressive LLM for every router edge or tool choice costs 1,000–1,800ms and hundreds of tokens per hop.",
-        "Agent frameworks needed a drop-in System-1 decision layer that could evaluate candidate tools, RAG indices, and graph edges in a single deterministic forward pass — with calibrated confidence gating so uncertain queries safely fall back.",
+        "Agent frameworks needed a drop-in System-1 decision layer that could evaluate candidate tools, RAG indices, and graph edges in a single deterministic forward pass, with calibrated confidence gating so uncertain queries safely fall back.",
       ],
       howItWorks: [
         { title: "Agent state / schemas", body: "Normalizes Python callables, LangChain/CrewAI/LlamaIndex tools, or JSON Schemas into choice criteria." },
@@ -256,7 +256,7 @@ export const projects: Project[] = [
         { title: "Live responder console", body: "Real-time geolocation map and status tracker deployed on Vercel." },
       ],
       reflection:
-        "Reproducing the duplicate-dispatch bug under concurrent requests was a turning point — it taught me never to trust non-atomic check-then-set logic in distributed queues.",
+        "Reproducing the duplicate-dispatch bug under concurrent requests was a turning point: it taught me never to trust non-atomic check-then-set logic in distributed queues.",
     },
   },
   {
@@ -305,7 +305,7 @@ export const projects: Project[] = [
     ],
     caseStudy: {
       subtitle: "v1.6 · Smart India Hackathon 2025 · production build",
-      lead: "Follows every rail fitting from manufacturing to installation — scanned by QR in the field, graded at each stage, risk-scored by vendor.",
+      lead: "Follows every rail fitting from manufacturing to installation: scanned by QR in the field, graded at each stage, risk-scored by vendor.",
       leadHighlight: "manufacturing to installation",
       role: "Full-Stack & Backend Architect (SIH 2025)",
       annotations: ["every fitting gets a QR code", "vendors scored 0–100 for risk"],
@@ -317,7 +317,7 @@ export const projects: Project[] = [
       ],
       problem: [
         "A rail fitting changes hands several times before it is bolted to a track: it is manufactured, supplied, installed, and sometimes found defective. Each stage needs a check, and each check needs to be tied back to the exact item and the vendor who made it.",
-        "Without item-level traceability on Indian Railways track fittings, defective batches and high-risk vendors are only discovered after field failures occur — when paper logs are too fragmented to audit.",
+        "Without item-level traceability on Indian Railways track fittings, defective batches and high-risk vendors are only discovered after field failures occur, when paper logs are too fragmented to audit.",
       ],
       howItWorks: [
         { title: "QR field scan", body: "An inspector scans the fitting with a phone camera." },
@@ -399,7 +399,7 @@ export const projects: Project[] = [
         { title: "Streaming drift monitor", body: "Tracks feature distributions and prediction confidence bounds across sliding windows." },
       ],
       reflection:
-        "Most of the latency wasn't in the model forward pass — it was in feature serialization. Vectorizing the preprocessing step cut p95 latency in half.",
+        "Most of the latency wasn't in the model forward pass. It was in feature serialization. Vectorizing the preprocessing step cut p95 latency in half.",
     },
   },
   {
@@ -413,7 +413,7 @@ export const projects: Project[] = [
     cats: ["ai", "web"],
     win: "any CSV in, type-safe JSON out",
     summary:
-      "Maps messy CSV lead files to clean CRM records using the Anthropic API with structured output — no brittle column rules.",
+      "Maps messy CSV lead files to clean CRM records using the Anthropic API with structured output, no brittle column rules.",
     stack: ["Next.js", "TypeScript", "Anthropic API"],
     image: "/projects/crmimporter.jpg",
     highlights: ["LLM Extraction", "Zero CSV Schema Rules", "Type-Safe JSON"],
@@ -453,7 +453,7 @@ export const projects: Project[] = [
         { value: "Live", label: "deployed on Vercel", note: "gro-weasy.vercel.app" },
       ],
       problem: [
-        "Every sales team exports leads differently — merged name columns, inconsistent phone formats, swapped headers, or extra notes stuffed into cells. Traditional CSV importers break the moment a header name changes.",
+        "Every sales team exports leads differently: merged name columns, inconsistent phone formats, swapped headers, or extra notes stuffed into cells. Traditional CSV importers break the moment a header name changes.",
         "Instead of forcing users through a tedious column-mapping wizard, we wanted an importer that understands any spreadsheet layout and outputs strictly typed CRM records.",
       ],
       howItWorks: [
@@ -510,7 +510,7 @@ export const projects: Project[] = [
     ],
     caseStudy: {
       subtitle: "v1.5 · ML Inference Gateway · Containerized Service",
-      lead: "A production gateway sitting in front of ML models — handling JWT authentication, rate limiting, canary A/B traffic splitting, and Prometheus metrics.",
+      lead: "A production gateway sitting in front of ML models, handling JWT authentication, rate limiting, canary A/B traffic splitting, and Prometheus metrics.",
       leadHighlight: "canary A/B traffic splitting",
       role: "Backend & MLOps Engineer",
       annotations: ["A/B traffic routing", "Prometheus latency histograms"],
@@ -536,7 +536,7 @@ export const projects: Project[] = [
         { title: "Prometheus instrumentation", body: "Custom counters and histograms exposed on /metrics for Grafana dashboards." },
       ],
       reflection:
-        "Treating ML endpoints like standard microservices — with auth, observability, and canary routing — makes shipping model updates dramatically less stressful.",
+        "Treating ML endpoints like standard microservices (with auth, observability, and canary routing) makes shipping model updates dramatically less stressful.",
     },
   },
   {
@@ -550,7 +550,7 @@ export const projects: Project[] = [
     cats: ["ai"],
     win: "retraining without the manual chores",
     summary:
-      "An end-to-end MLOps pipeline for text classification — preprocessing, tracked evaluation and a containerised release.",
+      "An end-to-end MLOps pipeline for text classification: preprocessing, tracked evaluation and a containerised release.",
     stack: ["Python", "Hugging Face", "DVC & MLflow", "Docker"],
     image: "/projects/nlppipeline.jpg",
     highlights: ["End-to-End MLOps", "Model Evaluation", "Automated Runs"],
@@ -589,7 +589,7 @@ export const projects: Project[] = [
         { value: "Docker", label: "containerized serving", note: "ready for cloud deploy" },
       ],
       problem: [
-        "NLP models often start as messy Jupyter notebooks where preprocessing rules, hyperparameters, and evaluation splits live in scattered cells — making it impossible to reproduce last week's best checkpoint.",
+        "NLP models often start as messy Jupyter notebooks where preprocessing rules, hyperparameters, and evaluation splits live in scattered cells, making it impossible to reproduce last week's best checkpoint.",
         "This project turns the entire text-classification lifecycle into a modular, versioned pipeline where every run logs metrics and produces a deployable container.",
       ],
       howItWorks: [
@@ -658,7 +658,7 @@ export const projects: Project[] = [
       ],
       problem: [
         "Most personal finance apps are either bloated with bank-sync upsells or too barebones to show where money actually goes week over week.",
-        "Ledgerline focuses on frictionless expense entry and clear visual feedback — showing category burn rates and monthly trends at a glance.",
+        "Ledgerline focuses on frictionless expense entry and clear visual feedback, showing category burn rates and monthly trends at a glance.",
       ],
       howItWorks: [
         { title: "Expense entry", body: "Quick-add form captures amount, category, date, and notes." },
@@ -672,7 +672,7 @@ export const projects: Project[] = [
         { title: "Instant search & filter bar", body: "Filter transactions by date range, category, or keyword with zero lag." },
       ],
       reflection:
-        "Good financial dashboards are all about information hierarchy — surfacing the three numbers you care about today before the twenty charts you only check once a month.",
+        "Good financial dashboards are all about information hierarchy: surfacing the three numbers you care about today before the twenty charts you only check once a month.",
     },
   },
 ];
